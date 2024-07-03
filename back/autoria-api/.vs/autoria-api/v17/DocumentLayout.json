@@ -1,7 +1,24 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\ITStep\\Diplom\\autoria\\back\\autoria-api\\",
-  "Documents": [],
+  "WorkspaceRootPath": "E:\\Project\\autoria\\back\\autoria-api\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|e:\\project\\autoria\\back\\autoria-api\\autoria-api\\models\\car.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|solutionrelative:autoria-api\\models\\car.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|e:\\project\\autoria\\back\\autoria-api\\autoria-api\\models\\seller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|solutionrelative:autoria-api\\models\\seller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|e:\\project\\autoria\\back\\autoria-api\\autoria-api\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|solutionrelative:autoria-api\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|e:\\project\\autoria\\back\\autoria-api\\autoria-api\\controllers\\carscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|solutionrelative:autoria-api\\controllers\\carscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +26,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Seller.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Models\\Seller.cs",
+              "RelativeDocumentMoniker": "autoria-api\\Models\\Seller.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Models\\Seller.cs",
+              "RelativeToolTip": "autoria-api\\Models\\Seller.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-03T11:49:08.964Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "autoria-api\\ApplicationDbContext.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\ApplicationDbContext.cs",
+              "RelativeToolTip": "autoria-api\\ApplicationDbContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-03T12:02:45.317Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CarsController.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Controllers\\CarsController.cs",
+              "RelativeDocumentMoniker": "autoria-api\\Controllers\\CarsController.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Controllers\\CarsController.cs",
+              "RelativeToolTip": "autoria-api\\Controllers\\CarsController.cs",
+              "ViewState": "AQIAAGUAAAAAAAAAAAAuwGgAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-03T12:01:26.523Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Car.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Models\\Car.cs",
+              "RelativeDocumentMoniker": "autoria-api\\Models\\Car.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Models\\Car.cs",
+              "RelativeToolTip": "autoria-api\\Models\\Car.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAAcwD0AAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-03T11:19:27.954Z",
+              "EditorCaption": ""
             }
           ]
         }
