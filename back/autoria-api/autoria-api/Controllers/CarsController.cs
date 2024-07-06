@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using autoria_api.data;
 
 namespace autoria_api.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class CarsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;

@@ -7,6 +7,7 @@
         public string Place_of_residence { get; set; } //Мізце проживання
         public DateTime Register_date { get; set; } //Дата реестрації
         public string Phone { get; set; } //номер телефону
+        public List<int> CarsId { get; set; } //id машин
         public string ImagePath { get; set; } //Полисання на зображення
         public Seller() { }
 
