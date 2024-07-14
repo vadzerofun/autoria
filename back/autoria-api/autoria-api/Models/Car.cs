@@ -1,4 +1,6 @@
-﻿namespace autoria_api.Models
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace autoria_api.Models
 {
     public class Car
     {
@@ -22,12 +24,16 @@
         public string Description { get; set; } // Опис авто
         public int Number_of_seats { get; set; } // Кількість посадочних місць
         public List<string> ImagesPath { get; set; } //Посилання на картики авто
+        public string UserId { get; set; } //Id юзера
 
-        public Car() { }
+        public Car() 
+        {
+            ImagesPath = new List<string>();
+        }
         public Car(int id, double priceUSD, double mileage, string make, string model, int year, double engine_capacity,
                Engine_type engine_type, string color, int owners_number, bool wanted, string road_accident,
                double carrying_capacity_ton, string car_number, string car_vin_code, Transmission_type transmission_type,
-               Occasion occasion, string description, int number_of_seats, List<string> imagesPath)
+               Occasion occasion, string description, int number_of_seats, [FromQuery] List<string> imagesPath, string userId)
         {
             Id = id;
             PriceUSD = priceUSD;
@@ -49,11 +55,12 @@
             Description = description;
             Number_of_seats = number_of_seats;
             ImagesPath = imagesPath;
+            UserId = userId;
         }
         public Car(double priceUSD, double mileage, string make, string model, int year, double engine_capacity,
                Engine_type engine_type, string color, int owners_number, bool wanted, string road_accident,
                double carrying_capacity_ton, string car_number, string car_vin_code, Transmission_type transmission_type,
-               Occasion occasion, string description, int number_of_seats, List<string> imagesPath)
+               Occasion occasion, string description, int number_of_seats, [FromQuery] List<string> imagesPath, string userId)
         {
             PriceUSD = priceUSD;
             Mileage = mileage;
@@ -74,6 +81,7 @@
             Description = description;
             Number_of_seats = number_of_seats;
             ImagesPath = imagesPath;
+            UserId = userId;
         }
     }
 
