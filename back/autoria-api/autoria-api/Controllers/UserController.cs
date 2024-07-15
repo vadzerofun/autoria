@@ -66,9 +66,9 @@ namespace autoria_api.Controllers
                 UserName = model.UserName,
                 Email = model.Email,
                 PhoneNumber = model.PhoneNumber,
-                CarsId = model.CarsId,
-                Place_of_residence = model.Place_of_residence,
-                ImagePath = model.ImagePath,
+                CarsId = [0],
+                Place_of_residence = null,
+                ImagePath = null
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
