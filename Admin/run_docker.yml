@@ -1,0 +1,9 @@
+---
+- name: Запускаємо контейнер
+  community.docker.docker_container:
+    name: myapp
+    image: "{{ image_name }}:{{ image_tag }}"
+    state: started
+    restart_policy: always
+    ports:
+      - "{{ app_port }}:{{ app_port_expose }}"
