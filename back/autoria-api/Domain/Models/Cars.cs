@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Enums;
+using Microsoft.AspNetCore.Http;
 
 namespace Core.Models
 {
     public class Cars
     {
-        public int Id { get; set; } // Id
+        public Guid Id { get; set; } // Id
         public double PriceUSD { get; set; } // ціна в доларах
         public double Mileage { get; set; } // Пробіг авто
         public string Make { get; set; } // Марка

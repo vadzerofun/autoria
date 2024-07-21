@@ -25,7 +25,7 @@ namespace Infrastructure.Repositories
             return;
         }
 
-        public async Task DeleteCarById(int id)
+        public async Task DeleteCarById(Guid id)
         {
             if (_context.Cars == null)
             {
@@ -42,7 +42,7 @@ namespace Infrastructure.Repositories
             return;
         }
 
-        public async Task EditCar(int id, Cars car)
+        public async Task EditCar(Guid id, Cars car)
         {
             var tempcar = await _context.Cars.FindAsync(id);
             _context.Cars.Remove(tempcar);
@@ -50,7 +50,7 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Cars> GetCarById(int id)
+        public async Task<Cars> GetCarById(Guid id)
         {
             if (_context.Cars == null)
             {

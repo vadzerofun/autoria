@@ -1,4 +1,5 @@
 ﻿using Core.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Application.DTOs
 {
     public class CarDTO
     {
-        public int Id { get; set; } // Id
+        public Guid Id { get; set; } // Id
         public double PriceUSD { get; set; } // ціна в доларах
         public double Mileage { get; set; } // Пробіг авто
         public string Make { get; set; } // Марка

@@ -3,6 +3,7 @@ using Application.Interfaces;
 using Core.Enums;
 using Core.Interfaces;
 using Core.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -50,12 +51,22 @@ namespace Application.Services
             await _carRepository.AddCar(car);
         }
 
-        public async Task DeleteCarById(int id)
+        public Task AddImageToCar(Guid id, string ImageFiles)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task DeleteCarById(Guid id)
         {
             await _carRepository.DeleteCarById(id);
         }
 
-        public async Task EditCar(int id, CarDTO carDTO)
+        public Task DeleteImageFromCar(Guid id, string ImageName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task EditCar(Guid id, CarDTO carDTO)
         {
             Cars car = new Cars
             {
@@ -86,7 +97,7 @@ namespace Application.Services
             await _carRepository.EditCar(id, car);
         }
 
-        public async Task<CarDTO> GetCarById(int id)
+        public async Task<CarDTO> GetCarById(Guid id)
         {
             Cars car = await _carRepository.GetCarById(id);
             if (car == null)

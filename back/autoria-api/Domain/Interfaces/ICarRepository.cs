@@ -11,9 +11,9 @@ namespace Core.Interfaces
     public interface ICarRepository
     {
         Task<List<Cars>> GetCars();
-        Task<Cars> GetCarById(int id);
+        Task<Cars> GetCarById(Guid id);
         Task AddCar(Cars car);
-        Task DeleteCarById(int id);
-        Task EditCar(int id, Cars car);
+        Task DeleteCarById(Guid id);
+        Task EditCar(Guid id, Cars car);
     }
 }
