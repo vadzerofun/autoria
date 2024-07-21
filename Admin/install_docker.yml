@@ -1,0 +1,77 @@
+---
+- name: Оновимо кеш
+  ansible.builtin.apt:
+    update_cache: true
+  become: true
+
+- name: Встановимо необхідні пакети для додавання репозиторію docker
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - ca-certificates
+    - curl
+    - gnupg
+    - pip
+  become: true
+
+- name: Створюємо директорію для ключа
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+  become: true
+
+- name: Перевірити чи існує ключ підпису для репозиторію
+  ansible.builtin.stat:
+    path: /etc/apt/keyrings/docker.asc
+  become: true
+  register: key_state
+
+- name: Скачати ключ підпису
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /etc/apt/keyrings/docker.asc
+    force: true
+    validate_certs: false
+  become: true
+  when: not key_state.stat.exists
+
+- name: Встановлюємо права на файл ключа
+  ansible.builtin.file:
+    path: /etc/apt/keyrings/docker.asc
+    mode: a+r
+  become: true
+
+- name: Додати репозиторій docker
+  ansible.builtin.lineinfile:
+    dest: /etc/apt/sources.list.d/docker.list
+    line: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu  {{ ansible_distribution_release }} stable"
+    create: true
+  become: true
+
+- name: Оновимо кеш після додавання репозиторію
+  ansible.builtin.apt:
+    update_cache: true
+  become: true
+
+- name: Встановимо необхідні пакети для docker
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+   - docker-ce
+   - docker-ce-cli
+   - containerd.io
+   - docker-buildx-plugin
+   - docker-compose-plugin
+   - docker-compose
+  become: true
+
+- name: Додамо користувача для роботи з docker
+  ansible.builtin.user:
+    name: "{{ docker_user  }}"
+    shell: /bin/bash
+    groups: docker,sudo
+    append: yes
+  become: true
