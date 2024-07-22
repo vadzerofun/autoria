@@ -1,0 +1,73 @@
+.loginRegisterButtons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 100px;
+}
+@media screen and (max-width: 1024px) {
+  .loginRegisterButtons {
+    padding-top: 50px;
+  }
+}
+
+.loginRegisterButtons .loginFormBtn {
+  margin: 0;
+}
+
+.loginFormBtnSecondary {
+  color: var(--bs-dark) !important;
+}
+
+.socialMediaButtons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 70px;
+  gap: 10px;
+}
+@media screen and (max-width: 1024px) {
+  .socialMediaButtons {
+    padding-top: 35px;
+  }
+}
+
+.socialMediaButtons .loginFormBtn {
+  padding: 0;
+  margin: 0;
+  height: 60px;
+  max-width: 120px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.loginFormBtn a {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}/*# sourceMappingURL=LoginRegister.css.map */
