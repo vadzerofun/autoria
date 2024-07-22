@@ -9,6 +9,8 @@ import Root from "./routes/root";
 import ErrorPage from './error-page.jsx';
 import { Register } from './Components/Register/Register.jsx';
 import { Login } from './Components/Login/Login.jsx';
+import LoginRegister from './Components/LoginRegister/LoginRegister.jsx';
+import { ForgotPassword } from './Components/ForgotPassword/ForgotPassword.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <div><Register /></div>,
+  },
+  {
+    path: "/login-register",
+    element: <div><LoginRegister /></div>,
+  },
+  {
+    path: "/forgot-password",
+    element: <div><ForgotPassword /></div>,
   },
 ]);
 

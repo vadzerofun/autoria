@@ -5,9 +5,23 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
+  box-sizing: border-box;  
+}
+
+body {
   font-family: "Montserrat", sans-serif;
   color: #5C5C5C;
+}
+
+a {
+  color: #5C5C5C;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 0.95; /* 23/24 */
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+  }
 }
 
 // Button styling
@@ -17,6 +31,9 @@
   font-weight: 700;
   line-height: 1.2;
 }
+
+// Link styling 
+
 
 /* ===============================================================================================*/
 // Login and Register styling
@@ -28,8 +45,10 @@
   margin: 0 auto;
   max-width: 490px;
   padding-top: 50px;
+  padding-bottom: 50px;
   @media screen and (min-width: 1900px) {
     padding-top: 150px;
+    padding-bottom: 150px;
   }
 }
 
@@ -68,11 +87,15 @@
   font-size: 20px;
   line-height: 1.38; /* 27.6/20 */
   font-weight: 600;
-  color: #5c5c5c99;
+  color: #5c5c5c;
   border: none;
   @media screen and (max-width: 768px) {
     font-size: 16px;
   }
+}
+
+.loginFormInput::placeholder {
+  color: #5c5c5c99;
 }
 
 .loginFormInput:focus {
@@ -147,6 +170,32 @@
 .formTitle {
   font-weight: 500;
   margin-bottom: 15px;
+}
+
+// Switch
+
+.customFormSwitch .form-check-label {
+  font-weight: 600;
+  @media screen and (min-width: 768px) {
+    font-size: 18px;
+    line-height: 1.38;    
+    margin-top: 7px;
+    margin-right: 10px;
+  }
+}
+
+.customFormSwitch .form-check-input {
+  border: none;
+  background-color: var(--bs-secondary);
+  
+  @media screen and (min-width: 768px) {
+    width: 55px;
+    height: 30px;
+  }
+}
+
+.customFormSwitch .form-check-input:checked {
+  background-color: var(--bs-primary);
 }
 
 // Pages styling
