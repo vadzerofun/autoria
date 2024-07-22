@@ -1,9 +1,9 @@
-﻿using autoria_api.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using autoria_api.DbContext;
 using Microsoft.AspNetCore.Authorization;
+using Application.Interfaces;
+using Application.DTOs;
 
 namespace autoria_api.Controllers
 {
@@ -11,109 +11,93 @@ namespace autoria_api.Controllers
     [ApiController]
     public class CarsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICarService _carService;
 
-        public CarsController(ApplicationDbContext context)
+        public CarsController(ICarService carService)
         {
-            _context = context;
+            _carService = carService;
         }
 
         // GET: api/Cars
         [HttpGet]
-        public async Task<List<Car>> GetCars()
+        public async Task<List<CarDTO>> GetCars()
         {
-            if (_context.Cars == null)
-            {
-                return null;
-            }
-            return await _context.Cars.ToListAsync();
+            var car = await _carService.GetCars();
+            return car;
         }
 
         // GET: api/Cars/5
         [HttpGet("{id}")]
-        public async Task<Car> GetCars(int id)
+        public async Task<CarDTO> GetCarById(Guid id)
         {
-            if (_context.Cars == null)
-            {
-                return null;
-            }
-            var Car = await _context.Cars.FindAsync(id);
-
-            if (Car == null)
-            {
-                return null;
-            }
-
-            return Car;
+            var car = await _carService.GetCarById(id);
+            return car;
         }
 
-        [HttpGet("AddCar"), Authorize]
-        public async Task<List<Car>> AddCar(double priceUSD, double mileage, string make, string model, int year, double engine_capacity,
-               Engine_type engine_type, string color, int owners_number, bool wanted, string road_accident,
-               double carrying_capacity_ton, string car_number, string car_vin_code, Transmission_type transmission_type,
-               Occasion occasion, string description, int number_of_seats, [FromQuery] List<string> imagesPath, string userId)
+        [HttpPost("AddCar")]
+        public async Task<IActionResult> AddCar([FromForm] CarDTO carDTO, [FromForm] IFormFile[] ImageFiles)
         {
-            _context.Cars.Add(new Car(priceUSD, mileage, make, model, year, engine_capacity,
-               engine_type, color, owners_number, wanted, road_accident,
-               carrying_capacity_ton, car_number, car_vin_code, transmission_type,
-               occasion, description, number_of_seats, imagesPath, userId));
 
-            await _context.SaveChangesAsync();
-            return _context.Cars.ToList();
+            carDTO.ImagesPath = await UploadImages(ImageFiles.ToList());
+            await _carService.AddCar(carDTO);
+            return CreatedAtAction(nameof(AddCar), carDTO);
         }
 
         // DELETE: api/Cars/5
-        [HttpDelete("{id}"), Authorize]
-        public async Task<Car> DeleteCar(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCar(Guid id)
         {
-            if (_context.Cars == null)
-            {
-                return null;
-            }
-            var Car = await _context.Cars.FindAsync(id);
-            if (Car == null)
-            {
-                return null;
-            }
-
-            _context.Cars.Remove(Car);
-            await _context.SaveChangesAsync();
-
-            return Car;
+            await _carService.DeleteCarById(id);
+            return Ok();
         }
 
-        //[HttpDelete("All")]
-        //public async Task<List<Car>> DeleteAllCar()
+        [HttpPost("EditCar")]
+        public async Task<IActionResult> EditCar([FromForm] Guid id, [FromForm] CarDTO carDTO, [FromForm] IFormFile[] ImageFiles)
+        {
+            carDTO.ImagesPath = await UploadImages(ImageFiles.ToList());
+            await _carService.EditCar(id, carDTO);
+            return Ok();
+        }
+        //TODO: доробити додавання і видалення фото
+        //[HttpPost("AddImageToCar")]
+        //public async Task<IActionResult> AddImageToCar([FromForm] Guid id, [FromForm] IFormFile ImageFiles)
         //{
-        //    if (_context.Cars == null)
-        //    {
-        //        return null;
-        //    }
-        //    foreach (var item in _context.Cars)
-        //    {
-        //        _context.Cars.Remove(item);
-        //    }
-
-        //    await _context.SaveChangesAsync();
-
-        //    return _context.Cars.ToList();
+        //    await _carService.AddImageToCar(id, "test");
+        //    return Ok();
         //}
 
-        [HttpGet("EditCar"), Authorize]
-        public async Task<Car> EditCar(int id, double priceUSD, double mileage, string make, string model, int year, double engine_capacity,
-               Engine_type engine_type, string color, int owners_number, bool wanted, string road_accident,
-               double carrying_capacity_ton, string car_number, string car_vin_code, Transmission_type transmission_type,
-               Occasion occasion, string description, int number_of_seats, [FromQuery] List<string> imagesPath, string userId)
+        //[HttpDelete("DeleteImageFromCar")]
+        //public async Task<IActionResult> DeleteImageFromCar([FromForm] Guid id, [FromForm] string ImageName)
+        //{
+        //    await _carService.DeleteImageFromCar(id, ImageName);
+        //    return Ok();
+        //}
+
+        private async Task<List<string>> UploadImages(List<IFormFile> files)
         {
-            var tempcar = await _context.Cars.FindAsync(id);
-            _context.Cars.Remove(tempcar);
-            Car Car = new Car(priceUSD, mileage, make, model, year, engine_capacity,
-               engine_type, color, owners_number, wanted, road_accident,
-               carrying_capacity_ton, car_number, car_vin_code, transmission_type,
-               occasion, description, number_of_seats, imagesPath, userId);
-            _context.Cars.Add(Car);
-            await _context.SaveChangesAsync();
-            return Car;
+            var _imageFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Images");
+            var filePaths = new List<string>();
+
+            foreach (var file in files)
+            {
+                if (file == null || file.Length == 0)
+                {
+                    throw new ArgumentException("One or more files are invalid.");
+                }
+
+                var fileExtension = Path.GetExtension(file.FileName);
+                var uniqueFileName = $"{Guid.NewGuid()}{fileExtension}";
+                var filePath = Path.Combine(_imageFolderPath, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                filePaths.Add(uniqueFileName);
+            }
+
+            return filePaths;
         }
     }
 }

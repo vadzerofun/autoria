@@ -1,12 +1,12 @@
-﻿using autoria_api.DbContext;
-using autoria_api.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Application.DTOs;
+using Application.Interfaces;
+using Application.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SendGrid.Helpers.Mail;
-using SendGrid;
-using System.Globalization;
+using Common;
+using Microsoft.Extensions.Options;
+using Application.Model;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace autoria_api.Controllers
 {
@@ -14,116 +14,72 @@ namespace autoria_api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-        private readonly UserManager<UserDbContext> _userManager;
+        private readonly IUserService _userService;
+        private readonly IOptions<AuthOption> _authOption;
 
-        public UserController(ApplicationDbContext context, UserManager<UserDbContext> userManager)
+        public UserController(IUserService userService, IOptions<AuthOption> authOptions)
         {
-            _context = context;
-            _userManager = userManager;
+            _userService = userService;
+            _authOption = authOptions;
         }
 
         // GET: api/Users
         [HttpGet]
-        public async Task<List<UserDbContext>> GetUsers()
+        public async Task<List<UserDTO>> GetUsers()
         {
-            if (_context.Users == null)
-            {
-                return null;
-            }
-            return await _context.Users.ToListAsync();
+            var users = await _userService.GetUsers();
+            return users;
         }
 
+        // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<UserDbContext> GetUser(string id)
+        public async Task<UserDTO> GetUserById(Guid id)
         {
-            if (_context.Users == null)
-            {
-                return null;
-            }
-            var User = await _context.Users.FindAsync(id);
-
-            if (User == null)
-            {
-                return null;
-            }
-
+            var User = await _userService.GetUserById(id);
             return User;
         }
 
-
-
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UserRegisterModel model)
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register(UserDTO UserDTO)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var user = new UserDbContext
-            {
-                UserName = model.UserName,
-                Email = model.Email,
-                PhoneNumber = model.PhoneNumber,
-                CarsId = [0],
-                Place_of_residence = null,
-                ImagePath = null
-            };
-
-            var result = await _userManager.CreateAsync(user, model.Password);
-            if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
-            }
-
-            return Ok("User created successfully");
+            await _userService.AddUser(UserDTO);
+            return Ok();
         }
 
-        [HttpPost("SendEmailConfirm")]
-        public async Task<Response> SendEmailConfirm([FromBody] string email)
+        // DELETE: api/Users/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(Guid id)
         {
-            if (!await _context.Users.AnyAsync(u => u.Email == email))
-                return null;
-            string contitueEmail = "https://localhost:7224/api/User/ConfirmEmail?email=" + email;
-            var apiKey = "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";
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("dimarudik317@gmail.com", "Autoria");
-            var subject = "Check Email";
-            var to = new EmailAddress(email, "User");
-            var plainTextContent = "Press this button to confirm your email";
-            var htmlContent = $@"
-            <strong>Підтвердіть вашу електронну пошту.</strong>
-            <br><br>
-            <a href='{contitueEmail}' style='display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #4CAF50; text-align: center; text-decoration: none; border-radius: 5px;'>Підтвердити пошту</a>";
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            Response response = await client.SendEmailAsync(msg);
-
-            if (response.IsSuccessStatusCode)
-            {
-                return response;
-
-            }
-            return null;
-
+            await _userService.DeleteUserById(id);
+            return Ok();
         }
 
-        [HttpGet("ConfirmEmail")]
-        public async Task<IActionResult> ConfirmEmail(string email)
+        [HttpPost("EditUser")]
+        public async Task<IActionResult> EditUser(Guid id, UserDTO UserDTO)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            await _userService.EditUser(id, UserDTO);
+            return Ok();
+        }
+        [HttpGet("GetByEmail")]
+        public async Task<UserDTO> GetUserByEmail(string email)
+        {
+            var User = await _userService.GetUserByEmail(email);
+            return User;
+        }
+        [HttpGet("GetByName")]
+        public async Task<UserDTO> GetUserByName(string name)
+        {
+            var User = await _userService.GetUserByName(name); 
+            return User;
+        }
 
-            if (user != null)
-            {
-                user.EmailConfirmed = true;
-                await _context.SaveChangesAsync();
-                return Ok("Email confirmed successfully.");
-            }
-            else
-            {
-                return NotFound("User not found.");
-
-            }
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody]Login login)
+        {
+            var res = await _userService.Login(login);
+            if (res == null)
+                return Unauthorized();
+            return Ok(res);
         }
     }
 }

@@ -1,0 +1,8 @@
+---
+docker_user: diplom
+app_port: 5056
+app_port_expose: 5050
+docker_build_path: /opt/docker
+image_name: myimg
+image_tag: v1
+request.remote_addr: "{{ request.remote_addr }}"

@@ -1,0 +1,11 @@
+---
+- name: Diplom project docker deploy
+  hosts: diplom
+  gather_facts: true
+  become: false
+  become_method: sudo
+  vars_files: diplom_vars.yml
+  tasks:
+    - import_tasks: install_docker.yml
+#    - import_tasks: conf_docker.yml
+#    - import_tasks: run_docker.yml

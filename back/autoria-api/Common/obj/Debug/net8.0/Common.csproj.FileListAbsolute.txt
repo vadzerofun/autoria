@@ -1,0 +1,13 @@
+E:\Project\autoria\back\autoria-api\Common\bin\Debug\net8.0\Common.deps.json
+E:\Project\autoria\back\autoria-api\Common\bin\Debug\net8.0\Common.dll
+E:\Project\autoria\back\autoria-api\Common\bin\Debug\net8.0\Common.pdb
+E:\Project\autoria\back\autoria-api\Common\obj\Debug\net8.0\Common.csproj.AssemblyReference.cache
+E:\Project\autoria\back\autoria-api\Common\obj\Debug\net8.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+E:\Project\autoria\back\autoria-api\Common\obj\Debug\net8.0\Common.AssemblyInfoInputs.cache
+E:\Project\autoria\back\autoria-api\Common\obj\Debug\net8.0\Common.AssemblyInfo.cs
+E:\Project\autoria\back\autoria-api\Common\obj\Debug\net8.0\Common.csproj.CoreCompileInputs.cache
+E:\Project\autoria\back\autoria-api\Common\obj\Debug\net8.0\Common.sourcelink.json
+E:\Project\autoria\back\autoria-api\Common\obj\Debug\net8.0\Common.dll
+E:\Project\autoria\back\autoria-api\Common\obj\Debug\net8.0\refint\Common.dll
+E:\Project\autoria\back\autoria-api\Common\obj\Debug\net8.0\Common.pdb
+E:\Project\autoria\back\autoria-api\Common\obj\Debug\net8.0\ref\Common.dll

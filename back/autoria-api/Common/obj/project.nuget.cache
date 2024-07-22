@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "3nTwPizUYt/ze/ErtePy/keygIe/0rui7i4tM8iqUDx2sjWvlxXYMGPwrf5p3ZuTWf7B96+7o6uqeRqi2syylA==",
+  "success": true,
+  "projectFilePath": "E:\\Project\\autoria\\back\\autoria-api\\Common\\Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dimar\\.nuget\\packages\\microsoft.identitymodel.abstractions\\8.0.0\\microsoft.identitymodel.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\dimar\\.nuget\\packages\\microsoft.identitymodel.logging\\8.0.0\\microsoft.identitymodel.logging.8.0.0.nupkg.sha512",
+    "C:\\Users\\dimar\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.0.0\\microsoft.identitymodel.tokens.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
