@@ -14,5 +14,3 @@ E:\Project\autoria\back\autoria-api\Application\obj\Debug\net8.0\Application.dll
 E:\Project\autoria\back\autoria-api\Application\obj\Debug\net8.0\refint\Application.dll
 E:\Project\autoria\back\autoria-api\Application\obj\Debug\net8.0\Application.pdb
 E:\Project\autoria\back\autoria-api\Application\obj\Debug\net8.0\ref\Application.dll
-E:\Project\autoria\back\autoria-api\Application\bin\Debug\net8.0\Common.dll
-E:\Project\autoria\back\autoria-api\Application\bin\Debug\net8.0\Common.pdb

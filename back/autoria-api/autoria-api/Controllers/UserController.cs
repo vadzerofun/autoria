@@ -2,9 +2,9 @@
 using Application.Interfaces;
 using Application.Services;
 using Microsoft.AspNetCore.Mvc;
-using Common;
 using Microsoft.Extensions.Options;
 using Application.Model;
+using System.ComponentModel.DataAnnotations;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,24 +25,31 @@ namespace autoria_api.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public async Task<List<UserDTO>> GetUsers()
+        public async Task<IActionResult> GetUsers()
         {
-            var users = await _userService.GetUsers();
-            return users;
+            var res = await _userService.GetUsers();
+            if (!res.IsSuccess)
+                return BadRequest(res.ErrorMessage);
+            return Ok(res.Value);
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<UserDTO> GetUserById(Guid id)
+        public async Task<IActionResult> GetUserById(Guid id)
         {
-            var User = await _userService.GetUserById(id);
-            return User;
+            var res = await _userService.GetUserById(id);
+            if (!res.IsSuccess)
+                return BadRequest(res.ErrorMessage);
+            return Ok(res.Value);
         }
 
         [HttpPost("Register")]
         public async Task<IActionResult> Register(UserDTO UserDTO)
         {
-            await _userService.AddUser(UserDTO);
+            UserDTO.Id = Guid.NewGuid();
+            var res = await _userService.AddUser(UserDTO);
+            if (!res.IsSuccess)
+                return BadRequest(res.ErrorMessage);
             return Ok();
         }
 
@@ -61,24 +68,46 @@ namespace autoria_api.Controllers
             return Ok();
         }
         [HttpGet("GetByEmail")]
-        public async Task<UserDTO> GetUserByEmail(string email)
+        public async Task<IActionResult> GetUserByEmail(string email)
         {
-            var User = await _userService.GetUserByEmail(email);
-            return User;
+            var res = await _userService.GetUserByEmail(email);
+            if (!res.IsSuccess)
+                return BadRequest(res.ErrorMessage);
+            return Ok(res);
         }
         [HttpGet("GetByName")]
-        public async Task<UserDTO> GetUserByName(string name)
+        public async Task<IActionResult> GetUserByName(string name)
         {
-            var User = await _userService.GetUserByName(name); 
-            return User;
+            var res = await _userService.GetUserByName(name);
+            if (!res.IsSuccess)
+                return BadRequest(res.ErrorMessage);
+            return Ok(res);
         }
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody]Login login)
         {
             var res = await _userService.Login(login);
-            if (res == null)
-                return Unauthorized();
+            if (!res.IsSuccess)
+                return Unauthorized(res.ErrorMessage);
+            return Ok(res);
+        }
+
+        [HttpPost("SendConfirmEmail")]
+        public async Task<IActionResult> SendConfirmEmail([FromBody] [EmailAddress] string Email)
+        {
+            var res = await _userService.SendConfirmEmail(Email);
+            if (!res.IsSuccess)
+                return BadRequest(res.ErrorMessage);
+            return Ok(res);
+        }
+
+        [HttpGet("ConfirmEmail")]
+        public async Task<IActionResult> ConfirmEmail(string Token)
+        {
+            var res = await _userService.ConfirmEmail(Token);
+            if (!res.IsSuccess)
+                return BadRequest(res.ErrorMessage);
             return Ok(res);
         }
     }

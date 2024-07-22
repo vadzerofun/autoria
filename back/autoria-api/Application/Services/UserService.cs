@@ -9,11 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Interfaces;
 using Application.Model;
-using Common;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mail;
+using SendGrid.Helpers.Mail;
+using SendGrid;
+using Application.Services;
 
 namespace Application.Services
 {
@@ -21,13 +24,16 @@ namespace Application.Services
     {
         private readonly IuserRepository _userRepository;
         private readonly IOptions<AuthOption> _authOption;
+        private readonly JWTtokenService _jwtTokenService;
         public UserService(IuserRepository userRepository, IOptions<AuthOption> authOption)
         {
             _userRepository = userRepository;
             _authOption = authOption;
+            _jwtTokenService = new JWTtokenService(authOption);
         }
-        public async Task AddUser(UserDTO userDTO)
+        public async Task<Result> AddUser(UserDTO userDTO)
         {
+
             var user = new User
             {
                 Id = userDTO.Id,
@@ -35,19 +41,66 @@ namespace Application.Services
                 Email = userDTO.Email,
                 Phone = userDTO.Phone,
                 Password = userDTO.Password,
-                userRole = 0
+                userRole = 0,
+                IsEmailConfirmed = false
             };
+
+
+            if (await _userRepository.GetUserByEmail(userDTO.Email) != null)
+                return Result.Failure("Email is already in use");
+
+            if (await _userRepository.GetUserByPhone(userDTO.Phone) != null)
+                return Result.Failure("Phone is already in use");
+
             await _userRepository.AddUser(user);
-            return;
+            return Result.Success();
         }
 
-        public async Task DeleteUserById(Guid id)
+        public async Task<Result<Response>> SendConfirmEmail(string Email)
         {
-            await _userRepository.DeleteUserById(id);
-            return;
+            //TODO: зробити підтвердження email
+            var user = await _userRepository.GetUserByEmail(Email);
+            if (user == null)
+                return Result<Response>.Failure("no such email");
+
+            string Token = _jwtTokenService.GenerateJWT(user);
+            string contitueEmail = "https://localhost:7224/api/User/ConfirmEmail?Token=" + Token;
+            var apiKey = "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";
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("dimarudik317@gmail.com", "Autoria");
+            var subject = "Check Email";
+            var to = new EmailAddress(Email, "User");
+            var plainTextContent = "Press this button to confirm your email";
+            var htmlContent = $@"
+            <strong>Підтвердіть вашу електронну пошту.</strong>
+            <br><br>
+            <a href='{contitueEmail}' style='display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #4CAF50; text-align: center; text-decoration: none; border-radius: 5px;'>Підтвердити пошту</a>";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            Response response = await client.SendEmailAsync(msg);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Result<Response>.Success(response);
+            }
+            return Result<Response>.Failure(response.StatusCode.ToString());
+
         }
 
-        public async Task EditUser(Guid id, UserDTO userDTO)
+        //TODO: Тільки юзер якого видаляють
+        public async Task<Result> DeleteUserById(Guid id)
+        {
+            try
+            {
+                await _userRepository.DeleteUserById(id);
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure(ex.Message);
+            }
+            return Result.Success();
+        }
+        //TODO: Тільки юзер якого редагують
+        public async Task<Result> EditUser(Guid id, UserDTO userDTO)
         {
             User user = new User
             {
@@ -58,114 +111,120 @@ namespace Application.Services
                 Phone = userDTO.Phone,
                 userRole = userDTO.userRole
             };
-            await _userRepository.EditUser(id, user);
+            try
+            {
+                await _userRepository.EditUser(id, user);
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure(ex.Message);
+            }
+            return Result.Success();
         }
 
-        public async Task<UserDTO> GetUserByEmail(string email)
+        public async Task<Result<UserDTO>> GetUserByEmail(string email)
         {
             User user = await _userRepository.GetUserByEmail(email);
             if (user == null)
-                return null;
+                return Result<UserDTO>.Failure("no such user");
             UserDTO userDto = new UserDTO
             {
                 Id = user.Id,
                 Email = user.Email,
                 Name = user.Name,
                 Phone = user.Phone,
-                userRole = user.userRole
+                userRole = user.userRole,
+                IsEmailConfirmed = user.IsEmailConfirmed,
             };
 
-            return userDto;
+            return Result<UserDTO>.Success(userDto);
         }
 
-        public async Task<UserDTO> GetUserById(Guid id)
+        public async Task<Result<UserDTO>> GetUserById(Guid id)
         {
             User user = await _userRepository.GetUserById(id);
             if (user == null)
-                return null;
+                return Result<UserDTO>.Failure("no such user");
             UserDTO userDto = new UserDTO
             {
                 Id = user.Id,
                 Email = user.Email,
                 Name = user.Name,
                 Phone = user.Phone,
-                userRole = user.userRole
+                userRole = user.userRole,
+                IsEmailConfirmed = user.IsEmailConfirmed,
             };
 
-            return userDto;
+            return Result<UserDTO>.Success(userDto);
         }
 
-        public async Task<UserDTO> GetUserByName(string name)
+        public async Task<Result<UserDTO>> GetUserByName(string name)
         {
             User user = await _userRepository.GetUserByName(name);
             if (user == null)
-                return null;
+                return Result<UserDTO>.Failure("no such user");
             UserDTO userDto = new UserDTO
             {
                 Id = user.Id,
                 Email = user.Email,
                 Name = user.Name,
                 Phone = user.Phone,
-                userRole = user.userRole
+                userRole = user.userRole,
+                IsEmailConfirmed = user.IsEmailConfirmed,
             };
 
-            return userDto;
+            return Result<UserDTO>.Success(userDto);
         }
 
-        public async Task<List<UserDTO>> GetUsers()
+        public async Task<Result<List<UserDTO>>> GetUsers()
         {
-            List<User> users = await _userRepository.GetUsers();
-            List<UserDTO> userDTOs = new List<UserDTO>();
-            foreach (var user in users)
+            try
             {
-                userDTOs.Add(new UserDTO
+                List<User> users = await _userRepository.GetUsers();
+                List<UserDTO> userDTOs = new List<UserDTO>();
+                foreach (var user in users)
                 {
-                    Id = user.Id,
-                    Email = user.Email,
-                    Name = user.Name,
-                    Phone = user.Phone,
-                    userRole = user.userRole
-                });
+                    userDTOs.Add(new UserDTO
+                    {
+                        Id = user.Id,
+                        Email = user.Email,
+                        Name = user.Name,
+                        Phone = user.Phone,
+                        userRole = user.userRole,
+                        IsEmailConfirmed = user.IsEmailConfirmed,
+                    });
+                }
+                return Result<List<UserDTO>>.Success(userDTOs);
             }
-            return userDTOs;
+            catch (Exception ex)
+            {
+                return Result<List<UserDTO>>.Failure(ex.Message);
+            }
         }
 
-        public async Task<string> Login(Login login)
+        public async Task<Result<string>> Login(Login login)
         {
             var user = _userRepository.GetUsers().Result.FirstOrDefault(user => user.Email == login.Email && user.Password == login.Password);
 
             if (user != null)
             {
-                var token = GenerateJWT(user);
+                var token = _jwtTokenService.GenerateJWT(user);
 
-                return token;
+                return Result<string>.Success(token);
             }
 
-            return null;
+            return Result<string>.Failure("No such User");
         }
 
-        private string GenerateJWT(User user)
+        public async Task<Result> ConfirmEmail(string token)
         {
-            var authParams = _authOption.Value;
+            var principal = _jwtTokenService.ValidateToken(token);
+            if (principal == null)
+                return Result.Failure("Old Link");
+            var email = principal.FindFirst(ClaimTypes.Email)?.Value;
 
-            var SecurityKey = authParams.GetSymmetricSecurityKey();
-            var credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256);
-
-            var claims = new List<Claim>()
-            {
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString())
-            };
-
-            claims.Add(new Claim("role", user.userRole.ToString()));
-
-            var token = new JwtSecurityToken(authParams.Issuer,
-                authParams.Audience,
-                claims,
-                expires: DateTime.Now.AddSeconds(authParams.TokenLifetime),
-                signingCredentials: credentials);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            await _userRepository.ConfirmUserEmail(email);
+            return Result.Success();
         }
     }
 }

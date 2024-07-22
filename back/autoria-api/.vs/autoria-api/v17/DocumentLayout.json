@@ -3,28 +3,104 @@
   "WorkspaceRootPath": "E:\\Project\\autoria\\back\\autoria-api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\controllers\\carscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|solutionrelative:autoria-api\\controllers\\carscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|E:\\Project\\autoria\\back\\autoria-api\\application\\services\\carservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\services\\carservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|E:\\Project\\autoria\\back\\autoria-api\\infrastructure\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|E:\\Project\\autoria\\back\\autoria-api\\infrastructure\\repositories\\carrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\carrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|solutionrelative:autoria-api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|E:\\Project\\autoria\\back\\autoria-api\\application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|E:\\Project\\autoria\\back\\autoria-api\\application\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|E:\\Project\\autoria\\back\\autoria-api\\infrastructure\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|E:\\Project\\autoria\\back\\autoria-api\\application\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|e:\\project\\autoria\\back\\autoria-api\\autoria-api\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|solutionrelative:autoria-api\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|e:\\project\\autoria\\back\\autoria-api\\autoria-api\\controllers\\carscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|solutionrelative:autoria-api\\controllers\\carscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|E:\\Project\\autoria\\back\\autoria-api\\domain\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|solutionrelative:domain\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|e:\\project\\autoria\\back\\autoria-api\\application\\services\\jwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\services\\jwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|e:\\project\\autoria\\back\\autoria-api\\application\\model\\authoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\model\\authoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|solutionrelative:autoria-api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|e:\\project\\autoria\\back\\autoria-api\\application\\services\\newsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\services\\newsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Migrations\\20240722151433_m1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Migrations\\20240722151433_m1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|E:\\Project\\autoria\\back\\autoria-api\\domain\\models\\news.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|solutionrelative:domain\\models\\news.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|solutionrelative:autoria-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|E:\\Project\\autoria\\back\\autoria-api\\application\\interfaces\\icarservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\interfaces\\icarservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|E:\\Project\\autoria\\back\\autoria-api\\domain\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|solutionrelative:domain\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|E:\\Project\\autoria\\back\\autoria-api\\application\\model\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\model\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|e:\\project\\autoria\\back\\autoria-api\\application\\interfaces\\inewsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\interfaces\\inewsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|e:\\project\\autoria\\back\\autoria-api\\infrastructure\\repositories\\newsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\newsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|e:\\project\\autoria\\back\\autoria-api\\domain\\interfaces\\inewsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|solutionrelative:domain\\interfaces\\inewsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|E:\\Project\\autoria\\back\\autoria-api\\infrastructure\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|E:\\Project\\autoria\\back\\autoria-api\\application\\services\\carservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\services\\carservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|e:\\project\\autoria\\back\\autoria-api\\application\\model\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\model\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|E:\\Project\\autoria\\back\\autoria-api\\infrastructure\\repositories\\carrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\carrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|E:\\Project\\autoria\\back\\autoria-api\\domain\\interfaces\\icarrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -35,52 +111,8 @@
       "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\dtos\\cardto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|e:\\project\\autoria\\back\\autoria-api\\autoria-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|solutionrelative:autoria-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|solutionrelative:autoria-api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|E:\\Project\\autoria\\back\\autoria-api\\infrastructure\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|E:\\Project\\autoria\\back\\autoria-api\\domain\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|solutionrelative:domain\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|E:\\Project\\autoria\\back\\autoria-api\\domain\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|solutionrelative:domain\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|E:\\Project\\autoria\\back\\autoria-api\\domain\\enums\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|solutionrelative:domain\\enums\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3676F75D-4957-4690-9392-8FE4DF3D3C30}|Common\\Common.csproj|E:\\Project\\autoria\\back\\autoria-api\\common\\authoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3676F75D-4957-4690-9392-8FE4DF3D3C30}|Common\\Common.csproj|solutionrelative:common\\authoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|e:\\project\\autoria\\back\\autoria-api\\domain\\models\\news.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FBE471A8-03D5-4C02-94A7-F18B9322D5B8}|Domain\\Core.csproj|solutionrelative:domain\\models\\news.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|E:\\Project\\autoria\\back\\autoria-api\\application\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|E:\\Project\\autoria\\back\\autoria-api\\application\\model\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\model\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|E:\\Project\\autoria\\back\\autoria-api\\application\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80DBBBED-5F9C-4B02-A0E9-927294B447A6}|Application\\Application.csproj|solutionrelative:application\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{F34B25A5-1FAA-412B-8673-1F3D9AD1CA0C}|autoria-api\\autoria-api.csproj|solutionrelative:autoria-api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\dimar\\AppData\\Local\\SourceServer\\14b652dc053e2be4ee929184697263741c54fa72da0fe9d03d57c6388943b3ee\\src\\DefaultBuilder\\src\\WebApplicationBuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -88,10 +120,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Migrations\\20240717133008_m1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Migrations\\20240717133008_m1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Migrations\\20240717215943_m1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B65160FD-C2E7-4BE2-B194-DADB838E18DC}|Infrastructure\\Infrastructure.csproj|solutionrelative:Infrastructure\\Migrations\\20240717215943_m1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -109,78 +137,91 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "AuthOption.cs",
-              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Common\\AuthOption.cs",
-              "RelativeDocumentMoniker": "Common\\AuthOption.cs",
-              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Common\\AuthOption.cs",
-              "RelativeToolTip": "Common\\AuthOption.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAFAAAA",
+              "DocumentIndex": 5,
+              "Title": "NewsController.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Controllers\\NewsController.cs",
+              "RelativeDocumentMoniker": "autoria-api\\Controllers\\NewsController.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Controllers\\NewsController.cs",
+              "RelativeToolTip": "autoria-api\\Controllers\\NewsController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T20:22:10.004Z",
+              "WhenOpened": "2024-07-22T14:43:05.87Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "UserRole.cs",
-              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Enums\\UserRole.cs",
-              "RelativeDocumentMoniker": "Domain\\Enums\\UserRole.cs",
-              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Enums\\UserRole.cs",
-              "RelativeToolTip": "Domain\\Enums\\UserRole.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAANAAAA",
+              "DocumentIndex": 18,
+              "Title": "INewsService.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Interfaces\\INewsService.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\INewsService.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Interfaces\\INewsService.cs",
+              "RelativeToolTip": "Application\\Interfaces\\INewsService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T16:23:46.345Z",
+              "WhenOpened": "2024-07-22T14:38:28.979Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ICarRepository.cs",
-              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Interfaces\\ICarRepository.cs",
-              "RelativeDocumentMoniker": "Domain\\Interfaces\\ICarRepository.cs",
-              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Interfaces\\ICarRepository.cs",
-              "RelativeToolTip": "Domain\\Interfaces\\ICarRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwA0AAAAnAAAA",
+              "DocumentIndex": 19,
+              "Title": "NewsRepository.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Repositories\\NewsRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\NewsRepository.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Repositories\\NewsRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\NewsRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T16:19:48.792Z",
+              "WhenOpened": "2024-07-22T14:36:53.375Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 20,
+              "Title": "INewsRepository.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Interfaces\\INewsRepository.cs",
+              "RelativeDocumentMoniker": "Domain\\Interfaces\\INewsRepository.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Interfaces\\INewsRepository.cs",
+              "RelativeToolTip": "Domain\\Interfaces\\INewsRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-22T14:36:24.433Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "IuserRepository.cs",
               "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Interfaces\\IuserRepository.cs",
               "RelativeDocumentMoniker": "Domain\\Interfaces\\IuserRepository.cs",
               "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Interfaces\\IuserRepository.cs",
               "RelativeToolTip": "Domain\\Interfaces\\IuserRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAgAAAA",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAAwBMAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-17T16:19:45.11Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "User.cs",
               "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Models\\User.cs",
               "RelativeDocumentMoniker": "Domain\\Models\\User.cs",
               "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Models\\User.cs",
               "RelativeToolTip": "Domain\\Models\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAFAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-17T16:13:25.998Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 21,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Data\\AppDbContext.cs",
               "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Data\\AppDbContext.cs",
               "RelativeToolTip": "Infrastructure\\Data\\AppDbContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAuAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-17T13:27:48.263Z",
               "EditorCaption": ""
@@ -188,25 +229,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "CarRepository.cs",
-              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Repositories\\CarRepository.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\CarRepository.cs",
-              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Repositories\\CarRepository.cs",
-              "RelativeToolTip": "Infrastructure\\Repositories\\CarRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADEAAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T13:27:48.997Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Repositories\\UserRepository.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Repositories\\UserRepository.cs",
               "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Repositories\\UserRepository.cs",
               "RelativeToolTip": "Infrastructure\\Repositories\\UserRepository.cs",
-              "ViewState": "AQIAAFkAAAAAAAAAAAAuwC8AAAAiAAAA",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAwwC4AAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-17T17:27:06.176Z",
               "EditorCaption": ""
@@ -214,84 +242,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CarsController.cs",
-              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Controllers\\CarsController.cs",
-              "RelativeDocumentMoniker": "autoria-api\\Controllers\\CarsController.cs",
-              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Controllers\\CarsController.cs",
-              "RelativeToolTip": "autoria-api\\Controllers\\CarsController.cs",
-              "ViewState": "AQIAACwAAAAAAAAAAAAIwDwAAAAzAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T13:29:32.968Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
               "Title": "UserController.cs",
               "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "autoria-api\\Controllers\\UserController.cs",
               "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Controllers\\UserController.cs",
               "RelativeToolTip": "autoria-api\\Controllers\\UserController.cs",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAmwEcAAAA/AAAA",
+              "ViewState": "AQIAAFoAAAAAAAAAAAAAAGgAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-17T17:35:59.837Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Program.cs",
-              "RelativeDocumentMoniker": "autoria-api\\Program.cs",
-              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Program.cs",
-              "RelativeToolTip": "autoria-api\\Program.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAAADMAAABjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T17:15:51.227Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CarDTO.cs",
-              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\DTOs\\CarDTO.cs",
-              "RelativeDocumentMoniker": "Application\\DTOs\\CarDTO.cs",
-              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\DTOs\\CarDTO.cs",
-              "RelativeToolTip": "Application\\DTOs\\CarDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAATAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T16:35:47.158Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "UserDTO.cs",
-              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\DTOs\\UserDTO.cs",
-              "RelativeDocumentMoniker": "Application\\DTOs\\UserDTO.cs",
-              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\DTOs\\UserDTO.cs",
-              "RelativeToolTip": "Application\\DTOs\\UserDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T16:35:37.401Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ICarService.cs",
-              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Interfaces\\ICarService.cs",
-              "RelativeDocumentMoniker": "Application\\Interfaces\\ICarService.cs",
-              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Interfaces\\ICarService.cs",
-              "RelativeToolTip": "Application\\Interfaces\\ICarService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBQAAAA3AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T16:29:17.821Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 22,
               "Title": "CarService.cs",
               "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Services\\CarService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\CarService.cs",
@@ -304,57 +267,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "Application\\Services\\UserService.cs",
-              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Services\\UserService.cs",
-              "RelativeToolTip": "Application\\Services\\UserService.cs",
-              "ViewState": "AQIAAJEAAAAAAAAAAAAYwJcAAABfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T16:52:47.805Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "News.cs",
-              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Models\\News.cs",
-              "RelativeDocumentMoniker": "Domain\\Models\\News.cs",
-              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Models\\News.cs",
-              "RelativeToolTip": "Domain\\Models\\News.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-21T17:20:59.143Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 17,
               "Title": "Login.cs",
               "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Model\\Login.cs",
               "RelativeDocumentMoniker": "Application\\Model\\Login.cs",
               "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Model\\Login.cs",
               "RelativeToolTip": "Application\\Model\\Login.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwA4AAAAWAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAgAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T19:01:17.197Z"
+              "WhenOpened": "2024-07-17T19:01:17.197Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "IUserService.cs",
-              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Interfaces\\IUserService.cs",
-              "RelativeDocumentMoniker": "Application\\Interfaces\\IUserService.cs",
-              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Interfaces\\IUserService.cs",
-              "RelativeToolTip": "Application\\Interfaces\\IUserService.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAjwBAAAAAUAAAA",
+              "DocumentIndex": 1,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\UserService.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Services\\UserService.cs",
+              "RelativeToolTip": "Application\\Services\\UserService.cs",
+              "ViewState": "AQIAAMEAAAAAAAAAAAAYwNkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T16:46:00.575Z"
+              "WhenOpened": "2024-07-17T16:52:47.805Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 10,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\appsettings.json",
               "RelativeDocumentMoniker": "autoria-api\\appsettings.json",
@@ -362,11 +301,203 @@
               "RelativeToolTip": "autoria-api\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAA9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-07-17T13:32:00.623Z"
+              "WhenOpened": "2024-07-17T13:32:00.623Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 4,
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Interfaces\\IUserService.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\IUserService.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Interfaces\\IUserService.cs",
+              "RelativeToolTip": "Application\\Interfaces\\IUserService.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAuwBYAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-17T16:46:00.575Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CarsController.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Controllers\\CarsController.cs",
+              "RelativeDocumentMoniker": "autoria-api\\Controllers\\CarsController.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Controllers\\CarsController.cs",
+              "RelativeToolTip": "autoria-api\\Controllers\\CarsController.cs",
+              "ViewState": "AQIAADkAAAAAAAAAAAAmwEsAAABMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-17T13:29:32.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserDTO.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\DTOs\\UserDTO.cs",
+              "RelativeDocumentMoniker": "Application\\DTOs\\UserDTO.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\DTOs\\UserDTO.cs",
+              "RelativeToolTip": "Application\\DTOs\\UserDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-17T16:35:37.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "JWTtokenService.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Services\\JWTtokenService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\JWTtokenService.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Services\\JWTtokenService.cs",
+              "RelativeToolTip": "Application\\Services\\JWTtokenService.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAAowC8AAAA6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-22T15:18:41.543Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AuthOption.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Model\\AuthOption.cs",
+              "RelativeDocumentMoniker": "Application\\Model\\AuthOption.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Model\\AuthOption.cs",
+              "RelativeToolTip": "Application\\Model\\AuthOption.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-22T15:23:30.428Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "NewsService.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Services\\NewsService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\NewsService.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Services\\NewsService.cs",
+              "RelativeToolTip": "Application\\Services\\NewsService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-22T15:23:36.894Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "20240722151433_m1.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Migrations\\20240722151433_m1.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20240722151433_m1.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Migrations\\20240722151433_m1.cs",
+              "RelativeToolTip": "Infrastructure\\Migrations\\20240722151433_m1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-22T15:14:33.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ICarService.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Interfaces\\ICarService.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\ICarService.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Interfaces\\ICarService.cs",
+              "RelativeToolTip": "Application\\Interfaces\\ICarService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBQAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-17T16:29:17.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Program.cs",
+              "RelativeDocumentMoniker": "autoria-api\\Program.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\autoria-api\\Program.cs",
+              "RelativeToolTip": "autoria-api\\Program.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAsAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-17T17:15:51.227Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "News.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Models\\News.cs",
+              "RelativeDocumentMoniker": "Domain\\Models\\News.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Models\\News.cs",
+              "RelativeToolTip": "Domain\\Models\\News.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-21T17:20:59.143Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "CarRepository.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Repositories\\CarRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\CarRepository.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Repositories\\CarRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\CarRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADEAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-17T13:27:48.997Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "CarDTO.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\DTOs\\CarDTO.cs",
+              "RelativeDocumentMoniker": "Application\\DTOs\\CarDTO.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\DTOs\\CarDTO.cs",
+              "RelativeToolTip": "Application\\DTOs\\CarDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-17T16:35:47.158Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Result.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Model\\Result.cs",
+              "RelativeDocumentMoniker": "Application\\Model\\Result.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Model\\Result.cs",
+              "RelativeToolTip": "Application\\Model\\Result.cs",
+              "ViewState": "AQIAABcAAAAAAAAAAAAIwCYAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-22T11:14:01.447Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ICarRepository.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Interfaces\\ICarRepository.cs",
+              "RelativeDocumentMoniker": "Domain\\Interfaces\\ICarRepository.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Interfaces\\ICarRepository.cs",
+              "RelativeToolTip": "Domain\\Interfaces\\ICarRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwA0AAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-17T16:19:48.792Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "UserRole.cs",
+              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Enums\\UserRole.cs",
+              "RelativeDocumentMoniker": "Domain\\Enums\\UserRole.cs",
+              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Domain\\Enums\\UserRole.cs",
+              "RelativeToolTip": "Domain\\Enums\\UserRole.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-17T16:23:46.345Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
               "Title": "WebApplicationBuilder.cs",
               "DocumentMoniker": "C:\\Users\\dimar\\AppData\\Local\\SourceServer\\14b652dc053e2be4ee929184697263741c54fa72da0fe9d03d57c6388943b3ee\\src\\DefaultBuilder\\src\\WebApplicationBuilder.cs",
               "ToolTip": "C:\\Users\\dimar\\AppData\\Local\\SourceServer\\14b652dc053e2be4ee929184697263741c54fa72da0fe9d03d57c6388943b3ee\\src\\DefaultBuilder\\src\\WebApplicationBuilder.cs",
@@ -376,19 +507,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "20240717215943_m1.cs",
-              "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Migrations\\20240717215943_m1.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20240717215943_m1.cs",
-              "ToolTip": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Migrations\\20240717215943_m1.cs",
-              "RelativeToolTip": "Infrastructure\\Migrations\\20240717215943_m1.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAgwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T21:59:43.919Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 29,
               "Title": "20240717133008_m1.cs",
               "DocumentMoniker": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Migrations\\20240717133008_m1.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20240717133008_m1.cs",

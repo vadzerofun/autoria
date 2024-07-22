@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Application.Services;
-using Common;
+using Application.Model;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
