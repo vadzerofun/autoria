@@ -46,6 +46,7 @@ namespace Infrastructure.Repositories
         {
             var tempcar = await _context.Cars.FindAsync(id);
             _context.Cars.Remove(tempcar);
+            await _context.SaveChangesAsync();
             _context.Cars.Add(car);
             await _context.SaveChangesAsync();
         }
@@ -73,6 +74,20 @@ namespace Infrastructure.Repositories
                 return null;
             }
             return await _context.Cars.ToListAsync();
+        }
+
+        public async Task AddImageToCar(Guid id, string ImageLink)
+        {
+            var car = await GetCarById(id);
+            car.ImagesPath.Add(ImageLink);
+            await EditCar(id, car);
+        }
+
+        public async Task DeleteImagefromCar(Guid id, string ImageLink)
+        {
+            var car = await GetCarById(id);
+            car.ImagesPath.Remove(ImageLink);
+            await EditCar(id, car);
         }
     }
 }

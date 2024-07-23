@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
-    public class INewsRepository
+    public interface INewsRepository
     {
         //TODO: Доробити інтерфейс INewsRepository
+
     }
 }

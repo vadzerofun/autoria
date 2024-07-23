@@ -51,9 +51,9 @@ namespace Application.Services
             await _carRepository.AddCar(car);
         }
 
-        public Task AddImageToCar(Guid id, string ImageFiles)
+        public async Task AddImageToCar(Guid id, string ImageFiles)
         {
-            throw new NotImplementedException();
+            await _carRepository.AddImageToCar(id, ImageFiles);
         }
 
         public async Task DeleteCarById(Guid id)
@@ -61,9 +61,9 @@ namespace Application.Services
             await _carRepository.DeleteCarById(id);
         }
 
-        public Task DeleteImageFromCar(Guid id, string ImageName)
+        public async Task DeleteImageFromCar(Guid id, string ImageName)
         {
-            throw new NotImplementedException();
+            await _carRepository.DeleteImagefromCar(id, ImageName);
         }
 
         public async Task EditCar(Guid id, CarDTO carDTO)

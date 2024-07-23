@@ -58,20 +58,21 @@ namespace autoria_api.Controllers
             await _carService.EditCar(id, carDTO);
             return Ok();
         }
-        //TODO: доробити додавання і видалення фото
-        //[HttpPost("AddImageToCar")]
-        //public async Task<IActionResult> AddImageToCar([FromForm] Guid id, [FromForm] IFormFile ImageFiles)
-        //{
-        //    await _carService.AddImageToCar(id, "test");
-        //    return Ok();
-        //}
 
-        //[HttpDelete("DeleteImageFromCar")]
-        //public async Task<IActionResult> DeleteImageFromCar([FromForm] Guid id, [FromForm] string ImageName)
-        //{
-        //    await _carService.DeleteImageFromCar(id, ImageName);
-        //    return Ok();
-        //}
+        [HttpPost("AddImageToCar")]
+        public async Task<IActionResult> AddImageToCar(Guid id, IFormFile ImageFile)
+        {
+            string ImagesPath = await UploadImage(ImageFile);
+            await _carService.AddImageToCar(id, ImagesPath);
+            return Ok();
+        }
+
+        [HttpDelete("DeleteImageFromCar")]
+        public async Task<IActionResult> DeleteImageFromCar(Guid id, string ImageName)
+        {
+            await _carService.DeleteImageFromCar(id, ImageName);
+            return Ok();
+        }
 
         private async Task<List<string>> UploadImages(List<IFormFile> files)
         {
@@ -98,6 +99,25 @@ namespace autoria_api.Controllers
             }
 
             return filePaths;
+        }
+
+        private async Task<string> UploadImage(IFormFile file)
+        {
+            var _imageFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Images");
+
+            if (file == null || file.Length == 0)
+                throw new ArgumentException("file is invalid.");
+
+            var fileExtension = Path.GetExtension(file.FileName);
+            var uniqueFileName = $"{Guid.NewGuid()}{fileExtension}";
+            var filePath = Path.Combine(_imageFolderPath, uniqueFileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return uniqueFileName;
         }
     }
 }

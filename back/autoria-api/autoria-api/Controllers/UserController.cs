@@ -94,21 +94,27 @@ namespace autoria_api.Controllers
         }
 
         [HttpPost("SendConfirmEmail")]
-        public async Task<IActionResult> SendConfirmEmail([FromBody] [EmailAddress] string Email)
+        public async Task<IActionResult> SendConfirmEmail(ConfirmEmail confirmEmail)
         {
-            var res = await _userService.SendConfirmEmail(Email);
+            var res = await _userService.SendConfirmEmail(confirmEmail.Email, confirmEmail.SuccessLink, confirmEmail.BadLink);
             if (!res.IsSuccess)
                 return BadRequest(res.ErrorMessage);
             return Ok(res);
         }
 
         [HttpGet("ConfirmEmail")]
-        public async Task<IActionResult> ConfirmEmail(string Token)
+        public async Task<IActionResult> ConfirmEmail(string Token, string SuccessLink, string BadLink)
         {
             var res = await _userService.ConfirmEmail(Token);
             if (!res.IsSuccess)
-                return BadRequest(res.ErrorMessage);
-            return Ok(res);
+                return Redirect(BadLink);
+            return Redirect(SuccessLink);
+        }
+        //TODO: зробити забув пароль
+        [HttpPost("ForgotPassword")]
+        public async Task<IActionResult> ForgotPassword()
+        {
+            return Ok("Dont Work");
         }
     }
 }

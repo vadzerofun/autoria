@@ -56,15 +56,14 @@ namespace Application.Services
             return Result.Success();
         }
 
-        public async Task<Result<Response>> SendConfirmEmail(string Email)
+        public async Task<Result<Response>> SendConfirmEmail(string Email, string SuccessLink, string BadLink)
         {
-            //TODO: зробити підтвердження email
             var user = await _userRepository.GetUserByEmail(Email);
             if (user == null)
                 return Result<Response>.Failure("no such email");
 
             string Token = _jwtTokenService.GenerateJWT(user);
-            string contitueEmail = "https://localhost:7224/api/User/ConfirmEmail?Token=" + Token;
+            string contitueEmail = $"https://localhost:7224/api/User/ConfirmEmail?Token={Token}&SuccessLink={SuccessLink}&BadLink={BadLink}";
             var apiKey = "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";
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress("dimarudik317@gmail.com", "Autoria");
@@ -205,6 +204,9 @@ namespace Application.Services
         public async Task<Result<string>> Login(Login login)
         {
             var user = _userRepository.GetUsers().Result.FirstOrDefault(user => user.Email == login.Email && user.Password == login.Password);
+
+            if (!user.IsEmailConfirmed)
+                return Result<string>.Failure("Email is not confirmed!");
 
             if (user != null)
             {

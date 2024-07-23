@@ -19,7 +19,7 @@ namespace Application.Interfaces
         Task<Result> DeleteUserById(Guid id);
         Task<Result> EditUser(Guid id, UserDTO user);
         Task<Result<string>> Login(Login login);
-        Task<Result<Response>> SendConfirmEmail(string Email);
+        Task<Result<Response>> SendConfirmEmail(string Email, string SuccessLink, string BadLink);
         Task<Result> ConfirmEmail(string token);
     }
 }

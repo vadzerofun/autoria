@@ -15,5 +15,7 @@ namespace Core.Interfaces
         Task AddCar(Cars car);
         Task DeleteCarById(Guid id);
         Task EditCar(Guid id, Cars car);
+        Task AddImageToCar(Guid id, string ImageLink);
+        Task DeleteImagefromCar(Guid id, string ImageLink);
     }
 }
