@@ -11,6 +11,10 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 using Application.Services;
 using Application.Model;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -24,6 +28,62 @@ builder.Services.AddSwaggerGen(optins =>
 {
 	optins.OperationFilter<SecurityRequirementsOperationFilter>();
 });
+
+builder.Services.Configure<AuthOption>(builder.Configuration.GetSection("AuthOption"));
+
+builder.Services.AddSingleton<JWTtokenService>();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+     {
+         var authOptions = builder.Configuration.GetSection("AuthOption").Get<AuthOption>();
+         options.TokenValidationParameters = new TokenValidationParameters
+         {
+             ValidateIssuer = true,
+             ValidateAudience = true,
+             ValidateLifetime = true,
+             ValidateIssuerSigningKey = true,
+             ValidIssuer = authOptions.Issuer,
+             ValidAudience = authOptions.Audience,
+             IssuerSigningKey = authOptions.GetSymmetricSecurityKey(),
+         };
+     });
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+    // Додаємо підтримку JWT
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter into field the word 'Bearer' followed by a space and the JWT value.",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] { }
+        }
+    });
+});
+
 
 builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
 {
@@ -56,6 +116,8 @@ app.UseStaticFiles(new StaticFileOptions
 app.UseCors("corspolicy");
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

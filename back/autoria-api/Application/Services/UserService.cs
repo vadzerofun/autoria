@@ -42,7 +42,8 @@ namespace Application.Services
                 Phone = userDTO.Phone,
                 Password = userDTO.Password,
                 userRole = 0,
-                IsEmailConfirmed = false
+                IsEmailConfirmed = false,
+                CarsId = new List<Guid>()
             };
 
 
@@ -108,7 +109,8 @@ namespace Application.Services
                 Name = userDTO.Name,
                 Password = userDTO.Password,
                 Phone = userDTO.Phone,
-                userRole = userDTO.userRole
+                userRole = userDTO.userRole,
+                CarsId = userDTO.CarsId
             };
             try
             {
@@ -134,6 +136,7 @@ namespace Application.Services
                 Phone = user.Phone,
                 userRole = user.userRole,
                 IsEmailConfirmed = user.IsEmailConfirmed,
+                CarsId = user.CarsId,
             };
 
             return Result<UserDTO>.Success(userDto);
@@ -152,6 +155,7 @@ namespace Application.Services
                 Phone = user.Phone,
                 userRole = user.userRole,
                 IsEmailConfirmed = user.IsEmailConfirmed,
+                CarsId = user.CarsId,
             };
 
             return Result<UserDTO>.Success(userDto);
@@ -170,6 +174,7 @@ namespace Application.Services
                 Phone = user.Phone,
                 userRole = user.userRole,
                 IsEmailConfirmed = user.IsEmailConfirmed,
+                CarsId = user.CarsId,
             };
 
             return Result<UserDTO>.Success(userDto);
@@ -191,6 +196,7 @@ namespace Application.Services
                         Phone = user.Phone,
                         userRole = user.userRole,
                         IsEmailConfirmed = user.IsEmailConfirmed,
+                        CarsId = user.CarsId,
                     });
                 }
                 return Result<List<UserDTO>>.Success(userDTOs);
@@ -205,11 +211,14 @@ namespace Application.Services
         {
             var user = _userRepository.GetUsers().Result.FirstOrDefault(user => user.Email == login.Email && user.Password == login.Password);
 
-            if (!user.IsEmailConfirmed)
-                return Result<string>.Failure("Email is not confirmed!");
+            
 
             if (user != null)
             {
+                if (!user.IsEmailConfirmed)
+                    return Result<string>.Failure("Email is not confirmed!");
+
+
                 var token = _jwtTokenService.GenerateJWT(user);
 
                 return Result<string>.Success(token);
@@ -227,6 +236,19 @@ namespace Application.Services
 
             await _userRepository.ConfirmUserEmail(email);
             return Result.Success();
+        }
+
+        public async Task<Result> AddCarIdToUser(Guid UserId, Guid CarId)
+        {
+            try
+            {
+                await _userRepository.AddCarIdToUser(UserId, CarId);
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure(ex.Message);
+            }
         }
     }
 }

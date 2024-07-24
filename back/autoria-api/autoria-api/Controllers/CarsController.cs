@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Application.Interfaces;
 using Application.DTOs;
+using Application.Services;
+using Application.Model;
 
 namespace autoria_api.Controllers
 {
@@ -12,21 +14,23 @@ namespace autoria_api.Controllers
     public class CarsController : ControllerBase
     {
         private readonly ICarService _carService;
+        private readonly IConfiguration _configuration;
 
-        public CarsController(ICarService carService)
+        public CarsController(ICarService carService, IConfiguration configuration)
         {
             _carService = carService;
+            _configuration = configuration;
         }
-
         // GET: api/Cars
+        [AllowAnonymous]
         [HttpGet]
         public async Task<List<CarDTO>> GetCars()
         {
             var car = await _carService.GetCars();
             return car;
         }
-
         // GET: api/Cars/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<CarDTO> GetCarById(Guid id)
         {
@@ -34,6 +38,7 @@ namespace autoria_api.Controllers
             return car;
         }
 
+        [Authorize]
         [HttpPost("AddCar")]
         public async Task<IActionResult> AddCar([FromForm] CarDTO carDTO, [FromForm] IFormFile[] ImageFiles)
         {
@@ -50,6 +55,13 @@ namespace autoria_api.Controllers
             await _carService.DeleteCarById(id);
             return Ok();
         }
+        //[HttpGet("Validat3eToken")]
+        //public async Task<bool> Validat3eToken(string token)
+        //{
+        //    var authOptions = _configuration.GetSection("AuthOption").Get<AuthOption>();
+        //    var JWT = JWTtokenService(authOptions);
+        //    return  
+        //}
 
         [HttpPost("EditCar")]
         public async Task<IActionResult> EditCar([FromForm] Guid id, [FromForm] CarDTO carDTO, [FromForm] IFormFile[] ImageFiles)

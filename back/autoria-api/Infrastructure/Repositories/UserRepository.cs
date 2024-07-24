@@ -132,6 +132,21 @@ namespace Infrastructure.Repositories
             user.IsEmailConfirmed = true;
             await EditUser(user.Id, user);
         }
+
+        public async Task AddCarIdToUser(Guid UserId, Guid CarId)
+        {
+            var user = await GetUserById(UserId);
+            if (user == null)
+                return;
+
+            if (user.CarsId == null)
+            {
+                user.CarsId = new List<Guid>();
+            }
+
+            user.CarsId.Add(CarId);
+            await _context.SaveChangesAsync();
+        }
     }
 }
 

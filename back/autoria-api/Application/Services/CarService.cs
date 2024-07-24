@@ -11,20 +11,24 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Services;
 
 namespace Application.Services
 {
     public class CarService : ICarService
     {
         private readonly ICarRepository _carRepository;
-        public CarService(ICarRepository carRepository)
+        private readonly IuserRepository _userRepository;
+        public CarService(ICarRepository carRepository, IuserRepository userRepository)
         {
             _carRepository = carRepository;
+            _userRepository = userRepository;
         }
         public async Task AddCar(CarDTO carDTO)
         {
             Cars car = new Cars
             {
+                Id = Guid.NewGuid(),
                 PriceUSD = carDTO.PriceUSD,
                 Mileage = carDTO.Mileage,
                 Make = carDTO.Make,
@@ -46,8 +50,8 @@ namespace Application.Services
                 ImagesPath = carDTO.ImagesPath,
                 UserId = carDTO.UserId,
                 CreatedTime = DateTime.Now
-
             };
+            await _userRepository.AddCarIdToUser(carDTO.UserId, car.Id);
             await _carRepository.AddCar(car);
         }
 

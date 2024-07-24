@@ -61,14 +61,13 @@ namespace Application.Services
                     ValidIssuer = _authOption.Value.Issuer,
                     ValidAudience = _authOption.Value.Audience,
                     IssuerSigningKey = key,
-                    ClockSkew = TimeSpan.Zero // Токен не повинен мати "часового зміщення"
+                    ClockSkew = TimeSpan.Zero
                 }, out SecurityToken validatedToken);
 
                 return principal;
             }
             catch
             {
-                // Токен недійсний або прострочений
                 return null;
             }
         }

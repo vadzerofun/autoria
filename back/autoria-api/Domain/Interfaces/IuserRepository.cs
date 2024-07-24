@@ -18,5 +18,6 @@ namespace Core.Interfaces
         Task DeleteUserById(Guid id);
         Task EditUser(Guid id, User user);
         Task ConfirmUserEmail(string Email);
+        Task AddCarIdToUser(Guid UserId, Guid CarId);
     }
 }
