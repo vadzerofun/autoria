@@ -85,8 +85,14 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Transmission_type")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("VisitedCount")
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("Wanted")
                         .HasColumnType("INTEGER");

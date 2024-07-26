@@ -15,6 +15,7 @@ namespace Core.Models
         public double Mileage { get; set; } // Пробіг авто
         public string Make { get; set; } // Марка
         public string Model { get; set; } // Модель
+        public CarType Type { get; set; } // Тип машини Легкові, Вантажні ...
         public int Year { get; set; } // Рік випуску
         public double Engine_capacity { get; set; } // Об'єм двигуна
         public Engine_type Engine_type { get; set; } // Тип двигуна (бензин, дизель)
@@ -32,5 +33,6 @@ namespace Core.Models
         public List<string> ImagesPath { get; set; } //Посилання на картики авто
         public Guid UserId { get; set; } //Id юзера
         public DateTime CreatedTime { get; set; } // дата створення оголошення
+        public int VisitedCount { get; set; } // кількість переглядів
     }
 }

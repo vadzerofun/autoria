@@ -6,6 +6,7 @@ using Application.Interfaces;
 using Application.DTOs;
 using Application.Services;
 using Application.Model;
+using Core.Models;
 
 namespace autoria_api.Controllers
 {
@@ -24,7 +25,7 @@ namespace autoria_api.Controllers
         // GET: api/Cars
         [AllowAnonymous]
         [HttpGet]
-        public async Task<List<CarDTO>> GetCars()
+        public async Task<List<Cars>> GetCars()
         {
             var car = await _carService.GetCars();
             return car;
@@ -32,17 +33,59 @@ namespace autoria_api.Controllers
         // GET: api/Cars/5
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<CarDTO> GetCarById(Guid id)
+        public async Task<Cars> GetCarById(Guid id)
         {
             var car = await _carService.GetCarById(id);
             return car;
         }
+        [AllowAnonymous]
+        [HttpGet("GetCarByMark")]
+        public async Task<Result<List<Cars>>> GetCarByMark(string mark)
+        {
+            try
+            {
+                var cars = await _carService.GetCarByMark(mark);
+                return Result<List<Cars>>.Success(cars);
+            }
+            catch (Exception ex)
+            {
+                return Result<List<Cars>>.Failure(ex.Message);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet("GetCarsForYou")]
+        public async Task<Result<List<Cars>>> GetCarsForYou()
+        {
+            try
+            {
+                var cars = await _carService.GetCarsForYou();
+                return Result<List<Cars>>.Success(cars);
+            }
+            catch(Exception ex)
+            {
+                return Result<List<Cars>>.Failure(ex.Message);
+            }
+        }
+        [AllowAnonymous]
+        [HttpGet("GetCarsByFilter")]
+        public async Task<Result<List<Cars>>> GetCarsByFilter(CarFilter carFilter)
+        {
+            try
+            {
+                var cars = await _carService.GetCarByFilter(carFilter);
+                return Result<List<Cars>>.Success(cars);
+            }
+            catch (Exception ex)
+            {
+                return Result<List<Cars>>.Failure(ex.Message);
+            }
+        }
 
         [Authorize]
         [HttpPost("AddCar")]
-        public async Task<IActionResult> AddCar([FromForm] CarDTO carDTO, [FromForm] IFormFile[] ImageFiles)
+        public async Task<IActionResult> AddCar([FromForm] Cars carDTO, [FromForm] IFormFile[] ImageFiles)
         {
-
             carDTO.ImagesPath = await UploadImages(ImageFiles.ToList());
             await _carService.AddCar(carDTO);
             return CreatedAtAction(nameof(AddCar), carDTO);
@@ -64,7 +107,7 @@ namespace autoria_api.Controllers
         //}
 
         [HttpPost("EditCar")]
-        public async Task<IActionResult> EditCar([FromForm] Guid id, [FromForm] CarDTO carDTO, [FromForm] IFormFile[] ImageFiles)
+        public async Task<IActionResult> EditCar([FromForm] Guid id, [FromForm] Cars carDTO, [FromForm] IFormFile[] ImageFiles)
         {
             carDTO.ImagesPath = await UploadImages(ImageFiles.ToList());
             await _carService.EditCar(id, carDTO);
@@ -131,5 +174,6 @@ namespace autoria_api.Controllers
 
             return uniqueFileName;
         }
+
     }
 }
