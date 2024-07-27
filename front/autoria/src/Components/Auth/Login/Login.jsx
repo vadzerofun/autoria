@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
-export const Login = () => {
+export const Login = ({ setToken }) => {
 
     const navigate = useNavigate();
 
@@ -14,31 +14,23 @@ export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    // Function to set a cookie
-    function setCookie(name, value, maxAge) {
-        document.cookie = `${name}=${value}; path=/; max-age=${maxAge}`;
-    }
-
     // onClick
     const loginUser = (e) => {
         e.preventDefault();
 
         axios
             .post(
-                "https://localhost:7224/login?useCookies=false&useSessionCookies=false",
+                import.meta.env.VITE_REACT_API_URL + "User/Login",
                 {
                     email: email,
                     password: password,
                 }
             )
             .then((response) => {
-                // Set cookies
-                console.log(response.data.tokenType);
-                setCookie("tokenType", response.data.tokenType, response.data.expiresIn);
-                setCookie("accessToken", response.data.accessToken, response.data.expiresIn);
-                setCookie("refreshToken", response.data.refreshToken, response.data.expiresIn);
-                console.log(response.data);
-                navigate("/");
+                // Set token
+                const tokenValue = response.data;
+                setToken({token: tokenValue});
+                // navigate("/");
             })
             .catch((error) => {
                 console.error(error);
@@ -54,9 +46,9 @@ export const Login = () => {
             <Form className="loginForm">
                 <Form.Group className="mb-3" controlId="email">
                     <Form.Control
-                        type="username"
-                        placeholder="Ім'я користувача"
-                        aria-label="Username"
+                        type="email"
+                        placeholder="Email"
+                        aria-label="Email"
                         className="loginFormInput"
                         required
                         onChange={(e) => {

@@ -1,0 +1,199 @@
+.footerLeft {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2.5rem;
+  padding: 50px;
+}
+@media screen and (max-width: 992px) {
+  .footerLeft {
+    padding: 2.5rem 1.25rem 1.25rem;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .footerLeftRow {
+    gap: 1rem;
+  }
+}
+
+.footerLeftRow .col {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.5rem;
+}
+@media screen and (max-width: 992px) {
+  .footerLeftRow .col {
+    padding-left: 0;
+  }
+}
+@media screen and (max-width: 530px) {
+  .footerLeftRow .col {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 0 100%;
+            flex: 1 0 100%;
+    gap: 1rem;
+  }
+}
+
+.footerLeftRow .col a {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.375; /* 22/16 */
+  color: var(--bs-footertext);
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.footerLeftRow .col a:hover {
+  color: var(--bs-primary);
+}
+
+.footerLeftTitle {
+  font-weight: 700;
+  color: var(--bs-primary);
+  padding-left: 90px;
+}
+@media screen and (max-width: 992px) {
+  .footerLeftTitle {
+    padding-left: 0;
+  }
+}
+
+.footerRight {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.25rem;
+  padding: 2.5rem 2rem;
+}
+@media screen and (max-width: 992px) {
+  .footerRight {
+    padding: 2.5rem 1.25rem 1.25rem;
+  }
+}
+
+.footerRightTitle {
+  font-weight: 700;
+}
+
+.footerRightControlls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 100px;
+  padding-top: 10px;
+}
+@media screen and (max-width: 1200px) {
+  .footerRightControlls {
+    gap: 0;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+@media screen and (max-width: 530px) {
+  .footerRightControlls {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+.footerRightImages {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.875rem;
+}
+@media screen and (max-width: 530px) {
+  .footerRightImages {
+    gap: 1.5rem;
+  }
+}
+
+.footerRightDownload {
+  padding-top: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footerRightDownloadButton {
+  max-width: 140px;
+}
+
+.footerRightDownloadButton img {
+  height: 40px;
+}
+
+.footerRightSocialMedia {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1.875rem;
+}
+
+.footerRightSocialMedia img {
+  height: 1rem;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.footerRightSocialMedia img:hover {
+  -webkit-transform: scale(1.25);
+          transform: scale(1.25);
+}
+
+.footerRightButtons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footerRightButtons .btn {
+  color: #5C5C5C;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.38; /* 16.56/12 */
+  border-radius: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.footerRightButtons .btn:hover {
+  color: #fff;
+}
+
+.footerRightCopyright p {
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--bs-footertext);
+}
+.footerRightCopyright p:last-child {
+  margin-bottom: 0;
+}/*# sourceMappingURL=Footer.css.map */

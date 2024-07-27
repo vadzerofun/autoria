@@ -1,21 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
+import App from './Components/App/App.jsx';
 import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom'
 import Root from "./routes/root";
 import ErrorPage from './error-page.jsx';
-import { Register } from './Components/Register/Register.jsx';
-import { Login } from './Components/Login/Login.jsx';
-import LoginRegister from './Components/LoginRegister/LoginRegister.jsx';
-import { ForgotPassword } from './Components/ForgotPassword/ForgotPassword.jsx';
+import { Register } from './Components/Auth/Register/Register.jsx';
+import { Login } from './Components/Auth/Login/Login.jsx';
+import LoginRegister from './Components/Auth/LoginRegister/LoginRegister.jsx';
+import { ForgotPassword } from './Components/Auth/ForgotPassword/ForgotPassword.jsx';
+import { Home } from './Pages/Home/Home.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Home />,
     errorElement: <ErrorPage />
   },
   {

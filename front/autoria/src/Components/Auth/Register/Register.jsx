@@ -8,7 +8,7 @@ import { Message } from "../Message/Message";
 
 import axios from "axios";
 
-export const Register = () => {
+export const Register = () => {   
     // msg
     const [showMessage, setShowMessage] = useState(false);
     const [message, setMessage] = useState({
@@ -28,10 +28,10 @@ export const Register = () => {
         e.preventDefault();
 
         axios
-            .post(import.meta.env.VITE_REACT_API_URL + "User/register", {
-                userName: username,
-                email: email,
-                phoneNumber: "+380" + phone,
+            .post(import.meta.env.VITE_REACT_API_URL + "User/Register", {                
+                name: username,
+                phone: "+380" + phone,
+                email: email,                
                 password: password,
             })
             .then((response) => {
@@ -39,11 +39,12 @@ export const Register = () => {
                     title: "Вітаємо",
                     msgText: "Ви успішно зареєструвались",
                     linkText: "Далі",
-                    linkURL: "/",
+                    linkURL: "/login",
                 });
                 setShowMessage(true);
             })
             .catch((error) => {
+                console.log(error);
                 setMessage({
                     title: "Упс",
                     msgText: "Щось пішло не так",
@@ -53,6 +54,17 @@ export const Register = () => {
                 setShowMessage(true);
             });
     };
+
+    // guid
+    function uuidv4() {
+        return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c) =>
+            (
+                +c ^
+                (crypto.getRandomValues(new Uint8Array(1))[0] &
+                    (15 >> (+c / 4)))
+            ).toString(16)
+        );
+    }
 
     return (
         <>
