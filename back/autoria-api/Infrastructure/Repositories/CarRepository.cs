@@ -1,4 +1,5 @@
-﻿using Core.Models;
+﻿using Core.Enums;
+using Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,7 @@ namespace Infrastructure.Repositories
         {
             var tempcar = await _context.Cars.FindAsync(id);
             _context.Cars.Remove(tempcar);
+            await _context.SaveChangesAsync();
             _context.Cars.Add(car);
             await _context.SaveChangesAsync();
         }
@@ -73,6 +75,44 @@ namespace Infrastructure.Repositories
                 return null;
             }
             return await _context.Cars.ToListAsync();
+        }
+
+        public async Task AddImageToCar(Guid id, string ImageLink)
+        {
+            var car = await GetCarById(id);
+            car.ImagesPath.Add(ImageLink);
+            await EditCar(id, car);
+        }
+
+        public async Task DeleteImagefromCar(Guid id, string ImageLink)
+        {
+            var car = await GetCarById(id);
+            car.ImagesPath.Remove(ImageLink);
+            await EditCar(id, car);
+        }
+
+        public async Task<List<Cars>> GetCarsByMark(string mark)
+        {
+            List<Cars> cars = new List<Cars>();
+            cars = _context.Cars.Where(car => car.Make == mark).ToList();
+            return cars;
+        }
+
+        public async Task<List<Cars>> GetCarsByFilter(CarType type, string Mark, string Model, string Region, int MinYear, int MaxYear, int MinPrice, int MaxPrice)
+        {
+            //TODO: string Region хз як
+            List<Cars> cars = new List<Cars>();
+            cars = await _context.Cars.Where(car => car.Type == type && car.Make == Mark && car.Model == Model && (car.Year < MaxYear && car.Year > MinYear) && (car.PriceUSD < MaxPrice && car.PriceUSD > MinPrice)).ToListAsync();
+            return cars;
+        }
+
+        public async Task<List<Cars>> GetCarsForYou()
+        {
+            List<Cars> cars = new List<Cars>();
+            cars = await _context.Cars.OrderByDescending(car => car.VisitedCount)
+                .Take(10)
+                .ToListAsync();
+            return cars;
         }
     }
 }

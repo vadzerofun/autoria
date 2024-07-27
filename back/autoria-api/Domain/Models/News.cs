@@ -8,10 +8,11 @@ namespace Core.Models
 {
     public class News
     {
-        public string Tittle {  get; set; }//заголовок
-        public DateTime WritingTime { get; set; }//час написання
-        public string Link {  get; set; }//лінк на новину
-        public string ImageLink { get; set; }//
+        public Guid Id { get; set; } //Id
+        public string Tittle {  get; set; } //заголовок
+        public DateTime WritingTime { get; set; } //час написання
+        public string Link {  get; set; } //лінк на новину
+        public string ImageLink { get; set; } //посилання на картинку
 
     }
 }

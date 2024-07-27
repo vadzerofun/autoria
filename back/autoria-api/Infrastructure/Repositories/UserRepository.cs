@@ -46,6 +46,7 @@ namespace Infrastructure.Repositories
         {
             var tempUser = await _context.Users.FindAsync(id);
             _context.Users.Remove(tempUser);
+            await _context.SaveChangesAsync();
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
         }
@@ -57,6 +58,22 @@ namespace Infrastructure.Repositories
                 return null;
             }
             var User = await _context.Users.FirstOrDefaultAsync(user => user.Email == email);
+
+            if (User == null)
+            {
+                return null;
+            }
+
+            return User;
+        }
+
+        public async Task<User> GetUserByPhone(string phone)
+        {
+            if (_context.Users == null)
+            {
+                return null;
+            }
+            var User = await _context.Users.FirstOrDefaultAsync(user => user.Phone == phone);
 
             if (User == null)
             {
@@ -105,6 +122,30 @@ namespace Infrastructure.Repositories
                 return null;
             }
             return await _context.Users.ToListAsync();
+        }
+
+        public async Task ConfirmUserEmail(string Email)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(user => user.Email == Email);
+            if (user == null)
+                return;
+            user.IsEmailConfirmed = true;
+            await EditUser(user.Id, user);
+        }
+
+        public async Task AddCarIdToUser(Guid UserId, Guid CarId)
+        {
+            var user = await GetUserById(UserId);
+            if (user == null)
+                return;
+
+            if (user.CarsId == null)
+            {
+                user.CarsId = new List<Guid>();
+            }
+
+            user.CarsId.Add(CarId);
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using Application.Model;
 using Application.Services;
 using Core.Interfaces;
 using Core.Models;
@@ -13,12 +14,15 @@ namespace Application.Interfaces
 {
     public interface ICarService
     {
-        Task<List<CarDTO>> GetCars();
-        Task<CarDTO> GetCarById(Guid id);
-        Task AddCar(CarDTO car);
+        Task<List<Cars>> GetCars();
+        Task<Cars> GetCarById(Guid id);
+        Task AddCar(Cars car);
         Task DeleteCarById(Guid id);
-        Task EditCar(Guid id, CarDTO car);
+        Task EditCar(Guid id, Cars car);
         Task AddImageToCar(Guid id, string ImageFiles);
         Task DeleteImageFromCar(Guid id, string ImageName);
+        Task<List<Cars>> GetCarByMark(string mark);
+        Task<List<Cars>> GetCarByFilter(CarFilter filter);
+        Task<List<Cars>> GetCarsForYou();
     }
 }
