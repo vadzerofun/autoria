@@ -15,11 +15,13 @@ namespace autoria_api.Controllers
     {
         private readonly ICarService _carService;
         private readonly IConfiguration _configuration;
+        private readonly IImageUploader _imageUploader;
 
-        public CarsController(ICarService carService, IConfiguration configuration)
+        public CarsController(ICarService carService, IConfiguration configuration, IImageUploader imageUploader)
         {
             _carService = carService;
             _configuration = configuration;
+            _imageUploader = imageUploader;
         }
         // GET: api/Cars
         [AllowAnonymous]
@@ -83,11 +85,11 @@ namespace autoria_api.Controllers
 
         [Authorize]
         [HttpPost("AddCar")]
-        public async Task<IActionResult> AddCar([FromForm] Cars carDTO, [FromForm] IFormFile[] ImageFiles)
+        public async Task<IActionResult> AddCar([FromForm] Cars car, [FromForm] IFormFile[] ImageFiles)
         {
-            carDTO.ImagesPath = await UploadImages(ImageFiles.ToList());
-            await _carService.AddCar(carDTO);
-            return CreatedAtAction(nameof(AddCar), carDTO);
+            car.ImagesPath = await _imageUploader.UploadImages(ImageFiles.ToList());
+            await _carService.AddCar(car);
+            return CreatedAtAction(nameof(AddCar), car);
         }
 
         // DELETE: api/Cars/5
@@ -108,7 +110,7 @@ namespace autoria_api.Controllers
         [HttpPost("EditCar")]
         public async Task<IActionResult> EditCar([FromForm] Guid id, [FromForm] Cars carDTO, [FromForm] IFormFile[] ImageFiles)
         {
-            carDTO.ImagesPath = await UploadImages(ImageFiles.ToList());
+            carDTO.ImagesPath = await _imageUploader.UploadImages(ImageFiles.ToList());
             await _carService.EditCar(id, carDTO);
             return Ok();
         }
@@ -116,7 +118,7 @@ namespace autoria_api.Controllers
         [HttpPost("AddImageToCar")]
         public async Task<IActionResult> AddImageToCar(Guid id, IFormFile ImageFile)
         {
-            string ImagesPath = await UploadImage(ImageFile);
+            string ImagesPath = await _imageUploader.UploadImage(ImageFile);
             await _carService.AddImageToCar(id, ImagesPath);
             return Ok();
         }
@@ -126,52 +128,6 @@ namespace autoria_api.Controllers
         {
             await _carService.DeleteImageFromCar(id, ImageName);
             return Ok();
-        }
-
-        private async Task<List<string>> UploadImages(List<IFormFile> files)
-        {
-            var _imageFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Images");
-            var filePaths = new List<string>();
-
-            foreach (var file in files)
-            {
-                if (file == null || file.Length == 0)
-                {
-                    throw new ArgumentException("One or more files are invalid.");
-                }
-
-                var fileExtension = Path.GetExtension(file.FileName);
-                var uniqueFileName = $"{Guid.NewGuid()}{fileExtension}";
-                var filePath = Path.Combine(_imageFolderPath, uniqueFileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
-                }
-
-                filePaths.Add(uniqueFileName);
-            }
-
-            return filePaths;
-        }
-
-        private async Task<string> UploadImage(IFormFile file)
-        {
-            var _imageFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Images");
-
-            if (file == null || file.Length == 0)
-                throw new ArgumentException("file is invalid.");
-
-            var fileExtension = Path.GetExtension(file.FileName);
-            var uniqueFileName = $"{Guid.NewGuid()}{fileExtension}";
-            var filePath = Path.Combine(_imageFolderPath, uniqueFileName);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
-
-            return uniqueFileName;
         }
 
     }
