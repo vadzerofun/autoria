@@ -138,7 +138,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CarsId")
-                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedTime")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -158,6 +160,12 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Phone")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Region")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("lastVisitedDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("userRole")

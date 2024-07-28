@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+﻿using Core.Models;
 using Application.Model;
 using System;
 using System.Collections.Generic;
@@ -11,15 +11,15 @@ namespace Application.Interfaces
 {
     public interface IUserService
     {
-        Task<Result<List<UserDTO>>> GetUsers();
-        Task<Result<UserDTO>> GetUserById(Guid id);
-        Task<Result<UserDTO>> GetUserByName(string name);
-        Task<Result<UserDTO>> GetUserByEmail(string email);
-        Task<Result> AddUser(UserDTO user);
+        Task<Result<List<User>>> GetUsers();
+        Task<Result<User>> GetUserById(Guid id);
+        Task<Result<User>> GetUserByName(string name);
+        Task<Result<User>> GetUserByEmail(string email);
+        Task<Result> AddUser(User user);
         Task<Result> DeleteUserById(Guid id);
-        Task<Result> EditUser(Guid id, UserDTO user);
+        Task<Result> EditUser(Guid id, User user);
         Task<Result<string>> Login(Login login);
         Task<Result<Response>> SendConfirmEmail(string Email, string SuccessLink, string BadLink);
-        Task<Result> ConfirmEmail(string token);
+        Task<Result> ConfirmEmail(string hashToken);
     }
 }

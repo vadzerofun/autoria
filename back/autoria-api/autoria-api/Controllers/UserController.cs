@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+﻿using Core.Models;
 using Application.Interfaces;
 using Application.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -45,9 +45,10 @@ namespace autoria_api.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<IActionResult> Register(UserDTO UserDTO)
+        public async Task<IActionResult> Register(User UserDTO)
         {
             UserDTO.Id = Guid.NewGuid();
+            UserDTO.CarsId = new List<Guid>();
             var res = await _userService.AddUser(UserDTO);
             if (!res.IsSuccess)
                 return BadRequest(res.ErrorMessage);
@@ -63,7 +64,7 @@ namespace autoria_api.Controllers
         }
 
         [HttpPost("EditUser")]
-        public async Task<IActionResult> EditUser(Guid id, UserDTO UserDTO)
+        public async Task<IActionResult> EditUser(Guid id, User UserDTO)
         {
             await _userService.EditUser(id, UserDTO);
             return Ok();

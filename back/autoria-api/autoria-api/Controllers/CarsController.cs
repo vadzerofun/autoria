@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Application.Interfaces;
-using Application.DTOs;
 using Application.Services;
 using Application.Model;
 using Core.Models;

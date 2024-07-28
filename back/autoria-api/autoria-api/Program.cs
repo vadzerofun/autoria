@@ -94,9 +94,15 @@ builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<IuserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IEncryptionService, AesEncryptionService>();
 
 var authOptionsConfiguration = builder.Configuration.GetSection("Auth");
 builder.Services.Configure<AuthOption>(authOptionsConfiguration);
+var SendGridOptionsConfiguration = builder.Configuration.GetSection("SendGridOptions");
+builder.Services.Configure<SendGridOption>(SendGridOptionsConfiguration);
+var AesEncryptionOptionsConfiguration = builder.Configuration.GetSection("AesEncryptionOptions");
+builder.Services.Configure<AesEncryptionOption>(AesEncryptionOptionsConfiguration);
 
 var app = builder.Build();
 

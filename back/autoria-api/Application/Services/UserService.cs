@@ -1,5 +1,4 @@
-﻿using Application.DTOs;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Core.Enums;
 using Core.Models;
 using System;
@@ -17,6 +16,7 @@ using System.Net.Mail;
 using SendGrid.Helpers.Mail;
 using SendGrid;
 using Application.Services;
+using System.Security.Cryptography;
 
 namespace Application.Services
 {
@@ -25,33 +25,26 @@ namespace Application.Services
         private readonly IuserRepository _userRepository;
         private readonly IOptions<AuthOption> _authOption;
         private readonly JWTtokenService _jwtTokenService;
-        public UserService(IuserRepository userRepository, IOptions<AuthOption> authOption)
+        private readonly IEmailService _emailService;
+        private readonly IEncryptionService _encryptionService;
+        public UserService(IuserRepository userRepository, IOptions<AuthOption> authOption, IEmailService emailService, IEncryptionService encryptionService)
         {
             _userRepository = userRepository;
             _authOption = authOption;
             _jwtTokenService = new JWTtokenService(authOption);
+            _emailService = emailService;
+            _encryptionService = encryptionService;
         }
-        public async Task<Result> AddUser(UserDTO userDTO)
+        public async Task<Result> AddUser(User user)
         {
-
-            var user = new User
-            {
-                Id = userDTO.Id,
-                Name = userDTO.Name,
-                Email = userDTO.Email,
-                Phone = userDTO.Phone,
-                Password = userDTO.Password,
-                userRole = 0,
-                IsEmailConfirmed = false,
-                CarsId = new List<Guid>()
-            };
-
-
-            if (await _userRepository.GetUserByEmail(userDTO.Email) != null)
+            if (await _userRepository.GetUserByEmail(user.Email) != null)
                 return Result.Failure("Email is already in use");
 
-            if (await _userRepository.GetUserByPhone(userDTO.Phone) != null)
+            if (await _userRepository.GetUserByPhone(user.Phone) != null)
                 return Result.Failure("Phone is already in use");
+
+            user.lastVisitedDate = DateTime.UtcNow;
+            user.CreatedTime = DateTime.UtcNow;
 
             await _userRepository.AddUser(user);
             return Result.Success();
@@ -64,19 +57,15 @@ namespace Application.Services
                 return Result<Response>.Failure("no such email");
 
             string Token = _jwtTokenService.GenerateJWT(user);
-            string contitueEmail = $"https://localhost:7224/api/User/ConfirmEmail?Token={Token}&SuccessLink={SuccessLink}&BadLink={BadLink}";
-            var apiKey = "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";
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("dimarudik317@gmail.com", "Autoria");
-            var subject = "Check Email";
-            var to = new EmailAddress(Email, "User");
+            string HashToken = _encryptionService.Encrypt(Token);
+            string contitueEmail = $"https://localhost:7224/api/User/ConfirmEmail?Token={Uri.EscapeDataString(HashToken)}&SuccessLink={Uri.EscapeDataString(SuccessLink)}&BadLink={Uri.EscapeDataString(BadLink)}";
             var plainTextContent = "Press this button to confirm your email";
             var htmlContent = $@"
             <strong>Підтвердіть вашу електронну пошту.</strong>
             <br><br>
             <a href='{contitueEmail}' style='display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #4CAF50; text-align: center; text-decoration: none; border-radius: 5px;'>Підтвердити пошту</a>";
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            Response response = await client.SendEmailAsync(msg);
+            var subject = "Check Email";
+            var response = await _emailService.SendEmail(Email, plainTextContent, htmlContent, subject);
 
             if (response.IsSuccessStatusCode)
             {
@@ -100,18 +89,8 @@ namespace Application.Services
             return Result.Success();
         }
         //TODO: Тільки юзер якого редагують
-        public async Task<Result> EditUser(Guid id, UserDTO userDTO)
+        public async Task<Result> EditUser(Guid id, User user)
         {
-            User user = new User
-            {
-                Id = id,
-                Email = userDTO.Email,
-                Name = userDTO.Name,
-                Password = userDTO.Password,
-                Phone = userDTO.Phone,
-                userRole = userDTO.userRole,
-                CarsId = userDTO.CarsId
-            };
             try
             {
                 await _userRepository.EditUser(id, user);
@@ -123,113 +102,68 @@ namespace Application.Services
             return Result.Success();
         }
 
-        public async Task<Result<UserDTO>> GetUserByEmail(string email)
+        public async Task<Result<User>> GetUserByEmail(string email)
         {
             User user = await _userRepository.GetUserByEmail(email);
             if (user == null)
-                return Result<UserDTO>.Failure("no such user");
-            UserDTO userDto = new UserDTO
-            {
-                Id = user.Id,
-                Email = user.Email,
-                Name = user.Name,
-                Phone = user.Phone,
-                userRole = user.userRole,
-                IsEmailConfirmed = user.IsEmailConfirmed,
-                CarsId = user.CarsId,
-            };
+                return Result<User>.Failure("no such user");
 
-            return Result<UserDTO>.Success(userDto);
+            return Result<User>.Success(user);
         }
 
-        public async Task<Result<UserDTO>> GetUserById(Guid id)
+        public async Task<Result<User>> GetUserById(Guid id)
         {
-            User user = await _userRepository.GetUserById(id);
+            Core.Models.User user = await _userRepository.GetUserById(id);
             if (user == null)
-                return Result<UserDTO>.Failure("no such user");
-            UserDTO userDto = new UserDTO
-            {
-                Id = user.Id,
-                Email = user.Email,
-                Name = user.Name,
-                Phone = user.Phone,
-                userRole = user.userRole,
-                IsEmailConfirmed = user.IsEmailConfirmed,
-                CarsId = user.CarsId,
-            };
+                return Result<User>.Failure("no such user");
 
-            return Result<UserDTO>.Success(userDto);
+            return Result<User>.Success(user);
         }
 
-        public async Task<Result<UserDTO>> GetUserByName(string name)
+        public async Task<Result<User>> GetUserByName(string name)
         {
-            User user = await _userRepository.GetUserByName(name);
+            Core.Models.User user = await _userRepository.GetUserByName(name);
             if (user == null)
-                return Result<UserDTO>.Failure("no such user");
-            UserDTO userDto = new UserDTO
-            {
-                Id = user.Id,
-                Email = user.Email,
-                Name = user.Name,
-                Phone = user.Phone,
-                userRole = user.userRole,
-                IsEmailConfirmed = user.IsEmailConfirmed,
-                CarsId = user.CarsId,
-            };
+                return Result<User>.Failure("no such user");
 
-            return Result<UserDTO>.Success(userDto);
+            return Result<User>.Success(user);
         }
 
-        public async Task<Result<List<UserDTO>>> GetUsers()
+        public async Task<Result<List<User>>> GetUsers()
         {
             try
             {
                 List<User> users = await _userRepository.GetUsers();
-                List<UserDTO> userDTOs = new List<UserDTO>();
-                foreach (var user in users)
-                {
-                    userDTOs.Add(new UserDTO
-                    {
-                        Id = user.Id,
-                        Email = user.Email,
-                        Name = user.Name,
-                        Phone = user.Phone,
-                        userRole = user.userRole,
-                        IsEmailConfirmed = user.IsEmailConfirmed,
-                        CarsId = user.CarsId,
-                    });
-                }
-                return Result<List<UserDTO>>.Success(userDTOs);
+                return Result<List<User>>.Success(users);
             }
             catch (Exception ex)
             {
-                return Result<List<UserDTO>>.Failure(ex.Message);
+                return Result<List<User>>.Failure(ex.Message);
             }
         }
 
         public async Task<Result<string>> Login(Login login)
         {
             var user = _userRepository.GetUsers().Result.FirstOrDefault(user => user.Email == login.Email && user.Password == login.Password);
-
             
+            if (user == null)
+                return Result<string>.Failure("No such User");
 
-            if (user != null)
-            {
-                if (!user.IsEmailConfirmed)
-                    return Result<string>.Failure("Email is not confirmed!");
+            if (!user.IsEmailConfirmed)
+                return Result<string>.Failure("Email is not confirmed!");
 
 
-                var token = _jwtTokenService.GenerateJWT(user);
+            await _userRepository.Visit(user.Id);
 
-                return Result<string>.Success(token);
-            }
+            var token = _jwtTokenService.GenerateJWT(user);
 
-            return Result<string>.Failure("No such User");
+            return Result<string>.Success(token);
         }
 
-        public async Task<Result> ConfirmEmail(string token)
+        public async Task<Result> ConfirmEmail(string hashToken)
         {
-            var principal = _jwtTokenService.ValidateToken(token);
+            string Token = _encryptionService.Decrypt(hashToken);
+            var principal = _jwtTokenService.ValidateToken(Token);
             if (principal == null)
                 return Result.Failure("Old Link");
             var email = principal.FindFirst(ClaimTypes.Email)?.Value;

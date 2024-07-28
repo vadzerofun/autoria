@@ -147,6 +147,16 @@ namespace Infrastructure.Repositories
             user.CarsId.Add(CarId);
             await _context.SaveChangesAsync();
         }
+
+        public async Task Visit(Guid UserId)
+        {
+            var user = await GetUserById(UserId);
+            if (user == null)
+                return;
+            
+            user.lastVisitedDate = DateTime.Now;
+            await _context.SaveChangesAsync();
+        }
     }
 }
 

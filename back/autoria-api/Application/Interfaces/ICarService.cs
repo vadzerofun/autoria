@@ -1,5 +1,4 @@
-﻿using Application.DTOs;
-using Application.Model;
+﻿using Application.Model;
 using Application.Services;
 using Core.Interfaces;
 using Core.Models;
