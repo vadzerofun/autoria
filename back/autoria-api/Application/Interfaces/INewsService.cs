@@ -17,6 +17,7 @@ namespace Application.Interfaces
         public Task<Result<List<News>>> GetNews();
         public Task<Result<News>> GetNews(Guid Id);
         public Task<Result> EditNews(Guid Id, News news);
+        public Task<Result> AddLike(Guid Id, Guid UserId);
 
     }
 }

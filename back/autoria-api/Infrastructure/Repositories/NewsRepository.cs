@@ -56,7 +56,6 @@ namespace Infrastructure.Repositories
             var news = await _context.News.ToListAsync();
             return news;
         }
-
         public async Task EditNews(Guid Id, News news)
         {
             var tempNews = await _context.News.FindAsync(Id);
@@ -66,6 +65,14 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync();
             _context.News.Add(news);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task Addlike(Guid id, Guid UserId)
+        {
+            var news = await GetNews(id);
+            news.Likes.Add(UserId);
+            await EditNews(news.Id, news);
+            return;
         }
     }
 }

@@ -87,6 +87,8 @@ namespace Infrastructure.Repositories
         public async Task DeleteImagefromCar(Guid id, string ImageLink)
         {
             var car = await GetCarById(id);
+            if (car.ImagesPath.FirstOrDefault(car => car == ImageLink) == null)
+                return;
             car.ImagesPath.Remove(ImageLink);
             await EditCar(id, car);
         }

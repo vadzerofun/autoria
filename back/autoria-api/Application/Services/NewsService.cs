@@ -20,6 +20,17 @@ namespace Application.Services
             _repository = repository;
         }
 
+        public async Task<Result> AddLike(Guid Id, Guid UserId)
+        {
+            try
+            {
+                await _repository.Addlike(Id, UserId);
+                return Result.Success();
+            }catch (Exception ex)
+            {
+                return Result.Failure(ex.Message);
+            }
+        }
 
         public async Task<Result> AddNew(News news)
         {
