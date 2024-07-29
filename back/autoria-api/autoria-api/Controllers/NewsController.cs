@@ -53,26 +53,38 @@ namespace autoria_api.Controllers
             return Result.Failure(result.ErrorMessage);
         }
 
-        //[HttpPut("EditNews/{id}")]
-        //public async Task<Result> EditNews(Guid id, [FromForm] News news, [FromForm] IFormFile image)
-        //{
-        //    if (image != null)
-        //    {
-        //        var imgpath = await _imageUploader.UploadImage(image);
-        //        news.ImageLink = imgpath;
-        //    }
-        //    else
-        //    {
-        //        var newsimg = await _newsService.GetNews(id);
-        //        news.ImageLink = newsimg.Value.ImageLink;
-        //    }
-        //    var result = await _newsService.EditNews(id, news);
-        //    if (result.IsSuccess)
-        //    {
-        //        return Result.Success();
-        //    }
-        //    return Result.Failure(result.ErrorMessage);
-        //}
+        [HttpPut("EditNews/{id}")]
+        public async Task<Result> EditNews(Guid id, [FromForm] News news, [FromForm] IFormFile[] image)
+        {
+            if (image != null)
+            {
+                var imgpath = await _imageUploader.UploadImage(image[0]);
+                news.ImageLink = imgpath;
+            }
+            else
+            {
+                var newsimg = await _newsService.GetNews(id);
+                news.ImageLink = newsimg.Value.ImageLink;
+            }
+            var result = await _newsService.EditNews(id, news);
+            if (result.IsSuccess)
+            {
+                return Result.Success();
+            }
+            return Result.Failure(result.ErrorMessage);
+        }
+
+        [Authorize]
+        [HttpPost("LikeNews")]
+        public async Task<Result> LikeNews(Guid Id, Guid UserId)
+        {
+            var res = await _newsService.AddLike(Id, UserId);
+            if (res.IsSuccess)
+            {
+                return Result.Success();
+            }
+            return Result.Failure(res.ErrorMessage);
+        }
 
         [HttpDelete("{id}")]
         public async Task<Result> DeleteNews(Guid id)
