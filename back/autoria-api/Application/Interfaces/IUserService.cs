@@ -1,22 +1,25 @@
-﻿using Application.DTOs;
+﻿using Core.Models;
 using Application.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SendGrid;
 
 namespace Application.Interfaces
 {
     public interface IUserService
     {
-        Task<List<UserDTO>> GetUsers();
-        Task<UserDTO> GetUserById(Guid id);
-        Task<UserDTO> GetUserByName(string name);
-        Task<UserDTO> GetUserByEmail(string email);
-        Task AddUser(UserDTO user);
-        Task DeleteUserById(Guid id);
-        Task EditUser(Guid id, UserDTO user);
-        Task<string> Login(Login login);
+        Task<Result<List<User>>> GetUsers();
+        Task<Result<User>> GetUserById(Guid id);
+        Task<Result<User>> GetUserByName(string name);
+        Task<Result<User>> GetUserByEmail(string email);
+        Task<Result> AddUser(User user);
+        Task<Result> DeleteUserById(Guid id);
+        Task<Result> EditUser(Guid id, User user);
+        Task<Result<string>> Login(Login login);
+        Task<Result<Response>> SendConfirmEmail(string Email, string SuccessLink, string BadLink);
+        Task<Result> ConfirmEmail(string hashToken);
     }
 }

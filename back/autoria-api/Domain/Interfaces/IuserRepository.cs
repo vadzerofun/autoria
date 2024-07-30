@@ -13,8 +13,12 @@ namespace Core.Interfaces
         Task<User> GetUserById(Guid id);
         Task<User> GetUserByName(string name);
         Task<User> GetUserByEmail(string email);
+        Task<User> GetUserByPhone(string phone);
         Task AddUser(User user);
         Task DeleteUserById(Guid id);
         Task EditUser(Guid id, User user);
+        Task ConfirmUserEmail(string Email);
+        Task AddCarIdToUser(Guid UserId, Guid CarId);
+        Task Visit(Guid UserId);
     }
 }

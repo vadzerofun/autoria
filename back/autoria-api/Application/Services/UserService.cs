@@ -1,5 +1,4 @@
-﻿using Application.DTOs;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Core.Enums;
 using Core.Models;
 using System;
@@ -9,11 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Interfaces;
 using Application.Model;
-using Common;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mail;
+using SendGrid.Helpers.Mail;
+using SendGrid;
+using Application.Services;
+using System.Security.Cryptography;
 
 namespace Application.Services
 {
@@ -21,151 +24,165 @@ namespace Application.Services
     {
         private readonly IuserRepository _userRepository;
         private readonly IOptions<AuthOption> _authOption;
-        public UserService(IuserRepository userRepository, IOptions<AuthOption> authOption)
+        private readonly JWTtokenService _jwtTokenService;
+        private readonly IEmailService _emailService;
+        private readonly IEncryptionService _encryptionService;
+        public UserService(IuserRepository userRepository, IOptions<AuthOption> authOption, IEmailService emailService, IEncryptionService encryptionService)
         {
             _userRepository = userRepository;
             _authOption = authOption;
+            _jwtTokenService = new JWTtokenService(authOption);
+            _emailService = emailService;
+            _encryptionService = encryptionService;
         }
-        public async Task AddUser(UserDTO userDTO)
+        public async Task<Result> AddUser(User user)
         {
-            var user = new User
-            {
-                Id = userDTO.Id,
-                Name = userDTO.Name,
-                Email = userDTO.Email,
-                Phone = userDTO.Phone,
-                Password = userDTO.Password,
-                userRole = 0
-            };
+            if (await _userRepository.GetUserByEmail(user.Email) != null)
+                return Result.Failure("Email is already in use");
+
+            if (await _userRepository.GetUserByPhone(user.Phone) != null)
+                return Result.Failure("Phone is already in use");
+
+            user.lastVisitedDate = DateTime.UtcNow;
+            user.CreatedTime = DateTime.UtcNow;
+
             await _userRepository.AddUser(user);
-            return;
+            return Result.Success();
         }
 
-        public async Task DeleteUserById(Guid id)
+        public async Task<Result<Response>> SendConfirmEmail(string Email, string SuccessLink, string BadLink)
         {
-            await _userRepository.DeleteUserById(id);
-            return;
-        }
+            var user = await _userRepository.GetUserByEmail(Email);
+            if (user == null)
+                return Result<Response>.Failure("no such email");
 
-        public async Task EditUser(Guid id, UserDTO userDTO)
-        {
-            User user = new User
+            string Token = _jwtTokenService.GenerateJWT(user);
+            string HashToken = _encryptionService.Encrypt(Token);
+            string contitueEmail = $"https://localhost:7224/api/User/ConfirmEmail?Token={Uri.EscapeDataString(HashToken)}&SuccessLink={Uri.EscapeDataString(SuccessLink)}&BadLink={Uri.EscapeDataString(BadLink)}";
+            var plainTextContent = "Press this button to confirm your email";
+            var htmlContent = $@"
+            <strong>Підтвердіть вашу електронну пошту.</strong>
+            <br><br>
+            <a href='{contitueEmail}' style='display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #4CAF50; text-align: center; text-decoration: none; border-radius: 5px;'>Підтвердити пошту</a>";
+            var subject = "Check Email";
+            var response = await _emailService.SendEmail(Email, plainTextContent, htmlContent, subject);
+
+            if (response.IsSuccessStatusCode)
             {
-                Id = id,
-                Email = userDTO.Email,
-                Name = userDTO.Name,
-                Password = userDTO.Password,
-                Phone = userDTO.Phone,
-                userRole = userDTO.userRole
-            };
-            await _userRepository.EditUser(id, user);
+                return Result<Response>.Success(response);
+            }
+            return Result<Response>.Failure(response.StatusCode.ToString());
+
         }
 
-        public async Task<UserDTO> GetUserByEmail(string email)
+        //TODO: Тільки юзер якого видаляють
+        public async Task<Result> DeleteUserById(Guid id)
+        {
+            try
+            {
+                await _userRepository.DeleteUserById(id);
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure(ex.Message);
+            }
+            return Result.Success();
+        }
+        //TODO: Тільки юзер якого редагують
+        public async Task<Result> EditUser(Guid id, User user)
+        {
+            try
+            {
+                await _userRepository.EditUser(id, user);
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure(ex.Message);
+            }
+            return Result.Success();
+        }
+
+        public async Task<Result<User>> GetUserByEmail(string email)
         {
             User user = await _userRepository.GetUserByEmail(email);
             if (user == null)
-                return null;
-            UserDTO userDto = new UserDTO
-            {
-                Id = user.Id,
-                Email = user.Email,
-                Name = user.Name,
-                Phone = user.Phone,
-                userRole = user.userRole
-            };
+                return Result<User>.Failure("no such user");
 
-            return userDto;
+            return Result<User>.Success(user);
         }
 
-        public async Task<UserDTO> GetUserById(Guid id)
+        public async Task<Result<User>> GetUserById(Guid id)
         {
-            User user = await _userRepository.GetUserById(id);
+            Core.Models.User user = await _userRepository.GetUserById(id);
             if (user == null)
-                return null;
-            UserDTO userDto = new UserDTO
-            {
-                Id = user.Id,
-                Email = user.Email,
-                Name = user.Name,
-                Phone = user.Phone,
-                userRole = user.userRole
-            };
+                return Result<User>.Failure("no such user");
 
-            return userDto;
+            return Result<User>.Success(user);
         }
 
-        public async Task<UserDTO> GetUserByName(string name)
+        public async Task<Result<User>> GetUserByName(string name)
         {
-            User user = await _userRepository.GetUserByName(name);
+            Core.Models.User user = await _userRepository.GetUserByName(name);
             if (user == null)
-                return null;
-            UserDTO userDto = new UserDTO
-            {
-                Id = user.Id,
-                Email = user.Email,
-                Name = user.Name,
-                Phone = user.Phone,
-                userRole = user.userRole
-            };
+                return Result<User>.Failure("no such user");
 
-            return userDto;
+            return Result<User>.Success(user);
         }
 
-        public async Task<List<UserDTO>> GetUsers()
+        public async Task<Result<List<User>>> GetUsers()
         {
-            List<User> users = await _userRepository.GetUsers();
-            List<UserDTO> userDTOs = new List<UserDTO>();
-            foreach (var user in users)
+            try
             {
-                userDTOs.Add(new UserDTO
-                {
-                    Id = user.Id,
-                    Email = user.Email,
-                    Name = user.Name,
-                    Phone = user.Phone,
-                    userRole = user.userRole
-                });
+                List<User> users = await _userRepository.GetUsers();
+                return Result<List<User>>.Success(users);
             }
-            return userDTOs;
+            catch (Exception ex)
+            {
+                return Result<List<User>>.Failure(ex.Message);
+            }
         }
 
-        public async Task<string> Login(Login login)
+        public async Task<Result<string>> Login(Login login)
         {
             var user = _userRepository.GetUsers().Result.FirstOrDefault(user => user.Email == login.Email && user.Password == login.Password);
+            
+            if (user == null)
+                return Result<string>.Failure("No such User");
 
-            if (user != null)
-            {
-                var token = GenerateJWT(user);
+            if (!user.IsEmailConfirmed)
+                return Result<string>.Failure("Email is not confirmed!");
 
-                return token;
-            }
 
-            return null;
+            await _userRepository.Visit(user.Id);
+
+            var token = _jwtTokenService.GenerateJWT(user);
+
+            return Result<string>.Success(token);
         }
 
-        private string GenerateJWT(User user)
+        public async Task<Result> ConfirmEmail(string hashToken)
         {
-            var authParams = _authOption.Value;
+            string Token = _encryptionService.Decrypt(hashToken);
+            var principal = _jwtTokenService.ValidateToken(Token);
+            if (principal == null)
+                return Result.Failure("Old Link");
+            var email = principal.FindFirst(ClaimTypes.Email)?.Value;
 
-            var SecurityKey = authParams.GetSymmetricSecurityKey();
-            var credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256);
+            await _userRepository.ConfirmUserEmail(email);
+            return Result.Success();
+        }
 
-            var claims = new List<Claim>()
+        public async Task<Result> AddCarIdToUser(Guid UserId, Guid CarId)
+        {
+            try
             {
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString())
-            };
-
-            claims.Add(new Claim("role", user.userRole.ToString()));
-
-            var token = new JwtSecurityToken(authParams.Issuer,
-                authParams.Audience,
-                claims,
-                expires: DateTime.Now.AddSeconds(authParams.TokenLifetime),
-                signingCredentials: credentials);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                await _userRepository.AddCarIdToUser(UserId, CarId);
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure(ex.Message);
+            }
         }
     }
 }

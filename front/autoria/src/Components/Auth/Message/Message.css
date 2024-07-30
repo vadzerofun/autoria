@@ -1,0 +1,15 @@
+.msgText {
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+@media screen and (min-width: 900px) {
+  .msgText {
+    font-size: 32px;
+    line-height: 1.38; /* 44/32 */
+  }
+}
+
+.msgLogo {
+  padding-bottom: 100px;
+}/*# sourceMappingURL=Message.css.map */

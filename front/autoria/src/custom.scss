@@ -1,9 +1,28 @@
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+
 $theme-colors: (
         "primary": #FD9052,
-        "secondary": #F5F5F5,
+        "secondary": #F5F5F5,        
         "light": #fff,
-        "dark": #343434
+        "dark": #343434        
 );
+
+$custom-colors: (
+  "customblue": #D4DDF4,
+  "footertext": #242D3D
+);
+
+$headings-margin-bottom: 0;
+$headings-font-weight: 800;
+$headings-line-height: 1.375; /* 55/40 */
+
+$container-max-widths: (  
+  xxl: 1400px
+);
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
 
 /* import bootstrap to set changes */
 @import "../node_modules/bootstrap/scss/bootstrap";

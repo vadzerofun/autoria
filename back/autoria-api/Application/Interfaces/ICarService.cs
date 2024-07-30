@@ -1,6 +1,8 @@
-﻿using Application.DTOs;
+﻿using Application.Model;
+using Application.Services;
 using Core.Interfaces;
 using Core.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,15 @@ namespace Application.Interfaces
 {
     public interface ICarService
     {
-        Task<List<CarDTO>> GetCars();
-        Task<CarDTO> GetCarById(int id);
-        Task AddCar(CarDTO car);
-        Task DeleteCarById(int id);
-        Task EditCar(int id, CarDTO car);
+        Task<List<Cars>> GetCars();
+        Task<Cars> GetCarById(Guid id);
+        Task AddCar(Cars car);
+        Task DeleteCarById(Guid id);
+        Task EditCar(Guid id, Cars car);
+        Task AddImageToCar(Guid id, string ImageFiles);
+        Task DeleteImageFromCar(Guid id, string ImageName);
+        Task<List<Cars>> GetCarByMark(string mark);
+        Task<List<Cars>> GetCarByFilter(CarFilter filter);
+        Task<List<Cars>> GetCarsForYou();
     }
 }
