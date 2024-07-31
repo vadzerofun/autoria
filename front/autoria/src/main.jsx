@@ -12,6 +12,7 @@ import { Login } from './Components/Auth/Login/Login.jsx';
 import LoginRegister from './Components/Auth/LoginRegister/LoginRegister.jsx';
 import { ForgotPassword } from './Components/Auth/ForgotPassword/ForgotPassword.jsx';
 import { Home } from './Pages/Home/Home.jsx';
+import { ConfirmEmail } from './Components/Auth/ConfirmEmail/ConfirmEmail.jsx';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "/forgot-password",
     element: <div><ForgotPassword /></div>,
+  },
+  {
+    path: "/confirm-email",
+    element: <div><ConfirmEmail /></div>,
   },
 ]);
 
