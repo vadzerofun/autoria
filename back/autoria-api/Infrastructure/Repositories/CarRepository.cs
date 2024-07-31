@@ -116,5 +116,9 @@ namespace Infrastructure.Repositories
                 .ToListAsync();
             return cars;
         }
+        //public async Task<List<Cars>> Get()
+        //{
+            //TODO: повернути найдешевші і найбільший рік випуску
+        //}
     }
 }
