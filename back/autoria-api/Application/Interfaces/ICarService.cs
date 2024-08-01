@@ -23,5 +23,6 @@ namespace Application.Interfaces
         Task<List<Cars>> GetCarByMark(string mark);
         Task<List<Cars>> GetCarByFilter(CarFilter filter);
         Task<List<Cars>> GetCarsForYou();
+        Task<List<Cars>> GetMostProfitable();
     }
 }

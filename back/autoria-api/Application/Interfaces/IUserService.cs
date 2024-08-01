@@ -21,5 +21,6 @@ namespace Application.Interfaces
         Task<Result<string>> Login(Login login);
         Task<Result<Response>> SendConfirmEmail(string Email, string SuccessLink, string BadLink);
         Task<Result> ConfirmEmail(string hashToken);
+        Task<Result<Response>> ForgotPassword(string Email, string SuccessLink, string BadLink);
     }
 }

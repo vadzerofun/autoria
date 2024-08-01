@@ -114,9 +114,13 @@ namespace autoria_api.Controllers
         }
         //TODO: зробити забув пароль
         [HttpPost("ForgotPassword")]
-        public async Task<IActionResult> ForgotPassword()
+        public async Task<IActionResult> ForgotPassword(ConfirmEmail email)
         {
-            return Ok("Dont Work");
+            return default;
+            //var res = await _userService.ForgotPassword(email.Email, email.BadLink, email.SuccessLink);
+            //if (!res.IsSuccess)
+            //    return BadRequest(res.ErrorMessage);
+            //return Ok(res);
         }
     }
 }

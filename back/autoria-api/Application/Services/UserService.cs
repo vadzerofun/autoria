@@ -45,6 +45,7 @@ namespace Application.Services
 
             user.lastVisitedDate = DateTime.UtcNow;
             user.CreatedTime = DateTime.UtcNow;
+            user.userRole = UserRole.Admin;
 
             await _userRepository.AddUser(user);
             return Result.Success();
@@ -183,6 +184,30 @@ namespace Application.Services
             {
                 return Result.Failure(ex.Message);
             }
+        }
+
+        public async Task<Result<Response>> ForgotPassword(string Email, string SuccessLink, string BadLink)
+        {
+            var user = await _userRepository.GetUserByEmail(Email);
+            if (user == null)
+                return Result<Response>.Failure("no such user");
+
+            string Token = _jwtTokenService.GenerateJWT(user);
+            string HashToken = _encryptionService.Encrypt(Token);
+            string contitueEmail = $"https://localhost:7224/api/User/?Token={Uri.EscapeDataString(HashToken)}&SuccessLink={Uri.EscapeDataString(SuccessLink)}&BadLink={Uri.EscapeDataString(BadLink)}";
+            var plainTextContent = "Press this button to chenge password";
+            var htmlContent = $@"
+            <strong>Chenge password.</strong>
+            <br><br>
+            <a href='{contitueEmail}' style='display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #4CAF50; text-align: center; text-decoration: none; border-radius: 5px;'>Підтвердити пошту</a>";
+            var subject = "Chenge Password";
+            var response = await _emailService.SendEmail(Email, plainTextContent, htmlContent, subject);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Result<Response>.Success(response);
+            }
+            return Result<Response>.Failure(response.StatusCode.ToString());
         }
     }
 }

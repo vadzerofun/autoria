@@ -14,7 +14,6 @@ namespace Infrastructure.Repositories
     public class NewsRepository : INewsRepository
     {
         private readonly AppDbContext _context;
-        //TODO: зробти NewsRepository
         public NewsRepository(AppDbContext context)
         {
             _context = context;

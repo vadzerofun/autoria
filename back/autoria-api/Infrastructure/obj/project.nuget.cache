@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ugtNUeqH0KlOt2EdGQRxKmAfDFXo/RMzn3u+iOviTVgxqS5OQT02IzUvg5cvQHMrH8YpkTw92uxJQPw6gQAObA==",
+  "dgSpecHash": "CXzhLbSl7MM=",
   "success": true,
-  "projectFilePath": "E:\\Project\\autoria\\back\\autoria-api\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "D:\\projects\\autoria\\back\\autoria-api\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dimar\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\dimar\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

@@ -63,7 +63,7 @@ namespace autoria_api.Controllers
                 var cars = await _carService.GetCarsForYou();
                 return Result<List<Cars>>.Success(cars);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Result<List<Cars>>.Failure(ex.Message);
             }
@@ -129,6 +129,18 @@ namespace autoria_api.Controllers
             await _carService.DeleteImageFromCar(id, ImageName);
             return Ok();
         }
-
+        [HttpGet("GetMostProfitable")]
+        public async Task<Result<List<Cars>>> GetMostProfitable()
+        {
+            try
+            {
+                var cars = await _carService.GetMostProfitable();
+                return Result<List<Cars>>.Success(cars);
+            }
+            catch (Exception ex)
+            {
+                return Result<List<Cars>>.Failure(ex.Message);
+            }
+        }
     }
 }

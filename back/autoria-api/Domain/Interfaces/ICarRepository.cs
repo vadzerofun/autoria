@@ -20,5 +20,6 @@ namespace Core.Interfaces
         Task<List<Cars>> GetCarsByMark(string mark);
         Task<List<Cars>> GetCarsByFilter(CarType type, string Mark, string Model, string Region, int MinYear, int MaxYear, int MinPrice, int MaxPrice);
         Task<List<Cars>> GetCarsForYou();
+        Task<List<Cars>> GetMostProfitable();
     }
 }
