@@ -186,7 +186,7 @@ namespace Application.Services
             }
         }
 
-        public async Task<Result<Response>> ForgotPassword(string Email, string SuccessLink, string BadLink)
+        public async Task<Result<Response>> ForgotPassword(string Email, string Link)
         {
             var user = await _userRepository.GetUserByEmail(Email);
             if (user == null)
@@ -194,7 +194,7 @@ namespace Application.Services
 
             string Token = _jwtTokenService.GenerateJWT(user);
             string HashToken = _encryptionService.Encrypt(Token);
-            string contitueEmail = $"https://localhost:7224/api/User/?Token={Uri.EscapeDataString(HashToken)}&SuccessLink={Uri.EscapeDataString(SuccessLink)}&BadLink={Uri.EscapeDataString(BadLink)}";
+            string contitueEmail = $"{Link}/{HashToken}";
             var plainTextContent = "Press this button to chenge password";
             var htmlContent = $@"
             <strong>Chenge password.</strong>
@@ -208,6 +208,18 @@ namespace Application.Services
                 return Result<Response>.Success(response);
             }
             return Result<Response>.Failure(response.StatusCode.ToString());
+        }
+
+        public async Task<Result> ChengeForgotPassword(string NewPassword, string Token)
+        {
+            var UnhashToken = _encryptionService.Decrypt(Token);
+            var peripteral = _jwtTokenService.ValidateToken(UnhashToken);
+            if (peripteral == null)
+                return Result.Failure("Bad Token");
+            var userId = peripteral.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+            if (userId == null) return Result.Failure("Bad Token");
+            await _userRepository.ChengePassword(NewPassword, Guid.Parse(userId));
+            return Result.Success();
         }
     }
 }

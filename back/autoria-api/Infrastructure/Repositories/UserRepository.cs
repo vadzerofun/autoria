@@ -157,6 +157,18 @@ namespace Infrastructure.Repositories
             user.lastVisitedDate = DateTime.Now;
             await _context.SaveChangesAsync();
         }
+
+        public async Task ChengePassword(string Password, Guid UserId)
+        {
+            var user = await GetUserById(UserId);
+            if (user == null)
+                return;
+
+            user.Password = Password;
+            await EditUser(UserId, user);
+            return;
+
+        }
     }
 }
 
