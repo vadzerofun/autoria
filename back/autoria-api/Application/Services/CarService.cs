@@ -88,6 +88,19 @@ namespace Application.Services
             return cars;
         }
 
+        public async Task<Result> ViewCar(Guid Carid)
+        {
+            try
+            {
+                await _carRepository.ViewCar(Carid);
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure(ex.Message);
+            }
+        }
+             
 
     }
 }

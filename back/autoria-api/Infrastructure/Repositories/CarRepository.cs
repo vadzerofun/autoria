@@ -124,5 +124,13 @@ namespace Infrastructure.Repositories
                                     .ToListAsync();
             return cars;
         }
+
+        public async Task ViewCar(Guid CarId)
+        {
+            var car = await GetCarById(CarId);
+            car.VisitedCount += 1;
+            EditCar(CarId, car);
+            return;
+        }
     }
 }

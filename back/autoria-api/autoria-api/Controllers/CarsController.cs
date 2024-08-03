@@ -99,13 +99,6 @@ namespace autoria_api.Controllers
             await _carService.DeleteCarById(id);
             return Ok();
         }
-        //[HttpGet("Validat3eToken")]
-        //public async Task<bool> Validat3eToken(string token)
-        //{
-        //    var authOptions = _configuration.GetSection("AuthOption").Get<AuthOption>();
-        //    var JWT = JWTtokenService(authOptions);
-        //    return  
-        //}
 
         [HttpPost("EditCar")]
         public async Task<IActionResult> EditCar([FromForm] Guid id, [FromForm] Cars carDTO, [FromForm] IFormFile[] ImageFiles)
@@ -141,6 +134,12 @@ namespace autoria_api.Controllers
             {
                 return Result<List<Cars>>.Failure(ex.Message);
             }
+        }
+        [HttpGet("ViewCar")]
+        public async Task<Result> ViewCar(Guid CarId)
+        {
+            var res = await _carService.ViewCar(CarId);
+            return res;
         }
     }
 }
