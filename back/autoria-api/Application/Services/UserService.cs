@@ -45,6 +45,7 @@ namespace Application.Services
 
             user.lastVisitedDate = DateTime.UtcNow;
             user.CreatedTime = DateTime.UtcNow;
+            user.userRole = UserRole.Admin;
 
             await _userRepository.AddUser(user);
             return Result.Success();
@@ -183,6 +184,42 @@ namespace Application.Services
             {
                 return Result.Failure(ex.Message);
             }
+        }
+
+        public async Task<Result<Response>> ForgotPassword(string Email, string Link)
+        {
+            var user = await _userRepository.GetUserByEmail(Email);
+            if (user == null)
+                return Result<Response>.Failure("no such user");
+
+            string Token = _jwtTokenService.GenerateJWT(user);
+            string HashToken = _encryptionService.Encrypt(Token);
+            string contitueEmail = $"{Link}/{HashToken}";
+            var plainTextContent = "Press this button to chenge password";
+            var htmlContent = $@"
+            <strong>Chenge password.</strong>
+            <br><br>
+            <a href='{contitueEmail}' style='display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #4CAF50; text-align: center; text-decoration: none; border-radius: 5px;'>Підтвердити пошту</a>";
+            var subject = "Chenge Password";
+            var response = await _emailService.SendEmail(Email, plainTextContent, htmlContent, subject);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Result<Response>.Success(response);
+            }
+            return Result<Response>.Failure(response.StatusCode.ToString());
+        }
+
+        public async Task<Result> ChengeForgotPassword(string NewPassword, string Token)
+        {
+            var UnhashToken = _encryptionService.Decrypt(Token);
+            var peripteral = _jwtTokenService.ValidateToken(UnhashToken);
+            if (peripteral == null)
+                return Result.Failure("Bad Token");
+            var userId = peripteral.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+            if (userId == null) return Result.Failure("Bad Token");
+            await _userRepository.ChengePassword(NewPassword, Guid.Parse(userId));
+            return Result.Success();
         }
     }
 }

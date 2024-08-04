@@ -63,7 +63,7 @@ namespace autoria_api.Controllers
                 var cars = await _carService.GetCarsForYou();
                 return Result<List<Cars>>.Success(cars);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Result<List<Cars>>.Failure(ex.Message);
             }
@@ -99,13 +99,6 @@ namespace autoria_api.Controllers
             await _carService.DeleteCarById(id);
             return Ok();
         }
-        //[HttpGet("Validat3eToken")]
-        //public async Task<bool> Validat3eToken(string token)
-        //{
-        //    var authOptions = _configuration.GetSection("AuthOption").Get<AuthOption>();
-        //    var JWT = JWTtokenService(authOptions);
-        //    return  
-        //}
 
         [HttpPost("EditCar")]
         public async Task<IActionResult> EditCar([FromForm] Guid id, [FromForm] Cars carDTO, [FromForm] IFormFile[] ImageFiles)
@@ -129,6 +122,24 @@ namespace autoria_api.Controllers
             await _carService.DeleteImageFromCar(id, ImageName);
             return Ok();
         }
-
+        [HttpGet("GetMostProfitable")]
+        public async Task<Result<List<Cars>>> GetMostProfitable()
+        {
+            try
+            {
+                var cars = await _carService.GetMostProfitable();
+                return Result<List<Cars>>.Success(cars);
+            }
+            catch (Exception ex)
+            {
+                return Result<List<Cars>>.Failure(ex.Message);
+            }
+        }
+        [HttpGet("ViewCar")]
+        public async Task<Result> ViewCar(Guid CarId)
+        {
+            var res = await _carService.ViewCar(CarId);
+            return res;
+        }
     }
 }

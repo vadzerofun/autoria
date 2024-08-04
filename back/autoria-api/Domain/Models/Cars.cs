@@ -33,6 +33,7 @@ namespace Core.Models
         public List<string> ImagesPath { get; set; } //Посилання на картики авто
         public Guid UserId { get; set; } //Id юзера
         public DateTime CreatedTime { get; set; } // дата створення оголошення
+        public string Region {  get; set; } // Регіон Продажу Авто
         public int VisitedCount { get; set; } // кількість переглядів
     }
 }

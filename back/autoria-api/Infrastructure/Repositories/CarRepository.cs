@@ -102,9 +102,8 @@ namespace Infrastructure.Repositories
 
         public async Task<List<Cars>> GetCarsByFilter(CarType type, string Mark, string Model, string Region, int MinYear, int MaxYear, int MinPrice, int MaxPrice)
         {
-            //TODO: string Region хз як
             List<Cars> cars = new List<Cars>();
-            cars = await _context.Cars.Where(car => car.Type == type && car.Make == Mark && car.Model == Model && (car.Year < MaxYear && car.Year > MinYear) && (car.PriceUSD < MaxPrice && car.PriceUSD > MinPrice)).ToListAsync();
+            cars = await _context.Cars.Where(car => car.Type == type && car.Make == Mark && car.Model == Model && (car.Year < MaxYear && car.Year > MinYear) && (car.PriceUSD < MaxPrice && car.PriceUSD > MinPrice) && car.Region == Region).ToListAsync();
             return cars;
         }
 
@@ -115,6 +114,23 @@ namespace Infrastructure.Repositories
                 .Take(10)
                 .ToListAsync();
             return cars;
+        }
+        public async Task<List<Cars>> GetMostProfitable()
+        {
+            List<Cars> cars = new List<Cars>();
+            cars = await _context.Cars.OrderByDescending(car => car.Year)
+                                    .ThenBy(car => car.PriceUSD) 
+                                    .Take(10)
+                                    .ToListAsync();
+            return cars;
+        }
+
+        public async Task ViewCar(Guid CarId)
+        {
+            var car = await GetCarById(CarId);
+            car.VisitedCount += 1;
+            EditCar(CarId, car);
+            return;
         }
     }
 }

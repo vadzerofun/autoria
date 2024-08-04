@@ -45,11 +45,11 @@ namespace autoria_api.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<IActionResult> Register(User UserDTO)
+        public async Task<IActionResult> Register(User User)
         {
-            UserDTO.Id = Guid.NewGuid();
-            UserDTO.CarsId = new List<Guid>();
-            var res = await _userService.AddUser(UserDTO);
+            User.Id = Guid.NewGuid();
+            User.CarsId = new List<Guid>();
+            var res = await _userService.AddUser(User);
             if (!res.IsSuccess)
                 return BadRequest(res.ErrorMessage);
             return Ok();
@@ -114,9 +114,21 @@ namespace autoria_api.Controllers
         }
         //TODO: зробити забув пароль
         [HttpPost("ForgotPassword")]
-        public async Task<IActionResult> ForgotPassword()
+        public async Task<IActionResult> ForgotPassword(string Email, string Link)
         {
-            return Ok("Dont Work");
+            var res = await _userService.ForgotPassword(Email, Link);
+            if (!res.IsSuccess)
+                return BadRequest(res.ErrorMessage);
+            return Ok(res);
+        }
+
+        [HttpPost("ChengeForgotPassword")]
+        public async Task<IActionResult> ChengeForgotPassword(string NewPassword, string Token)
+        {
+            var res = await _userService.ChengeForgotPassword(NewPassword, Token);
+            if (!res.IsSuccess)
+                return BadRequest(res.ErrorMessage);
+            return Ok(res);
         }
     }
 }

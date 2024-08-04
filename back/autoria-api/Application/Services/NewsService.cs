@@ -36,6 +36,9 @@ namespace Application.Services
         {
             try
             {
+                news.WritingTime = DateTime.Now;
+                news.Likes = new List<Guid>();
+                news.Id = Guid.NewGuid();
                 await _repository.AddNews(news);
                 return Result.Success();
             }

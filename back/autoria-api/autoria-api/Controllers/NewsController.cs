@@ -1,5 +1,7 @@
 ﻿using Application.Interfaces;
 using Application.Model;
+using autoria_api.Atributes;
+using Core.Enums;
 using Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,10 +15,12 @@ namespace autoria_api.Controllers
     {
         private readonly INewsService _newsService;
         private readonly IImageUploader _imageUploader;
-        public NewsController(INewsService newsService, IImageUploader imageUploader)
+        private readonly IUserService _userService;
+        public NewsController(INewsService newsService, IImageUploader imageUploader, IUserService userService)
         {
             _newsService = newsService;
             _imageUploader = imageUploader;
+            _userService = userService;
         }
         [HttpGet]
         public async Task<Result<List<News>>> GetNews()
@@ -40,10 +44,15 @@ namespace autoria_api.Controllers
             return Result<News>.Failure(news.ErrorMessage);
         }
 
+        [Authorize(Policy = "Admin-Policy")]
         [HttpPost("AddNews")]
         public async Task<Result> AddNews([FromForm] News news, [FromForm] IFormFile[] ImageFile)
         {
-            var imgpath = await _imageUploader.UploadImage(ImageFile[0]);
+            string imgpath;
+            if (ImageFile != null)
+                imgpath = await _imageUploader.UploadImage(ImageFile[0]);
+            else
+                imgpath = "";
             news.ImageLink = imgpath;
             var result = await _newsService.AddNew(news);
             if (result.IsSuccess)

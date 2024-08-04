@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Cv4y1gxSPr2ZwiFfKQ/k5Qnh+029RuqVM4jfbKSX+Y9xyghHw04BHvMIQxo3aEUM3Kg6mrPlTb1E7fuuqWGc8Q==",
+  "dgSpecHash": "v407jL9lHGI=",
   "success": true,
-  "projectFilePath": "E:\\Project\\autoria\\back\\autoria-api\\Application\\Application.csproj",
+  "projectFilePath": "D:\\projects\\autoria\\back\\autoria-api\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dimar\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
     "C:\\Users\\dimar\\.nuget\\packages\\google.protobuf\\3.26.1\\google.protobuf.3.26.1.nupkg.sha512",

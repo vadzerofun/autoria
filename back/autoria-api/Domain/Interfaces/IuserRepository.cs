@@ -20,5 +20,6 @@ namespace Core.Interfaces
         Task ConfirmUserEmail(string Email);
         Task AddCarIdToUser(Guid UserId, Guid CarId);
         Task Visit(Guid UserId);
+        Task ChengePassword(string Password, Guid UserId);
     }
 }

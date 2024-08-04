@@ -11,7 +11,6 @@ namespace Application.Interfaces
 {
     public interface INewsService
     {
-        //TODO: доробити INewsService
         public Task<Result> AddNew(News news);
         public Task<Result> Delete(Guid Id);
         public Task<Result<List<News>>> GetNews();

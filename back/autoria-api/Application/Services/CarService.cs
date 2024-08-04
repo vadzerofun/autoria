@@ -82,6 +82,25 @@ namespace Application.Services
             List<Cars> cars = await _carRepository.GetCarsForYou();
             return cars;
         }
-        
+        public async Task<List<Cars>> GetMostProfitable()
+        {
+            List<Cars> cars = await _carRepository.GetMostProfitable();
+            return cars;
+        }
+
+        public async Task<Result> ViewCar(Guid Carid)
+        {
+            try
+            {
+                await _carRepository.ViewCar(Carid);
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure(ex.Message);
+            }
+        }
+             
+
     }
 }

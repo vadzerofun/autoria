@@ -78,6 +78,10 @@ namespace Infrastructure.Migrations
                     b.Property<double>("PriceUSD")
                         .HasColumnType("REAL");
 
+                    b.Property<string>("Region")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Road_accident")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -113,6 +117,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("ImageLink")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Likes")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Link")

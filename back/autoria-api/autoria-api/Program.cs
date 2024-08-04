@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Core.Enums;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -52,6 +53,12 @@ builder.Services.AddAuthentication(options =>
              IssuerSigningKey = authOptions.GetSymmetricSecurityKey(),
          };
      });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("User-Policy", policy => policy.RequireRole(UserRole.User.ToString()));
+    options.AddPolicy("Admin-Policy", policy => policy.RequireRole(UserRole.Admin.ToString()));
+});
 
 builder.Services.AddSwaggerGen(c =>
 {
