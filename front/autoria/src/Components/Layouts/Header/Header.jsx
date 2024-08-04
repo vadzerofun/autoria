@@ -14,7 +14,7 @@ export const Header = () => {
       <Navbar key="lg" expand="lg" className="bg-secondary">
         <Container>
           <Navbar.Brand>
-            <Link>
+            <Link to="/">
               <div className="logoContainer">
                 <img src={Logo} alt="Logo" className="img-fluid logoImage" />
                 <span className="logoText">DriveDreams</span>
@@ -46,7 +46,7 @@ export const Header = () => {
               <Link to="#">
                 <img src={Heart} alt="Heart" className="img-fluid" width="19px" height="16px" />
               </Link>
-              <Link to="#">
+              <Link to="/login-register">
                 <img src={Profile} alt="Profile" className="img-fluid" width="16px" height="16px" />
               </Link>
             </div>

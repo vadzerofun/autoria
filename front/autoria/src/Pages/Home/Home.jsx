@@ -16,11 +16,24 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 
+// Import images
 import SearchImage from '../../assets/images/cars/car-01.png';
+import ImagePlaceholder from '../../assets/placeholder-image.png';
+
 import imgRecs from './imgRecs';
 import brandsArray from './brandsArray';
+import useGetCarsForYou from '../../Hooks/useGetCarsForYou';
 
 export const Home = () => {
+  // images
+  const imagesURL = import.meta.env.VITE_IMAGES_URL;
+  // fetch Cars
+  const { carsForYou, loadingForYou, errorForYou } = useGetCarsForYou();
+  console.log(carsForYou);
+
+  if (loadingForYou) return <div>Loading...</div>;
+  if (errorForYou) return <div>Error: {error.message}</div>;
+
   return (
     <Layout>
       <section className="homeSection">
@@ -144,20 +157,32 @@ export const Home = () => {
           <div className="recsContainer">
             <div className="recsLeft">
               <h2 className="homeTitle fs-1">Тобі може сподобатись!</h2>
-              <Link to="#" className="noFontStyle">
+              <Link to={`cars/${carsForYou[0].id}`} className="noFontStyle">
                 <div className="recsLeftCard">
-                  <img className="recsLeftImage" src={imgRecs[0]} alt="Recommended car" />
+                  <img
+                    className="recsLeftImage"
+                    src={
+                      carsForYou[0].imagesPath.length
+                        ? imagesURL + carsForYou[0].imagesPath[0]
+                        : ImagePlaceholder
+                    }
+                    alt="Recommended car"
+                  />
                   <div className="recsLeftCardMain">
-                    <span className="recsLeftCardTitle fs-4">Porsche Cayenne Coupé 3.0 340KM</span>
-                    <span className="recsLeftCardPrice fs-4">90 000 $</span>
+                    <span className="recsLeftCardTitle fs-4">{`${carsForYou[0].make} ${carsForYou[0].model}`}</span>
+                    <span className="recsLeftCardPrice fs-4">{`${formatNumber(
+                      carsForYou[0].priceUSD
+                    )} $`}</span>
                   </div>
                   <div className="recsLeftCardDetails">
                     <div>
-                      <span>Електро, 77.4 кВт-год</span>
-                      <span>2019 р</span>
+                      <span>{`${carsForYou[0].engine_type == 1 ? 'Бензин' : 'Дизель'} ${
+                        carsForYou[0].engine_capacity
+                      } л`}</span>
+                      <span>{carsForYou[0].year} р</span>
                     </div>
                     <div>
-                      <span>65 000 км</span>
+                      <span>{`${formatNumber(carsForYou[0].mileage)} км`}</span>
                       <span>м. Київ</span>
                     </div>
                   </div>
@@ -165,21 +190,29 @@ export const Home = () => {
               </Link>
             </div>
             <div className="recsRight">
-              {imgRecs.slice(1, 5).map((img, index) => (
-                <Link to="#" className="noFontStyle" key={`rec-${index}`}>
+              {carsForYou.slice(1, 5).map((car, index) => (
+                <Link to={`cars/${car.id}`} className="noFontStyle" key={`rec-${index}`}>
                   <div className="carCard">
-                    <img className="carImage" src={img} alt={`Recommended car ${index + 1}`} />
+                    <img
+                      className="carImage"
+                      src={car.imagesPath.length ? imagesURL + car.imagesPath[0] : ImagePlaceholder}
+                      alt={`Recommended car ${index + 1}`}
+                    />
                     <div className="carCardMain">
-                      <span className="carCardTitle fs-6">Porsche Cayenne Coupé 3.0 340KM</span>
-                      <span className="carCardPrice fs-6">90 000 $</span>
+                      <span className="carCardTitle fs-6">{`${car.make} ${car.model}`}</span>
+                      <span className="carCardPrice fs-6">{`${formatNumber(
+                        car.priceUSD
+                      )} $`}</span>
                     </div>
                     <div className="carCardDetails">
                       <div>
-                        <span>Електро, 77.4 кВт-год</span>
-                        <span>2019 р</span>
+                        <span>{`${car.engine_type == 0 ? 'Бензин' : 'Дизель'} ${
+                          car.engine_capacity
+                        } л`}</span>
+                        <span>{car.year} р</span>
                       </div>
                       <div>
-                        <span>65 000 км</span>
+                        <span>{`${formatNumber(car.mileage)} км`}</span>
                         <span>м. Київ</span>
                       </div>
                     </div>
@@ -236,7 +269,7 @@ export const Home = () => {
               grabCursor={true}
               className="brandsSwiper">
               {brandsArray.map((brand, index) => (
-                <SwiperSlide  key={`brand-${index}`}>
+                <SwiperSlide key={`brand-${index}`}>
                   <Link to="#" className="noFontStyle">
                     <div className="brandCard">
                       <img className="brandImage" src={brand.url} alt={`Brand ${index + 1}`} />
@@ -254,4 +287,14 @@ export const Home = () => {
       </section>
     </Layout>
   );
+};
+
+// formatNumber
+const formatNumber = (number) => {
+  return new Intl.NumberFormat('en-US', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  })
+    .format(number)
+    .replace(/,/g, ' ');
 };

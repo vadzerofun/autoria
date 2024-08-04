@@ -3,16 +3,20 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import useToken from "../../../Hooks/useToken";
 
 import axios from "axios";
 
-export const Login = ({ setToken }) => {
+export const Login = () => {
 
     const navigate = useNavigate();
 
     // useState
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    // useToken
+    const { token, setToken } = useToken();
 
     // onClick
     const loginUser = (e) => {
@@ -30,7 +34,7 @@ export const Login = ({ setToken }) => {
                 // Set token
                 const tokenValue = response.data;
                 setToken({token: tokenValue});
-                // navigate("/");
+                navigate("/");
             })
             .catch((error) => {
                 console.error(error);
