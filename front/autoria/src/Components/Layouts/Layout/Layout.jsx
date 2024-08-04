@@ -10,7 +10,7 @@ export const Layout = ({ children }) => {
   // const { token, setToken } = useToken();
 
   // if(!token) {
-  //   return <Login setToken={setToken} />
+  //   return <Login />
   // }
 
   return (

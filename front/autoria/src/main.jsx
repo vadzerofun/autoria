@@ -13,12 +13,13 @@ import LoginRegister from './Components/Auth/LoginRegister/LoginRegister.jsx';
 import { ForgotPassword } from './Components/Auth/ForgotPassword/ForgotPassword.jsx';
 import { Home } from './Pages/Home/Home.jsx';
 import { ConfirmEmail } from './Components/Auth/ConfirmEmail/ConfirmEmail.jsx';
+import { Car } from './Pages/Car/Car.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
-    errorElement: <ErrorPage />
+    errorElement: <ErrorPage />,    
   },
   {
     path: "/login",
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: "/confirm-email",
     element: <div><ConfirmEmail /></div>,
+  },  
+  {
+    path: "/cars/:carId",
+    element: <div><Car /></div>,
   },
 ]);
 
