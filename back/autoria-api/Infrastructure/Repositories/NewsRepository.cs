@@ -52,7 +52,7 @@ namespace Infrastructure.Repositories
 
         public async Task<List<News>> GetNews()
         {
-            var news = await _context.News.ToListAsync();
+            var news = await _context.News.OrderByDescending(news => news.WritingTime).ToListAsync();
             return news;
         }
         public async Task EditNews(Guid Id, News news)

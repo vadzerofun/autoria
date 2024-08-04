@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using Application.Model;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -63,9 +64,11 @@ namespace autoria_api.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpPost("EditUser")]
         public async Task<IActionResult> EditUser(Guid id, User UserDTO)
         {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
             await _userService.EditUser(id, UserDTO);
             return Ok();
         }
@@ -112,7 +115,6 @@ namespace autoria_api.Controllers
                 return Redirect(BadLink);
             return Redirect(SuccessLink);
         }
-        //TODO: зробити забув пароль
         [HttpPost("ForgotPassword")]
         public async Task<IActionResult> ForgotPassword(string Email, string Link)
         {

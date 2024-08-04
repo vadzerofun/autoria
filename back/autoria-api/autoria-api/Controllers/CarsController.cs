@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
-using Application.Interfaces;
-using Application.Services;
+﻿using Application.Interfaces;
 using Application.Model;
+using autoria_api.ViewModel;
 using Core.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 
 namespace autoria_api.Controllers
 {
@@ -85,9 +86,14 @@ namespace autoria_api.Controllers
 
         [Authorize]
         [HttpPost("AddCar")]
-        public async Task<IActionResult> AddCar([FromForm] Cars car, [FromForm] IFormFile[] ImageFiles)
+        public async Task<IActionResult> AddCar([FromForm] CarInputViewModel carV, [FromForm] IFormFile[] ImageFiles)
         {
-            car.ImagesPath = await _imageUploader.UploadImages(ImageFiles.ToList());
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null)
+                return BadRequest("No such authorise User");
+            var UserId = Guid.Parse(userId);
+            var ImagesPath = await _imageUploader.UploadImages(ImageFiles.ToList());
+            var car = CarInputViewModel.ToCars(carV, Guid.NewGuid(), ImagesPath, UserId, DateTime.Now, 0);
             await _carService.AddCar(car);
             return CreatedAtAction(nameof(AddCar), car);
         }
@@ -101,10 +107,10 @@ namespace autoria_api.Controllers
         }
 
         [HttpPost("EditCar")]
-        public async Task<IActionResult> EditCar([FromForm] Guid id, [FromForm] Cars carDTO, [FromForm] IFormFile[] ImageFiles)
+        public async Task<IActionResult> EditCar([FromForm] Guid id, [FromForm] Cars car, [FromForm] IFormFile[] ImageFiles)
         {
-            carDTO.ImagesPath = await _imageUploader.UploadImages(ImageFiles.ToList());
-            await _carService.EditCar(id, carDTO);
+            car.ImagesPath = await _imageUploader.UploadImages(ImageFiles.ToList());
+            await _carService.EditCar(id, car);
             return Ok();
         }
 
