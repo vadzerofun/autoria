@@ -13,18 +13,21 @@ namespace Application.Services
 {
     public class NewsService : INewsService
     {
-        private readonly INewsRepository _repository;
+        private readonly IuserRepository _userRepository;
+        private readonly INewsRepository _NewsRepository;
 
-        public NewsService(INewsRepository repository)
+        public NewsService(INewsRepository repository, IuserRepository userRepository)
         {
-            _repository = repository;
+            _NewsRepository = repository;
+            _userRepository = userRepository;
         }
 
         public async Task<Result> AddLike(Guid Id, Guid UserId)
         {
             try
             {
-                await _repository.Addlike(Id, UserId);
+                await _NewsRepository.Addlike(Id, UserId);
+                await _userRepository.AddNewsToUser(UserId, Id);
                 return Result.Success();
             }catch (Exception ex)
             {
@@ -39,7 +42,7 @@ namespace Application.Services
                 news.WritingTime = DateTime.Now;
                 news.Likes = new List<Guid>();
                 news.Id = Guid.NewGuid();
-                await _repository.AddNews(news);
+                await _NewsRepository.AddNews(news);
                 return Result.Success();
             }
             catch (Exception ex)
@@ -52,7 +55,7 @@ namespace Application.Services
         {
             try
             {
-                await _repository.DeleteNews(Id);
+                await _NewsRepository.DeleteNews(Id);
                 return Result.Success();
             }
             catch (Exception ex)
@@ -65,7 +68,7 @@ namespace Application.Services
         {
             try
             {
-                await _repository.EditNews(Id, news);
+                await _NewsRepository.EditNews(Id, news);
                 return Result.Success();
             }catch (Exception ex)
             {
@@ -77,7 +80,7 @@ namespace Application.Services
         {
             try
             {
-                return Result<List<News>>.Success(await _repository.GetNews());
+                return Result<List<News>>.Success(await _NewsRepository.GetNews());
             }catch (Exception ex)
             {
                 return Result<List<News>>.Failure(ex.Message);
@@ -88,11 +91,24 @@ namespace Application.Services
         {
             try
             {
-                return Result<News>.Success(await _repository.GetNews(Id));
+                return Result<News>.Success(await _NewsRepository.GetNews(Id));
             }
             catch (Exception ex)
             {
                 return Result<News>.Failure(ex.Message);
+            }
+        }
+
+        public async Task<Result<int>> GetNewsLikes(Guid Id)
+        {
+            try
+            {
+                var likes = await _NewsRepository.GetLikesCount(Id);
+                return Result<int>.Success(likes);
+            }
+            catch (Exception ex)
+            {
+                return Result<int>.Failure(ex.Message);
             }
         }
     }

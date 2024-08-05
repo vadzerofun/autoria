@@ -21,5 +21,6 @@ namespace Core.Interfaces
         Task AddCarIdToUser(Guid UserId, Guid CarId);
         Task Visit(Guid UserId);
         Task ChengePassword(string Password, Guid UserId);
+        Task AddNewsToUser(Guid UserId, Guid NewsId);
     }
 }

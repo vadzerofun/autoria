@@ -6,6 +6,7 @@ using Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace autoria_api.Controllers
 {
@@ -83,11 +84,14 @@ namespace autoria_api.Controllers
             return Result.Failure(result.ErrorMessage);
         }
 
+        //TODO: зробити щоб додавалося в User лайкнута новина
         [Authorize]
         [HttpPost("LikeNews")]
-        public async Task<Result> LikeNews(Guid Id, Guid UserId)
+        public async Task<Result> LikeNews(Guid Id)
         {
-            var res = await _newsService.AddLike(Id, UserId);
+            var UserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (UserId == null) return Result.Failure("Bad User");
+            var res = await _newsService.AddLike(Id, Guid.Parse(UserId));
             if (res.IsSuccess)
             {
                 return Result.Success();
@@ -105,6 +109,15 @@ namespace autoria_api.Controllers
             }
             return Result.Failure(result.ErrorMessage);
         }
-
+        [HttpGet("GetNewsLikes")]
+        public async Task<Result<int>> GetNewsLikes(Guid Id)
+        {
+            var res =  await _newsService.GetNewsLikes(Id);
+            if (res.IsSuccess)
+            {
+                return Result<int>.Success(res.Value);
+            }
+            return Result<int>.Failure(res.ErrorMessage);
+        }
     }
 }

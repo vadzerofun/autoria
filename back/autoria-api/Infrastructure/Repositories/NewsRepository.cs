@@ -73,5 +73,14 @@ namespace Infrastructure.Repositories
             await EditNews(news.Id, news);
             return;
         }
+
+        public async Task<int> GetLikesCount(Guid Id)
+        {
+            var news = await GetNews(Id);
+            if (news == null) return 0;
+            if (news.Likes == null) return 0;
+            int LikesCount = news.Likes.Count;
+            return LikesCount;
+        }
     }
 }

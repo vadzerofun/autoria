@@ -169,6 +169,15 @@ namespace Infrastructure.Repositories
             return;
 
         }
+
+        public async Task AddNewsToUser(Guid UserId, Guid NewsId)
+        {
+            var user = await GetUserById(UserId);
+            if (user == null) return;
+            user.LikesNews.Add(NewsId);
+            await EditUser(UserId, user);
+            return;
+        }
     }
 }
 

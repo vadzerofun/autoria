@@ -77,7 +77,6 @@ namespace Application.Services
 
         }
 
-        //TODO: Тільки юзер якого видаляють
         public async Task<Result> DeleteUserById(Guid id)
         {
             try
@@ -90,7 +89,6 @@ namespace Application.Services
             }
             return Result.Success();
         }
-        //TODO: Тільки юзер якого редагують
         public async Task<Result> EditUser(Guid id, User user)
         {
             try
