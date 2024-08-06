@@ -52,7 +52,7 @@ namespace Infrastructure.Repositories
 
         public async Task<List<News>> GetNews()
         {
-            var news = await _context.News.ToListAsync();
+            var news = await _context.News.OrderByDescending(news => news.WritingTime).ToListAsync();
             return news;
         }
         public async Task EditNews(Guid Id, News news)
@@ -72,6 +72,15 @@ namespace Infrastructure.Repositories
             news.Likes.Add(UserId);
             await EditNews(news.Id, news);
             return;
+        }
+
+        public async Task<int> GetLikesCount(Guid Id)
+        {
+            var news = await GetNews(Id);
+            if (news == null) return 0;
+            if (news.Likes == null) return 0;
+            int LikesCount = news.Likes.Count;
+            return LikesCount;
         }
     }
 }

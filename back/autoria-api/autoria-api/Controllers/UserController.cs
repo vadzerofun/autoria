@@ -6,6 +6,8 @@ using Microsoft.Extensions.Options;
 using Application.Model;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Core.Enums;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -56,17 +58,47 @@ namespace autoria_api.Controllers
         }
 
         // DELETE: api/Users/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
-            await _userService.DeleteUserById(id);
-            return Ok();
+            var userid = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+            if (userid == null || userRole == null)
+                return BadRequest("No Such User");
+            if (id == Guid.Parse(userid) || userRole == UserRole.Admin.ToString())
+            {
+                await _userService.DeleteUserById(id);
+                return Ok();
+            }
+            return BadRequest("no access");
         }
 
+        [Authorize]
         [HttpPost("EditUser")]
-        public async Task<IActionResult> EditUser(Guid id, User UserDTO)
+        public async Task<IActionResult> EditUser(Guid id, User User)
         {
-            await _userService.EditUser(id, UserDTO);
+            var userRole = base.User.FindFirst(ClaimTypes.Role)?.Value;
+            var userId = base.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userRole == null || userId == null)
+                return BadRequest("No Such User");
+            if (userRole == UserRole.Admin.ToString())
+            {
+                User.CreatedTime = User.CreatedTime;
+                User.lastVisitedDate = User.lastVisitedDate;
+                User.Id = User.Id;
+                User.Password = User.Password;
+            }
+            else
+            {
+                User.CreatedTime = User.CreatedTime;
+                User.lastVisitedDate = User.lastVisitedDate;
+                User.Id = User.Id;
+                User.CarsId = User.CarsId;
+                User.IsEmailConfirmed = User.IsEmailConfirmed;
+                User.userRole = User.userRole;
+            }
+            await _userService.EditUser(id, User);
             return Ok();
         }
         [HttpGet("GetByEmail")]
@@ -112,7 +144,6 @@ namespace autoria_api.Controllers
                 return Redirect(BadLink);
             return Redirect(SuccessLink);
         }
-        //TODO: зробити забув пароль
         [HttpPost("ForgotPassword")]
         public async Task<IActionResult> ForgotPassword(string Email, string Link)
         {
@@ -130,5 +161,6 @@ namespace autoria_api.Controllers
                 return BadRequest(res.ErrorMessage);
             return Ok(res);
         }
+        
     }
 }

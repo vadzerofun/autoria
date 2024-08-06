@@ -17,6 +17,7 @@ using SendGrid.Helpers.Mail;
 using SendGrid;
 using Application.Services;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Application.Services
 {
@@ -76,7 +77,6 @@ namespace Application.Services
 
         }
 
-        //TODO: Тільки юзер якого видаляють
         public async Task<Result> DeleteUserById(Guid id)
         {
             try
@@ -89,7 +89,6 @@ namespace Application.Services
             }
             return Result.Success();
         }
-        //TODO: Тільки юзер якого редагують
         public async Task<Result> EditUser(Guid id, User user)
         {
             try
@@ -216,7 +215,7 @@ namespace Application.Services
             var peripteral = _jwtTokenService.ValidateToken(UnhashToken);
             if (peripteral == null)
                 return Result.Failure("Bad Token");
-            var userId = peripteral.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+            var userId = peripteral.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userId == null) return Result.Failure("Bad Token");
             await _userRepository.ChengePassword(NewPassword, Guid.Parse(userId));
             return Result.Success();
