@@ -38,16 +38,19 @@ export const Car = () => {
   const [openDescription, setOpenDescription] = useState(false);
   // carId
   const { carId } = useParams();
-  // fetch car
-  const { car, loading, error } = useGetCarById(carId);
+  // fetch car and user
+  const { car, user, loading, error } = useGetCarById(carId);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   // car description
   // console.log(car.imagesPath);
-  const description = formatDescription(car.description);
+  const description = formatDescription(car.description);  
 
+  console.log(user);
+  
+  
   return (
     <Layout>
       <section className="homeSection carGallerySection">
@@ -120,9 +123,9 @@ export const Car = () => {
                 <div className="carGallerySellerText">
                   <div className="fw-medium">Продавець</div>
                   <div className="carGallerySellerName fs-5">
-                    <span>Павло</span>
+                    <span>{user.name}</span>
                     <span className="carGalleryInfoPoint"></span>
-                    <span>Київ</span>
+                    <span>{user.region}</span>
                   </div>
                   <div className="carGallerySellerIcons">
                     <div className="carGallerySellerIconItem">
@@ -135,7 +138,7 @@ export const Car = () => {
                     </div>
                     <div className="carGallerySellerIconItem">
                       <img className="carGallerySellerIcon" src={carIcons.Chat} alt="Chat Icon" />
-                      <span>Останній раз на сайті 14.07.2024</span>
+                      <span>Останній раз на сайті {formatLastVisited(user.lastVisitedDate)}</span>
                     </div>
                     <div className="carGallerySellerIconItem">
                       <img
@@ -143,11 +146,11 @@ export const Car = () => {
                         src={carIcons.Profile}
                         alt="Profile Icon"
                       />
-                      <span>З Drive Dreams від 2023</span>
+                      <span>З Drive Dreams від {user.createdTime.substring(0,4)}</span>
                     </div>
                   </div>
                 </div>
-                <Button className="carGallerySellerBtn" href="#">
+                <Button className="carGallerySellerBtn" href={`tel:${user.phone}`}>
                   <div className="d-flex align-items-center justify-content-center gap-3">
                     <img
                       className="carGallerySellerBtnIcon"
@@ -344,4 +347,13 @@ const formatNumber = (number) => {
   })
     .format(number)
     .replace(/,/g, ' ');
+};
+
+// formatLastVisited
+const formatLastVisited = (dateString) => {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); 
+  const year = date.getFullYear();
+  return `${day}.${month}.${year}`;
 };

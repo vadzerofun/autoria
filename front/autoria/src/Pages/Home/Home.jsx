@@ -21,8 +21,12 @@ import SearchImage from '../../assets/images/cars/car-01.png';
 import ImagePlaceholder from '../../assets/placeholder-image.png';
 
 import imgRecs from './imgRecs';
+import arrNews from './arrNews';
 import brandsArray from './brandsArray';
 import useGetCarsForYou from '../../Hooks/useGetCarsForYou';
+import { HeartFilledIcon } from '../../Components/Icons/HeartIcon/HeartFilledIcon';
+import { HeartIcon } from '../../Components/Icons/HeartIcon/HeartIcon';
+import { NewsCard } from '../../Components/News/NewsCard/NewsCard';
 
 export const Home = () => {
   // images
@@ -200,9 +204,7 @@ export const Home = () => {
                     />
                     <div className="carCardMain">
                       <span className="carCardTitle fs-6">{`${car.make} ${car.model}`}</span>
-                      <span className="carCardPrice fs-6">{`${formatNumber(
-                        car.priceUSD
-                      )} $`}</span>
+                      <span className="carCardPrice fs-6">{`${formatNumber(car.priceUSD)} $`}</span>
                     </div>
                     <div className="carCardDetails">
                       <div>
@@ -283,7 +285,22 @@ export const Home = () => {
         </Container>
       </section>
       <section className="homeSection">
-        <Container>Авто новини</Container>
+        <Container>
+          <div className="newsContainer">
+            <h2 className="homeTitle fs-1">Авто новини</h2>
+            <Swiper
+              slidesPerView={'auto'}
+              spaceBetween={24}
+              grabCursor={true}
+              className="newsSwiper">
+              {arrNews.map((news, index) => (
+                <SwiperSlide key={`news-${index}`}>
+                  <NewsCard news={news}/>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </Container>
       </section>
     </Layout>
   );
