@@ -208,7 +208,7 @@
   object-fit: cover;
   border-radius: 0.9rem;
   @media screen and (max-width: 700px) {
-    height: 250px;
+    height: 180px;
   }
 }
 
@@ -273,9 +273,6 @@
   height: 180px;
   object-fit: cover;
   border-radius: 0.75rem;
-  @media screen and (max-width: 700px) {
-    height: 250px;
-  }
 }
 
 .carCardMain{
@@ -318,6 +315,23 @@
 
 .offersSwiper .swiper-slide {
   width: 370px;
+  @media screen and (max-width: 530px) {
+    width: 100%;
+  }
+}
+
+/* =============================== */
+
+// News section
+
+.newsContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.5rem;
+}
+
+.newsSwiper .swiper-slide {
+  width: 350px;
   @media screen and (max-width: 530px) {
     width: 100%;
   }
