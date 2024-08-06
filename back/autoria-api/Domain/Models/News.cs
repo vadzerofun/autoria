@@ -11,9 +11,9 @@ namespace Core.Models
         public Guid Id { get; set; } //Id
         public string Tittle {  get; set; } //заголовок
         public DateTime WritingTime { get; set; } //час написання
-        public List<Guid>? Likes { get; set; } //лайки
+        public List<Guid> Likes { get; set; } = new List<Guid>(); //лайки
         public string Link {  get; set; } //лінк на новину
-        public string ImageLink { get; set; } //посилання на картинку
+        public string? ImageLink { get; set; } //посилання на картинку
 
     }
 }

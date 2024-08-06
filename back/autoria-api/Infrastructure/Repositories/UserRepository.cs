@@ -178,6 +178,15 @@ namespace Infrastructure.Repositories
             await EditUser(UserId, user);
             return;
         }
+
+        public async Task RemoveNews(Guid UserId, Guid NewsId)
+        {
+            var user = await GetUserById(UserId);
+            if (user == null) return;
+            user.LikesNews.Remove(NewsId);
+            await EditUser(UserId, user);
+            return;
+        }
     }
 }
 

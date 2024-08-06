@@ -69,6 +69,10 @@ namespace Infrastructure.Repositories
         public async Task Addlike(Guid id, Guid UserId)
         {
             var news = await GetNews(id);
+            if (news == null) return;
+            if (news.Likes == null) news.Likes = new List<Guid>();
+            if (news.Likes.Contains(UserId))
+                return;
             news.Likes.Add(UserId);
             await EditNews(news.Id, news);
             return;
@@ -81,6 +85,15 @@ namespace Infrastructure.Repositories
             if (news.Likes == null) return 0;
             int LikesCount = news.Likes.Count;
             return LikesCount;
+        }
+
+        public async Task RemoveLike(Guid id, Guid UserId)
+        {
+            var news = await GetNews(id);
+            if (news == null) return;
+            news.Likes.Remove(UserId);
+            await EditNews(id, news);
+            return;
         }
     }
 }

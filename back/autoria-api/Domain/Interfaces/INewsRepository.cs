@@ -16,5 +16,6 @@ namespace Core.Interfaces
         public Task<News> GetNews(Guid id);
         public Task Addlike(Guid id, Guid UserId);
         public Task<int> GetLikesCount(Guid Id);
+        public Task RemoveLike(Guid id, Guid UserId);
     }
 }
