@@ -20,6 +20,7 @@ namespace Core.Models
         public bool IsEmailConfirmed { get; set; }
         public List<Guid>? CarsId { get; set; }
         public UserRole userRole { get; set; }
+        public string? ImageLink { get; set; }
         public List<Guid> LikesNews { get; set; } = new List<Guid>();
     }
 }

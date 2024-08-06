@@ -19,11 +19,13 @@ namespace autoria_api.Controllers
     {
         private readonly IUserService _userService;
         private readonly IOptions<AuthOption> _authOption;
+        private readonly IImageUploader _imageUploader;
 
-        public UserController(IUserService userService, IOptions<AuthOption> authOptions)
+        public UserController(IUserService userService, IOptions<AuthOption> authOptions, IImageUploader imageUploader)
         {
             _userService = userService;
             _authOption = authOptions;
+            _imageUploader = imageUploader;
         }
 
         // GET: api/Users
@@ -76,24 +78,29 @@ namespace autoria_api.Controllers
 
         [Authorize]
         [HttpPost("EditUser")]
-        public async Task<IActionResult> EditUser(Guid id, User User)
+        public async Task<IActionResult> EditUser([FromForm] Guid id, [FromForm] User User, [FromForm] IFormFile[] Image)
         {
+            string imgpath;
+            if (Image != null)
+                imgpath = await _imageUploader.UploadImage(Image[0]);
+            else
+                imgpath = "";
             var userRole = base.User.FindFirst(ClaimTypes.Role)?.Value;
             var userId = base.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userRole == null || userId == null)
                 return BadRequest("No Such User");
+
+            User.CreatedTime = User.CreatedTime;
+            User.lastVisitedDate = User.lastVisitedDate;
+            User.Id = User.Id;
+            User.ImageLink = imgpath;
+
             if (userRole == UserRole.Admin.ToString())
             {
-                User.CreatedTime = User.CreatedTime;
-                User.lastVisitedDate = User.lastVisitedDate;
-                User.Id = User.Id;
                 User.Password = User.Password;
             }
             else
             {
-                User.CreatedTime = User.CreatedTime;
-                User.lastVisitedDate = User.lastVisitedDate;
-                User.Id = User.Id;
                 User.CarsId = User.CarsId;
                 User.IsEmailConfirmed = User.IsEmailConfirmed;
                 User.userRole = User.userRole;
