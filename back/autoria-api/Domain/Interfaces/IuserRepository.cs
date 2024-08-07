@@ -22,5 +22,6 @@ namespace Core.Interfaces
         Task Visit(Guid UserId);
         Task ChengePassword(string Password, Guid UserId);
         Task AddNewsToUser(Guid UserId, Guid NewsId);
+        Task RemoveNews(Guid UserId, Guid NewsId);
     }
 }

@@ -26,8 +26,18 @@ namespace Application.Services
         {
             try
             {
-                await _NewsRepository.Addlike(Id, UserId);
-                await _userRepository.AddNewsToUser(UserId, Id);
+                var news = await _NewsRepository.GetNews(Id);
+                if (news == null) return Result.Failure("No Such News");
+                if (news.Likes.Contains(UserId))
+                {
+                    await _NewsRepository.RemoveLike(Id, UserId);
+                    await _userRepository.RemoveNews(UserId, Id);
+                }
+                else
+                {
+                    await _NewsRepository.Addlike(Id, UserId);
+                    await _userRepository.AddNewsToUser(UserId, Id);
+                }
                 return Result.Success();
             }catch (Exception ex)
             {
