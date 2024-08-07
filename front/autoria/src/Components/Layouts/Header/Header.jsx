@@ -30,7 +30,7 @@ export const Header = () => {
               <Nav.Link as={Link} to="#">
                 Нові машини
               </Nav.Link>
-              <Nav.Link as={Link} to="#">
+              <Nav.Link as={Link} to="/add-car">
                 Продати машину
               </Nav.Link>
               <Nav.Link as={Link} to="#">
@@ -46,11 +46,11 @@ export const Header = () => {
               <Link to="#">
                 <img src={Heart} alt="Heart" className="img-fluid" width="19px" height="16px" />
               </Link>
-              <Link to="/login-register">
+              <Link to="/cabinet">
                 <img src={Profile} alt="Profile" className="img-fluid" width="16px" height="16px" />
               </Link>
             </div>
-            <Link to="#" className="navbarRightButton">
+            <Link to="/add-car" className="navbarRightButton">
               + Продати авто
             </Link>
           </div>
