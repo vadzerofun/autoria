@@ -23,7 +23,7 @@ import ImagePlaceholder from '../../assets/placeholder-image.png';
 import imgRecs from './imgRecs';
 import arrNews from './arrNews';
 import brandsArray from './brandsArray';
-import useGetCarsForYou from '../../Hooks/useGetCarsForYou';
+import useLoadHome from '../../Hooks/useLoadHome';
 import { HeartFilledIcon } from '../../Components/Icons/HeartIcon/HeartFilledIcon';
 import { HeartIcon } from '../../Components/Icons/HeartIcon/HeartIcon';
 import { NewsCard } from '../../Components/News/NewsCard/NewsCard';
@@ -31,12 +31,16 @@ import { NewsCard } from '../../Components/News/NewsCard/NewsCard';
 export const Home = () => {
   // images
   const imagesURL = import.meta.env.VITE_IMAGES_URL;
-  // fetch Cars
-  const { carsForYou, loadingForYou, errorForYou } = useGetCarsForYou();
-  console.log(carsForYou);
+  // fetch Data
+  const { carsForYou, carsMostProfitable, news, loading, error } = useLoadHome();
 
-  if (loadingForYou) return <div>Loading...</div>;
-  if (errorForYou) return <div>Error: {error.message}</div>;
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  // console.log(carsForYou);
+  // console.log(carsMostProfitable);
+  // console.log(news);
+  
 
   return (
     <Layout>
@@ -234,22 +238,32 @@ export const Home = () => {
               spaceBetween={24}
               grabCursor={true}
               className="offersSwiper">
-              {imgRecs.slice(5, 9).map((img, index) => (
+              {carsMostProfitable.map((car, index) => (
                 <SwiperSlide key={`offer-${index}`}>
-                  <Link to="#" className="noFontStyle">
+                  <Link to={`cars/${car.id}`} className="noFontStyle">
                     <div className="carCard">
-                      <img className="carImage" src={img} alt={`Offer ${index + 1}`} />
+                      <img
+                        className="carImage"
+                        src={
+                          car.imagesPath.length ? imagesURL + car.imagesPath[0] : ImagePlaceholder
+                        }
+                        alt={`Offer ${index + 1}`}
+                      />
                       <div className="carCardMain">
-                        <span className="carCardTitle fs-6">Porsche Cayenne Coupé 3.0 340KM</span>
-                        <span className="carCardPrice fs-6">90 000 $</span>
+                        <span className="carCardTitle fs-6">{`${car.make} ${car.model}`}</span>
+                        <span className="carCardPrice fs-6">{`${formatNumber(
+                          car.priceUSD
+                        )} $`}</span>
                       </div>
                       <div className="carCardDetails">
                         <div>
-                          <span>Електро, 77.4 кВт-год</span>
-                          <span>2019 р</span>
+                          <span>{`${car.engine_type == 0 ? 'Бензин' : 'Дизель'} ${
+                            car.engine_capacity
+                          } л`}</span>
+                          <span>{car.year} р</span>
                         </div>
                         <div>
-                          <span>65 000 км</span>
+                          <span>{`${formatNumber(car.mileage)} км`}</span>
                           <span>м. Київ</span>
                         </div>
                       </div>
@@ -293,9 +307,9 @@ export const Home = () => {
               spaceBetween={24}
               grabCursor={true}
               className="newsSwiper">
-              {arrNews.map((news, index) => (
+              {news.map((news, index) => (
                 <SwiperSlide key={`news-${index}`}>
-                  <NewsCard news={news}/>
+                  <NewsCard news={news} />
                 </SwiperSlide>
               ))}
             </Swiper>

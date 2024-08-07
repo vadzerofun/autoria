@@ -26,8 +26,9 @@ import 'swiper/css/thumbs';
 
 // import required modules
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import { ContactSellerButton } from '../../Components/Car/ContactSellerButton/ContactSellerButton';
 
-export const Car = () => {
+export const Car = () => { 
   // Swiper Thumbs
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
@@ -46,11 +47,10 @@ export const Car = () => {
 
   // car description
   // console.log(car.imagesPath);
-  const description = formatDescription(car.description);  
+  const description = formatDescription(car.description);
 
   console.log(user);
-  
-  
+
   return (
     <Layout>
       <section className="homeSection carGallerySection">
@@ -146,20 +146,11 @@ export const Car = () => {
                         src={carIcons.Profile}
                         alt="Profile Icon"
                       />
-                      <span>З Drive Dreams від {user.createdTime.substring(0,4)}</span>
+                      <span>З Drive Dreams від {user.createdTime.substring(0, 4)}</span>
                     </div>
                   </div>
                 </div>
-                <Button className="carGallerySellerBtn" href={`tel:${user.phone}`}>
-                  <div className="d-flex align-items-center justify-content-center gap-3">
-                    <img
-                      className="carGallerySellerBtnIcon"
-                      src={carIcons.ChatWhite}
-                      alt="Chat Icon"
-                    />
-                    <span className="fs-5">Зв’язатись з продацвем</span>
-                  </div>
-                </Button>
+                <ContactSellerButton user={user} icon={carIcons.ChatWhite}/>
               </div>
             </div>
           </div>
@@ -353,7 +344,7 @@ const formatNumber = (number) => {
 const formatLastVisited = (dateString) => {
   const date = new Date(dateString);
   const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0'); 
+  const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();
   return `${day}.${month}.${year}`;
 };

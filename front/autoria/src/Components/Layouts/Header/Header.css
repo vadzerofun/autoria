@@ -77,11 +77,13 @@
 
 .navbar-toggler {
   padding: 0.3rem 0.5rem 0.5rem;
-  margin-left: auto;
-  margin-right: 0.75rem;
+  margin-left: 0.75rem;
   background-color: var(--bs-customblue);
   color: #5C5C5C;
   border: none;
+  -webkit-box-ordinal-group: 1000;
+      -ms-flex-order: 999;
+          order: 999;
 }
 .navbar-toggler:hover {
   background-color: #c2d2ff;
@@ -116,6 +118,7 @@
   display: -ms-flexbox;
   display: flex;
   gap: 0.75rem;
+  margin-left: auto;
 }
 
 .navbarRightIcons {

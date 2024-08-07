@@ -14,6 +14,8 @@ import { ForgotPassword } from './Components/Auth/ForgotPassword/ForgotPassword.
 import { Home } from './Pages/Home/Home.jsx';
 import { ConfirmEmail } from './Components/Auth/ConfirmEmail/ConfirmEmail.jsx';
 import { Car } from './Pages/Car/Car.jsx';
+import { Cabinet } from './Pages/Cabinet/Cabinet.jsx';
+import { AddCar } from './Pages/AddCar/AddCar.jsx';
 
 const router = createBrowserRouter([
   {
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
   {
     path: "/cars/:carId",
     element: <div><Car /></div>,
+  },
+  {
+    path: "/cabinet",
+    element: <div><Cabinet /></div>,
+  },
+  {
+    path: "/add-car",
+    element: <div><AddCar /></div>,
   },
 ]);
 
