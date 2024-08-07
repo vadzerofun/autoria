@@ -193,12 +193,12 @@ namespace Application.Services
 
             string Token = _jwtTokenService.GenerateJWT(user);
             string HashToken = _encryptionService.Encrypt(Token);
-            string contitueEmail = $"{Link}/{HashToken}";
+            string contitueEmail = $"{Link}/{Uri.EscapeDataString(HashToken)}";
             var plainTextContent = "Press this button to chenge password";
             var htmlContent = $@"
-            <strong>Chenge password.</strong>
+            <strong>Chenge password.</strong>ф
             <br><br>
-            <a href='{contitueEmail}' style='display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #4CAF50; text-align: center; text-decoration: none; border-radius: 5px;'>Підтвердити пошту</a>";
+            <a href='{contitueEmail}' style='display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #4CAF50; text-align: center; text-decoration: none; border-radius: 5px;'>Змінити пароль</a>";
             var subject = "Chenge Password";
             var response = await _emailService.SendEmail(Email, plainTextContent, htmlContent, subject);
 
