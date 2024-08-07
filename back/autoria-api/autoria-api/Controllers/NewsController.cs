@@ -45,7 +45,7 @@ namespace autoria_api.Controllers
             return Result<News>.Failure(news.ErrorMessage);
         }
 
-        [Authorize(Policy = "Admin-Policy")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("AddNews")]
         public async Task<Result> AddNews([FromForm] News news, [FromForm] IFormFile[] ImageFile)
         {

@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Core.Enums;
+using autoria_api.ViewModel;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -78,34 +79,51 @@ namespace autoria_api.Controllers
 
         [Authorize]
         [HttpPost("EditUser")]
-        public async Task<IActionResult> EditUser([FromForm] Guid id, [FromForm] User User, [FromForm] IFormFile[] Image)
+        public async Task<IActionResult> EditUser([FromForm] UserEditModel InputUser)
         {
             string imgpath;
-            if (Image != null)
-                imgpath = await _imageUploader.UploadImage(Image[0]);
+            if (InputUser.FormImageFile != null)
+                imgpath = await _imageUploader.UploadImage(InputUser.FormImageFile);
             else
                 imgpath = "";
+
             var userRole = base.User.FindFirst(ClaimTypes.Role)?.Value;
             var userId = base.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
             if (userRole == null || userId == null)
                 return BadRequest("No Such User");
 
-            User.CreatedTime = User.CreatedTime;
-            User.lastVisitedDate = User.lastVisitedDate;
-            User.Id = User.Id;
-            User.ImageLink = imgpath;
+            var userOrig = (await _userService.GetUserById(InputUser.EditId)).Value;
+
+            User User = new User
+            {
+                Id = userOrig.Id,
+                Name = InputUser.Name,
+                Phone = InputUser.Phone,
+                Email = InputUser.Email,
+                Password = InputUser.Password,
+                Region = InputUser.Region,
+                CreatedTime = userOrig.CreatedTime,
+                lastVisitedDate = userOrig.lastVisitedDate,
+                IsEmailConfirmed = InputUser.IsEmailConfirmed,
+                CarsId = userOrig.CarsId,
+                userRole = InputUser.userRole,
+                ImageLink = imgpath,
+                LikesNews = userOrig.LikesNews
+            };
 
             if (userRole == UserRole.Admin.ToString())
             {
-                User.Password = User.Password;
+                User.Password = userOrig.Password;
             }
             else
             {
-                User.CarsId = User.CarsId;
-                User.IsEmailConfirmed = User.IsEmailConfirmed;
-                User.userRole = User.userRole;
+                if (InputUser.EditId != Guid.Parse(userId))
+                    return BadRequest("No Sucsess");
+                User.IsEmailConfirmed = userOrig.IsEmailConfirmed;
+                User.userRole = userOrig.userRole;
             }
-            await _userService.EditUser(id, User);
+            await _userService.EditUser(InputUser.EditId, User);
             return Ok();
         }
         [HttpGet("GetByEmail")]
