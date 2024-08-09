@@ -11,7 +11,7 @@ import { HeartFilledIcon } from '../../Icons/HeartIcon/HeartFilledIcon';
 
 import useToken from '../../../Hooks/useToken';
 
-export const NewsCard = ({ news }) => {
+export const NewsCard = ({ news, userId }) => {
   // images
   const imagesURL = import.meta.env.VITE_IMAGES_URL;
   // useToken
@@ -20,7 +20,7 @@ export const NewsCard = ({ news }) => {
   const navigate = useNavigate();
 
   // liked
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(news.likes.includes(userId));
   // likes
   const [likesCount, setLikesCount] = useState(news.likes.length);
 
@@ -28,6 +28,11 @@ export const NewsCard = ({ news }) => {
   const handleClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
+
+    if (!token) {
+      navigate('/login');
+      return;
+    }
 
     axios
       .post(

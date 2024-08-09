@@ -34,9 +34,6 @@ export const Header = () => {
                 Продати машину
               </Nav.Link>
               <Nav.Link as={Link} to="#">
-                Автозапчастини
-              </Nav.Link>
-              <Nav.Link as={Link} to="#">
                 Новини
               </Nav.Link>
             </Nav>

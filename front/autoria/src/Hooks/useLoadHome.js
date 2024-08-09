@@ -7,13 +7,14 @@ const useLoadHome = () => {
   const [carsMostProfitable, setCarsMostProfitable] = useState([]);
   //news
   const [news, setNews] = useState([]);
+  const [user, setUser] = useState(null);
   // loading, error
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
+      try { 
         const [carsForYouResponse, carsMostProfitableResponse, newsResponse] = await Promise.all([
           axios.get(import.meta.env.VITE_REACT_API_URL + 'Cars/GetCarsForYou'),
           axios.get(import.meta.env.VITE_REACT_API_URL + 'Cars/GetMostProfitable'),
@@ -33,7 +34,7 @@ const useLoadHome = () => {
     fetchData();
   }, []);
 
-  return { carsForYou, carsMostProfitable, news, loading, error };
+  return { carsForYou, carsMostProfitable, news, user, loading, error };
 };
 
 export default useLoadHome;
