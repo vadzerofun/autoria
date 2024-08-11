@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Layout } from '../../Components/Layouts/Layout/Layout';
 import Container from 'react-bootstrap/esm/Container';
 import './Home.css';
@@ -20,24 +20,25 @@ import 'swiper/css';
 import SearchImage from '../../assets/images/cars/car-01.png';
 import ImagePlaceholder from '../../assets/placeholder-image.png';
 
-import imgRecs from './imgRecs';
-import arrNews from './arrNews';
 import brandsArray from './brandsArray';
 import useLoadHome from '../../Hooks/useLoadHome';
-import { HeartFilledIcon } from '../../Components/Icons/HeartIcon/HeartFilledIcon';
-import { HeartIcon } from '../../Components/Icons/HeartIcon/HeartIcon';
+import useToken from '../../Hooks/useToken';
 import { NewsCard } from '../../Components/News/NewsCard/NewsCard';
 
 export const Home = () => {
   // images
   const imagesURL = import.meta.env.VITE_IMAGES_URL;
+  // user, token
+  const { token, setToken } = useToken();
+  const [userId, setUserId] = useState(getUserIdFromToken(token));
+  
   // fetch Data
   const { carsForYou, carsMostProfitable, news, loading, error } = useLoadHome();
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  // console.log(carsForYou);
+  console.log(carsForYou);
   // console.log(carsMostProfitable);
   // console.log(news);
   
@@ -309,7 +310,7 @@ export const Home = () => {
               className="newsSwiper">
               {news.map((news, index) => (
                 <SwiperSlide key={`news-${index}`}>
-                  <NewsCard news={news} />
+                  <NewsCard news={news} userId={userId} />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -328,4 +329,12 @@ const formatNumber = (number) => {
   })
     .format(number)
     .replace(/,/g, ' ');
+};
+// getUserIdFromToken
+const getUserIdFromToken = (token) => {
+  if (!token) return null;
+  const tokenValue = token.value;
+  const arrayToken = tokenValue.split('.');
+  const tokenPayload = JSON.parse(atob(arrayToken[1]));
+  return tokenPayload.sub;
 };
