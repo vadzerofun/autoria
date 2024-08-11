@@ -1249,6 +1249,18 @@
           }
         }
       },
+      "Stripe.net/45.7.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "System.Configuration.ConfigurationManager": "8.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Stripe.net.dll": {
+            "assemblyVersion": "45.7.0.0",
+            "fileVersion": "45.7.0.0"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore/6.6.2": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
@@ -1893,6 +1905,7 @@
           "Microsoft.Extensions.Options": "8.0.2",
           "MySql.Data": "9.0.0",
           "SendGrid": "9.29.3",
+          "Stripe.net": "45.7.0",
           "System.IdentityModel.Tokens.Jwt": "8.0.0"
         },
         "runtime": {
@@ -2604,6 +2617,13 @@
       "sha512": "sha512-OblOaKb1enXn+dSp7tsx9yjwV+/BEKM9jFhshIkZTwCk7LuTFTp+wSon6rFzuPiIiTGtvVWQNUw2slHjGktJog==",
       "path": "starkbank-ecdsa/1.3.3",
       "hashPath": "starkbank-ecdsa.1.3.3.nupkg.sha512"
+    },
+    "Stripe.net/45.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Y7CM6hnEWoS/CskZYYAa7sCeWNUsfcTJixTgBd5x3Nkuq/aqimge9oZukdRQLSnRQHiC8hZRE1rUJ2Zi0+40Pw==",
+      "path": "stripe.net/45.7.0",
+      "hashPath": "stripe.net.45.7.0.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/6.6.2": {
       "type": "package",

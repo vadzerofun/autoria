@@ -75,7 +75,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Owners_number")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("PriceUSD")
+                    b.Property<double>("Price")
                         .HasColumnType("REAL");
 
                     b.Property<string>("Region")
@@ -102,6 +102,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Year")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Сurrency")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

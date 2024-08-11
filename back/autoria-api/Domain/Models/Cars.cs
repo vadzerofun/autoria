@@ -11,14 +11,15 @@ namespace Core.Models
     public class Cars
     {
         public Guid Id { get; set; } // Id
-        public double PriceUSD { get; set; } // ціна в доларах
+        public double Price { get; set; } // ціна
+        public Сurrency Сurrency { get; set; } //валюта
         public double Mileage { get; set; } // Пробіг авто
         public string Make { get; set; } // Марка
         public string Model { get; set; } // Модель
         public CarType Type { get; set; } // Тип машини Легкові, Вантажні ...
         public int Year { get; set; } // Рік випуску
         public double Engine_capacity { get; set; } // Об'єм двигуна
-        public Engine_type Engine_type { get; set; } // Тип двигуна (бензин, дизель)
+        public Engine_type Engine_type { get; set; } // Тип двигуна (бензин, дизель, ...)
         public string Color { get; set; } // Колір авто
         public int Owners_number { get; set; } // Кількість власників
         public bool Wanted { get; set; } // Стан в розшуку

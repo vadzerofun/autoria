@@ -401,3 +401,4 @@ D:\projects\autoria\back\autoria-api\autoria-api\obj\Debug\net8.0\refint\autoria
 D:\projects\autoria\back\autoria-api\autoria-api\obj\Debug\net8.0\autoria-api.pdb
 D:\projects\autoria\back\autoria-api\autoria-api\obj\Debug\net8.0\autoria-api.genruntimeconfig.cache
 D:\projects\autoria\back\autoria-api\autoria-api\obj\Debug\net8.0\ref\autoria-api.dll
+D:\projects\autoria\back\autoria-api\autoria-api\bin\Debug\net8.0\Stripe.net.dll
