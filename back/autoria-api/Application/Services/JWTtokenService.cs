@@ -9,22 +9,25 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
-using static Mysqlx.Expect.Open.Types.Condition.Types;
 using System.Security.Cryptography;
 using System.Text.Unicode;
+using Core.Interfaces;
+using Application.Interfaces;
 
 namespace Application.Services
 {
-    public class JWTtokenService
+    public class JWTtokenService: IJWTTokenService
     {
         private readonly IOptions<AuthOption> _authOption;
+        private readonly IRefreshTokenRepository _refreshTokenRepository;
 
-        public JWTtokenService(IOptions<AuthOption> authOption)
+        public JWTtokenService(IOptions<AuthOption> authOption, IRefreshTokenRepository refreshTokenRepository)
         {
             _authOption = authOption;
+            _refreshTokenRepository = refreshTokenRepository;
         }
 
-        public string GenerateJWT(User user)
+        public async Task<string> GenerateJWT(User user)
         {
             var authParams = _authOption.Value;
 
@@ -48,7 +51,7 @@ namespace Application.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public ClaimsPrincipal ValidateToken(string token)
+        public async Task<ClaimsPrincipal> ValidateToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = _authOption.Value.GetSymmetricSecurityKey();
@@ -73,6 +76,29 @@ namespace Application.Services
             {
                 return null;
             }
+        }
+        public async Task<string> GenerateRefreshToken(User user)
+        {
+            var refreshToken = new RefreshToken
+            {
+                Token = Guid.NewGuid().ToString(),
+                ExpiryDate = DateTime.UtcNow.AddMonths(5),
+                UserId = user.Id
+            };
+
+            _refreshTokenRepository.AddRefreshToken(refreshToken);
+            return refreshToken.Token;
+        }
+
+        public async Task<bool> ValidateRefreshToken(string token)
+        {
+            var refreshToken = await _refreshTokenRepository.GetRefreshToken(token);
+            return refreshToken != null && refreshToken.ExpiryDate > DateTime.UtcNow;
+        }
+
+        public async Task RevokeRefreshToken(string token)
+        {
+            _refreshTokenRepository.DeleteRefreshToken(token);
         }
     }
 }

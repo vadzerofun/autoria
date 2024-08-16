@@ -22,5 +22,6 @@ namespace Core.Models
         public UserRole userRole { get; set; }
         public string? ImageLink { get; set; }
         public List<Guid> LikesNews { get; set; } = new List<Guid>();
+        public long Balance { get; set; } = 0;
     }
 }

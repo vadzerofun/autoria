@@ -9,11 +9,11 @@ namespace Core.Models
 {
     public class Subscribe
     {
-        Guid Id { get; set; }
-        List<Guid> CarsId { get; set; } = new List<Guid>();
-        Guid UserId { get; set; }
-        DateTime ByDate { get; set; }
-        DateTime EndDate { get; set; }
-        Subscribe_Level Subscribe_Level { get; set; }
+        public Guid Id { get; set; }
+        public List<Guid> CarsId { get; set; } = new List<Guid>();
+        public Guid UserId { get; set; }
+        public DateTime ByDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public Subscribe_Level Subscribe_Level { get; set; }
     }
 }

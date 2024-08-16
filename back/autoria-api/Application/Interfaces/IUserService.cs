@@ -18,10 +18,14 @@ namespace Application.Interfaces
         Task<Result> AddUser(User user);
         Task<Result> DeleteUserById(Guid id);
         Task<Result> EditUser(Guid id, User user);
-        Task<Result<string>> Login(Login login);
+        Task<Result<RefreshTokenResponse>> Login(Login login);
         Task<Result<Response>> SendConfirmEmail(string Email, string SuccessLink, string BadLink);
         Task<Result> ConfirmEmail(string hashToken);
         Task<Result<Response>> ForgotPassword(string Email, string Link);
         Task<Result> ChengeForgotPassword(string NewPassword, string Token);
+        Task<Result<RefreshTokenResponse>> RefreshToken(RefreshTokenRequest request);
+        Task<Result> Logout(string RefreshToken);
+
+
     }
 }

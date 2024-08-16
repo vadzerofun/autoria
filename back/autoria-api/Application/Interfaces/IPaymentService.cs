@@ -9,6 +9,6 @@ namespace Application.Interfaces
 {
     public interface IPaymentService
     {
-        Task<PaymentResponse> CreateChargeAsync(PaymentReauest request);
+        Task<PaymentResponse> CreateChargeAsync(PaymentRequest request);
     }
 }

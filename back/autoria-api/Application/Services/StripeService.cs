@@ -12,15 +12,15 @@ namespace Application.Services
 {
     public class StripeService : IPaymentService
     {
-        private readonly string _secretKey;
+        private readonly IOptions<string> _secretKey;
 
-        public StripeService(string secretKey)
+        public StripeService(IOptions<string> secretKey)
         {
             _secretKey = secretKey;
-            StripeConfiguration.ApiKey = _secretKey;
+            StripeConfiguration.ApiKey = _secretKey.Value;
         }
 
-        public async Task<PaymentResponse> CreateChargeAsync(PaymentReauest request)
+        public async Task<PaymentResponse> CreateChargeAsync(PaymentRequest request)
         {
             var options = new ChargeCreateOptions
             {

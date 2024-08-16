@@ -25,14 +25,12 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<Infrastructure.Data.AppDbContext>(options =>
                 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(optins =>
+builder.Services.AddSwaggerGen(options =>
 {
-	optins.OperationFilter<SecurityRequirementsOperationFilter>();
+	options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 
 builder.Services.Configure<AuthOption>(builder.Configuration.GetSection("AuthOption"));
-
-builder.Services.AddSingleton<JWTtokenService>();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -106,6 +104,9 @@ builder.Services.AddScoped<IEncryptionService, AesEncryptionService>();
 builder.Services.AddScoped<INewsService, NewsService>();
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
 builder.Services.AddScoped<IImageUploader, ImageUploader>();
+builder.Services.AddScoped<IPaymentService, StripeService>();
+builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+builder.Services.AddScoped<IJWTTokenService, JWTtokenService>();
 
 var authOptionsConfiguration = builder.Configuration.GetSection("Auth");
 builder.Services.Configure<AuthOption>(authOptionsConfiguration);
@@ -113,6 +114,8 @@ var SendGridOptionsConfiguration = builder.Configuration.GetSection("SendGridOpt
 builder.Services.Configure<SendGridOption>(SendGridOptionsConfiguration);
 var AesEncryptionOptionsConfiguration = builder.Configuration.GetSection("AesEncryptionOptions");
 builder.Services.Configure<AesEncryptionOption>(AesEncryptionOptionsConfiguration);
+var PaymentOptions = builder.Configuration.GetSection("PaymentConfiguration");
+builder.Services.Configure<PayOptions>(PaymentOptions);
 
 var app = builder.Build();
 

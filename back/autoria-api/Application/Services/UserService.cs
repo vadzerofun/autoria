@@ -18,6 +18,7 @@ using SendGrid;
 using Application.Services;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
 
 namespace Application.Services
 {
@@ -25,14 +26,14 @@ namespace Application.Services
     {
         private readonly IuserRepository _userRepository;
         private readonly IOptions<AuthOption> _authOption;
-        private readonly JWTtokenService _jwtTokenService;
+        private readonly IJWTTokenService _jwtTokenService;
         private readonly IEmailService _emailService;
         private readonly IEncryptionService _encryptionService;
-        public UserService(IuserRepository userRepository, IOptions<AuthOption> authOption, IEmailService emailService, IEncryptionService encryptionService)
+        public UserService(IuserRepository userRepository, IOptions<AuthOption> authOption, IEmailService emailService, IEncryptionService encryptionService, IJWTTokenService jWTTokenService)
         {
             _userRepository = userRepository;
             _authOption = authOption;
-            _jwtTokenService = new JWTtokenService(authOption);
+            _jwtTokenService = jWTTokenService;
             _emailService = emailService;
             _encryptionService = encryptionService;
         }
@@ -58,7 +59,7 @@ namespace Application.Services
             if (user == null)
                 return Result<Response>.Failure("no such email");
 
-            string Token = _jwtTokenService.GenerateJWT(user);
+            string Token = await _jwtTokenService.GenerateJWT(user);
             string HashToken = _encryptionService.Encrypt(Token);
             string contitueEmail = $"https://localhost:7224/api/User/ConfirmEmail?Token={Uri.EscapeDataString(HashToken)}&SuccessLink={Uri.EscapeDataString(SuccessLink)}&BadLink={Uri.EscapeDataString(BadLink)}";
             var plainTextContent = "Press this button to confirm your email";
@@ -142,28 +143,49 @@ namespace Application.Services
             }
         }
 
-        public async Task<Result<string>> Login(Login login)
+        public async Task<Result<RefreshTokenResponse>> Login(Login login)
         {
+            //var user = _userRepository.GetUsers().Result.FirstOrDefault(user => user.Email == login.Email && user.Password == login.Password);
+
+            //if (user == null)
+            //    return Result<string>.Failure("No such User");
+
+            //if (!user.IsEmailConfirmed)
+            //    return Result<string>.Failure("Email is not confirmed!");
+
+
+            //await _userRepository.Visit(user.Id);
+
+            //var token = _jwtTokenService.GenerateJWT(user);
+
+            //return Result<string>.Success(token);
             var user = _userRepository.GetUsers().Result.FirstOrDefault(user => user.Email == login.Email && user.Password == login.Password);
-            
+
             if (user == null)
-                return Result<string>.Failure("No such User");
+                return Result<RefreshTokenResponse>.Failure("No such User");
 
             if (!user.IsEmailConfirmed)
-                return Result<string>.Failure("Email is not confirmed!");
-
+                return Result<RefreshTokenResponse>.Failure("Email is not confirmed!");
 
             await _userRepository.Visit(user.Id);
 
-            var token = _jwtTokenService.GenerateJWT(user);
+            var token = await _jwtTokenService.GenerateJWT(user);
+            var refreshToken = await _jwtTokenService.GenerateRefreshToken(user);
 
-            return Result<string>.Success(token);
+            // Можна повернути обидва токени в одному об'єкті
+            var response = new RefreshTokenResponse
+            {
+                Token = token,
+                RefreshToken = refreshToken
+            };
+
+            return Result<RefreshTokenResponse>.Success(response);
         }
 
         public async Task<Result> ConfirmEmail(string hashToken)
         {
             string Token = _encryptionService.Decrypt(hashToken);
-            var principal = _jwtTokenService.ValidateToken(Token);
+            var principal = await _jwtTokenService.ValidateToken(Token);
             if (principal == null)
                 return Result.Failure("Old Link");
             var email = principal.FindFirst(ClaimTypes.Email)?.Value;
@@ -191,7 +213,7 @@ namespace Application.Services
             if (user == null)
                 return Result<Response>.Failure("no such user");
 
-            string Token = _jwtTokenService.GenerateJWT(user);
+            string Token = await _jwtTokenService.GenerateJWT(user);
             string HashToken = _encryptionService.Encrypt(Token);
             string contitueEmail = $"{Link}/{Uri.EscapeDataString(HashToken)}";
             var plainTextContent = "Press this button to chenge password";
@@ -212,13 +234,48 @@ namespace Application.Services
         public async Task<Result> ChengeForgotPassword(string NewPassword, string Token)
         {
             var UnhashToken = _encryptionService.Decrypt(Token);
-            var peripteral = _jwtTokenService.ValidateToken(UnhashToken);
+            var peripteral = await _jwtTokenService.ValidateToken(UnhashToken);
             if (peripteral == null)
                 return Result.Failure("Bad Token");
             var userId = peripteral.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userId == null) return Result.Failure("Bad Token");
             await _userRepository.ChengePassword(NewPassword, Guid.Parse(userId));
             return Result.Success();
+        }
+
+        public async Task<Result<RefreshTokenResponse>> RefreshToken(RefreshTokenRequest request)
+        {
+            if (await _jwtTokenService.ValidateRefreshToken(request.RefreshToken))
+            {
+                var user = await _userRepository.GetUserByRefreshToken(request.RefreshToken);
+                if (user != null)
+                {
+                    // Видаляємо старий refresh токен, якщо це потрібно
+                    await _jwtTokenService.RevokeRefreshToken(request.RefreshToken);
+
+                    var newToken = await _jwtTokenService.GenerateJWT(user);
+                    var newRefreshToken = await _jwtTokenService.GenerateRefreshToken(user);
+
+                    var response = new RefreshTokenResponse
+                    {
+                        Token = newToken,
+                        RefreshToken = newRefreshToken
+                    };
+
+                    return  Result<RefreshTokenResponse>.Success(response);
+                }
+                return Result<RefreshTokenResponse>.Failure("Invalid refresh token");
+            }
+            return Result<RefreshTokenResponse>.Failure("Invalid or expired refresh token");
+        }
+        public async Task<Result> Logout(string RefreshToken)
+        {
+            if (await _jwtTokenService.ValidateRefreshToken(RefreshToken))
+            {
+                _jwtTokenService.RevokeRefreshToken(RefreshToken);
+                return Result.Success();
+            }
+            return Result.Failure("Invalid refresh token");
         }
     }
 }

@@ -86,6 +86,9 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("State")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Transmission_type")
                         .HasColumnType("INTEGER");
 
@@ -141,11 +144,62 @@ namespace Infrastructure.Migrations
                     b.ToTable("News");
                 });
 
+            modelBuilder.Entity("Core.Models.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("refreshTokens");
+                });
+
+            modelBuilder.Entity("Core.Models.Subscribe", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ByDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CarsId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Subscribe_Level")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subscribe");
+                });
+
             modelBuilder.Entity("Core.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
+
+                    b.Property<long>("Balance")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("CarsId")
                         .HasColumnType("TEXT");
