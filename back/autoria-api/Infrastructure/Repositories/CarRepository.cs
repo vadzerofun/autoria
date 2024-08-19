@@ -129,7 +129,7 @@ namespace Infrastructure.Repositories
         {
             var car = await GetCarById(CarId);
             car.VisitedCount += 1;
-            EditCar(CarId, car);
+            await EditCar(CarId, car);
             return;
         }
 

@@ -6,7 +6,8 @@ namespace autoria_api.ViewModel
     public class CarInputViewModel
     {
         //public Guid Id { get; set; } // Id
-        public double PriceUSD { get; set; } // ціна в доларах
+        public double Price { get; set; } // ціна в доларах
+        public Сurrency Сurrency { get; set; } //валюта
         public double Mileage { get; set; } // Пробіг авто
         public string Make { get; set; } // Марка
         public string Model { get; set; } // Модель
@@ -36,7 +37,8 @@ namespace autoria_api.ViewModel
             Cars cars = new Cars
             {
                 Id = Id,
-                Price = CarVM.PriceUSD,
+                Price = CarVM.Price,
+                Сurrency = CarVM.Сurrency,
                 Mileage = CarVM.Mileage,
                 Make = CarVM.Make,
                 Model = CarVM.Model,
