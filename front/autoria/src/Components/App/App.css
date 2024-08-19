@@ -41,6 +41,7 @@
   --bs-footertext: #242D3D;
   --bs-text-gray: #888888;
   --bs-text-darkgray: #5C5C5C;
+  --bs-input-addcar-bg: #EBECEF;
   --bs-primary-rgb: 253, 144, 82;
   --bs-secondary-rgb: 245, 245, 245;
   --bs-light-rgb: 255, 255, 255;
@@ -49,6 +50,7 @@
   --bs-footertext-rgb: 36, 45, 61;
   --bs-text-gray-rgb: 136, 136, 136;
   --bs-text-darkgray-rgb: 92, 92, 92;
+  --bs-input-addcar-bg-rgb: 235, 236, 239;
   --bs-primary-text-emphasis: #052c65;
   --bs-secondary-text-emphasis: #2b2f32;
   --bs-success-text-emphasis: #0a3622;
@@ -3523,6 +3525,23 @@ textarea.form-control-lg {
   --bs-btn-disabled-border-color: #5C5C5C;
 }
 
+.btn-input-addcar-bg {
+  --bs-btn-color: #000;
+  --bs-btn-bg: #EBECEF;
+  --bs-btn-border-color: #EBECEF;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #eeeff1;
+  --bs-btn-hover-border-color: #edeef1;
+  --bs-btn-focus-shadow-rgb: 200, 201, 203;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #eff0f2;
+  --bs-btn-active-border-color: #edeef1;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #000;
+  --bs-btn-disabled-bg: #EBECEF;
+  --bs-btn-disabled-border-color: #EBECEF;
+}
+
 .btn-outline-primary {
   --bs-btn-color: #FD9052;
   --bs-btn-border-color: #FD9052;
@@ -3656,6 +3675,23 @@ textarea.form-control-lg {
   --bs-btn-disabled-color: #5C5C5C;
   --bs-btn-disabled-bg: transparent;
   --bs-btn-disabled-border-color: #5C5C5C;
+  --bs-gradient: none;
+}
+
+.btn-outline-input-addcar-bg {
+  --bs-btn-color: #EBECEF;
+  --bs-btn-border-color: #EBECEF;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #EBECEF;
+  --bs-btn-hover-border-color: #EBECEF;
+  --bs-btn-focus-shadow-rgb: 235, 236, 239;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #EBECEF;
+  --bs-btn-active-border-color: #EBECEF;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #EBECEF;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #EBECEF;
   --bs-gradient: none;
 }
 
@@ -5478,6 +5514,13 @@ textarea.form-control-lg {
   --bs-alert-link-color: var(--bs-text-darkgray-text-emphasis);
 }
 
+.alert-input-addcar-bg {
+  --bs-alert-color: var(--bs-input-addcar-bg-text-emphasis);
+  --bs-alert-bg: var(--bs-input-addcar-bg-bg-subtle);
+  --bs-alert-border-color: var(--bs-input-addcar-bg-border-subtle);
+  --bs-alert-link-color: var(--bs-input-addcar-bg-text-emphasis);
+}
+
 @-webkit-keyframes progress-bar-stripes {
   0% {
     background-position-x: 1rem;
@@ -5923,6 +5966,19 @@ textarea.form-control-lg {
   --bs-list-group-active-color: var(--bs-text-darkgray-bg-subtle);
   --bs-list-group-active-bg: var(--bs-text-darkgray-text-emphasis);
   --bs-list-group-active-border-color: var(--bs-text-darkgray-text-emphasis);
+}
+
+.list-group-item-input-addcar-bg {
+  --bs-list-group-color: var(--bs-input-addcar-bg-text-emphasis);
+  --bs-list-group-bg: var(--bs-input-addcar-bg-bg-subtle);
+  --bs-list-group-border-color: var(--bs-input-addcar-bg-border-subtle);
+  --bs-list-group-action-hover-color: var(--bs-emphasis-color);
+  --bs-list-group-action-hover-bg: var(--bs-input-addcar-bg-border-subtle);
+  --bs-list-group-action-active-color: var(--bs-emphasis-color);
+  --bs-list-group-action-active-bg: var(--bs-input-addcar-bg-border-subtle);
+  --bs-list-group-active-color: var(--bs-input-addcar-bg-bg-subtle);
+  --bs-list-group-active-bg: var(--bs-input-addcar-bg-text-emphasis);
+  --bs-list-group-active-border-color: var(--bs-input-addcar-bg-text-emphasis);
 }
 
 .btn-close {
@@ -7658,6 +7714,11 @@ textarea.form-control-lg {
   background-color: RGBA(var(--bs-text-darkgray-rgb), var(--bs-bg-opacity, 1)) !important;
 }
 
+.text-bg-input-addcar-bg {
+  color: #000 !important;
+  background-color: RGBA(var(--bs-input-addcar-bg-rgb), var(--bs-bg-opacity, 1)) !important;
+}
+
 .link-primary {
   color: RGBA(var(--bs-primary-rgb), var(--bs-link-opacity, 1)) !important;
   text-decoration-color: RGBA(var(--bs-primary-rgb), var(--bs-link-underline-opacity, 1)) !important;
@@ -7728,6 +7789,15 @@ textarea.form-control-lg {
 .link-text-darkgray:hover, .link-text-darkgray:focus {
   color: RGBA(74, 74, 74, var(--bs-link-opacity, 1)) !important;
   text-decoration-color: RGBA(74, 74, 74, var(--bs-link-underline-opacity, 1)) !important;
+}
+
+.link-input-addcar-bg {
+  color: RGBA(var(--bs-input-addcar-bg-rgb), var(--bs-link-opacity, 1)) !important;
+  text-decoration-color: RGBA(var(--bs-input-addcar-bg-rgb), var(--bs-link-underline-opacity, 1)) !important;
+}
+.link-input-addcar-bg:hover, .link-input-addcar-bg:focus {
+  color: RGBA(239, 240, 242, var(--bs-link-opacity, 1)) !important;
+  text-decoration-color: RGBA(239, 240, 242, var(--bs-link-underline-opacity, 1)) !important;
 }
 
 .link-body-emphasis {
@@ -8201,6 +8271,10 @@ textarea.form-control-lg {
   --bs-focus-ring-color: rgba(var(--bs-text-darkgray-rgb), var(--bs-focus-ring-opacity));
 }
 
+.focus-ring-input-addcar-bg {
+  --bs-focus-ring-color: rgba(var(--bs-input-addcar-bg-rgb), var(--bs-focus-ring-opacity));
+}
+
 .position-static {
   position: static !important;
 }
@@ -8362,6 +8436,11 @@ textarea.form-control-lg {
 .border-text-darkgray {
   --bs-border-opacity: 1;
   border-color: rgba(var(--bs-text-darkgray-rgb), var(--bs-border-opacity)) !important;
+}
+
+.border-input-addcar-bg {
+  --bs-border-opacity: 1;
+  border-color: rgba(var(--bs-input-addcar-bg-rgb), var(--bs-border-opacity)) !important;
 }
 
 .border-black {
@@ -9399,6 +9478,11 @@ textarea.form-control-lg {
   color: rgba(var(--bs-text-darkgray-rgb), var(--bs-text-opacity)) !important;
 }
 
+.text-input-addcar-bg {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-input-addcar-bg-rgb), var(--bs-text-opacity)) !important;
+}
+
 .text-black {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-black-rgb), var(--bs-text-opacity)) !important;
@@ -9601,6 +9685,11 @@ textarea.form-control-lg {
   text-decoration-color: rgba(var(--bs-text-darkgray-rgb), var(--bs-link-underline-opacity)) !important;
 }
 
+.link-underline-input-addcar-bg {
+  --bs-link-underline-opacity: 1;
+  text-decoration-color: rgba(var(--bs-input-addcar-bg-rgb), var(--bs-link-underline-opacity)) !important;
+}
+
 .link-underline {
   --bs-link-underline-opacity: 1;
   text-decoration-color: rgba(var(--bs-link-color-rgb), var(--bs-link-underline-opacity, 1)) !important;
@@ -9692,6 +9781,11 @@ textarea.form-control-lg {
 .bg-text-darkgray {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-text-darkgray-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-input-addcar-bg {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-input-addcar-bg-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-black {

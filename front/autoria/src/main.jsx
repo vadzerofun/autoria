@@ -15,6 +15,7 @@ import { Cabinet } from './Pages/Cabinet/Cabinet.jsx';
 import { AddCar } from './Pages/AddCar/AddCar.jsx';
 import { EditCabinet } from './Pages/Cabinet/EditCabinet/EditCabinet.jsx';
 import { CabinetLayout } from './Components/Layouts/CabinetLayout/CabinetLayout.jsx';
+import { AddCarDataProvider } from './Contexts/addCar.context.jsx';
 
 const router = createBrowserRouter([
   {
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: '/forgot-password',    
+    path: '/forgot-password',
     element: (
       <div>
         <ForgotPassword />
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: '/forgot-password/:token',    
+    path: '/forgot-password/:token',
     element: (
       <div>
         <ForgotPassword />
@@ -84,7 +85,7 @@ const router = createBrowserRouter([
       <div>
         <Cabinet />
       </div>
-    ),    
+    )
   },
   {
     path: '/cabinet/edit',
@@ -92,13 +93,15 @@ const router = createBrowserRouter([
       <div>
         <EditCabinet />
       </div>
-    ),    
+    )
   },
   {
     path: '/add-car',
     element: (
       <div>
-        <AddCar />
+        <AddCarDataProvider>
+          <AddCar />
+        </AddCarDataProvider>
       </div>
     )
   }
