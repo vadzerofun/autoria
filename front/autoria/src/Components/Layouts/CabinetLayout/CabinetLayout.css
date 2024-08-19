@@ -1,3 +1,47 @@
 .cabinetWrapper {
-  padding-top: 3rem;
+  padding-top: 3.75rem;
+}
+
+.cabinetContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 3.75rem;
+}
+@media screen and (max-width: 1024px) {
+  .cabinetContainer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.cabinetSidebarContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2.5rem;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 390px;
+          flex: 0 0 390px;
+}
+@media screen and (max-width: 1024px) {
+  .cabinetSidebarContainer {
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 390px;
+    -ms-flex-item-align: center;
+        align-self: center;
+  }
+}
+
+.cabinetMainContainer {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }/*# sourceMappingURL=CabinetLayout.css.map */

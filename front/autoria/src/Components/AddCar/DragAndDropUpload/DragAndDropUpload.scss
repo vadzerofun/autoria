@@ -1,0 +1,63 @@
+.imageDropzone {
+  padding: 5rem 2.5rem;
+  gap: 2.5rem;
+  background-color: var(--bs-input-addcar-bg);
+  border-radius: 0.75rem;
+  cursor: pointer;
+}
+
+.imageDropzone button {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.38;
+  background-color: #0071CE;
+  border: none;
+  padding: 0.625rem 2.125rem;
+  border-radius: 0.75rem;
+}
+
+.imageDropzone button:hover, 
+.imageDropzone button:focus-visible,
+.imageDropzone .btn:active {
+  background-color: #408dcd !important;
+}
+
+.imageDropzone .btn:focus-visible {
+  box-shadow: 0 0 0 0.25rem rgba(#408dcd, .5);
+}
+
+.imageDropzoneText {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--bs-text-darkgray);
+  text-align: center;
+}
+
+// car gallery
+.addCarGallery {
+  --gallery-width: 600px;
+  width: var(--gallery-width);
+  height: 20%;
+  @media screen and (max-width: 1400px) {
+    width: calc(var(--gallery-width) - (1400px - 100vw));
+  }
+  @media screen and (max-width: 1024px) {
+    width: calc(var(--gallery-width) + 2rem + 100px - (1400px - 100vw));
+  }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.addCarGallery .swiper-slide {
+  width: 100px;
+  height: 100px;  
+}
+
+.addCarGallery .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}

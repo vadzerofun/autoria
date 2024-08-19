@@ -30,7 +30,7 @@ export const NewsCard = ({ news, userId }) => {
     e.stopPropagation();
 
     if (!token) {
-      navigate('/login');
+      navigate('/login-register');
       return;
     }
 
@@ -50,12 +50,12 @@ export const NewsCard = ({ news, userId }) => {
       })
       .catch((err) => {
         console.log(err);        
-        navigate('/login');
+        navigate('/login-register');
       });
   };
 
   return (
-    <Link to="/login" className="noFontStyle">
+    <Link to="/login-register" className="noFontStyle">
       <div className="newsCard">
         <img
           className="newsImage"
