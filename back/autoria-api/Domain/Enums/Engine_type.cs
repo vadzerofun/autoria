@@ -9,6 +9,10 @@ namespace Core.Enums
     public enum Engine_type
     {
         Benzin,
-        Diesel
+        Diesel,
+        Gas,
+        Hydrogen,
+        Hybrid,
+        Electro
     }
 }

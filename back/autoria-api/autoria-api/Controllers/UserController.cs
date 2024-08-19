@@ -186,6 +186,25 @@ namespace autoria_api.Controllers
                 return BadRequest(res.ErrorMessage);
             return Ok(res);
         }
-        
+
+        [HttpPost("refresh-token")]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequest request)
+        {
+            var res = await _userService.RefreshToken(request);
+            if (!res.IsSuccess)
+                return BadRequest(res.ErrorMessage);
+            return Ok(res);
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout([FromBody] string RefreshToken)
+        {
+            var res = await _userService.Logout(RefreshToken);
+            if (!res.IsSuccess)
+                return BadRequest(res.ErrorMessage);
+            return Ok(res);
+        }
+
+
     }
 }

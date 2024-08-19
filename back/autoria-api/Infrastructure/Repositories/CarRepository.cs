@@ -103,7 +103,7 @@ namespace Infrastructure.Repositories
         public async Task<List<Cars>> GetCarsByFilter(CarType type, string Mark, string Model, string Region, int MinYear, int MaxYear, int MinPrice, int MaxPrice)
         {
             List<Cars> cars = new List<Cars>();
-            cars = await _context.Cars.Where(car => car.Type == type && car.Make == Mark && car.Model == Model && (car.Year < MaxYear && car.Year > MinYear) && (car.PriceUSD < MaxPrice && car.PriceUSD > MinPrice) && car.Region == Region).ToListAsync();
+            cars = await _context.Cars.Where(car => car.Type == type && car.Make == Mark && car.Model == Model && (car.Year < MaxYear && car.Year > MinYear) && (car.Price < MaxPrice && car.Price > MinPrice) && car.Region == Region).ToListAsync();
             return cars;
         }
 
@@ -119,7 +119,7 @@ namespace Infrastructure.Repositories
         {
             List<Cars> cars = new List<Cars>();
             cars = await _context.Cars.OrderByDescending(car => car.Year)
-                                    .ThenBy(car => car.PriceUSD) 
+                                    .ThenBy(car => car.Price) 
                                     .Take(10)
                                     .ToListAsync();
             return cars;

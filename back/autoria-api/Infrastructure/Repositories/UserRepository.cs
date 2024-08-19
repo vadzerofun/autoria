@@ -187,6 +187,17 @@ namespace Infrastructure.Repositories
             await EditUser(UserId, user);
             return;
         }
+        public async Task<User> GetUserByRefreshToken(string refreshToken)
+        {
+            // Знайти refresh token у базі даних
+            var token = await _context.refreshTokens.SingleOrDefaultAsync(t => t.Token == refreshToken);
+
+            if (token == null || token.ExpiryDate <= DateTime.UtcNow)
+                return null;
+
+            // Знайти користувача за допомогою UserId з refresh token
+            return await _context.Users.SingleOrDefaultAsync(u => u.Id == token.UserId);
+        }
     }
 }
 

@@ -36,7 +36,7 @@ namespace autoria_api.ViewModel
             Cars cars = new Cars
             {
                 Id = Id,
-                PriceUSD = CarVM.PriceUSD,
+                Price = CarVM.PriceUSD,
                 Mileage = CarVM.Mileage,
                 Make = CarVM.Make,
                 Model = CarVM.Model,

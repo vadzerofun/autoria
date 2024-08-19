@@ -10,7 +10,8 @@ namespace Infrastructure.Data
         public DbSet<Cars> Cars { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<News> News { get; set; }
-
+        public DbSet<RefreshToken> refreshTokens { get; set; }
+        public DbSet<Subscribe> Subscribe { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
 
         protected override void OnModelCreating(ModelBuilder builder)

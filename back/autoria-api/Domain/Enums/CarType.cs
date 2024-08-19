@@ -13,6 +13,6 @@ namespace Core.Enums
         Minivans, //Мікроавтобуси
         SUVs, //Позашляховики 
         Trucks, //Вантажівки 
-        Vans //Фургони 
+        Vans //Фургони
     }
 }
