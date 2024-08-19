@@ -132,5 +132,13 @@ namespace Infrastructure.Repositories
             EditCar(CarId, car);
             return;
         }
+
+        public async Task<List<Cars>> GetCarsByUserId(Guid UserId)
+        {
+            var cars = await _context.Cars.Where(car => car.UserId == UserId)
+                .OrderBy(car => car.CreatedTime)
+                .ToListAsync();
+            return cars;
+        }
     }
 }

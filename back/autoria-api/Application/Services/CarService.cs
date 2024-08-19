@@ -100,7 +100,18 @@ namespace Application.Services
                 return Result.Failure(ex.Message);
             }
         }
-             
 
+        public async Task<Result<List<Cars>>> GetCarsByUserId(Guid UserId)
+        {
+            try
+            {
+                var cars = await _carRepository.GetCarsByUserId(UserId);
+                return Result<List<Cars>>.Success(cars);
+            }
+            catch (Exception ex)
+            {
+                return Result<List<Cars>>.Failure(ex.Message);
+            }
+        }
     }
 }
