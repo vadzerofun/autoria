@@ -32,8 +32,8 @@ export const Login = () => {
             )
             .then((response) => {
                 // Set token
-                const tokenValue = response.data;
-                setToken({token: tokenValue});
+                const tokenValue = response.data.value;                
+                setToken(tokenValue);
                 navigate("/");
             })
             .catch((error) => {

@@ -117,7 +117,7 @@ export const Car = () => {
                   <span className="carGalleryInfoPoint"></span>
                   <span>{car.year}</span>
                 </div>
-                <div className="carGalleryCarPrice fs-2">{formatNumber(car.priceUSD)} $</div>
+                <div className="carGalleryCarPrice fs-2">{formatNumber(car.price)} $</div>
               </div>
               <div className="carGallerySellerInfo">
                 <div className="carGallerySellerText">

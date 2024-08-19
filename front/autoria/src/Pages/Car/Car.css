@@ -82,9 +82,21 @@
 .swiperCarGallery .swiper-slide img {
   display: block;
   width: 100%;
+  height: 70vh;
+  max-height: 680px;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 0.75rem;
+}
+@media screen and (max-width: 1200px) {
+  .swiperCarGallery .swiper-slide img {
+    max-height: 480px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .swiperCarGallery .swiper-slide img {
+    height: 50vh;
+  }
 }
 
 .swiperCarGallery .swiper-button-next,
@@ -154,13 +166,15 @@
 .swiperCarGallerySmall .swiper-slide img {
   display: block;
   width: 100%;
+  height: 15vh;
+  max-height: 100px;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 0.5rem;
 }
 @media screen and (max-width: 1024px) {
   .swiperCarGallerySmall .swiper-slide img {
-    height: 100%;
+    height: 20vh;
   }
 }
 
