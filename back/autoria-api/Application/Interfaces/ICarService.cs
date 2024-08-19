@@ -25,5 +25,6 @@ namespace Application.Interfaces
         Task<List<Cars>> GetCarsForYou();
         Task<List<Cars>> GetMostProfitable();
         Task<Result> ViewCar(Guid Carid);
+        Task<Result<List<Cars>>> GetCarsByUserId(Guid UserId);
     }
 }

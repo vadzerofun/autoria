@@ -147,5 +147,11 @@ namespace autoria_api.Controllers
             var res = await _carService.ViewCar(CarId);
             return res;
         }
+        [HttpGet("GetCarsByUserId")]
+        public async Task<Result<List<Cars>>> GetCarsByUserId(Guid UserId)
+        {
+            var res = await _carService.GetCarsByUserId(UserId);
+            return res;
+        }
     }
 }

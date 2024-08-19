@@ -129,8 +129,16 @@ namespace Infrastructure.Repositories
         {
             var car = await GetCarById(CarId);
             car.VisitedCount += 1;
-            EditCar(CarId, car);
+            await EditCar(CarId, car);
             return;
+        }
+
+        public async Task<List<Cars>> GetCarsByUserId(Guid UserId)
+        {
+            var cars = await _context.Cars.Where(car => car.UserId == UserId)
+                .OrderBy(car => car.CreatedTime)
+                .ToListAsync();
+            return cars;
         }
     }
 }

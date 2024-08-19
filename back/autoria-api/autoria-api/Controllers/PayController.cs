@@ -99,19 +99,39 @@ namespace autoria_api.Controllers
             return session.Id;
         }
 
-        [HttpGet("success")]
-        // Automatic query parameter handling from ASP.NET.
-        // Example URL: https://localhost:7051/checkout/success?sessionId=si_123123123123
-        public ActionResult CheckoutSuccess(string sessionId)
+        [HttpPost("Webhook")]
+        public async Task<IActionResult> WebHook()
         {
-            var sessionService = new SessionService();
-            var session = sessionService.Get(sessionId);
+            var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
+            try
+            {
+                var stripeEvent = EventUtility.ConstructEvent(json,
+                    Request.Headers["Stripe-Signature"], "whsec_1765b20b614d2be52f6d3d51e8a95906e2e74e608b9ad63618c4bdb92a7a5556");
 
-            // Here you can save order and customer details to your database.
-            var total = session.AmountTotal.Value;
-            var customerEmail = session.CustomerDetails.Email;
+                // Handle the event
+                Console.WriteLine("Unhandled event type: {0}", stripeEvent.Type);
 
-            return Redirect("https://google.com" + "success");
+                return Ok();
+            }
+            catch (StripeException e)
+            {
+                return BadRequest();
+            }
         }
+
+        //[HttpGet("success")]
+        //// Automatic query parameter handling from ASP.NET.
+        //// Example URL: https://localhost:7051/checkout/success?sessionId=si_123123123123
+        //public ActionResult CheckoutSuccess(string sessionId)
+        //{
+        //    var sessionService = new SessionService();
+        //    var session = sessionService.Get(sessionId);
+
+        //    // Here you can save order and customer details to your database.
+        //    var total = session.AmountTotal.Value;
+        //    var customerEmail = session.CustomerDetails.Email;
+
+        //    return Redirect("https://google.com" + "success");
+        //}
     }
 }
