@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Microsoft.AspNetCore.Http;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,25 @@ namespace Application.Services
             }
 
             return uniqueFileName;
+        }
+
+        public async Task DeleteImages(List<string> images)
+        {
+            var _imageFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Images");
+            foreach (var fileName in images)
+            {
+                var filePath = Path.Combine(_imageFolderPath, fileName);
+
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+                //else
+                //{
+                //    Model.Result.Failure($"Файл {fileName} не знайдено.");
+                //}
+            }
+            return;
         }
     }
 }

@@ -11,5 +11,6 @@ namespace Application.Interfaces
     {
         Task<List<string>> UploadImages(List<IFormFile> files);
         Task<string> UploadImage(IFormFile file);
+        Task DeleteImages(List<string> images);
     }
 }

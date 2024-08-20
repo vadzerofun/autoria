@@ -19,10 +19,12 @@ namespace Application.Services
     {
         private readonly ICarRepository _carRepository;
         private readonly IuserRepository _userRepository;
-        public CarService(ICarRepository carRepository, IuserRepository userRepository)
+        private readonly IImageUploader _imageUploader;
+        public CarService(ICarRepository carRepository, IuserRepository userRepository, IImageUploader imageUploader)
         {
             _carRepository = carRepository;
             _userRepository = userRepository;
+            _imageUploader = imageUploader;
         }
         public async Task AddCar(Cars car)
         {
@@ -40,6 +42,8 @@ namespace Application.Services
 
         public async Task DeleteCarById(Guid id)
         {
+            var car = await _carRepository.GetCarById(id);
+            await _imageUploader.DeleteImages(car.ImagesPath);
             await _carRepository.DeleteCarById(id);
         }
 
@@ -50,6 +54,7 @@ namespace Application.Services
 
         public async Task EditCar(Guid id, Cars car)
         {
+            car.ImagesPath = (await _carRepository.GetCarById(id)).ImagesPath;
             await _carRepository.EditCar(id, car);
         }
 
