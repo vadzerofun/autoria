@@ -8,17 +8,20 @@ import { LoginRegister } from '../../../Components/Auth/LoginRegister/LoginRegis
 import { Layout } from '../Layout/Layout';
 import useToken from '../../../Hooks/useToken';
 import useUser from '../../../Hooks/useUser';
+import { getUserIdFromToken } from '../../../Services/authService';
 
 export const CabinetLayout = ({ children }) => {
   // token
-  const { token, setToken } = useToken();
+  const { token, setToken } = useToken();  
+
+  // handle token
+  if (!token) {
+    return <LoginRegister />;
+  } 
+  
   // user
   const userId = getUserIdFromToken(token);
   const { user, loading, error } = useUser(userId);
-
-  if (!token) {
-    return <LoginRegister />;
-  }
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -37,13 +40,4 @@ export const CabinetLayout = ({ children }) => {
       </div>
     </Layout>
   );
-};
-
-// getUserIdFromToken
-const getUserIdFromToken = (token) => {
-  if (!token) return null;
-  const tokenValue = token.value;
-  const arrayToken = tokenValue.split('.');
-  const tokenPayload = JSON.parse(atob(arrayToken[1]));
-  return tokenPayload.sub;
 };

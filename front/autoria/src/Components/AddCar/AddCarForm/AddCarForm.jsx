@@ -108,13 +108,18 @@ export const AddCarForm = ({ carData, apiMethod, token }) => {
     axios
       .post(import.meta.env.VITE_REACT_API_URL + `Cars/${apiMethod}`, formDataToSend, {
         headers: {
-          Authorization: `Bearer ${token.value}`,
+          Authorization: `Bearer ${token.token}`,
           'Content-Type': 'multipart/form-data'
         }
       })
       .catch((err) => {
         console.log(err);
-        if (err.response?.status === 401) navigate('/login-register');
+        if (err.response?.status === 401) {
+          const newToken = refreshAuthToken(token);
+          handleSubmit();
+        } else {
+          navigate('/login-register');
+        }
       });
   };
 

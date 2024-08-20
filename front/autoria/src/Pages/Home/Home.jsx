@@ -24,6 +24,7 @@ import brandsArray from './brandsArray';
 import useLoadHome from '../../Hooks/useLoadHome';
 import useToken from '../../Hooks/useToken';
 import { NewsCard } from '../../Components/News/NewsCard/NewsCard';
+import { getUserIdFromToken } from '../../Services/authService';
 
 export const Home = () => {
   // images
@@ -180,7 +181,7 @@ export const Home = () => {
                   <div className="recsLeftCardMain">
                     <span className="recsLeftCardTitle fs-4">{`${carsForYou[0].make} ${carsForYou[0].model}`}</span>
                     <span className="recsLeftCardPrice fs-4">{`${formatNumber(
-                      carsForYou[0].priceUSD
+                      carsForYou[0].price
                     )} $`}</span>
                   </div>
                   <div className="recsLeftCardDetails">
@@ -209,7 +210,7 @@ export const Home = () => {
                     />
                     <div className="carCardMain">
                       <span className="carCardTitle fs-6">{`${car.make} ${car.model}`}</span>
-                      <span className="carCardPrice fs-6">{`${formatNumber(car.priceUSD)} $`}</span>
+                      <span className="carCardPrice fs-6">{`${formatNumber(car.price)} $`}</span>
                     </div>
                     <div className="carCardDetails">
                       <div>
@@ -253,7 +254,7 @@ export const Home = () => {
                       <div className="carCardMain">
                         <span className="carCardTitle fs-6">{`${car.make} ${car.model}`}</span>
                         <span className="carCardPrice fs-6">{`${formatNumber(
-                          car.priceUSD
+                          car.price
                         )} $`}</span>
                       </div>
                       <div className="carCardDetails">
@@ -330,11 +331,4 @@ const formatNumber = (number) => {
     .format(number)
     .replace(/,/g, ' ');
 };
-// getUserIdFromToken
-const getUserIdFromToken = (token) => {
-  if (!token) return null;
-  const tokenValue = token.value;
-  const arrayToken = tokenValue.split('.');
-  const tokenPayload = JSON.parse(atob(arrayToken[1]));
-  return tokenPayload.sub;
-};
+

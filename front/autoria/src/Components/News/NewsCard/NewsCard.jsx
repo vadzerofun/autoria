@@ -10,12 +10,14 @@ import ImagePlaceholder from '../../../assets/placeholder-image.png';
 import { HeartFilledIcon } from '../../Icons/HeartIcon/HeartFilledIcon';
 
 import useToken from '../../../Hooks/useToken';
+import { refreshAuthToken } from '../../../Services/authService';
 
 export const NewsCard = ({ news, userId }) => {
   // images
   const imagesURL = import.meta.env.VITE_IMAGES_URL;
   // useToken
-  const { token, setToken } = useToken();
+  const { token, setToken } = useToken();  
+  
   // useNavigate
   const navigate = useNavigate();
 
@@ -23,6 +25,7 @@ export const NewsCard = ({ news, userId }) => {
   const [liked, setLiked] = useState(news.likes.includes(userId));
   // likes
   const [likesCount, setLikesCount] = useState(news.likes.length);
+  
 
   // handleClick
   const handleClick = (e) => {
@@ -31,7 +34,6 @@ export const NewsCard = ({ news, userId }) => {
 
     if (!token) {
       navigate('/login-register');
-      return;
     }
 
     axios
@@ -40,7 +42,7 @@ export const NewsCard = ({ news, userId }) => {
         {},
         {
           headers: {
-            Authorization: `Bearer ${token.value}`
+            Authorization: `Bearer ${token.token}`
           }
         }
       )
@@ -49,8 +51,13 @@ export const NewsCard = ({ news, userId }) => {
         liked ? setLikesCount(likesCount - 1) : setLikesCount(likesCount + 1);
       })
       .catch((err) => {
-        console.log(err);        
-        navigate('/login-register');
+        console.log(err);
+        if (err.response.status === 401) {
+          const newToken = refreshAuthToken(token);
+          likeNews(newToken);
+        } else {
+          navigate('/login-register');
+        }
       });
   };
 
