@@ -107,9 +107,19 @@ namespace autoria_api.Controllers
         }
 
         [HttpPost("EditCar")]
-        public async Task<IActionResult> EditCar([FromForm] Guid id, [FromForm] Cars car, [FromForm] IFormFile[] ImageFiles)
+        public async Task<IActionResult> EditCar([FromForm] Guid id, [FromForm] CarInputViewModel carVM, [FromForm] IFormFile[] ImageFiles)
         {
-            car.ImagesPath = await _imageUploader.UploadImages(ImageFiles.ToList());
+            var oldCar = (await _carService.GetCarById(id));
+            List<string> ImagesPath;
+            if (ImageFiles.Length == 0)
+            {
+                ImagesPath = oldCar.ImagesPath;
+                await _imageUploader.DeleteImages(oldCar.ImagesPath);
+            }
+            else
+                ImagesPath = await _imageUploader.UploadImages(ImageFiles.ToList());
+
+            var car = CarInputViewModel.ToCars(carVM, id, ImagesPath, oldCar.UserId, oldCar.CreatedTime, oldCar.VisitedCount);
             await _carService.EditCar(id, car);
             return Ok();
         }
@@ -125,6 +135,7 @@ namespace autoria_api.Controllers
         [HttpDelete("DeleteImageFromCar")]
         public async Task<IActionResult> DeleteImageFromCar(Guid id, string ImageName)
         {
+            await _imageUploader.DeleteImages(new List<string>() { ImageName });
             await _carService.DeleteImageFromCar(id, ImageName);
             return Ok();
         }
