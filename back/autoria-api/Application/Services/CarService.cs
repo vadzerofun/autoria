@@ -43,6 +43,8 @@ namespace Application.Services
         public async Task DeleteCarById(Guid id)
         {
             var car = await _carRepository.GetCarById(id);
+            if (car == null)
+                return;
             await _imageUploader.DeleteImages(car.ImagesPath);
             await _carRepository.DeleteCarById(id);
         }
