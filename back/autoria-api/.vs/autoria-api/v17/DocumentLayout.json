@@ -396,7 +396,7 @@
               "RelativeDocumentMoniker": "Application\\Services\\CarService.cs",
               "ToolTip": "D:\\projects\\autoria\\back\\autoria-api\\Application\\Services\\CarService.cs",
               "RelativeToolTip": "Application\\Services\\CarService.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAA1wC4AAAAXAAAA",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAIwD0AAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-17T13:44:08.291Z",
               "EditorCaption": ""
@@ -435,8 +435,7 @@
               "RelativeToolTip": "autoria-api\\Controllers\\CarsController.cs",
               "ViewState": "AQIAAFgAAAAAAAAAAAA0wGkAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T13:29:32.968Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-17T13:29:32.968Z"
             },
             {
               "$type": "Document",

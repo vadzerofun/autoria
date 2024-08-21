@@ -51,11 +51,15 @@ namespace Application.Services
 
         public async Task DeleteImageFromCar(Guid id, string ImageName)
         {
+            var car = _carRepository.GetCarById(id);
+            if (car == null) return;
             await _carRepository.DeleteImagefromCar(id, ImageName);
         }
 
         public async Task EditCar(Guid id, Cars car)
         {
+            var _car = _carRepository.GetCarById(id);
+            if (_car == null) return;
             car.ImagesPath = (await _carRepository.GetCarById(id)).ImagesPath;
             await _carRepository.EditCar(id, car);
         }
