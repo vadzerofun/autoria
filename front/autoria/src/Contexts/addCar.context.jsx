@@ -47,7 +47,7 @@ export function AddCarDataProvider({ children }) {
       { length: new Date().getFullYear() - 1920 + 1 },
       (_, i) => new Date().getFullYear() - i
     ), // роки
-    selectEngineType: ['Бензин', 'Дизель', 'Електро'], // паливо
+    selectEngineType: ['Бензин', 'Дизель', 'Газ', 'Гідроген', 'Гібрид', 'Електро'], // паливо
     selectOccasion: ['Передній', 'Задній', 'Повний'], // привід
     selectTransmissionType: ['Механіка', 'Автомат'], // коробка передач
     selectState: [
@@ -59,7 +59,7 @@ export function AddCarDataProvider({ children }) {
     ], // коробка передач
     selectRegionsAndCities: [
       {
-        region: 'Вінницька область',
+        region: 'Вінницька обл.',
         cities: [
           'Вінниця',
           'Жмеринка',
@@ -70,7 +70,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Волинська область',
+        region: 'Волинська обл.',
         cities: [
           'Луцьк',
           'Ковель',
@@ -81,7 +81,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Дніпропетровська область',
+        region: 'Дніпропетровська обл.',
         cities: [
           'Дніпро',
           'Кривий Ріг',
@@ -92,7 +92,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Донецька область',
+        region: 'Донецька обл.',
         cities: [
           'Донецьк',
           'Маріуполь',
@@ -103,7 +103,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Житомирська область',
+        region: 'Житомирська обл.',
         cities: [
           'Житомир',
           'Бердичів',
@@ -114,7 +114,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Закарпатська область',
+        region: 'Закарпатська обл.',
         cities: [
           'Ужгород',
           'Мукачево',
@@ -125,7 +125,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Запорізька область',
+        region: 'Запорізька обл.',
         cities: [
           'Запоріжжя',
           'Мелітополь',
@@ -136,7 +136,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Івано-Франківська область',
+        region: 'Івано-Франківська обл.',
         cities: [
           'Івано-Франківськ',
           'Коломия',
@@ -147,7 +147,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Київська область',
+        region: 'Київська обл.',
         cities: [
           'Київ',
           'Біла Церква',
@@ -158,7 +158,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Кіровоградська область',
+        region: 'Кіровоградська обл.',
         cities: [
           'Кропивницький',
           'Олександрія',
@@ -169,7 +169,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Луганська область',
+        region: 'Луганська обл.',
         cities: [
           'Луганськ',
           'Сєвєродонецьк',
@@ -180,7 +180,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Львівська область',
+        region: 'Львівська обл.',
         cities: [
           'Львів',
           'Дрогобич',
@@ -191,7 +191,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Миколаївська область',
+        region: 'Миколаївська обл.',
         cities: [
           'Миколаїв',
           'Вознесенськ',
@@ -202,7 +202,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Одеська область',
+        region: 'Одеська обл.',
         cities: [
           'Одеса',
           'Ізмаїл',
@@ -213,7 +213,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Полтавська область',
+        region: 'Полтавська обл.',
         cities: [
           'Полтава',
           'Кременчук',
@@ -224,7 +224,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Рівненська область',
+        region: 'Рівненська обл.',
         cities: [
           'Рівне',
           'Дубно',
@@ -235,7 +235,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Сумська область',
+        region: 'Сумська обл.',
         cities: [
           'Суми',
           'Конотоп',
@@ -246,7 +246,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Тернопільська область',
+        region: 'Тернопільська обл.',
         cities: [
           'Тернопіль',
           'Чортків',
@@ -257,7 +257,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Харківська область',
+        region: 'Харківська обл.',
         cities: [
           'Харків',
           'Куп\'янськ',
@@ -268,7 +268,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Херсонська область',
+        region: 'Херсонська обл.',
         cities: [
           'Херсон',
           'Нова Каховка',
@@ -279,7 +279,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Хмельницька область',
+        region: 'Хмельницька обл.',
         cities: [
           'Хмельницький',
           'Кам\'янець-Подільський',
@@ -290,7 +290,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Черкаська область',
+        region: 'Черкаська обл.',
         cities: [
           'Черкаси',
           'Умань',
@@ -301,7 +301,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Чернівецька область',
+        region: 'Чернівецька обл.',
         cities: [
           'Чернівці',
           'Новодністровськ',
@@ -312,7 +312,7 @@ export function AddCarDataProvider({ children }) {
         ]
       },
       {
-        region: 'Чернігівська область',
+        region: 'Чернігівська обл.',
         cities: [
           'Чернігів',
           'Ніжин',

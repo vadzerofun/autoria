@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Layout } from '../../Components/Layouts/Layout/Layout';
-import useGetCarById from '../../Hooks/useGetCarById';
+import useLoadCarPage from '../../Hooks/useLoadCarPage';
 import { Link, useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 import imgRecs from '../Home/imgRecs';
@@ -27,8 +27,10 @@ import 'swiper/css/thumbs';
 // import required modules
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { ContactSellerButton } from '../../Components/Car/ContactSellerButton/ContactSellerButton';
+import { getCurrency } from '../../Services/carService';
+import { formatNumber } from '../../Services/formatService';
 
-export const Car = () => { 
+export const Car = () => {
   // Swiper Thumbs
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
@@ -40,7 +42,7 @@ export const Car = () => {
   // carId
   const { carId } = useParams();
   // fetch car and user
-  const { car, user, loading, error } = useGetCarById(carId);
+  const { car, user, loading, error } = useLoadCarPage(carId);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -49,7 +51,7 @@ export const Car = () => {
   // console.log(car.imagesPath);
   const description = formatDescription(car.description);
 
-  console.log(user);
+  console.log(car);
 
   return (
     <Layout>
@@ -61,7 +63,7 @@ export const Car = () => {
                 style={{
                   '--swiper-navigation-color': 'rgba(92, 92, 92, 0.7)',
                   '--swiper-pagination-color': 'rgba(92, 92, 92, 0.7)'
-                }}
+                }}                 
                 spaceBetween={10}
                 navigation={true}
                 loop={true}
@@ -117,7 +119,9 @@ export const Car = () => {
                   <span className="carGalleryInfoPoint"></span>
                   <span>{car.year}</span>
                 </div>
-                <div className="carGalleryCarPrice fs-2">{formatNumber(car.price)} $</div>
+                <div className="carGalleryCarPrice fs-2">
+                  {formatNumber(car.price)} {getCurrency(car.сurrency)}
+                </div>
               </div>
               <div className="carGallerySellerInfo">
                 <div className="carGallerySellerText">
@@ -150,7 +154,7 @@ export const Car = () => {
                     </div>
                   </div>
                 </div>
-                <ContactSellerButton user={user} icon={carIcons.ChatWhite}/>
+                <ContactSellerButton user={user} icon={carIcons.ChatWhite} />
               </div>
             </div>
           </div>
@@ -328,16 +332,6 @@ export const Car = () => {
 // formatDescription
 const formatDescription = (text) => {
   return text.split('\n\r');
-};
-
-// formatNumber
-const formatNumber = (number) => {
-  return new Intl.NumberFormat('en-US', {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0
-  })
-    .format(number)
-    .replace(/,/g, ' ');
 };
 
 // formatLastVisited

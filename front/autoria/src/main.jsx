@@ -16,6 +16,7 @@ import { AddCar } from './Pages/AddCar/AddCar.jsx';
 import { EditCabinet } from './Pages/Cabinet/EditCabinet/EditCabinet.jsx';
 import { CabinetLayout } from './Components/Layouts/CabinetLayout/CabinetLayout.jsx';
 import { AddCarDataProvider } from './Contexts/addCar.context.jsx';
+import { EditCar } from './Pages/EditCar/EditCar.jsx';
 
 const router = createBrowserRouter([
   {
@@ -80,6 +81,26 @@ const router = createBrowserRouter([
     )
   },
   {
+    path: '/add-car',
+    element: (
+      <div>
+        <AddCarDataProvider>
+          <AddCar />
+        </AddCarDataProvider>
+      </div>
+    )
+  },
+  {
+    path: '/cars/:carId/edit',
+    element: (
+      <div>
+        <AddCarDataProvider>
+          <EditCar />
+        </AddCarDataProvider>
+      </div>
+    )
+  },
+  {
     path: '/cabinet',
     element: (
       <div>
@@ -92,16 +113,6 @@ const router = createBrowserRouter([
     element: (
       <div>
         <EditCabinet />
-      </div>
-    )
-  },
-  {
-    path: '/add-car',
-    element: (
-      <div>
-        <AddCarDataProvider>
-          <AddCar />
-        </AddCarDataProvider>
       </div>
     )
   }

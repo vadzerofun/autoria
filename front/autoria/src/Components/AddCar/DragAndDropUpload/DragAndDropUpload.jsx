@@ -13,7 +13,7 @@ import 'swiper/css/free-mode';
 // import required modules
 import { FreeMode } from 'swiper/modules';
 
-export const DragAndDropUpload = ({ onFilesAdded, images }) => {
+export const DragAndDropUpload = ({ onFilesAdded, images, existingImages }) => {
   const [isSwiperActive, setIsSwiperActive] = useState(false);
 
   const onDrop = useCallback(
@@ -45,6 +45,9 @@ export const DragAndDropUpload = ({ onFilesAdded, images }) => {
     }
   };
 
+  // imagesURL
+  const imagesURL = import.meta.env.VITE_IMAGES_URL;
+
   return (
     <div
       onPointerDown={handleSwiperInteraction}
@@ -65,9 +68,14 @@ export const DragAndDropUpload = ({ onFilesAdded, images }) => {
           modules={[FreeMode]}
           className="addCarGallery"
         >
+          {existingImages.map((imagePath, index) => (
+            <SwiperSlide key={`existing-car-slide-${index}`}>
+              <img src={`${imagesURL}${imagePath}`} alt='car' />
+            </SwiperSlide>
+          ))}
           {images.map((image, index) => (
             <SwiperSlide key={`add-car-slide-${index}`}>
-              <img src={URL.createObjectURL(image)} />
+              <img src={URL.createObjectURL(image)} alt='car'/>
             </SwiperSlide>
           ))}
         </Swiper>

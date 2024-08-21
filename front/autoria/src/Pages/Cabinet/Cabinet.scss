@@ -1,0 +1,32 @@
+/* =================================================================================================== */
+
+// ads
+.adsContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-bottom: 3.75rem;
+}
+
+.adsIconTitle{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.adsIconTitleText {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.21; /* 17/14 */
+  color: var(--bs-primary);
+}
+
+.adsCards{
+  max-width: 764px;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* =================================================================================================== */

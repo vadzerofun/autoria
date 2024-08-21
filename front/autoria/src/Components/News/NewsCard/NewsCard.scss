@@ -45,3 +45,13 @@
   font-size: 0.625rem;
   font-weight: 700;
 }
+
+.newsCardTitle {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  height: 3em; /* Should be line-height * 2 */
+}

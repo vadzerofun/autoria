@@ -12,6 +12,7 @@ import Form from 'react-bootstrap/Form';
 import { LoginRegister } from '../../../Components/Auth/LoginRegister/LoginRegister';
 import { ProfileIcon } from '../../../Components/Icons/ProfileIcon/ProfileIcon';
 import { useNavigate } from 'react-router-dom';
+import { getUserIdFromToken } from '../../../Services/authService';
 
 export const EditCabinet = () => {
   const { token } = useToken();
@@ -184,15 +185,6 @@ export const EditCabinet = () => {
       </Container>
     </CabinetLayout>
   );
-};
-
-// getUserIdFromToken
-const getUserIdFromToken = (token) => {
-  if (!token) return null;
-  const tokenValue = token.value;
-  const arrayToken = tokenValue.split('.');
-  const tokenPayload = JSON.parse(atob(arrayToken[1]));
-  return tokenPayload.sub;
 };
 
 const capitalizeFirstLetter = (string) => {
