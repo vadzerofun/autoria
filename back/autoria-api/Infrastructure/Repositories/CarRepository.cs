@@ -140,5 +140,26 @@ namespace Infrastructure.Repositories
                 .ToListAsync();
             return cars;
         }
+
+        public async Task Addlike(Guid id, Guid UserId)
+        {
+            var Car = await GetCarById(id);
+            if (Car == null) return;
+            if (Car.Likes == null) Car.Likes = new List<Guid>();
+            if (Car.Likes.Contains(UserId))
+                return;
+            Car.Likes.Add(UserId);
+            await EditCar(Car.Id, Car);
+            return;
+        }
+
+        public async Task Removelike(Guid id, Guid UserId)
+        {
+            var Car = await GetCarById(id);
+            if (Car == null) return;
+            Car.Likes.Remove(UserId);
+            await EditCar(id, Car);
+            return;
+        }
     }
 }

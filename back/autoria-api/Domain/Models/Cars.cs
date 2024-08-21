@@ -37,5 +37,11 @@ namespace Core.Models
         public string Region {  get; set; } // Регіон Продажу Авто
         public int VisitedCount { get; set; } // кількість переглядів
         public CarState State { get; set; } // Стан Авто (нове, в ДТП ...)
+        public string Body {  get; set; } // тип кузову
+        public string City { get; set; } //місто
+        public string SellerPhone { get; set; } //номер телефону продавця
+        public string SellerName { get; set; } // імя продавця
+        public string SellerPhoneExtra { get; set; } // Дод. номер продавця
+        public List<Guid> Likes { get; set; } = new List<Guid>(); //лайки
     }
 }
