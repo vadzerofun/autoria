@@ -16,8 +16,8 @@ export const NewsCard = ({ news, userId }) => {
   // images
   const imagesURL = import.meta.env.VITE_IMAGES_URL;
   // useToken
-  const { token, setToken } = useToken();  
-  
+  const { token, setToken } = useToken();
+
   // useNavigate
   const navigate = useNavigate();
 
@@ -25,7 +25,6 @@ export const NewsCard = ({ news, userId }) => {
   const [liked, setLiked] = useState(news.likes.includes(userId));
   // likes
   const [likesCount, setLikesCount] = useState(news.likes.length);
-  
 
   // handleClick
   const handleClick = (e) => {
@@ -34,32 +33,36 @@ export const NewsCard = ({ news, userId }) => {
 
     if (!token) {
       navigate('/login-register');
+      return;
     }
 
-    axios
-      .post(
-        import.meta.env.VITE_REACT_API_URL + 'News/LikeNews' + `?Id=${news.id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token.token}`
-          }
-        }
-      )
-      .then((response) => {
-        setLiked(!liked);
-        liked ? setLikesCount(likesCount - 1) : setLikesCount(likesCount + 1);
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err.response.status === 401) {
-          const newToken = refreshAuthToken(token);
-          likeNews(newToken);
-        } else {
-          navigate('/login-register');
-        }
-      });
+    setLiked(!liked);
+    liked ? setLikesCount(likesCount - 1) : setLikesCount(likesCount + 1);
+
+    try {
+      likeNews(token.token);
+    } catch (err) {
+      console.log(err);
+      if (err.response.status === 401) {
+        const newToken = refreshAuthToken(token);
+        setToken(newToken);
+        likeNews(token.token);
+      } 
+    }
   };
+
+  // likeNews
+  const likeNews = (authToken) => {
+    axios.post(
+      import.meta.env.VITE_REACT_API_URL + 'News/LikeNews' + `?Id=${news.id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${authToken}`
+        }
+      }
+    );
+  }
 
   return (
     <Link to="/login-register" className="noFontStyle">

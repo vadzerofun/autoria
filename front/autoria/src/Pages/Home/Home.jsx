@@ -25,6 +25,8 @@ import useLoadHome from '../../Hooks/useLoadHome';
 import useToken from '../../Hooks/useToken';
 import { NewsCard } from '../../Components/News/NewsCard/NewsCard';
 import { getUserIdFromToken } from '../../Services/authService';
+import { getCurrency } from '../../Services/carService';
+import { formatNumber } from '../../Services/formatService';
 
 export const Home = () => {
   // images
@@ -32,7 +34,7 @@ export const Home = () => {
   // user, token
   const { token, setToken } = useToken();
   const [userId, setUserId] = useState(getUserIdFromToken(token));
-  
+
   // fetch Data
   const { carsForYou, carsMostProfitable, news, loading, error } = useLoadHome();
 
@@ -42,7 +44,6 @@ export const Home = () => {
   console.log(carsForYou);
   // console.log(carsMostProfitable);
   // console.log(news);
-  
 
   return (
     <Layout>
@@ -182,7 +183,7 @@ export const Home = () => {
                     <span className="recsLeftCardTitle fs-4">{`${carsForYou[0].make} ${carsForYou[0].model}`}</span>
                     <span className="recsLeftCardPrice fs-4">{`${formatNumber(
                       carsForYou[0].price
-                    )} $`}</span>
+                    )} ${getCurrency(carsForYou[0].сurrency)}`}</span>
                   </div>
                   <div className="recsLeftCardDetails">
                     <div>
@@ -193,7 +194,7 @@ export const Home = () => {
                     </div>
                     <div>
                       <span>{`${formatNumber(carsForYou[0].mileage)} км`}</span>
-                      <span>м. Київ</span>
+                      <span>{carsForYou[0].region}</span>
                     </div>
                   </div>
                 </div>
@@ -210,7 +211,9 @@ export const Home = () => {
                     />
                     <div className="carCardMain">
                       <span className="carCardTitle fs-6">{`${car.make} ${car.model}`}</span>
-                      <span className="carCardPrice fs-6">{`${formatNumber(car.price)} $`}</span>
+                      <span className="carCardPrice fs-6">{`${formatNumber(
+                        car.price
+                      )} ${getCurrency(car.сurrency)}`}</span>
                     </div>
                     <div className="carCardDetails">
                       <div>
@@ -221,7 +224,7 @@ export const Home = () => {
                       </div>
                       <div>
                         <span>{`${formatNumber(car.mileage)} км`}</span>
-                        <span>м. Київ</span>
+                        <span>{car.region}</span>
                       </div>
                     </div>
                   </div>
@@ -255,7 +258,7 @@ export const Home = () => {
                         <span className="carCardTitle fs-6">{`${car.make} ${car.model}`}</span>
                         <span className="carCardPrice fs-6">{`${formatNumber(
                           car.price
-                        )} $`}</span>
+                        )} ${getCurrency(car.сurrency)}`}</span>
                       </div>
                       <div className="carCardDetails">
                         <div>
@@ -266,7 +269,7 @@ export const Home = () => {
                         </div>
                         <div>
                           <span>{`${formatNumber(car.mileage)} км`}</span>
-                          <span>м. Київ</span>
+                          <span>{car.region}</span>
                         </div>
                       </div>
                     </div>
@@ -322,13 +325,4 @@ export const Home = () => {
   );
 };
 
-// formatNumber
-const formatNumber = (number) => {
-  return new Intl.NumberFormat('en-US', {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0
-  })
-    .format(number)
-    .replace(/,/g, ' ');
-};
 

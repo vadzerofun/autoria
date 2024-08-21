@@ -22,8 +22,8 @@ export const AddCar = () => {
     Model: '',
     Year: 0,
     Mileage: 0, // пробіг
-    PriceUSD: 0,
-    PriceType: 0,
+    Price: 0,
+    Сurrency: 0,
     Engine_type: 0,
     Engine_capacity: 0,
     Occasion: 0,

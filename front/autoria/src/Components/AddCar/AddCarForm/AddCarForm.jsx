@@ -28,7 +28,7 @@ export const AddCarForm = ({ carData, apiMethod, token }) => {
 
   // formData
   const [formData, setFormData] = useState(carData);
-  console.log(formData);
+  // console.log(formData);
 
   // handleChange
   const handleChange = (e) => {
@@ -65,13 +65,13 @@ export const AddCarForm = ({ carData, apiMethod, token }) => {
 
   // Format the number for display
   const formattedMileage = formatNumber(formData.Mileage);
-  const formattedPrice = formatNumber(formData.PriceUSD);
+  const formattedPrice = formatNumber(formData.Price);
 
   // handleSubmit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    // console.log(formData);
 
     const formDataToSend = new FormData();
 
@@ -81,7 +81,8 @@ export const AddCarForm = ({ carData, apiMethod, token }) => {
     formDataToSend.append('Model', formData.Model);
     formDataToSend.append('Year', formData.Year);
     formDataToSend.append('Mileage', formData.Mileage);
-    formDataToSend.append('PriceUSD', formData.PriceUSD);
+    formDataToSend.append('Price', formData.Price);
+    formDataToSend.append('Сurrency', formData.Сurrency);
     formDataToSend.append('Engine_type', formData.Engine_type);
     formDataToSend.append('Engine_capacity', formData.Engine_capacity);
     formDataToSend.append('Occasion', formData.Occasion);
@@ -117,9 +118,7 @@ export const AddCarForm = ({ carData, apiMethod, token }) => {
         if (err.response?.status === 401) {
           const newToken = refreshAuthToken(token);
           handleSubmit();
-        } else {
-          navigate('/login-register');
-        }
+        } 
       });
   };
 
@@ -199,16 +198,16 @@ export const AddCarForm = ({ carData, apiMethod, token }) => {
               <Form.Label className="fs-5 fw-semibold">Ціна</Form.Label>
               <Form.Control
                 type="text"
-                name="PriceUSD"
+                name="Price"
                 value={formattedPrice}
                 onChange={handleFormattedNumberChange}
               />
             </Form.Group>
             <Form.Group
-              controlId="addCarFormCarPriceType"
+              controlId="addCarFormCarСurrency"
               className="mb-4"
-              value={formData.PriceType}>
-              <Form.Select onChange={handleChange} name="PriceType">
+              value={formData.Сurrency}>
+              <Form.Select onChange={handleChange} name="Сurrency">
                 <option value="0">$</option>
                 <option value="1">€</option>
                 <option value="2">грн</option>
@@ -231,7 +230,7 @@ export const AddCarForm = ({ carData, apiMethod, token }) => {
                 ))}
               </Form.Select>
             </Form.Group>
-            {formData.Engine_type != 2 && (
+            {formData.Engine_type != 5 && (
               <Form.Group controlId="addCarFormCarEngine_capacity" className="mb-4">
                 <Form.Label className="fs-5 fw-semibold">Об’єм двигуна, л</Form.Label>
                 <Form.Control
@@ -258,7 +257,7 @@ export const AddCarForm = ({ carData, apiMethod, token }) => {
                 ))}
               </Form.Select>
             </Form.Group>
-            {formData.Engine_type != 2 && (
+            {formData.Engine_type != 5 && (
               <Form.Group
                 controlId="addCarFormCarTransmission_type"
                 className="mb-4"
