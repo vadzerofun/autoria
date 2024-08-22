@@ -15,7 +15,7 @@ namespace Core.Interfaces
         Task AddCar(Cars car);
         Task DeleteCarById(Guid id);
         Task EditCar(Guid id, Cars car);
-        Task AddImageToCar(Guid id, string ImageLink);
+        Task AddImageToCar(Guid id, List<string> ImageLink);
         Task DeleteImagefromCar(Guid id, string ImageLink);
         Task<List<Cars>> GetCarsByMark(string mark);
         Task<List<Cars>> GetCarsByFilter(CarType type, string Mark, string Model, string Region, int MinYear, int MaxYear, int MinPrice, int MaxPrice);
