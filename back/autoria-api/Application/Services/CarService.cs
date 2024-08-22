@@ -43,18 +43,24 @@ namespace Application.Services
         public async Task DeleteCarById(Guid id)
         {
             var car = await _carRepository.GetCarById(id);
+            if (car == null)
+                return;
             await _imageUploader.DeleteImages(car.ImagesPath);
             await _carRepository.DeleteCarById(id);
         }
 
         public async Task DeleteImageFromCar(Guid id, string ImageName)
         {
+            var car = _carRepository.GetCarById(id);
+            if (car == null) return;
             await _carRepository.DeleteImagefromCar(id, ImageName);
         }
 
         public async Task EditCar(Guid id, Cars car)
         {
-            car.ImagesPath = (await _carRepository.GetCarById(id)).ImagesPath;
+            var _car = _carRepository.GetCarById(id);
+            if (_car == null) return;
+            //car.ImagesPath = (await _carRepository.GetCarById(id)).ImagesPath;
             await _carRepository.EditCar(id, car);
         }
 
@@ -116,6 +122,30 @@ namespace Application.Services
             catch (Exception ex)
             {
                 return Result<List<Cars>>.Failure(ex.Message);
+            }
+        }
+
+        public async Task<Result> Like(Guid Id, Guid UserId)
+        {
+            try
+            {
+                var Car = await _carRepository.GetCarById(Id);
+                if (Car == null) return Result.Failure("No Such News");
+                if (Car.Likes.Contains(UserId))
+                {
+                    await _carRepository.Removelike(Id, UserId);
+                    await _userRepository.RemoveNews(UserId, Id);
+                }
+                else
+                {
+                    await _carRepository.Addlike(Id, UserId);
+                    await _userRepository.AddNewsToUser(UserId, Id);
+                }
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure(ex.Message);
             }
         }
     }

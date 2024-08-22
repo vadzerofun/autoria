@@ -31,6 +31,11 @@ namespace autoria_api.ViewModel
         //public DateTime CreatedTime { get; set; } // дата створення оголошення
         public string Region { get; set; } // Регіон Продажу Авто
         //public int VisitedCount { get; set; } // кількість переглядів
+        public string Body { get; set; } // тип кузову
+        public string City { get; set; } //місто
+        public string SellerPhone { get; set; } //номер телефону продавця
+        public string SellerName { get; set; } // імя продавця
+        public string SellerPhoneExtra { get; set; } // Дод. номер продавця
 
         static public Cars ToCars(CarInputViewModel CarVM, Guid Id, List<string> ImagesPath, Guid UserId, DateTime CreatedTime, int VisitedCount)
         { 
@@ -62,6 +67,11 @@ namespace autoria_api.ViewModel
                 CreatedTime = CreatedTime,
                 Region = CarVM.Region,
                 VisitedCount = VisitedCount,
+                Body = CarVM.Body,
+                City = CarVM.City,
+                SellerName = CarVM.SellerName,
+                SellerPhone = CarVM.SellerPhone,
+                SellerPhoneExtra = CarVM.SellerPhoneExtra,
             };
             return cars;
         }

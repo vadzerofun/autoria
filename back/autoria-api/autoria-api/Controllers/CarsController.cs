@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Application.Model;
+using Application.Services;
 using autoria_api.ViewModel;
 using Core.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -110,6 +111,8 @@ namespace autoria_api.Controllers
         public async Task<IActionResult> EditCar([FromForm] Guid id, [FromForm] CarInputViewModel carVM, [FromForm] IFormFile[] ImageFiles)
         {
             var oldCar = (await _carService.GetCarById(id));
+            if (oldCar == null)
+                return NotFound();
             List<string> ImagesPath;
             if (ImageFiles.Length == 0)
             {
@@ -163,6 +166,19 @@ namespace autoria_api.Controllers
         {
             var res = await _carService.GetCarsByUserId(UserId);
             return res;
+        }
+        [Authorize]
+        [HttpPost("Like")]
+        public async Task<Result> Like(Guid Id)
+        {
+            var UserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (UserId == null) return Result.Failure("Bad User");
+            var res = await _carService.Like(Id, Guid.Parse(UserId));
+            if (res.IsSuccess)
+            {
+                return Result.Success();
+            }
+            return Result.Failure(res.ErrorMessage);
         }
     }
 }

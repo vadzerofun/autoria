@@ -13,18 +13,19 @@ namespace Application.Interfaces
 {
     public interface ICarService
     {
-        Task<List<Cars>> GetCars();
-        Task<Cars> GetCarById(Guid id);
-        Task AddCar(Cars car);
-        Task DeleteCarById(Guid id);
-        Task EditCar(Guid id, Cars car);
-        Task AddImageToCar(Guid id, string ImageFiles);
-        Task DeleteImageFromCar(Guid id, string ImageName);
-        Task<List<Cars>> GetCarByMark(string mark);
-        Task<List<Cars>> GetCarByFilter(CarFilter filter);
-        Task<List<Cars>> GetCarsForYou();
-        Task<List<Cars>> GetMostProfitable();
-        Task<Result> ViewCar(Guid Carid);
-        Task<Result<List<Cars>>> GetCarsByUserId(Guid UserId);
+        public Task<List<Cars>> GetCars();
+        public Task<Cars> GetCarById(Guid id);
+        public Task AddCar(Cars car);
+        public Task DeleteCarById(Guid id);
+        public Task EditCar(Guid id, Cars car);
+        public Task AddImageToCar(Guid id, string ImageFiles);
+        public Task DeleteImageFromCar(Guid id, string ImageName);
+        public Task<List<Cars>> GetCarByMark(string mark);
+        public Task<List<Cars>> GetCarByFilter(CarFilter filter);
+        public Task<List<Cars>> GetCarsForYou();
+        public Task<List<Cars>> GetMostProfitable();
+        public Task<Result> ViewCar(Guid Carid);
+        public Task<Result<List<Cars>>> GetCarsByUserId(Guid UserId);
+        public Task<Result> Like(Guid Id, Guid UserId);
     }
 }
