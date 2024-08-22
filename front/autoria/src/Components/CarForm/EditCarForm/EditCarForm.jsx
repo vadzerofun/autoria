@@ -76,9 +76,10 @@ export const EditCarForm = ({ carData, token }) => {
 
     const formDataToSend = new FormData();
 
-    // Append regular fields
+    // Append required
     formDataToSend.append('id', formData.id);
     formDataToSend.append('Type', formData.Type);
+    formDataToSend.append('Body', formData.Body);
     formDataToSend.append('Make', formData.Make);
     formDataToSend.append('Model', formData.Model);
     formDataToSend.append('Year', formData.Year);
@@ -86,11 +87,8 @@ export const EditCarForm = ({ carData, token }) => {
     formDataToSend.append('Price', formData.Price);
     formDataToSend.append('Сurrency', formData.Сurrency);
     formDataToSend.append('Engine_type', formData.Engine_type);
-    formDataToSend.append('Engine_capacity', formData.Engine_capacity);
     formDataToSend.append('Occasion', formData.Occasion);
-    formDataToSend.append('Transmission_type', formData.Transmission_type);
     formDataToSend.append('Carrying_capacity_ton', formData.Carrying_capacity_ton);
-    formDataToSend.append('Color', formData.Color);
     formDataToSend.append('Number_of_seats', formData.Number_of_seats);
     formDataToSend.append('Road_accident', formData.Road_accident);
     formDataToSend.append('Owners_number', formData.Owners_number);
@@ -98,9 +96,29 @@ export const EditCarForm = ({ carData, token }) => {
     formDataToSend.append('Car_number', formData.Car_number);
     formDataToSend.append('Car_vin_code', formData.Car_vin_code);
     formDataToSend.append('Region', formData.Region);
-    formDataToSend.append('City', formData.City);
     formDataToSend.append('Description', formData.Description);
-    // formDataToSend.append('State', formData.State);
+    formDataToSend.append('State', formData.State);
+    formDataToSend.append('SellerName', formData.SellerName);
+    formDataToSend.append('SellerPhone', formData.SellerPhone);
+
+    // Append optional
+    if (formData.Engine_capacity || formData.Engine_capacity === 0) {
+      // 0, 1, 2 ... (double)
+      formDataToSend.append('Engine_capacity', formData.Engine_capacity);
+    }
+    if (formData.Transmission_type || formData.Transmission_type === 0) {
+      // 0, 1, 2 ... (int)
+      formDataToSend.append('Transmission_type', formData.Transmission_type);
+    }
+    if (formData.Color) {
+      formDataToSend.append('Color', formData.Color);
+    }
+    if (formData.City) {
+      formDataToSend.append('City', formData.City);
+    }
+    if (formData.SellerPhoneExtra) {
+      formDataToSend.append('SellerPhoneExtra', formData.SellerPhoneExtra);
+    }
 
     // Append image files if they exist
     if (formData.ImageFiles && formData.ImageFiles.length > 0) {
@@ -109,9 +127,14 @@ export const EditCarForm = ({ carData, token }) => {
       }
     }
 
-    axios.post(import.meta.env.VITE_REACT_API_URL + `Cars/EditCar`, formDataToSend).catch((err) => {
-      console.log(err);
-    });
+    axios
+      .post(import.meta.env.VITE_REACT_API_URL + `Cars/EditCar`, formDataToSend)
+      .then(() => {
+        window.location = window.location;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -119,7 +142,7 @@ export const EditCarForm = ({ carData, token }) => {
       <section className="addCarContainer">
         <Form onSubmit={handleSubmit} className="addCarForm">
           <h1 className="addCarFirstHeader fs-2 fw-bold">Редагувати оголошення</h1>
-          <Form.Group controlId="addCarFormCarType" className="mb-4" value={formData.Type}>
+          <Form.Group controlId="addCarFormCarType" className="mb-4">
             {/* <Form.Label>Select an option</Form.Label> */}
             <Form.Select onChange={handleChange} name="Type" value={formData.Type}>
               {selectCarType.map((carType, index) => (
@@ -130,9 +153,9 @@ export const EditCarForm = ({ carData, token }) => {
             </Form.Select>
           </Form.Group>
           <h2 className="fs-2 fw-bold mb-4">Оголошення</h2>
-          <Form.Group controlId="addCarFormCarBody" className="mb-4" value={formData.Body}>
+          <Form.Group controlId="addCarFormCarBody" className="mb-4">
             <Form.Label className="fs-5 fw-semibold">Кузов</Form.Label>
-            <Form.Select onChange={handleChange} name="Body">
+            <Form.Select onChange={handleChange} name="Body" value={formData.Body}>
               <option value="">Вибрати</option>
               {selectCarType
                 .find((value, index, obj) => index == formData.Type)
@@ -161,7 +184,7 @@ export const EditCarForm = ({ carData, token }) => {
           </div>
           <div className="addCarFormDivider mb-4"></div>
           <div className="addCarFormFields">
-            <Form.Group controlId="addCarFormCarYear" className="mb-4" value={formData.Year}>
+            <Form.Group controlId="addCarFormCarYear" className="mb-4">
               <Form.Label className="fs-5 fw-semibold">Рік</Form.Label>
               <Form.Select onChange={handleChange} name="Year" value={formData.Year}>
                 <option value="">Вибрати</option>

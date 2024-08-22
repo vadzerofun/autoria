@@ -14,7 +14,7 @@ import useToken from '../../../Hooks/useToken';
 
 export const AddCarForm = ({ carData }) => {
   // token
-  const { token, setToken } = useToken();
+  const { token, setToken } = useToken();  
   // useNavigate
   const navigate = useNavigate();
 
@@ -80,8 +80,9 @@ export const AddCarForm = ({ carData }) => {
 
     const formDataToSend = new FormData();
 
-    // Append regular fields
+    // Append required
     formDataToSend.append('Type', formData.Type);
+    formDataToSend.append('Body', formData.Body);
     formDataToSend.append('Make', formData.Make);
     formDataToSend.append('Model', formData.Model);
     formDataToSend.append('Year', formData.Year);
@@ -89,11 +90,8 @@ export const AddCarForm = ({ carData }) => {
     formDataToSend.append('Price', formData.Price);
     formDataToSend.append('Сurrency', formData.Сurrency);
     formDataToSend.append('Engine_type', formData.Engine_type);
-    formDataToSend.append('Engine_capacity', formData.Engine_capacity);
     formDataToSend.append('Occasion', formData.Occasion);
-    formDataToSend.append('Transmission_type', formData.Transmission_type);
     formDataToSend.append('Carrying_capacity_ton', formData.Carrying_capacity_ton);
-    formDataToSend.append('Color', formData.Color);
     formDataToSend.append('Number_of_seats', formData.Number_of_seats);
     formDataToSend.append('Road_accident', formData.Road_accident);
     formDataToSend.append('Owners_number', formData.Owners_number);
@@ -101,10 +99,29 @@ export const AddCarForm = ({ carData }) => {
     formDataToSend.append('Car_number', formData.Car_number);
     formDataToSend.append('Car_vin_code', formData.Car_vin_code);
     formDataToSend.append('Region', formData.Region);
-    formDataToSend.append('City', formData.City);
     formDataToSend.append('Description', formData.Description);
-    // formDataToSend.append('State', formData.State);
-    
+    formDataToSend.append('State', formData.State);
+    formDataToSend.append('SellerName', formData.SellerName);
+    formDataToSend.append('SellerPhone', formData.SellerPhone);
+
+    // Append optional
+    if (formData.Engine_capacity || formData.Engine_capacity === 0) {
+      // 0, 1, 2 ... (double)
+      formDataToSend.append('Engine_capacity', formData.Engine_capacity);
+    }
+    if (formData.Transmission_type || formData.Transmission_type === 0) {
+      // 0, 1, 2 ...
+      formDataToSend.append('Transmission_type', formData.Transmission_type);
+    }
+    if (formData.Color) {
+      formDataToSend.append('Color', formData.Color);
+    }
+    if (formData.City) {
+      formDataToSend.append('City', formData.City);
+    }
+    if (formData.SellerPhoneExtra) {
+      formDataToSend.append('SellerPhoneExtra', formData.SellerPhoneExtra);
+    }
 
     // Append image files if they exist
     if (formData.ImageFiles && formData.ImageFiles.length > 0) {
@@ -114,11 +131,12 @@ export const AddCarForm = ({ carData }) => {
     }
 
     addCar(formDataToSend).catch((err) => {
+      console.log(err);
       if (err.response.status === 401) {
         const newToken = refreshAuthToken(token);
         setToken(newToken);
         addCar(formDataToSend);
-      } 
+      }
     });
   };
 
@@ -137,9 +155,9 @@ export const AddCarForm = ({ carData }) => {
       <section className="addCarContainer">
         <Form onSubmit={handleSubmit} className="addCarForm">
           <h1 className="addCarFirstHeader fs-2 fw-bold">Створити оголошення</h1>
-          <Form.Group controlId="addCarFormCarType" className="mb-4" value={formData.Type}>
+          <Form.Group controlId="addCarFormCarType" className="mb-4">
             {/* <Form.Label>Select an option</Form.Label> */}
-            <Form.Select onChange={handleChange} name="Type">
+            <Form.Select onChange={handleChange} name="Type" value={formData.Type}>
               {selectCarType.map((carType, index) => (
                 <option value={index} key={`carType-${index}`}>
                   {carType.type}
@@ -148,9 +166,9 @@ export const AddCarForm = ({ carData }) => {
             </Form.Select>
           </Form.Group>
           <h2 className="fs-2 fw-bold mb-4">Подача оголошення</h2>
-          <Form.Group controlId="addCarFormCarBody" className="mb-4" value={formData.Body}>
+          <Form.Group controlId="addCarFormCarBody" className="mb-4">
             <Form.Label className="fs-5 fw-semibold">Кузов</Form.Label>
-            <Form.Select onChange={handleChange} name="Body">
+            <Form.Select onChange={handleChange} name="Body" value={formData.Body}>
               <option value="">Вибрати</option>
               {selectCarType
                 .find((value, index, obj) => index == formData.Type)
@@ -179,9 +197,9 @@ export const AddCarForm = ({ carData }) => {
           </div>
           <div className="addCarFormDivider mb-4"></div>
           <div className="addCarFormFields">
-            <Form.Group controlId="addCarFormCarYear" className="mb-4" value={formData.Year}>
+            <Form.Group controlId="addCarFormCarYear" className="mb-4">
               <Form.Label className="fs-5 fw-semibold">Рік</Form.Label>
-              <Form.Select onChange={handleChange} name="Year">
+              <Form.Select onChange={handleChange} name="Year" value={formData.Year}>
                 <option value="">Вибрати</option>
                 {selectYear.map((year, index) => (
                   <option value={year} key={`year-${index}`}>
@@ -213,11 +231,8 @@ export const AddCarForm = ({ carData }) => {
                 onChange={handleFormattedNumberChange}
               />
             </Form.Group>
-            <Form.Group
-              controlId="addCarFormCarСurrency"
-              className="mb-4"
-              value={formData.Сurrency}>
-              <Form.Select onChange={handleChange} name="Сurrency">
+            <Form.Group controlId="addCarFormCarСurrency" className="mb-4">
+              <Form.Select onChange={handleChange} name="Сurrency" value={formData.Сurrency}>
                 <option value="0">$</option>
                 <option value="1">€</option>
                 <option value="2">грн</option>
@@ -226,12 +241,9 @@ export const AddCarForm = ({ carData }) => {
           </div>
           <h2 className="fs-2 fw-bold mb-4">Параметри</h2>
           <div className="addCarFormFields">
-            <Form.Group
-              controlId="addCarFormCarEngine_type"
-              className="mb-4"
-              value={formData.Engine_type}>
+            <Form.Group controlId="addCarFormCarEngine_type" className="mb-4">
               <Form.Label className="fs-5 fw-semibold">Паливо</Form.Label>
-              <Form.Select onChange={handleChange} name="Engine_type">
+              <Form.Select onChange={handleChange} name="Engine_type" value={formData.Engine_type}>
                 <option value="">Вибрати</option>
                 {selectEngineType.map((type, index) => (
                   <option value={index} key={`Engine_type-${index}`}>
@@ -253,12 +265,9 @@ export const AddCarForm = ({ carData }) => {
             )}
           </div>
           <div className="addCarFormFields">
-            <Form.Group
-              controlId="addCarFormCarOccasion"
-              className="mb-4"
-              value={formData.Occasion}>
+            <Form.Group controlId="addCarFormCarOccasion" className="mb-4">
               <Form.Label className="fs-5 fw-semibold">Привід</Form.Label>
-              <Form.Select onChange={handleChange} name="Occasion">
+              <Form.Select onChange={handleChange} name="Occasion" value={formData.Occasion}>
                 <option value="">Вибрати</option>
                 {selectOccasion.map((type, index) => (
                   <option value={index} key={`Occasion-${index}`}>
@@ -268,12 +277,12 @@ export const AddCarForm = ({ carData }) => {
               </Form.Select>
             </Form.Group>
             {formData.Engine_type != 5 && (
-              <Form.Group
-                controlId="addCarFormCarTransmission_type"
-                className="mb-4"
-                value={formData.Transmission_type}>
+              <Form.Group controlId="addCarFormCarTransmission_type" className="mb-4">
                 <Form.Label className="fs-5 fw-semibold">Коробка передач</Form.Label>
-                <Form.Select onChange={handleChange} name="Transmission_type">
+                <Form.Select
+                  onChange={handleChange}
+                  name="Transmission_type"
+                  value={formData.Transmission_type}>
                   <option value="">Вибрати</option>
                   {selectTransmissionType.map((type, index) => (
                     <option value={index} key={`Transmission_type-${index}`}>
@@ -300,9 +309,9 @@ export const AddCarForm = ({ carData }) => {
           </div>
           <div className="addCarFormDivider mb-4"></div>
           <div className="addCarFormFields">
-            <Form.Group controlId="addCarFormCarState" className="mb-4" value={formData.State}>
+            <Form.Group controlId="addCarFormCarState" className="mb-4">
               <Form.Label className="fs-5 fw-semibold">Стан</Form.Label>
-              <Form.Select onChange={handleChange} name="State">
+              <Form.Select onChange={handleChange} name="State" value={formData.State}>
                 <option value="">Вибрати</option>
                 {selectState.map((state, index) => (
                   <option value={index} key={`state-${index}`}>
@@ -335,12 +344,12 @@ export const AddCarForm = ({ carData }) => {
                 onChange={handleFormattedNumberChange}
               />
             </Form.Group>
-            <Form.Group
-              controlId="addCarFormCarRoad_accident"
-              className="mb-4"
-              value={formData.Road_accident}>
+            <Form.Group controlId="addCarFormCarRoad_accident" className="mb-4">
               <Form.Label className="fs-5 fw-semibold">Участь в ДТП</Form.Label>
-              <Form.Select onChange={handleChange} name="Road_accident">
+              <Form.Select
+                onChange={handleChange}
+                name="Road_accident"
+                value={formData.Road_accident}>
                 <option value="">Вибрати</option>
                 <option value="Так, був в ДТП">Так, був в ДТП</option>
                 <option value="Ні, не був в ДТП">Ні, не був в ДТП</option>
@@ -360,9 +369,9 @@ export const AddCarForm = ({ carData }) => {
                 onChange={handleFormattedNumberChange}
               />
             </Form.Group>
-            <Form.Group controlId="addCarFormCarWanted" className="mb-4" value={formData.Wanted}>
+            <Form.Group controlId="addCarFormCarWanted" className="mb-4">
               <Form.Label className="fs-5 fw-semibold">Стан в розшуку</Form.Label>
-              <Form.Select onChange={handleChange} name="Wanted">
+              <Form.Select onChange={handleChange} name="Wanted" value={formData.Wanted}>
                 <option value={false}>Вибрати</option>
                 <option value={true}>В розшуку</option>
                 <option value={false}>Не в розшуку</option>
@@ -391,9 +400,9 @@ export const AddCarForm = ({ carData }) => {
           </div>
           <div className="addCarFormDivider mb-4"></div>
           <div className="addCarFormFields">
-            <Form.Group controlId="addCarFormCarRegion" className="mb-4" value={formData.Region}>
+            <Form.Group controlId="addCarFormCarRegion" className="mb-4">
               <Form.Label className="fs-5 fw-semibold">Область</Form.Label>
-              <Form.Select onChange={handleChange} name="Region">
+              <Form.Select onChange={handleChange} name="Region" value={formData.Region}>
                 <option value="">Вибрати</option>
                 {selectRegionsAndCities.map((item, index) => (
                   <option value={item.region} key={`Region-${index}`}>
@@ -402,12 +411,13 @@ export const AddCarForm = ({ carData }) => {
                 ))}
               </Form.Select>
             </Form.Group>
-            <Form.Group controlId="addCarFormCarCity" className="mb-4" value={formData.City}>
+            <Form.Group controlId="addCarFormCarCity" className="mb-4">
               <Form.Label className="fs-5 fw-semibold">Місто</Form.Label>
               <Form.Select
                 onChange={handleChange}
                 name="City"
-                disabled={!formData.Region ? true : false}>
+                disabled={!formData.Region ? true : false}
+                value={formData.City}>
                 <option value="">Не обов'язково</option>
                 {selectRegionsAndCities
                   .find((value, index, obj) => value.region === formData.Region)

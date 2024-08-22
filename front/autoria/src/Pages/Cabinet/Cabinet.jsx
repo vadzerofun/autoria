@@ -13,6 +13,7 @@ import { CarCard } from '../../Components/CarCard/CarCard';
 import { LoginRegister } from '../../Components/Auth/LoginRegister/LoginRegister';
 import { DeleteCarModal } from '../../Components/CarForm/DeleteCarModal/DeleteCarModal';
 import Modal from 'react-bootstrap/Modal'; // for modalShow
+import { HeartIcon } from '../../Components/Icons/HeartIcon/HeartIcon';
 
 export const Cabinet = () => {
   // images
@@ -37,11 +38,41 @@ export const Cabinet = () => {
 
   return (
     <CabinetLayout>
-      <section>
+      <section className="d-flex flex-column gap-5 gap-lg-6">
+        <div className="favoritesContainer">
+          <div className="iconTitleContainer favoritesIconTitle">
+            <HeartIcon color="var( --bs-primary )" width={26} height={24} />
+            <h2 className="iconTitleText">Обране</h2>
+            <span className="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center lh-1 countCircleText" style={{ width: '27px', height: '26px' }}>
+              0
+            </span>
+          </div>
+          <div className="adsCards">
+            {cars.map((car, index) => (
+              <Dropdown key={`car-${index}`} drop="end" align="start">
+                <Dropdown.Toggle as={CustomToggle}>
+                  <CarCard car={car} />
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item href={`/cars/${car.id}`}>Перейти</Dropdown.Item>
+                  <Dropdown.Item href={`/cars/${car.id}/edit`}>Редагувати</Dropdown.Item>
+                  <Dropdown.Item
+                    href="#"
+                    onClick={() => {
+                      setModalShow(true);
+                      setModalCar(car);
+                    }}>
+                    Видалити
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            ))}
+          </div>
+        </div>
         <div className="adsContainer">
-          <div className="adsIconTitle">
+          <div className="iconTitleContainer">
             <AdIcon color="var( --bs-primary )" />
-            <h2 className="adsIconTitleText">Мої оголошення</h2>
+            <h2 className="iconTitleText">Мої оголошення</h2>
           </div>
           <div className="adsCards">
             {cars.map((car, index) => (

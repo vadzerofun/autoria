@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import { Layout } from '../../Components/Layouts/Layout/Layout';
 import useLoadCarPage from '../../Hooks/useLoadCarPage';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 import imgRecs from '../Home/imgRecs';
 import './Car.css';
@@ -29,8 +30,19 @@ import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { ContactSellerButton } from '../../Components/Car/ContactSellerButton/ContactSellerButton';
 import { getCurrency } from '../../Services/carService';
 import { formatNumber } from '../../Services/formatService';
+import { HeartFilledIcon } from '../../Components/Icons/HeartIcon/HeartFilledIcon';
+import { HeartIcon } from '../../Components/Icons/HeartIcon/HeartIcon';
+import useToken from '../../Hooks/useToken';
+import { getUserIdFromToken, refreshAuthToken } from '../../Services/authService';
 
 export const Car = () => {
+  // useToken
+  const { token, setToken } = useToken();
+  // userId
+  const userId = getUserIdFromToken(token);
+  // useNavigate
+  const navigate = useNavigate();
+
   // Swiper Thumbs
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
@@ -44,14 +56,57 @@ export const Car = () => {
   // fetch car and user
   const { car, user, loading, error } = useLoadCarPage(carId);
 
+  // liked
+  const [liked, setLiked] = useState(false);
+
+  useEffect(() => {    
+    if (car) {
+      setLiked(car.likes.includes(userId));
+    }
+  }, [car, userId]);
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   // car description
-  // console.log(car.imagesPath);
-  const description = formatDescription(car.description);
+  const description = formatDescription(car.description);  
 
   console.log(car);
+
+  // handleLikeCar
+  const handleLikeCar = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!token || !token.token) {
+      navigate('/login-register');
+      return;
+    }
+
+    setLiked(!liked);
+
+    likeCar(token.token).catch((err) => {
+      console.log(err);
+      if (err.response.status === 401) {
+        const newToken = refreshAuthToken(token);
+        setToken(newToken);
+        likeCar();
+      }
+    });
+  };
+
+  // likeNews
+  const likeCar = () => {
+    return axios.post(
+      import.meta.env.VITE_REACT_API_URL + 'Cars/Like' + `?Id=${car.id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token.token}`
+        }
+      }
+    );
+  };
 
   return (
     <Layout>
@@ -63,7 +118,7 @@ export const Car = () => {
                 style={{
                   '--swiper-navigation-color': 'rgba(92, 92, 92, 0.7)',
                   '--swiper-pagination-color': 'rgba(92, 92, 92, 0.7)'
-                }}                 
+                }}
                 spaceBetween={10}
                 navigation={true}
                 loop={true}
@@ -118,6 +173,13 @@ export const Car = () => {
                   <span>{!car.owners_number ? 'Невживана' : 'Вживана'}</span>
                   <span className="carGalleryInfoPoint"></span>
                   <span>{car.year}</span>
+                  <Button onClick={handleLikeCar} className="carLikeBtn" variant="link">
+                    {liked ? (
+                      <HeartFilledIcon color="var( --bs-primary )" />
+                    ) : (
+                      <HeartIcon color="var( --bs-primary )" />
+                    )}
+                  </Button>
                 </div>
                 <div className="carGalleryCarPrice fs-2">
                   {formatNumber(car.price)} {getCurrency(car.сurrency)}
