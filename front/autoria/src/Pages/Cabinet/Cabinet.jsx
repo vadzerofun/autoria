@@ -11,10 +11,15 @@ import { getCurrency } from '../../Services/carService';
 import { Dropdown } from 'react-bootstrap';
 import { CarCard } from '../../Components/CarCard/CarCard';
 import { LoginRegister } from '../../Components/Auth/LoginRegister/LoginRegister';
+import { DeleteCarModal } from '../../Components/CarForm/DeleteCarModal/DeleteCarModal';
+import Modal from 'react-bootstrap/Modal'; // for modalShow
 
 export const Cabinet = () => {
   // images
   const imagesURL = import.meta.env.VITE_IMAGES_URL;
+  // modal
+  const [modalShow, setModalShow] = useState(false);
+  const [modalCar, setModalCar] = useState({});
   // token, user
   const { token } = useToken();
 
@@ -47,13 +52,21 @@ export const Cabinet = () => {
                 <Dropdown.Menu>
                   <Dropdown.Item href={`/cars/${car.id}`}>Перейти</Dropdown.Item>
                   <Dropdown.Item href={`/cars/${car.id}/edit`}>Редагувати</Dropdown.Item>
-                  <Dropdown.Item href="#">Видалити</Dropdown.Item>
+                  <Dropdown.Item
+                    href="#"
+                    onClick={() => {
+                      setModalShow(true);
+                      setModalCar(car);
+                    }}>
+                    Видалити
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             ))}
           </div>
         </div>
       </section>
+      <DeleteCarModal show={modalShow} car={modalCar} onHide={() => setModalShow(false)} />
     </CabinetLayout>
   );
 };

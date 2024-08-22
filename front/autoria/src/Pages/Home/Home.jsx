@@ -177,6 +177,10 @@ export const Home = () => {
                         ? imagesURL + carsForYou[0].imagesPath[0]
                         : ImagePlaceholder
                     }
+                    onError={(e) => {
+                      e.target.onerror = null; 
+                      e.target.src = ImagePlaceholder; 
+                    }}
                     alt="Recommended car"
                   />
                   <div className="recsLeftCardMain">

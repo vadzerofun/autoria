@@ -28,10 +28,6 @@ export const capitalizeObjectKeys = (obj) => {
       // Assign the value to the new key in the new object
       capitalizedObj[capitalizedKey] = obj[key];
     }
-
-    if (key === 'imagesPath') {
-      capitalizedObj[capitalizedKey] = obj[key].map((file) => imagesURL + file);
-    }
   });
 
   return capitalizedObj;

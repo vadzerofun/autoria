@@ -71,6 +71,10 @@ export const NewsCard = ({ news, userId }) => {
           className="newsImage"
           src={news.imageLink ? imagesURL + news.imageLink : ImagePlaceholder}
           alt={`News`}
+          onError={(e) => {
+            e.target.onerror = null; 
+            e.target.src = ImagePlaceholder; 
+          }}
         />
         <div className="newsCardTitle fs-6">{news.tittle}</div>
         <div className="newsCardDetails">

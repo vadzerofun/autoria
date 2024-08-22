@@ -4,7 +4,7 @@ import { Layout } from '../../Components/Layouts/Layout/Layout';
 import useToken from '../../Hooks/useToken';
 import { LoginRegister } from '../../Components/Auth/LoginRegister/LoginRegister';
 import './AddCar.css';
-import { AddCarForm } from '../../Components/AddCar/AddCarForm/AddCarForm';
+import { AddCarForm } from '../../Components/CarForm/AddCarForm/AddCarForm';
 
 export const AddCar = () => {
   // token
@@ -49,7 +49,7 @@ export const AddCar = () => {
 
   return (
     <Layout>
-      <AddCarForm carData={{...formData}} apiMethod="AddCar" token={token}/>
+      <AddCarForm carData={{...formData}} />
     </Layout>
   );
 };
