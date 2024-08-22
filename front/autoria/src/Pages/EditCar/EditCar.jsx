@@ -4,9 +4,9 @@ import { Layout } from '../../Components/Layouts/Layout/Layout';
 import useToken from '../../Hooks/useToken';
 import { LoginRegister } from '../../Components/Auth/LoginRegister/LoginRegister';
 import { useParams } from 'react-router-dom';
-import { AddCarForm } from '../../Components/AddCar/AddCarForm/AddCarForm';
 import useGetCarById from '../../Hooks/useLoadCarPage';
 import { capitalizeObjectKeys } from '../../Services/formatService';
+import { EditCarForm } from '../../Components/CarForm/EditCarForm/EditCarForm';
 
 export const EditCar = () => {
   // imagesURL
@@ -25,11 +25,11 @@ export const EditCar = () => {
   const formData = { 
     ...car,      
     Body: '', // кузов    
-    City: '',
+    City: '', // місто
     // Seller
-    SellerPhone: '',
-    SellerName: '',
-    SellerPhoneExtra: '',
+    SellerPhone: '', // номер продавця
+    SellerName: '', // ім'я продавця
+    SellerPhoneExtra: '', // дод. номер продавця
     ImageFiles: [], 
   };
   
@@ -47,7 +47,7 @@ export const EditCar = () => {
 
   return (
     <Layout>
-      <AddCarForm carData={{...formData}} apiMethod="EditCar" token={token}/>
+      <EditCarForm carData={{...formDataFormatted}} token={token}/>
     </Layout>
   );
 };
