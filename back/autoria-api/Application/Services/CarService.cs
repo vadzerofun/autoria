@@ -35,7 +35,7 @@ namespace Application.Services
             await _carRepository.AddCar(car);
         }
 
-        public async Task AddImageToCar(Guid id, string ImageFiles)
+        public async Task AddImageToCar(Guid id, List<string> ImageFiles)
         {
             await _carRepository.AddImageToCar(id, ImageFiles);
         }

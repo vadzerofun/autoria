@@ -39,11 +39,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Color")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedTime")
@@ -53,7 +51,7 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("Engine_capacity")
+                    b.Property<double?>("Engine_capacity")
                         .HasColumnType("REAL");
 
                     b.Property<int>("Engine_type")
@@ -107,13 +105,12 @@ namespace Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SellerPhoneExtra")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("State")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Transmission_type")
+                    b.Property<int?>("Transmission_type")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Type")

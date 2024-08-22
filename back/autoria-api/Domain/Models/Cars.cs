@@ -18,16 +18,16 @@ namespace Core.Models
         public string Model { get; set; } // Модель
         public CarType Type { get; set; } // Тип машини Легкові, Вантажні ...
         public int Year { get; set; } // Рік випуску
-        public double Engine_capacity { get; set; } // Об'єм двигуна
+        public double? Engine_capacity { get; set; } // Об'єм двигуна
         public Engine_type Engine_type { get; set; } // Тип двигуна (бензин, дизель, ...)
-        public string Color { get; set; } // Колір авто
+        public string? Color { get; set; } // Колір авто
         public int Owners_number { get; set; } // Кількість власників
         public bool Wanted { get; set; } // Стан в розшуку
         public string Road_accident { get; set; } // ДТП
         public double Carrying_capacity_ton { get; set; } // Вантажопідйомність (в тоннах)
         public string Car_number { get; set; } // Номер машини (ВХ 1000 ВН)
         public string Car_vin_code { get; set; } // Він код машини
-        public Transmission_type Transmission_type { get; set; } // Тип трансмісії (автомат, механіка)
+        public Transmission_type? Transmission_type { get; set; } // Тип трансмісії (автомат, механіка)
         public Occasion Occasion { get; set; } // Привід машини (передній, задній, повний)
         public string Description { get; set; } // Опис авто
         public int Number_of_seats { get; set; } // Кількість посадочних місць
@@ -38,10 +38,10 @@ namespace Core.Models
         public int VisitedCount { get; set; } // кількість переглядів
         public CarState State { get; set; } // Стан Авто (нове, в ДТП ...)
         public string Body {  get; set; } // тип кузову
-        public string City { get; set; } //місто
+        public string? City { get; set; } //місто
         public string SellerPhone { get; set; } //номер телефону продавця
         public string SellerName { get; set; } // імя продавця
-        public string SellerPhoneExtra { get; set; } // Дод. номер продавця
+        public string? SellerPhoneExtra { get; set; } // Дод. номер продавця
         public List<Guid> Likes { get; set; } = new List<Guid>(); //лайки
     }
 }

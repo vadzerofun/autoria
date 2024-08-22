@@ -77,10 +77,13 @@ namespace Infrastructure.Repositories
             return await _context.Cars.ToListAsync();
         }
 
-        public async Task AddImageToCar(Guid id, string ImageLink)
+        public async Task AddImageToCar(Guid id, List<string> ImageLink)
         {
             var car = await GetCarById(id);
-            car.ImagesPath.Add(ImageLink);
+            foreach (var img in ImageLink)
+            {
+                car.ImagesPath.Add(img);
+            }
             await EditCar(id, car);
         }
 
