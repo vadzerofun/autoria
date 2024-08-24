@@ -1,0 +1,22 @@
+services:
+  backend:
+    image: autoria-api:latest
+    build:
+      context: ./back/autoria-api
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ./autoria-api:/app
+
+  frontend:
+    image: autoria-frontend:latest
+    build:
+      context: ./front/autoria
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
