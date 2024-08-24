@@ -23,13 +23,7 @@ export const EditCar = () => {
 
   // formData
   const formData = { 
-    ...car,      
-    Body: '', // кузов    
-    City: '', // місто
-    // Seller
-    SellerPhone: '', // номер продавця
-    SellerName: '', // ім'я продавця
-    SellerPhoneExtra: '', // дод. номер продавця
+    ...car,
     ImageFiles: [], 
   };
   

@@ -21,6 +21,7 @@ export const EditCabinet = () => {
 
   // imagesURL
   const imagesURL = import.meta.env.VITE_IMAGES_URL;
+  const [selectedFileURL, setSelectedFileURL] = useState(null);
   // useNavigate
   const navigate = useNavigate();
 
@@ -35,6 +36,7 @@ export const EditCabinet = () => {
     userRole: '',
     FormImageFile: ''
   });
+  console.log(formData);
 
   useEffect(() => {
     if (user) {
@@ -61,8 +63,9 @@ export const EditCabinet = () => {
       ...formData,
       [name]: files ? files[0] : value
     });
-    console.log(formData);
-    // console.log(e.target.files);
+
+    // set image after file selected
+    if (files) setSelectedFileURL(URL.createObjectURL(files[0]));
   };
 
   const handleSubmit = async (e) => {
@@ -81,19 +84,27 @@ export const EditCabinet = () => {
       formDataToSend.append('FormImageFile', formData.FormImageFile);
     }
 
-    axios
+    editUser(formDataToSend).catch((err) => {
+      console.log(err);
+      if (err.response.status === 401) {
+        const newToken = refreshAuthToken(token);
+        setToken(newToken);
+        editUser(formDataToSend);
+      }
+    });
+  };
+
+  // addCar
+  const editUser = (formDataToSend) => {
+    return axios
       .post(import.meta.env.VITE_REACT_API_URL + 'User/EditUser', formDataToSend, {
         headers: {
-          Authorization: `Bearer ${token.value}`,
+          Authorization: `Bearer ${token.token}`,
           'Content-Type': 'multipart/form-data'
         }
       })
       .then(() => {
         window.location = window.location;
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err.response?.status === 401) navigate('/login-register');
       });
   };
 
@@ -104,6 +115,8 @@ export const EditCabinet = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
+  console.log(selectedFileURL);
+
   return (
     <CabinetLayout>
       <Container>
@@ -111,9 +124,9 @@ export const EditCabinet = () => {
           <Col md="8">
             <h1 className="fs-3 text-center mb-4">Моя анкета</h1>
             <Form onSubmit={handleSubmit}>
-              {(user.imageLink && (
+              {((user.imageLink || selectedFileURL) && (
                 <img
-                  src={imagesURL + user.imageLink}
+                  src={selectedFileURL ? selectedFileURL : imagesURL + user.imageLink}
                   alt="User Photo"
                   height={80}
                   width={80}

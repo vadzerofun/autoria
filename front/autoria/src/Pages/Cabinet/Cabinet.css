@@ -1,3 +1,44 @@
+.countCircleText {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.iconTitleText {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.21; /* 17/14 */
+  color: var(--bs-primary);
+}
+
+.iconTitleContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 0.25rem;
+}
+
+/* =================================================================================================== */
+.favoritesContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.5rem;
+}
+
+.favoritesIconTitle {
+  gap: 1.5rem !important;
+}
+
 /* =================================================================================================== */
 .adsContainer {
   display: -webkit-box;
@@ -9,24 +50,6 @@
           flex-direction: column;
   gap: 2.5rem;
   margin-bottom: 3.75rem;
-}
-
-.adsIconTitle {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 1rem;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.adsIconTitleText {
-  font-family: "Inter", sans-serif;
-  font-weight: 600;
-  font-size: 0.875rem;
-  line-height: 1.21; /* 17/14 */
-  color: var(--bs-primary);
 }
 
 .adsCards {

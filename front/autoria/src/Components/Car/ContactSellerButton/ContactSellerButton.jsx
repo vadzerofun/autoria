@@ -9,7 +9,7 @@ export const ContactSellerButton = ({user, icon}) => {
   const [showContact, setShowContact] = useState(false);
   const contactTarget = useRef(null);
   const isDesktop = useMediaQuery('(min-width: 992px)');
-  console.log(isDesktop);  
+  // console.log(isDesktop);  
 
   // click
   const handleButtonClick = () => {

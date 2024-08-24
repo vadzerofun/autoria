@@ -223,6 +223,38 @@
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.carLikeBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.375rem;
+  color: var(--bs-primary) !important;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+  position: absolute;
+  inset: -1em 0 auto auto;
+}
+.carLikeBtn:hover, .carLikeBtn:focus, .carLikeBtn:active {
+  background-color: transparent;
+  color: var(--bs-primary) !important;
+  -webkit-filter: drop-shadow(0px 0px 3px #FD9052);
+          filter: drop-shadow(0px 0px 3px #FD9052);
+}
+
+.carLikeBtn svg {
+  width: 2em;
+  height: 2em;
 }
 
 .carGalleryInfoPoint {
