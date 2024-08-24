@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Core.Enums;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -107,6 +108,10 @@ builder.Services.AddScoped<IImageUploader, ImageUploader>();
 builder.Services.AddScoped<IPaymentService, StripeService>();
 builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 builder.Services.AddScoped<IJWTTokenService, JWTtokenService>();
+builder.Services.AddScoped<ISubscribeService, SubscribeService>();
+builder.Services.AddScoped<IUserSubscribeService, UserSubscribeService>();
+builder.Services.AddScoped<ISubscribeRepository, SubscribeRepository>();
+builder.Services.AddScoped<IUserSubscribeRepository, UserSubscribeRepository>();
 
 var authOptionsConfiguration = builder.Configuration.GetSection("Auth");
 builder.Services.Configure<AuthOption>(authOptionsConfiguration);

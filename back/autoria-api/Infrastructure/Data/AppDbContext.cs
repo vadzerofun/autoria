@@ -12,6 +12,7 @@ namespace Infrastructure.Data
         public DbSet<News> News { get; set; }
         public DbSet<RefreshToken> refreshTokens { get; set; }
         public DbSet<Subscribe> Subscribe { get; set; }
+        public DbSet<UserSubscribe> UserSubscribes { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
 
         protected override void OnModelCreating(ModelBuilder builder)

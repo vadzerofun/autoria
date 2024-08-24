@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Application.Interfaces;
 using Application.Model;
-using Application.Services;
-using Stripe;
-using Stripe.Checkout;
 using Core.Models;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace autoria_api.Controllers
 {
@@ -13,30 +15,56 @@ namespace autoria_api.Controllers
     [ApiController]
     public class SubscribeController : ControllerBase
     {
-        private readonly IPaymentService _PaymentService;
+        private readonly ISubscribeService _subscribeService;
 
-        public SubscribeController(IPaymentService paymentService)
+        public SubscribeController(ISubscribeService subscribeService)
         {
-            _PaymentService = paymentService;
+            _subscribeService = subscribeService;
         }
 
-        [HttpPost("CreatePayment")]
-        public async Task<IActionResult> CreatePayment([FromBody] PaymentRequest request)
+        [HttpGet]
+        public async Task<Result<List<Subscribe>>> GetSubscribes()
         {
-            if (request == null)
-                return BadRequest("Invalid request");
-
-            try
+            var subscribes = await _subscribeService.GetSubscribes();
+            if (subscribes.IsSuccess)
             {
-                var result = await _PaymentService.CreateChargeAsync(request);
-                return Ok(result);
+                return Result<List<Subscribe>>.Success(subscribes.Value);
             }
-            catch (StripeException ex)
-            {
-                return BadRequest(new { Message = ex.StripeError.Message });
-            }
+            return Result<List<Subscribe>>.Failure(subscribes.ErrorMessage);
         }
 
-        
+        [HttpGet("{id}")]
+        public async Task<Result<Subscribe>> GetSubscribe(Guid id)
+        {
+            var subscribe = await _subscribeService.GetSubscribe(id);
+            if (subscribe.IsSuccess)
+            {
+                return Result<Subscribe>.Success(subscribe.Value);
+            }
+            return Result<Subscribe>.Failure(subscribe.ErrorMessage);
+        }
+
+        [HttpPost("AddSubscribe")]
+        public async Task<IActionResult> AddSubscribe([FromBody] Subscribe subscribe)
+        {
+            subscribe.Id = Guid.NewGuid();
+            var result = await _subscribeService.AddSubscribe(subscribe);
+            if (result.IsSuccess)
+            {
+                return Ok();
+            }
+            return BadRequest(result.ErrorMessage);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<Result> RemoveSubscribe(Guid id)
+        {
+            var result = await _subscribeService.RemoveSubscribe(id);
+            if (result.IsSuccess)
+            {
+                return Result.Success();
+            }
+            return Result.Failure(result.ErrorMessage);
+        }
     }
 }

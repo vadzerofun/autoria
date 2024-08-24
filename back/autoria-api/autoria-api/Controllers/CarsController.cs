@@ -183,5 +183,16 @@ namespace autoria_api.Controllers
             }
             return Result.Failure(res.ErrorMessage);
         }
+        [AllowAnonymous]
+        [HttpPost("GetTopCars")]
+        public async Task<IActionResult> GetTopCars()
+        {
+            var res = await _carService.GetTopCars();
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+            return BadRequest(res.ErrorMessage);
+        }
     }
 }

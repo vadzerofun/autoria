@@ -20,11 +20,13 @@ namespace Application.Services
         private readonly ICarRepository _carRepository;
         private readonly IuserRepository _userRepository;
         private readonly IImageUploader _imageUploader;
-        public CarService(ICarRepository carRepository, IuserRepository userRepository, IImageUploader imageUploader)
+        private readonly IUserSubscribeService _userSubscribeService;
+        public CarService(ICarRepository carRepository, IuserRepository userRepository, IImageUploader imageUploader, IUserSubscribeService userSubscribeService)
         {
             _carRepository = carRepository;
             _userRepository = userRepository;
             _imageUploader = imageUploader;
+            _userSubscribeService = userSubscribeService;
         }
         public async Task AddCar(Cars car)
         {
@@ -146,6 +148,25 @@ namespace Application.Services
             catch (Exception ex)
             {
                 return Result.Failure(ex.Message);
+            }
+        }
+
+        public async Task<Result<List<Cars>>> GetTopCars()
+        {
+            try
+            {
+                var CarsId = (await _userSubscribeService.GetTopCarsId()).Value;
+                if (CarsId == null) return Result<List<Cars>>.Failure("top List is empty");
+                List<Cars> cars = new List<Cars>();
+                foreach (var CarId in CarsId)
+                {
+                    cars.Add(await GetCarById(CarId));
+                }
+                return Result<List<Cars>>.Success(cars);
+            }
+            catch (Exception ex)
+            {
+                return Result<List<Cars>>.Failure(ex.Message);
             }
         }
     }

@@ -192,20 +192,17 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("ByDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CarsId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("TEXT");
+                    b.Property<long>("Price")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Subscribe_Level")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<string>("Tittle")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<TimeSpan>("subTime")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -266,6 +263,30 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Core.Models.UserSubscribe", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CarsId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("SubEndTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("SubscribeId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserSubscribes");
                 });
 #pragma warning restore 612, 618
         }

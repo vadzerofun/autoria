@@ -520,6 +520,16 @@
   },
   {
     "ContainingType": "autoria_api.Controllers.CarsController",
+    "Method": "GetTopCars",
+    "RelativePath": "api/Cars/GetTopCars",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "autoria_api.Controllers.CarsController",
     "Method": "Like",
     "RelativePath": "api/Cars/Like",
     "HttpMethod": "POST",
@@ -839,15 +849,87 @@
   },
   {
     "ContainingType": "autoria_api.Controllers.SubscribeController",
-    "Method": "CreatePayment",
-    "RelativePath": "api/Subscribe/CreatePayment",
+    "Method": "GetSubscribes",
+    "RelativePath": "api/Subscribe",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Application.Model.Result\u00601[[System.Collections.Generic.List\u00601[[Core.Models.Subscribe, Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "autoria_api.Controllers.SubscribeController",
+    "Method": "GetSubscribe",
+    "RelativePath": "api/Subscribe/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Application.Model.Result\u00601[[Core.Models.Subscribe, Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "autoria_api.Controllers.SubscribeController",
+    "Method": "RemoveSubscribe",
+    "RelativePath": "api/Subscribe/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Application.Model.Result",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "autoria_api.Controllers.SubscribeController",
+    "Method": "AddSubscribe",
+    "RelativePath": "api/Subscribe/AddSubscribe",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "Application.Model.PaymentRequest",
+        "Name": "subscribe",
+        "Type": "Core.Models.Subscribe",
         "IsRequired": true
       }
     ],
@@ -1129,6 +1211,74 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "autoria_api.Controllers.UserSubscribeController",
+    "Method": "AddUserSubscribe",
+    "RelativePath": "api/UserSubscribe/AddUserSubscribe",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userSubscribe",
+        "Type": "Core.Models.UserSubscribe",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "autoria_api.Controllers.UserSubscribeController",
+    "Method": "BuyUserSubscribe",
+    "RelativePath": "api/UserSubscribe/BuyUserSubscribe",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userSubscribe",
+        "Type": "Core.Models.UserSubscribe",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "autoria_api.Controllers.UserSubscribeController",
+    "Method": "GetToopCarsId",
+    "RelativePath": "api/UserSubscribe/GetTopCars",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "autoria_api.Controllers.UserSubscribeController",
+    "Method": "GetUserSubscribe",
+    "RelativePath": "api/UserSubscribe/GetUserSubscribe/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "autoria_api.Controllers.UserSubscribeController",
+    "Method": "GetUserSubscribes",
+    "RelativePath": "api/UserSubscribe/GetUserSubscribes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]
