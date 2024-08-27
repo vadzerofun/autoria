@@ -164,5 +164,14 @@ namespace Infrastructure.Repositories
             await EditCar(id, Car);
             return;
         }
+
+        public async Task<List<Cars>> GetLikedCarsByUserId(Guid UserId)
+        {
+            var userCars = await _context.Cars
+                              .Where(car => car.Likes.Contains(UserId))
+                              .ToListAsync();
+            return userCars;
+
+        }
     }
 }

@@ -500,6 +500,22 @@
   },
   {
     "ContainingType": "autoria_api.Controllers.CarsController",
+    "Method": "GetLikedCarsByUserId",
+    "RelativePath": "api/Cars/GetLikedCarsByUserId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "autoria_api.Controllers.CarsController",
     "Method": "GetMostProfitable",
     "RelativePath": "api/Cars/GetMostProfitable",
     "HttpMethod": "GET",
