@@ -12,6 +12,10 @@ export const FavoriteCarCard = ({car}) => {
       <img
         className="favoriteCarImage"
         src={car.imagesPath.length ? imagesURL + car.imagesPath[0] : ImagePlaceholder}
+        onError={(e) => {
+          e.target.onerror = null; 
+          e.target.src = ImagePlaceholder; 
+        }}  
         alt={`Car`}
       />
       <div className="favoriteCarCardMain">

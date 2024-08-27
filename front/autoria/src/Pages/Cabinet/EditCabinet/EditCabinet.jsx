@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/Form';
 import { LoginRegister } from '../../../Components/Auth/LoginRegister/LoginRegister';
-import { ProfileIcon } from '../../../Components/Icons/ProfileIcon/ProfileIcon';
+import { UserIcon } from '../../../Components/Icons/UserIcon/UserIcon';
 import { useNavigate } from 'react-router-dom';
 import { getUserIdFromToken } from '../../../Services/authService';
 
@@ -134,7 +134,7 @@ export const EditCabinet = () => {
                 />
               )) || (
                 <div className="mb-3">
-                  <ProfileIcon color="#5C5C5C" size={80} />
+                  <UserIcon color="#5C5C5C" size={80}/>
                 </div>
               )}
               <Form.Group controlId="formImageFile" className="mb-3">

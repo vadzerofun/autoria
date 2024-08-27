@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const useGetCarsByUserId = (userId) => {
+const useLoadCabinet = (userId) => {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -31,4 +31,4 @@ const useGetCarsByUserId = (userId) => {
   return { cars, loading, error };
 };
 
-export default useGetCarsByUserId;
+export default useLoadCabinet;
