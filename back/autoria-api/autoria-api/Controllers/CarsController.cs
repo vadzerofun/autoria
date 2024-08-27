@@ -194,5 +194,17 @@ namespace autoria_api.Controllers
             }
             return BadRequest(res.ErrorMessage);
         }
+
+        [AllowAnonymous]
+        [HttpGet("GetLikedCarsByUserId")]
+        public async Task<IActionResult> GetLikedCarsByUserId(Guid userId)
+        {
+            var res = await _carService.GetLikedCarsByUserId(userId);
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+            return BadRequest(res.ErrorMessage);
+        }
     }
 }

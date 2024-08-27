@@ -169,5 +169,18 @@ namespace Application.Services
                 return Result<List<Cars>>.Failure(ex.Message);
             }
         }
+
+        public async Task<Result<List<Cars>>> GetLikedCarsByUserId(Guid UserId)
+        {
+            try
+            {
+                var cars = await _carRepository.GetLikedCarsByUserId(UserId);
+                return Result<List<Cars>>.Success(cars);
+            }
+            catch (Exception ex)
+            {
+                return Result<List<Cars>>.Failure(ex.Message);
+            }
+        }
     }
 }
