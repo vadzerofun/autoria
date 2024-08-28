@@ -1,12 +1,9 @@
 ﻿using Application.Interfaces;
 using Application.Model;
-using Application.Services;
 using autoria_api.ViewModel;
 using Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 
 namespace autoria_api.Controllers
