@@ -4,9 +4,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Logo from '../../../assets/logo.png';
 import Heart from '../../../assets/icons/heart.svg';
-import Profile from '../../../assets/icons/profile.svg';
+import Profile from '../../../assets/icons/user.svg';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import { UserIcon } from '../../Icons/UserIcon/UserIcon';
+import { HeartIcon } from '../../Icons/HeartIcon/HeartIcon';
 
 export const Header = () => {
   return (
@@ -25,10 +27,10 @@ export const Header = () => {
           <Navbar.Collapse>
             <Nav className="me-auto navbarText">
               <Nav.Link as={Link} to="#">
-                Вживані машини
+                Вживані авто
               </Nav.Link>
               <Nav.Link as={Link} to="#">
-                Нові машини
+                Нові авто
               </Nav.Link>
               <Nav.Link as={Link} to="/add-car">
                 Продати машину
@@ -41,10 +43,15 @@ export const Header = () => {
           <div className="navbarRight">
             <div className="navbarRightIcons">
               <Link to="#">
-                <img src={Heart} alt="Heart" className="img-fluid" width="19px" height="16px" />
+                <HeartIcon
+                  color="var(--bs-text-darkgray)"
+                  hoverColor="var(--bs-primary)"
+                  width={19}
+                  height={16}
+                />
               </Link>
               <Link to="/cabinet">
-                <img src={Profile} alt="Profile" className="img-fluid" width="16px" height="16px" />
+                <UserIcon color="var(--bs-text-darkgray)" hoverColor="var(--bs-primary)" />
               </Link>
             </div>
             <Link to="/add-car" className="navbarRightButton">

@@ -129,10 +129,10 @@
   padding: 0.5rem 0.75rem;
   border: none;
   border-radius: 0.75rem;
-  background-color: var(--bs-customblue);
+  background-color: var(--bs-darkgray);
 }
 .searchDropdownItem .dropdown-toggle:hover {
-  background-color: #c2d2ff;
+  background-color: var(--bs-dark);
 }
 
 .searchDropdownItem .dropdown-toggle::after {
@@ -140,10 +140,10 @@
 }
 
 .searchDropdownItem .searchDropdownToggle {
-  background: url("../../assets/icons/ui/dropdown-toggle.svg") no-repeat;
+  background: url("../../assets/icons/ui/select-caret-right.svg") no-repeat;
   background-position: center;
-  width: 28px;
-  height: 28px;
+  width: 1rem;
+  height: 1rem;
 }
 
 .searchButton {

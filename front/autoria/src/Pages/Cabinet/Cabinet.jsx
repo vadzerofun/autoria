@@ -3,7 +3,7 @@ import { CabinetLayout } from '../../Components/Layouts/CabinetLayout/CabinetLay
 import './Cabinet.css';
 import { AdIcon } from '../../Components/Icons/AdIcon/AdIcon';
 import ImagePlaceholder from '../../assets/placeholder-image.png';
-import useGetCarsByUserId from '../../Hooks/useGetCarsByUserId';
+import useLoadCabinet from '../../Hooks/useLoadCabinet';
 import useToken from '../../Hooks/useToken';
 import { getUserIdFromToken } from '../../Services/authService';
 import { formatNumber } from '../../Services/formatService';
@@ -14,6 +14,7 @@ import { LoginRegister } from '../../Components/Auth/LoginRegister/LoginRegister
 import { DeleteCarModal } from '../../Components/CarForm/DeleteCarModal/DeleteCarModal';
 import Modal from 'react-bootstrap/Modal'; // for modalShow
 import { HeartIcon } from '../../Components/Icons/HeartIcon/HeartIcon';
+import { FavoriteCarCard } from '../../Components/FavoriteCarCard/FavoriteCarCard';
 
 export const Cabinet = () => {
   // images
@@ -31,7 +32,7 @@ export const Cabinet = () => {
   const userId = getUserIdFromToken(token);
 
   // cars
-  const { cars, loading, error } = useGetCarsByUserId(userId);
+  const { cars, loading, error } = useLoadCabinet(userId);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -46,6 +47,7 @@ export const Cabinet = () => {
             <span className="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center lh-1 countCircleText" style={{ width: '27px', height: '26px' }}>
               0
             </span>
+            
           </div>
           <div className="adsCards">
             {cars.map((car, index) => (

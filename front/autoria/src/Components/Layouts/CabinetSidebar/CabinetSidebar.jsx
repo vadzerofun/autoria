@@ -2,7 +2,7 @@ import React from 'react';
 import './CabinetSidebar.css';
 import { Link } from 'react-router-dom';
 import { EditIcon } from '../../Icons/EditIcon/EditIcon';
-import { ProfileIcon } from '../../Icons/ProfileIcon/ProfileIcon';
+import { UserIcon } from '../../Icons/UserIcon/UserIcon';
 
 // import images
 import ImagePlaceholder from '../../../assets/placeholder-image.png';
@@ -28,7 +28,7 @@ export const CabinetSidebar = ({ user }) => {
               width={40}
               className="object-fit-cover rounded-circle"
             />
-          )) || <ProfileIcon color="#5C5C5C" size={40} />}
+          )) || <UserIcon color="#5C5C5C" size={40} />}
           <div className="cabinetSidebarUserText">
             <div className="cabinetSidebarUserName fs-5">
               <span>{user.name}</span>
