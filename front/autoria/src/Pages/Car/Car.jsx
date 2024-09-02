@@ -59,7 +59,7 @@ export const Car = () => {
   // liked
   const [liked, setLiked] = useState(false);
 
-  useEffect(() => {    
+  useEffect(() => {
     if (car) {
       setLiked(car.likes.includes(userId));
     }
@@ -69,7 +69,7 @@ export const Car = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   // car description
-  const description = formatDescription(car.description);  
+  const description = formatDescription(car.description);
 
   console.log(car);
 
@@ -85,12 +85,12 @@ export const Car = () => {
 
     setLiked(!liked);
 
-    likeCar(token.token).catch((err) => {
+    likeCar().catch((err) => {
       console.log(err);
       if (err.response.status === 401) {
-        const newToken = refreshAuthToken(token);
-        setToken(newToken);
-        likeCar();
+        refreshAuthToken(token, setToken).then(() => {
+          likeCar();
+        });
       }
     });
   };
@@ -189,9 +189,13 @@ export const Car = () => {
                 <div className="carGallerySellerText">
                   <div className="fw-medium">Продавець</div>
                   <div className="carGallerySellerName fs-5">
-                    <span>{user.name}</span>
-                    <span className="carGalleryInfoPoint"></span>
-                    <span>{user.region}</span>
+                    <span>{car.sellerName}</span>
+                    {car.city && (
+                      <>
+                        <span className="carGalleryInfoPoint"></span>
+                        <span>{car.city}</span>
+                      </>
+                    )}
                   </div>
                   <div className="carGallerySellerIcons">
                     <div className="carGallerySellerIconItem">
@@ -216,7 +220,7 @@ export const Car = () => {
                     </div>
                   </div>
                 </div>
-                <ContactSellerButton user={user} icon={carIcons.ChatWhite} />
+                <ContactSellerButton car={car} icon={carIcons.ChatWhite} />
               </div>
             </div>
           </div>

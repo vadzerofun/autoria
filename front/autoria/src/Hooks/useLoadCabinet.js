@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const useLoadCabinet = (userId) => {
   const [cars, setCars] = useState([]);
+  const [favoriteCars, setFavoriteCars] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -12,12 +13,20 @@ const useLoadCabinet = (userId) => {
         setLoading(true);
         setError(null);
 
-        // Fetch car data
+        // Fetch cars data
         const carResponse = await axios.get(
           `${import.meta.env.VITE_REACT_API_URL}Cars/GetCarsByUserId?UserId=${userId}`
         );
         const carData = carResponse.data.value;
+
+        // Fetch favorite cars data
+        const favoriteCarResponse = await axios.get(
+          `${import.meta.env.VITE_REACT_API_URL}Cars/GetLikedCarsByUserId?UserId=${userId}`
+        );
+        const favoriteCarData = favoriteCarResponse.data.value;
+
         setCars(carData);
+        setFavoriteCars(favoriteCarData);
       } catch (error) {
         setError(error);
       } finally {
@@ -28,7 +37,7 @@ const useLoadCabinet = (userId) => {
     fetchCars();
   }, [userId]);
 
-  return { cars, loading, error };
+  return { cars, favoriteCars, loading, error };
 };
 
 export default useLoadCabinet;

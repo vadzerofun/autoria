@@ -15,6 +15,7 @@ import { DeleteCarModal } from '../../Components/CarForm/DeleteCarModal/DeleteCa
 import Modal from 'react-bootstrap/Modal'; // for modalShow
 import { HeartIcon } from '../../Components/Icons/HeartIcon/HeartIcon';
 import { FavoriteCarCard } from '../../Components/FavoriteCarCard/FavoriteCarCard';
+import { Link } from 'react-router-dom';
 
 export const Cabinet = () => {
   // images
@@ -32,7 +33,7 @@ export const Cabinet = () => {
   const userId = getUserIdFromToken(token);
 
   // cars
-  const { cars, loading, error } = useLoadCabinet(userId);
+  const { cars, favoriteCars, loading, error } = useLoadCabinet(userId);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -44,30 +45,17 @@ export const Cabinet = () => {
           <div className="iconTitleContainer favoritesIconTitle">
             <HeartIcon color="var( --bs-primary )" width={26} height={24} />
             <h2 className="iconTitleText">Обране</h2>
-            <span className="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center lh-1 countCircleText" style={{ width: '27px', height: '26px' }}>
-              0
+            <span
+              className="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center lh-1 countCircleText"
+              style={{ width: '27px', height: '26px' }}>
+              {favoriteCars.length}
             </span>
-            
           </div>
           <div className="adsCards">
-            {cars.map((car, index) => (
-              <Dropdown key={`car-${index}`} drop="end" align="start">
-                <Dropdown.Toggle as={CustomToggle}>
-                  <CarCard car={car} />
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item href={`/cars/${car.id}`}>Перейти</Dropdown.Item>
-                  <Dropdown.Item href={`/cars/${car.id}/edit`}>Редагувати</Dropdown.Item>
-                  <Dropdown.Item
-                    href="#"
-                    onClick={() => {
-                      setModalShow(true);
-                      setModalCar(car);
-                    }}>
-                    Видалити
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+            {favoriteCars.map((car, index) => (
+              <Link to={`/cars/${car.id}`} key={`favoriteCar-${index}`} className="noFontStyle">
+                <FavoriteCarCard car={car} />
+              </Link>
             ))}
           </div>
         </div>

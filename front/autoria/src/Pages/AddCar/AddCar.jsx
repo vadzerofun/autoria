@@ -49,7 +49,7 @@ export const AddCar = () => {
 
   return (
     <Layout>
-      <AddCarForm carData={{...formData}} />
+      <AddCarForm carData={{...formData}} />      
     </Layout>
   );
 };

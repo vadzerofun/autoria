@@ -1,0 +1,8 @@
+.authOffcanvas {
+  width: 100% !important;
+}
+@media screen and (min-width: 900px) {
+  .authOffcanvas {
+    width: 40% !important;
+  }
+}/*# sourceMappingURL=AuthOffcanvas.css.map */

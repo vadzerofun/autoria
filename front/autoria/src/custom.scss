@@ -35,8 +35,22 @@ $container-max-widths: (
   xxl: 1400px
 );
 
+$utilities:(
+  "width": (
+    property: width,
+    class: w,
+    values: (
+      25: 25%,
+      50: 50%,
+      75: 75%,
+      100: 100%,
+      auto: auto,
+      40: 40%
+    )
+  ),
+);
+
 // Merge the maps
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
-/* import bootstrap to set changes */
 @import "../node_modules/bootstrap/scss/bootstrap";

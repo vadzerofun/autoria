@@ -144,6 +144,15 @@
   background-position: center;
   width: 1rem;
   height: 1rem;
+  -webkit-transition: -webkit-transform 0.15s ease-in-out;
+  transition: -webkit-transform 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+}
+
+.searchDropdownItem.show .searchDropdownToggle {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 .searchButton {

@@ -2,7 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Montserrat:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 /* 55/40 */
-/* import bootstrap to set changes */
 /*!
  * Bootstrap  v5.3.3 (https://getbootstrap.com/)
  * Copyright 2011-2024 The Bootstrap Authors
@@ -8674,6 +8673,10 @@ textarea.form-control-lg {
   width: auto !important;
 }
 
+.w-40 {
+  width: 40% !important;
+}
+
 .mw-100 {
   max-width: 100% !important;
 }
@@ -13958,7 +13961,6 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 40px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -13975,7 +13977,8 @@ a {
 }
 
 .loginLogo {
-  max-width: 170px;
+  max-width: 120px;
+  margin-bottom: 2.5rem;
 }
 @media screen and (max-width: 1024px) {
   .loginLogo {
@@ -13989,13 +13992,25 @@ a {
 
 .loginTitle {
   font-weight: 700;
-  margin-bottom: 20px;
+  line-height: 1.38; /* 50/36 */
+  margin-bottom: 1.25rem;
+  color: var(--bs-text-darkgray);
 }
 @media screen and (min-width: 900px) {
   .loginTitle {
-    font-size: 36px;
-    line-height: 1.38; /* 50/36 */
+    font-size: 2.25rem;
+    margin-bottom: 3.75rem;
   }
+}
+
+.loginBtnForgotPassword {
+  padding: 0;
+  margin: 0;
+  color: var(--bs-text-darkgray);
+  text-decoration: inherit;
+}
+.loginBtnForgotPassword:hover, .loginBtnForgotPassword:active, .loginBtnForgotPassword:focus-visible {
+  color: var(--bs-text-darkgray) !important;
 }
 
 .loginForm {
@@ -14068,22 +14083,24 @@ a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: rgba(var(--bs-text-darkgray-rgb), 0.6);
+  margin-bottom: 0;
 }
 
 .loginFormBtn {
-  font-size: 24px;
+  --bs-btn-font-family: "Inter", sans-serif;
+  font-size: 1.25rem;
   line-height: 1.2; /* 29/24 */
   font-weight: 700;
   color: var(--bs-light);
-  padding: 18px 70px;
+  padding: 20px;
+  width: 100%;
+  max-width: 222px;
   margin: 0 auto;
-  border-radius: 25px;
+  border-radius: 24px;
 }
 @media screen and (max-width: 768px) {
   .loginFormBtn {

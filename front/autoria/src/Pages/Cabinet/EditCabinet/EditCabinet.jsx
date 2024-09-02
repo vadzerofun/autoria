@@ -12,7 +12,7 @@ import Form from 'react-bootstrap/Form';
 import { LoginRegister } from '../../../Components/Auth/LoginRegister/LoginRegister';
 import { UserIcon } from '../../../Components/Icons/UserIcon/UserIcon';
 import { useNavigate } from 'react-router-dom';
-import { getUserIdFromToken } from '../../../Services/authService';
+import { getUserIdFromToken, refreshAuthToken } from '../../../Services/authService';
 
 export const EditCabinet = () => {
   const { token } = useToken();
@@ -87,9 +87,9 @@ export const EditCabinet = () => {
     editUser(formDataToSend).catch((err) => {
       console.log(err);
       if (err.response.status === 401) {
-        const newToken = refreshAuthToken(token);
-        setToken(newToken);
-        editUser(formDataToSend);
+        refreshAuthToken(token, setToken).then(() => {
+          editUser(formDataToSend);
+        });
       }
     });
   };
@@ -134,7 +134,7 @@ export const EditCabinet = () => {
                 />
               )) || (
                 <div className="mb-3">
-                  <UserIcon color="#5C5C5C" size={80}/>
+                  <UserIcon color="#5C5C5C" size={80} />
                 </div>
               )}
               <Form.Group controlId="formImageFile" className="mb-3">

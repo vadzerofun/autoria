@@ -27,8 +27,21 @@ import { NewsCard } from '../../Components/News/NewsCard/NewsCard';
 import { getUserIdFromToken } from '../../Services/authService';
 import { getCurrency } from '../../Services/carService';
 import { formatNumber } from '../../Services/formatService';
+import { AuthOffcanvas } from '../../Components/Auth/AuthOffcanvas/AuthOffcanvas';
 
 export const Home = () => {
+  // showOffcanvas
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+  console.log(showOffcanvas);
+
+  const displayOffcanvas = () => {
+    setShowOffcanvas(true);  
+  };
+
+  const closeOffcanvas = () => {
+    setShowOffcanvas(false);
+  };
+
   // images
   const imagesURL = import.meta.env.VITE_IMAGES_URL;
   // user, token
@@ -168,7 +181,7 @@ export const Home = () => {
           <div className="recsContainer">
             <div className="recsLeft">
               <h2 className="homeTitle fs-1">Тобі може сподобатись!</h2>
-              <Link to={`cars/${carsForYou[0].id}`} className="noFontStyle">
+              <Link to={`/cars/${carsForYou[0].id}`} className="noFontStyle">
                 <div className="recsLeftCard">
                   <img
                     className="recsLeftImage"
@@ -178,8 +191,8 @@ export const Home = () => {
                         : ImagePlaceholder
                     }
                     onError={(e) => {
-                      e.target.onerror = null; 
-                      e.target.src = ImagePlaceholder; 
+                      e.target.onerror = null;
+                      e.target.src = ImagePlaceholder;
                     }}
                     alt="Recommended car"
                   />
@@ -318,15 +331,14 @@ export const Home = () => {
               className="newsSwiper">
               {news.map((news, index) => (
                 <SwiperSlide key={`news-${index}`}>
-                  <NewsCard news={news} userId={userId} />
+                  <NewsCard news={news} userId={userId} displayOffcanvas={displayOffcanvas} />
                 </SwiperSlide>
               ))}
             </Swiper>
           </div>
         </Container>
       </section>
+      <AuthOffcanvas showOffcanvas={showOffcanvas} setShowOffcanvas={setShowOffcanvas} />
     </Layout>
   );
 };
-
-
