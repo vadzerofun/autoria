@@ -182,5 +182,37 @@ namespace Application.Services
                 return Result<List<Cars>>.Failure(ex.Message);
             }
         }
+
+        public async Task<Result<List<Cars>>> GetTopCars(int count)
+        {
+            try
+            {
+                var CarsId = (await _userSubscribeService.GetTopCarsId(count)).Value;
+                if (CarsId == null) return Result<List<Cars>>.Failure("top List is empty");
+                List<Cars> cars = new List<Cars>();
+                foreach (var CarId in CarsId)
+                {
+                    cars.Add(await GetCarById(CarId));
+                }
+                return Result<List<Cars>>.Success(cars);
+            }
+            catch (Exception ex)
+            {
+                return Result<List<Cars>>.Failure(ex.Message);
+            }
+        }
+
+        public async Task<Result> ViewPhone(Guid Carid)
+        {
+            try
+            {
+                await _carRepository.ViewPhone(Carid);
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure(ex.Message);
+            }
+        }
     }
 }

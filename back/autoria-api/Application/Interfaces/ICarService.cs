@@ -25,9 +25,11 @@ namespace Application.Interfaces
         public Task<List<Cars>> GetCarsForYou();
         public Task<List<Cars>> GetMostProfitable();
         public Task<Result> ViewCar(Guid Carid);
+        public Task<Result> ViewPhone(Guid Carid);
         public Task<Result<List<Cars>>> GetCarsByUserId(Guid UserId);
         public Task<Result> Like(Guid Id, Guid UserId);
         public Task<Result<List<Cars>>> GetTopCars();
+        public Task<Result<List<Cars>>> GetTopCars(int count);
         public Task<Result<List<Cars>>> GetLikedCarsByUserId(Guid userId);
     }
 }

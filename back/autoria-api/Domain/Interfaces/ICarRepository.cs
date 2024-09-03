@@ -22,6 +22,7 @@ namespace Core.Interfaces
         Task<List<Cars>> GetCarsForYou();
         Task<List<Cars>> GetMostProfitable();
         Task ViewCar(Guid CarId);
+        Task ViewPhone(Guid CarId);
         Task<List<Cars>> GetCarsByUserId(Guid UserId);
         Task Addlike(Guid id, Guid UserId);
         Task Removelike(Guid id, Guid UserId);

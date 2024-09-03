@@ -546,6 +546,22 @@
   },
   {
     "ContainingType": "autoria_api.Controllers.CarsController",
+    "Method": "GetTopCars",
+    "RelativePath": "api/Cars/GetTopCars",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "count",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "autoria_api.Controllers.CarsController",
     "Method": "Like",
     "RelativePath": "api/Cars/Like",
     "HttpMethod": "POST",
@@ -595,6 +611,22 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "autoria_api.Controllers.CarsController",
+    "Method": "ViewPhone",
+    "RelativePath": "api/Cars/ViewPhone",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CarId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "autoria_api.Controllers.NewsController",

@@ -193,6 +193,18 @@ namespace autoria_api.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("GetTopCars")]
+        public async Task<IActionResult> GetTopCars(int count)
+        {
+            var res = await _carService.GetTopCars(count);
+            if (res.IsSuccess)
+            {
+                return Ok(res);
+            }
+            return BadRequest(res.ErrorMessage);
+        }
+
+        [AllowAnonymous]
         [HttpGet("GetLikedCarsByUserId")]
         public async Task<IActionResult> GetLikedCarsByUserId(Guid userId)
         {
@@ -200,6 +212,18 @@ namespace autoria_api.Controllers
             if (res.IsSuccess)
             {
                 return Ok(res);
+            }
+            return BadRequest(res.ErrorMessage);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("ViewPhone")]
+        public async Task<IActionResult> ViewPhone(Guid CarId)
+        {
+            var res = await _carService.ViewPhone(CarId);
+            if (res.IsSuccess)
+            {
+                return Ok();
             }
             return BadRequest(res.ErrorMessage);
         }

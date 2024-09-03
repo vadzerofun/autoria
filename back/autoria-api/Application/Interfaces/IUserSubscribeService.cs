@@ -16,5 +16,6 @@ namespace Application.Interfaces
         public Task<Result<UserSubscribe>> GetUserSubscribe(Guid Id);
         public Task<Result> BuyUserSubscribe(UserSubscribe userSubscribe);
         public Task<Result<List<Guid>>> GetTopCarsId();
+        public Task<Result<List<Guid>>> GetTopCarsId(int count);
     }
 }

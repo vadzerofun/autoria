@@ -173,5 +173,13 @@ namespace Infrastructure.Repositories
             return userCars;
 
         }
+
+        public async Task ViewPhone(Guid CarId)
+        {
+            var car = await GetCarById(CarId);
+            car.SellerPhoneViews += 1;
+            await EditCar(CarId, car);
+            return;
+        }
     }
 }
