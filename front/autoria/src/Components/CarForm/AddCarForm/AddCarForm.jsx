@@ -14,7 +14,7 @@ import useToken from '../../../Hooks/useToken';
 
 export const AddCarForm = ({ carData }) => {
   // token
-  const { token, setToken } = useToken();  
+  const { token, setToken } = useToken();
   // useNavigate
   const navigate = useNavigate();
 
@@ -133,9 +133,9 @@ export const AddCarForm = ({ carData }) => {
     addCar(formDataToSend).catch((err) => {
       console.log(err);
       if (err.response.status === 401) {
-        const newToken = refreshAuthToken(token);
-        setToken(newToken);
-        addCar(formDataToSend);
+        refreshAuthToken(token, setToken).then(() => {
+          addCar(formDataToSend);
+        });
       }
     });
   };

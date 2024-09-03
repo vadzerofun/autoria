@@ -12,7 +12,7 @@ import { HeartFilledIcon } from '../../Icons/HeartIcon/HeartFilledIcon';
 import useToken from '../../../Hooks/useToken';
 import { refreshAuthToken } from '../../../Services/authService';
 
-export const NewsCard = ({ news, userId }) => {
+export const NewsCard = ({ news, userId, displayOffcanvas }) => {
   // images
   const imagesURL = import.meta.env.VITE_IMAGES_URL;
   // useToken
@@ -32,28 +32,26 @@ export const NewsCard = ({ news, userId }) => {
     e.stopPropagation();
 
     if (!token) {
-      navigate('/login-register');
+      displayOffcanvas();
       return;
     }
 
     setLiked(!liked);
     liked ? setLikesCount(likesCount - 1) : setLikesCount(likesCount + 1);
 
-    try {
-      likeNews(token.token);
-    } catch (err) {
+    likeNews(token.token).catch((err) => {
       console.log(err);
       if (err.response.status === 401) {
-        const newToken = refreshAuthToken(token);
-        setToken(newToken);
-        likeNews(token.token);
-      } 
-    }
+        refreshAuthToken(token, setToken).then(() => {
+          likeNews(token.token);
+        });
+      }
+    });
   };
 
   // likeNews
   const likeNews = (authToken) => {
-    axios.post(
+    return axios.post(
       import.meta.env.VITE_REACT_API_URL + 'News/LikeNews' + `?Id=${news.id}`,
       {},
       {
@@ -62,18 +60,18 @@ export const NewsCard = ({ news, userId }) => {
         }
       }
     );
-  }
+  };
 
   return (
-    <Link to="/login-register" className="noFontStyle">
+    <Link to={news.link} className="noFontStyle">
       <div className="newsCard">
         <img
           className="newsImage"
           src={news.imageLink ? imagesURL + news.imageLink : ImagePlaceholder}
           alt={`News`}
           onError={(e) => {
-            e.target.onerror = null; 
-            e.target.src = ImagePlaceholder; 
+            e.target.onerror = null;
+            e.target.src = ImagePlaceholder;
           }}
         />
         <div className="newsCardTitle fs-6">{news.tittle}</div>

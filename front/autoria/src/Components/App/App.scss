@@ -40,7 +40,6 @@ a {
 .login {
   display: flex;
   flex-direction: column;
-  gap: 40px;
   align-items: center;
   margin: 0 auto;
   max-width: 490px;
@@ -53,7 +52,8 @@ a {
 }
 
 .loginLogo {
-  max-width: 170px;
+  max-width: 120px;
+  margin-bottom: 2.5rem;
   @media screen and (max-width: 1024px) {
     max-width: 100px;   
   }
@@ -65,11 +65,25 @@ a {
 
 .loginTitle {
   font-weight: 700;
-  margin-bottom: 20px;
+  line-height: 1.38; /* 50/36 */    
+  margin-bottom: 1.25rem;
+  color: var(--bs-text-darkgray);
   @media screen and (min-width: 900px) {
-    font-size: 36px;
-    line-height: 1.38; /* 50/36 */    
+    font-size: 2.25rem;
+    margin-bottom: 3.75rem;    
   }
+}
+
+.loginBtnForgotPassword {
+  padding: 0;
+  margin: 0;
+  color: var(--bs-text-darkgray);
+  text-decoration: inherit; 
+  &:hover,
+  &:active,
+  &:focus-visible {
+    color: var(--bs-text-darkgray) !important;
+  }  
 }
 
 .loginForm {
@@ -114,18 +128,22 @@ a {
 
 .loginFormPhoneLabel {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: center;
+  color: rgba(var(--bs-text-darkgray-rgb), 0.6);
+  margin-bottom: 0;
 }
 
 .loginFormBtn {
-  font-size: 24px;
+  --bs-btn-font-family: "Inter", sans-serif;
+  font-size: 1.25rem;
   line-height: 1.2; /* 29/24 */
   font-weight: 700;
   color: var(--bs-light);
-  padding: 18px 70px;
+  padding: 20px;
+  width: 100%;
+  max-width: 222px;
   margin: 0 auto;
-  border-radius: 25px;
+  border-radius: 24px;
   @media screen and (max-width: 768px) {
     font-size: 16px;
   }

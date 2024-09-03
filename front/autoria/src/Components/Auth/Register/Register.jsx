@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Register.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -8,15 +8,22 @@ import { Message } from '../Message/Message';
 
 import axios from 'axios';
 
-export const Register = () => {
+export const Register = ({ setActiveComponent }) => {
+  // hide message
+  const hideMessage = () => {
+    setShowMessage(false);
+  };
   // msg
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState({
     title: '',
     msgText: '',
     linkText: '',
-    linkURL: ''
+    activeComponent: 0,
+    setActiveComponent: setActiveComponent,
+    hideMessage: hideMessage
   });
+
   // useState
   const [username, setUsername] = useState('');
   const [phone, setPhone] = useState('');
@@ -45,10 +52,13 @@ export const Register = () => {
           })
           .then((response) => {
             setMessage({
+              ...message,
               title: 'Вітаємо',
               msgText: `На адресу ${email} було надіслано повідомлення з підтвердженням`,
               linkText: 'Далі',
-              linkURL: '/login'
+              activeComponent: 1,
+              setActiveComponent: setActiveComponent,
+              hideMessage: hideMessage
             });
             setShowMessage(true);
           })
@@ -58,7 +68,9 @@ export const Register = () => {
               title: 'Упс',
               msgText: 'Щось пішло не так',
               linkText: 'Повторити',
-              linkURL: '/register'
+              activeComponent: 2,
+              setActiveComponent: setActiveComponent,
+              hideMessage: hideMessage
             });
             setShowMessage(true);
           });
@@ -69,7 +81,9 @@ export const Register = () => {
           title: 'Упс',
           msgText: 'Щось пішло не так',
           linkText: 'Повторити',
-          linkURL: '/register'
+          activeComponent: 2,
+          setActiveComponent: setActiveComponent,
+          hideMessage: hideMessage
         });
         setShowMessage(true);
       });
@@ -93,7 +107,7 @@ export const Register = () => {
           </div>
           <h1 className="loginTitle">Вітаємо</h1>
           <Form className="loginForm" encType="">
-            <Form.Group className="mb-3" controlId="username">
+            <Form.Group className="mb-4" controlId="username">
               <Form.Control
                 type="text"
                 placeholder="Ім'я"
@@ -105,11 +119,13 @@ export const Register = () => {
                 }}
               />
             </Form.Group>
-            <Form.Group as={Row} className="mb-3" controlId="phone">
-              <Form.Label column xs="2" className="loginFormInputFont loginFormPhoneLabel">
-                +380
-              </Form.Label>
-              <Col xs="10">
+            <Form.Group as={Row} className="mb-4" controlId="phone">
+              <Col className="pe-1" xs="3">
+                <Form.Label className="loginFormInput loginFormPhoneLabel">
+                  +380
+                </Form.Label>
+              </Col>
+              <Col xs="9">
                 <Form.Control
                   type="tel"
                   placeholder="Номер телефону"
@@ -121,7 +137,7 @@ export const Register = () => {
                 />
               </Col>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="email">
+            <Form.Group className="mb-4" controlId="email">
               <Form.Control
                 type="email"
                 placeholder="Email"
@@ -133,7 +149,7 @@ export const Register = () => {
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="password">
+            <Form.Group className="mb-4" controlId="password">
               <Form.Control
                 type="password"
                 placeholder="Пароль"
@@ -149,12 +165,12 @@ export const Register = () => {
               type="switch"
               id="privacyPolicySwitch"
               label="Я приймаю всі правила конфіденційності"
-              className="mb-5 customFormSwitch"
+              className="mb-4 customFormSwitch"
               reverse
               required
             />
             <Button variant="primary" type="submit" className="loginFormBtn" onClick={createUser}>
-              Зареєструватись
+              Завершити
             </Button>
           </Form>
         </div>

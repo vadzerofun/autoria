@@ -6,14 +6,20 @@ import './ForgotPassword.css';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Message } from '../Message/Message';
 
-export const ForgotPassword = () => {
+export const ForgotPassword = ({ setActiveComponent }) => {
+  // hide message
+  const hideMessage = () => {
+    setShowMessage(false);
+  };
   // msg
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState({
     title: '',
     msgText: '',
     linkText: '',
-    linkURL: ''
+    activeComponent: 0,
+    setActiveComponent: setActiveComponent,
+    hideMessage: hideMessage
   });
 
   // phase
@@ -46,7 +52,9 @@ export const ForgotPassword = () => {
           title: 'Вітаємо',
           msgText: `На адресу ${email} було надіслано повідомлення з посиланням на зміну паролю`,
           linkText: 'Далі',
-          linkURL: '/login'
+          activeComponent: 1,
+          setActiveComponent: setActiveComponent,
+          hideMessage: hideMessage
         });
         setPhase(2);
       })
@@ -56,7 +64,9 @@ export const ForgotPassword = () => {
           title: 'Упс',
           msgText: 'Щось пішло не так',
           linkText: 'Повторити',
-          linkURL: '/forgot-password'
+          activeComponent: 3,
+          setActiveComponent: setActiveComponent,
+          hideMessage: hideMessage
         });
         setPhase(2);
       });
@@ -82,7 +92,9 @@ export const ForgotPassword = () => {
           title: 'Вітаємо',
           msgText: `Пароль успішно змінений`,
           linkText: 'Далі',
-          linkURL: '/login'
+          activeComponent: 1,
+          setActiveComponent: setActiveComponent,
+          hideMessage: hideMessage
         });
         setShowMessage(true);
       })
@@ -92,7 +104,9 @@ export const ForgotPassword = () => {
           title: 'Упс',
           msgText: 'Щось пішло не так',
           linkText: 'Повторити',
-          linkURL: '/forgot-password'
+          activeComponent: 3,
+          setActiveComponent: setActiveComponent,
+          hideMessage: hideMessage
         });
         setPhase(2);
       });

@@ -3,7 +3,8 @@
 import axios from 'axios';
 
 // refreshAuthToken
-export const refreshAuthToken = (token) => {
+export const refreshAuthToken = (token, setToken) => {
+
   return axios.post(
     import.meta.env.VITE_REACT_API_URL + 'User/refresh-token',
     {
@@ -11,17 +12,18 @@ export const refreshAuthToken = (token) => {
     }
   )
   .then(response => {
-    return response.data.value; 
+    // Set token
+    const tokenValue = response.data.value;                                
+    setToken(tokenValue);
   })
   .catch(err => {
-    console.error('Error refreshing token:', err);
-    navigate('/login-register');
+    console.log(err);
   });
 };
 
 // getUserIdFromToken
 export const getUserIdFromToken = (token) => {
-  if (!token) return null;
+  if (!token || !token.token) return null;
   const tokenValue = token.token;  
   const arrayToken = tokenValue.split('.');
   const tokenPayload = JSON.parse(atob(arrayToken[1]));

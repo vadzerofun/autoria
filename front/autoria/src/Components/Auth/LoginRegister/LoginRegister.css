@@ -1,29 +1,38 @@
+.loginRegisterLogo {
+  margin-bottom: 5rem;
+}
+
+.loginRegisterLogo img {
+  width: 100%;
+  max-width: 205px;
+}
+
 .loginRegisterButtons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 100%;
+  max-width: 445px;
+  -ms-flex-item-align: center;
+      align-self: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -ms-flex-item-align: stretch;
-      align-self: stretch;
   padding-left: 10px;
   padding-right: 10px;
-  padding-top: 100px;
-}
-@media screen and (max-width: 1024px) {
-  .loginRegisterButtons {
-    padding-top: 50px;
-  }
+  margin-bottom: 2.5rem;
 }
 
 .loginRegisterButtons .loginFormBtn {
   margin: 0;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  max-width: 100%;
 }
 
 .loginFormBtnSecondary {
-  color: var(--bs-dark) !important;
+  color: var(--bs-text-darkgray) !important;
 }
 
 .socialMediaButtons {
@@ -33,17 +42,13 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -ms-flex-item-align: stretch;
-      align-self: stretch;
+  -ms-flex-item-align: center;
+      align-self: center;
+  width: 100%;
+  max-width: 445px;
   padding-left: 10px;
   padding-right: 10px;
-  padding-top: 70px;
   gap: 10px;
-}
-@media screen and (max-width: 1024px) {
-  .socialMediaButtons {
-    padding-top: 35px;
-  }
 }
 
 .socialMediaButtons .loginFormBtn {
@@ -70,4 +75,36 @@
   font-size: inherit;
   font-weight: inherit;
   line-height: inherit;
+}
+
+.loginRegisterOr {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.75rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-item-align: center;
+      align-self: center;
+  width: 100%;
+  max-width: 445px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 1.375rem;
+}
+
+.loginRegisterOrLine {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border: 1.3px solid var(--bs-darkgray);
+}
+
+.loginRegisterOrText {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--bs-text-darkgray);
 }/*# sourceMappingURL=LoginRegister.css.map */

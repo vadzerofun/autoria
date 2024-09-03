@@ -4,7 +4,7 @@ import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
 import useMediaQuery from '../../../Hooks/useMediaQuery';
 
-export const ContactSellerButton = ({user, icon}) => {
+export const ContactSellerButton = ({car, icon}) => {
   // Tooltip button
   const [showContact, setShowContact] = useState(false);
   const contactTarget = useRef(null);
@@ -15,7 +15,7 @@ export const ContactSellerButton = ({user, icon}) => {
   const handleButtonClick = () => {
     if (!isDesktop) {
       // For mobile devices, open phone dialer
-      window.location.href = `tel:${user.phone}`;
+      window.location.href = `tel:${car.sellerPhone}`;
     } else {
       // For desktop devices, toggle tooltip
       setShowContact(!showContact);
@@ -35,8 +35,10 @@ export const ContactSellerButton = ({user, icon}) => {
       </Button>
       <Overlay target={contactTarget.current} show={showContact} placement="bottom">
         {(props) => (
-          <Tooltip id="overlay-example" {...props}>
-            {`tel:${user.phone}`}
+          <Tooltip id="seller-phone" {...props}>
+            {`Телефон: ${car.sellerPhone}`}
+            {car.sellerPhoneExtra && <br/>}
+            {car.sellerPhoneExtra && `Дод. телефон: ${car.sellerPhoneExtra}`}
           </Tooltip>
         )}
       </Overlay>
