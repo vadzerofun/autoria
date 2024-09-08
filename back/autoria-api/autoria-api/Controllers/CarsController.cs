@@ -25,9 +25,9 @@ namespace autoria_api.Controllers
         // GET: api/Cars
         [AllowAnonymous]
         [HttpGet]
-        public async Task<List<Cars>> GetCars()
+        public async Task<List<Cars>> GetCars(int page, int pageSize)
         {
-            var car = await _carService.GetCars();
+            var car = await _carService.GetCars(page, pageSize);
             return car;
         }
         // GET: api/Cars/5
@@ -69,11 +69,11 @@ namespace autoria_api.Controllers
         }
         [AllowAnonymous]
         [HttpGet("GetCarsByFilter")]
-        public async Task<Result<List<Cars>>> GetCarsByFilter(CarFilter carFilter)
+        public async Task<Result<List<Cars>>> GetCarsByFilter(CarFilter carFilter, int page = 0, int pageSize = 0)
         {
             try
             {
-                var cars = await _carService.GetCarByFilter(carFilter);
+                var cars = await _carService.GetCarByFilter(carFilter, page, pageSize);
                 return Result<List<Cars>>.Success(cars);
             }
             catch (Exception ex)
@@ -206,9 +206,9 @@ namespace autoria_api.Controllers
 
         [AllowAnonymous]
         [HttpGet("GetLikedCarsByUserId")]
-        public async Task<IActionResult> GetLikedCarsByUserId(Guid userId)
+        public async Task<IActionResult> GetLikedCarsByUserId(Guid userId, int Page = 0, int PageSize = 0)
         {
-            var res = await _carService.GetLikedCarsByUserId(userId);
+            var res = await _carService.GetLikedCarsByUserId(userId, Page, PageSize);
             if (res.IsSuccess)
             {
                 return Ok(res);

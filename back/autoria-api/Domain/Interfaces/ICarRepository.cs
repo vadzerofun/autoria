@@ -10,7 +10,7 @@ namespace Core.Interfaces
 {
     public interface ICarRepository
     {
-        Task<List<Cars>> GetCars();
+        Task<List<Cars>> GetCars(int page, int pageSize);
         Task<Cars> GetCarById(Guid id);
         Task AddCar(Cars car);
         Task DeleteCarById(Guid id);
@@ -18,7 +18,7 @@ namespace Core.Interfaces
         Task AddImageToCar(Guid id, List<string> ImageLink);
         Task DeleteImagefromCar(Guid id, string ImageLink);
         Task<List<Cars>> GetCarsByMark(string mark);
-        Task<List<Cars>> GetCarsByFilter(CarType type, string Mark, string Model, string Region, int MinYear, int MaxYear, int MinPrice, int MaxPrice);
+        Task<List<Cars>> GetCarsByFilter(CarType type, string Mark, string Model, string Region, int MinYear, int MaxYear, int MinPrice, int MaxPrice, int page, int pageSize);
         Task<List<Cars>> GetCarsForYou();
         Task<List<Cars>> GetMostProfitable();
         Task ViewCar(Guid CarId);
@@ -26,6 +26,6 @@ namespace Core.Interfaces
         Task<List<Cars>> GetCarsByUserId(Guid UserId);
         Task Addlike(Guid id, Guid UserId);
         Task Removelike(Guid id, Guid UserId);
-        Task<List<Cars>> GetLikedCarsByUserId(Guid userId);
+        Task<List<Cars>> GetLikedCarsByUserId(Guid userId, int Page, int PageSize);
     }
 }

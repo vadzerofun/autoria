@@ -1,4 +1,5 @@
-﻿using Core.Enums;
+﻿using Azure;
+using Core.Enums;
 using Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -68,14 +69,25 @@ namespace Infrastructure.Repositories
             return Car;
         }
 
-        public async Task<List<Cars>> GetCars()
+        public async Task<List<Cars>> GetCars(int page, int pageSize)
         {
             if (_context.Cars == null)
             {
                 return null;
             }
-            return await _context.Cars.ToListAsync();
+
+            var query = _context.Cars.AsQueryable();
+
+            if (pageSize > 0)
+            {
+                query = query
+                    .Skip((page - 1) * pageSize) 
+                    .Take(pageSize);             
+            }
+
+            return await query.ToListAsync();
         }
+
 
         public async Task AddImageToCar(Guid id, List<string> ImageLink)
         {
@@ -103,12 +115,32 @@ namespace Infrastructure.Repositories
             return cars;
         }
 
-        public async Task<List<Cars>> GetCarsByFilter(CarType type, string Mark, string Model, string Region, int MinYear, int MaxYear, int MinPrice, int MaxPrice)
+        public async Task<List<Cars>> GetCarsByFilter(CarType type, string mark, string model, string region, int minYear, int maxYear, int minPrice, int maxPrice, int page, int pageSize)
         {
-            List<Cars> cars = new List<Cars>();
-            cars = await _context.Cars.Where(car => car.Type == type && car.Make == Mark && car.Model == Model && (car.Year < MaxYear && car.Year > MinYear) && (car.Price < MaxPrice && car.Price > MinPrice) && car.Region == Region).ToListAsync();
-            return cars;
+            if (_context.Cars == null)
+            {
+                return null;
+            }
+
+            var query = _context.Cars
+                .Where(car => car.Type == type
+                              && car.Make == mark
+                              && car.Model == model
+                              && car.Region == region
+                              && car.Year > minYear && car.Year < maxYear
+                              && car.Price > minPrice && car.Price < maxPrice)
+                .AsQueryable();
+
+            if (pageSize > 0)
+            {
+                query = query
+                    .Skip((page - 1) * pageSize) 
+                    .Take(pageSize);             
+            }
+
+            return await query.ToListAsync();
         }
+
 
         public async Task<List<Cars>> GetCarsForYou()
         {
@@ -165,14 +197,22 @@ namespace Infrastructure.Repositories
             return;
         }
 
-        public async Task<List<Cars>> GetLikedCarsByUserId(Guid UserId)
+        public async Task<List<Cars>> GetLikedCarsByUserId(Guid userId, int page, int pageSize)
         {
-            var userCars = await _context.Cars
-                              .Where(car => car.Likes.Contains(UserId))
-                              .ToListAsync();
-            return userCars;
+            var query = _context.Cars
+                .Where(car => car.Likes.Contains(userId));
 
+            if (pageSize > 0)
+            {
+                query = query
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize);
+            }
+
+            var userCars = await query.ToListAsync();
+            return userCars;
         }
+
 
         public async Task ViewPhone(Guid CarId)
         {
