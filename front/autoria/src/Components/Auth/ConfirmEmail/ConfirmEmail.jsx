@@ -8,7 +8,7 @@ export const ConfirmEmail = () => {
     title: '',
     msgText: '',
     linkText: '',
-    linkURL: ''
+    loadHome: false,
   });
   // searchParams
   const [searchParams] = useSearchParams();
@@ -17,12 +17,12 @@ export const ConfirmEmail = () => {
     message.title = 'Вітаємо';
     message.msgText = 'Ви успішно зареєструвались';
     message.linkText = 'Далі';
-    message.linkURL = '/';
+    message.loadHome = true;
   } else {
     message.title = 'Упс';
     message.msgText = 'Щось пішло не так';
     message.linkText = 'Повторити';
-    message.linkURL = '/register';
+    message.loadHome = true;
   }
 
   return (

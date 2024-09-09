@@ -235,7 +235,7 @@ export const AddCarForm = ({ carData }) => {
               <Form.Select onChange={handleChange} name="Сurrency" value={formData.Сurrency}>
                 <option value="0">$</option>
                 <option value="1">€</option>
-                <option value="2">грн</option>
+                <option value="2">₴</option>
               </Form.Select>
             </Form.Group>
           </div>

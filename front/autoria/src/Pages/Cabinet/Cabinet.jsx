@@ -8,18 +8,19 @@ import useToken from '../../Hooks/useToken';
 import { getUserIdFromToken } from '../../Services/authService';
 import { formatNumber } from '../../Services/formatService';
 import { getCurrency } from '../../Services/carService';
-import { Dropdown } from 'react-bootstrap';
-import { CarCard } from '../../Components/CarCard/CarCard';
+import { Button, Dropdown } from 'react-bootstrap';
+import { CarCard } from '../../Components/CarCards/CarCard/CarCard';
 import { LoginRegister } from '../../Components/Auth/LoginRegister/LoginRegister';
 import { DeleteCarModal } from '../../Components/CarForm/DeleteCarModal/DeleteCarModal';
 import Modal from 'react-bootstrap/Modal'; // for modalShow
 import { HeartIcon } from '../../Components/Icons/HeartIcon/HeartIcon';
-import { FavoriteCarCard } from '../../Components/FavoriteCarCard/FavoriteCarCard';
+import { FavoriteCarCard } from '../../Components/CarCards/FavoriteCarCard/FavoriteCarCard';
 import { Link } from 'react-router-dom';
+import { NotificationIcon } from '../../Components/Icons/NotificationIcon/NotificationIcon';
+import { EnvelopeIcon } from '../../Components/Icons/EnvelopeIcon/EnvelopeIcon';
+import { MyCarCard } from '../../Components/CarCards/MyCarCard/MyCarCard';
 
 export const Cabinet = () => {
-  // images
-  const imagesURL = import.meta.env.VITE_IMAGES_URL;
   // modal
   const [modalShow, setModalShow] = useState(false);
   const [modalCar, setModalCar] = useState({});
@@ -27,23 +28,42 @@ export const Cabinet = () => {
   const { token } = useToken();
 
   if (!token) {
-    return <LoginRegister />;
+    return <CabinetLayout></CabinetLayout>;
   }
 
   const userId = getUserIdFromToken(token);
 
-  // cars
-  const { cars, favoriteCars, loading, error } = useLoadCabinet(userId);
+  // cars, notifications
+  const { cars, favoriteCars, notifications, loading, error } = useLoadCabinet(userId);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
     <CabinetLayout>
-      <section className="d-flex flex-column gap-5 gap-lg-6">
+      <section className="d-flex flex-column gap-5">
+        <div className="notificationsContainer">
+          <div className="iconTitleContainer notificationsIconTitle">
+            <div className="cabinetIconContainer">
+              <NotificationIcon color="var( --bs-primary )" width={16} height={20} />
+            </div>
+            <h2 className="iconTitleText">Сповіщення</h2>
+            <span
+              className="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center lh-1 countCircleText"
+              style={{ width: '27px', height: '26px' }}>
+              {notifications.length}
+            </span>
+          </div>
+          {/* Notifications */}
+          <Button className="cabinetButton" href="/cabinet/notifications">
+            Переглянути усі сповіщення
+          </Button>
+        </div>
         <div className="favoritesContainer">
-          <div className="iconTitleContainer favoritesIconTitle">
-            <HeartIcon color="var( --bs-primary )" width={26} height={24} />
+          <div className="iconTitleContainer">
+            <div className="cabinetIconContainer">
+              <HeartIcon color="var( --bs-primary )" width={17} height={15} />
+            </div>
             <h2 className="iconTitleText">Обране</h2>
             <span
               className="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center lh-1 countCircleText"
@@ -51,28 +71,52 @@ export const Cabinet = () => {
               {favoriteCars.length}
             </span>
           </div>
-          <div className="adsCards">
-            {favoriteCars.map((car, index) => (
-              <Link to={`/cars/${car.id}`} key={`favoriteCar-${index}`} className="noFontStyle">
-                <FavoriteCarCard car={car} />
+          <div className="favoritesCards">
+            {favoriteCars.map((car, index, arr) => (
+              <Link
+                to={`/cars/${car.id}`}
+                key={`favoriteCar-${index}`}
+                className={`noFontStyle ${index < arr.length - 1 && 'mb-4'}`}>
+                <FavoriteCarCard car={car} userId={userId} />
               </Link>
             ))}
           </div>
         </div>
-        <div className="adsContainer">
+        <div className="subscriptionsContainer">
           <div className="iconTitleContainer">
-            <AdIcon color="var( --bs-primary )" />
-            <h2 className="iconTitleText">Мої оголошення</h2>
+            <div className="cabinetIconContainer">
+              <EnvelopeIcon color="var( --bs-primary )" width={26} height={26} />
+            </div>
+            <h2 className="iconTitleText">Підписка</h2>
+          </div>
+          <div className="subscriptionsTextBtn">
+            <p className="subscriptionsText">
+              Оформіть підписку на DriveDreams і ваші оголошення завжди будуть в топі
+            </p>
+            <Button className="cabinetButton" href="/cabinet/subscribe-cars">
+              Підписатись
+            </Button>
+          </div>
+        </div>
+        <div className="adsContainer">
+          <div className="adsHeader">
+            <div className="iconTitleContainer">
+              <AdIcon color="var( --bs-primary )" />
+              <h2 className="iconTitleText">Мої оголошення</h2>
+            </div>
+            <Button className="cabinetButton mySubsBtn" href="/cabinet/subscriptions">
+              Мої підписки
+            </Button>
           </div>
           <div className="adsCards">
             {cars.map((car, index) => (
               <Dropdown key={`car-${index}`} drop="end" align="start">
                 <Dropdown.Toggle as={CustomToggle}>
-                  <CarCard car={car} />
+                  <MyCarCard car={car} />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href={`/cars/${car.id}`}>Перейти</Dropdown.Item>
-                  <Dropdown.Item href={`/cars/${car.id}/edit`}>Редагувати</Dropdown.Item>
+                  <Dropdown.Item href={`/cabinet/edit-car/${car.id}`}>Редагувати</Dropdown.Item>
                   <Dropdown.Item
                     href="#"
                     onClick={() => {

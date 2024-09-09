@@ -34,8 +34,11 @@ import { HeartFilledIcon } from '../../Components/Icons/HeartIcon/HeartFilledIco
 import { HeartIcon } from '../../Components/Icons/HeartIcon/HeartIcon';
 import useToken from '../../Hooks/useToken';
 import { getUserIdFromToken, refreshAuthToken } from '../../Services/authService';
+import { AuthOffcanvas } from '../../Components/Auth/AuthOffcanvas/AuthOffcanvas';
 
 export const Car = () => {
+  // showOffcanvas
+  const [showOffcanvas, setShowOffcanvas] = useState(false);  
   // useToken
   const { token, setToken } = useToken();
   // userId
@@ -79,7 +82,7 @@ export const Car = () => {
     e.stopPropagation();
 
     if (!token || !token.token) {
-      navigate('/login-register');
+      setShowOffcanvas(true);
       return;
     }
 
@@ -95,7 +98,7 @@ export const Car = () => {
     });
   };
 
-  // likeNews
+  // likeCar
   const likeCar = () => {
     return axios.post(
       import.meta.env.VITE_REACT_API_URL + 'Cars/Like' + `?Id=${car.id}`,
@@ -168,19 +171,30 @@ export const Car = () => {
             </div>
             <div className="carGalleryInfo">
               <div className="carGalleryCarInfo">
-                <h1 className="carGalleryCarTitle fs-2">{`${car.make} ${car.model}`}</h1>
-                <div className="carGalleryCarYear fs-5">
-                  <span>{!car.owners_number ? 'Невживана' : 'Вживана'}</span>
-                  <span className="carGalleryInfoPoint"></span>
-                  <span>{car.year}</span>
-                  <Button onClick={handleLikeCar} className="carLikeBtn" variant="link">
-                    {liked ? (
-                      <HeartFilledIcon color="var( --bs-primary )" />
-                    ) : (
-                      <HeartIcon color="var( --bs-primary )" />
-                    )}
-                  </Button>
+                <div className="carGalleryCarTitleYear">
+                  <h1 className="carGalleryCarTitle fs-2">{`${car.make} ${car.model}`}</h1>
+                  <div className="carGalleryCarYear fs-5">
+                    <span>{!car.owners_number ? 'Невживана' : 'Вживана'}</span>
+                    <span className="carGalleryInfoPoint"></span>
+                    <span>{car.year}</span>
+                  </div>
                 </div>
+                <Button onClick={handleLikeCar} className="carLikeBtn" variant="link">
+                  {liked ? (
+                    <HeartFilledIcon
+                      color={'var(--bs-primary)'}
+                      width={26}
+                      height={23}
+                    />
+                  ) : (
+                    <HeartIcon
+                      color="var(--bs-darkgray)"
+                      hoverColor={'var(--bs-primary)'}
+                      width={26}
+                      height={23}
+                    />
+                  )}
+                </Button>
                 <div className="carGalleryCarPrice fs-2">
                   {formatNumber(car.price)} {getCurrency(car.сurrency)}
                 </div>
@@ -391,6 +405,7 @@ export const Car = () => {
           </div>
         </Container>
       </section>
+      <AuthOffcanvas showOffcanvas={showOffcanvas} setShowOffcanvas={setShowOffcanvas} />
     </Layout>
   );
 };

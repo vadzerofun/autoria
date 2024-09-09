@@ -1,0 +1,47 @@
+.subscriptionsSection {
+  font-family: "Inter", sans-serif;
+}
+
+.subscriptionsCars {
+  max-width: 764px;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.subscriptionsCarCard {
+  cursor: pointer;
+}
+
+.selectedCarCard .carCard {
+  box-shadow:inset 0px 0px 0px 2px var(--bs-primary);
+}
+
+.subscriptionsLevels {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.subscriptionLevel {
+  padding: 0.75rem;
+  border: 1px solid var(--bs-darkgray);
+  border-radius: 0.75rem;
+}
+
+.subscriptionLevelItem {
+  padding: 0.75rem;
+  border: 1px solid rgba(var(--bs-darkgray-rgb), 70%);
+  border-radius: 0.75rem;
+  cursor: pointer
+}
+
+.subscriptionsButton {
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  align-self: flex-start;
+}

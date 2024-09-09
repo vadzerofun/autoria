@@ -4,6 +4,7 @@ import axios from 'axios';
 const useLoadCabinet = (userId) => {
   const [cars, setCars] = useState([]);
   const [favoriteCars, setFavoriteCars] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -37,7 +38,7 @@ const useLoadCabinet = (userId) => {
     fetchCars();
   }, [userId]);
 
-  return { cars, favoriteCars, loading, error };
+  return { cars, favoriteCars, notifications, loading, error };
 };
 
 export default useLoadCabinet;

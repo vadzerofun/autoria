@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Layout } from '../../Components/Layouts/Layout/Layout';
 import useToken from '../../Hooks/useToken';
-import { LoginRegister } from '../../Components/Auth/LoginRegister/LoginRegister';
 import './AddCar.css';
 import { AddCarForm } from '../../Components/CarForm/AddCarForm/AddCarForm';
+import { AuthOffcanvas } from '../../Components/Auth/AuthOffcanvas/AuthOffcanvas';
 
 export const AddCar = () => {
+  // showOffcanvas
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
   // token
   const { token, setToken } = useToken();
 
   if (!token) {
-    return <LoginRegister />;
+    useEffect(() => {
+      setShowOffcanvas(true);
+    }, [token]);
+
+    return (
+      <Layout>
+        <AuthOffcanvas showOffcanvas={showOffcanvas} setShowOffcanvas={setShowOffcanvas} />
+      </Layout>
+    );
   }
 
   // formData

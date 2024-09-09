@@ -31,10 +31,16 @@ $headings-margin-bottom: 0;
 $headings-font-weight: 800;
 $headings-line-height: 1.375; /* 55/40 */
 
+// breadcrumbs
+$breadcrumb-item-padding-x: 0.75rem;
+// $breadcrumb-divider: url("./assets/icons/ui/select-caret-up.svg");
+
+// container
 $container-max-widths: (  
   xxl: 1400px
 );
 
+// utilities
 $utilities:(
   "width": (
     property: width,

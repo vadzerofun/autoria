@@ -1,0 +1,22 @@
+.breadcrumbContainer  {
+  padding-top: 1.125rem;
+  padding-bottom: 1.125rem;   
+  --bs-breadcrumb-divider: url("../../assets/icons/ui/breadcrumbs-divider.svg");
+}
+
+.breadcrumbContainer ol {
+  margin: 0;  
+  li {
+    line-height: 0.7;
+  }
+}
+
+.breadcrumbContainer .breadcrumb-item a {
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1.38;
+  transition: all 0.15s ease-in-out;
+  &:hover {
+    color: var(--bs-primary);
+  }
+}

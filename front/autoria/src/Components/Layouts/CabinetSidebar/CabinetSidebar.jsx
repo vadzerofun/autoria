@@ -43,20 +43,25 @@ export const CabinetSidebar = ({ user }) => {
         <div className="cabinetSidebarUserBalance">
           <div className="cabinetSidebarBalanceInfo">
             <span className="cabinetSidebarBalanceLabel">Особистий рахунок</span>
-            <span className="cabinetSidebarBalanceSum">0 грн</span>
+            <span className="cabinetSidebarBalanceSum">{user.balance} грн</span>
           </div>
-          <Button className="cabinetSidebarBalanceBtn" href="#">
+          <Button className="cabinetSidebarBalanceBtn" href="/cabinet/balance">
             Поповнити
           </Button>
         </div>
-        <Button className="button-font cabinetSidebarBtn" href="/add-car">
+        <Button className="button-font cabinetSidebarBtn" href="/cabinet/add-car">
           <div className="d-flex align-items-center gap-3">
             <span className="fs-2 fw-semibold">+</span>
             <span className="fs-5 fw-semibold">Додати оголошення</span>
           </div>
         </Button>
-        <Link to="/cabinet/edit" className="cabinetSidebarEditBtn">
-          <EditIcon color="#5C5C5C" />
+        <Link to="/cabinet/edit-profile" className="cabinetSidebarEditBtn">
+          <EditIcon
+            color="var(--bs-darkgray)"
+            hoverColor={'var(--bs-primary)'}
+            width={20}
+            height={20}
+          />
         </Link>
       </div>
     </div>

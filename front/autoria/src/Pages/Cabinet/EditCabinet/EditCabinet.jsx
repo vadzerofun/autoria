@@ -94,7 +94,7 @@ export const EditCabinet = () => {
     });
   };
 
-  // addCar
+  // editUser
   const editUser = (formDataToSend) => {
     return axios
       .post(import.meta.env.VITE_REACT_API_URL + 'User/EditUser', formDataToSend, {
@@ -109,7 +109,7 @@ export const EditCabinet = () => {
   };
 
   if (!token) {
-    return <LoginRegister />;
+    return <CabinetLayout></CabinetLayout>;
   }
 
   if (loading) return <div>Loading...</div>;

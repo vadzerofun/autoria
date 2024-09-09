@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/esm/Button';
 
 import GooglePlay from '../../../assets/images/footer/google-play.png';
-import AppStore from '../../../assets/images/footer/app-store.svg';
+import AppStore from '../../../assets/images/footer/app-store.png';
 import Facebook from '../../../assets/icons/footer/facebook.svg';
 import Twitter from '../../../assets/icons/footer/twitter.svg';
 import YouTube from '../../../assets/icons/footer/youtube.svg';
@@ -17,11 +17,10 @@ import Pinterest from '../../../assets/icons/footer/pinterest.svg';
 
 export const Footer = () => {
   return (
-    <footer className="bg-secondary">
+    <footer className="bg-secondary footerFont">
       <Container>
         <Row>
           <Col className="footerLeft" lg={6} md={12}>
-            <h4 className="footerLeftTitle">Інформація для вас</h4>
             <Container>
               <Row className="footerLeftRow">
                 <Col>
@@ -38,72 +37,51 @@ export const Footer = () => {
                   <Link>Банк ідей</Link>
                 </Col>
               </Row>
+              <Row className="footerLeftRow footerLeftCopyright">
+                <span>©Drive Dreams</span>
+              </Row>
             </Container>
           </Col>
-          <Col className="footerRight" >
-            <h5 className="footerRightTitle">Допоможіть нам покращити наш сайт</h5>
-            <div className="footerRightControlls">
-              <div className="footerRightImages">
-                <div className="footerRightDownload">
-                  <Link to="#">
-                    <div className="footerRightDownloadButton">
-                      <img src={AppStore} alt="App Store Button" />
-                    </div>
-                  </Link>
-                  <Link to="#">
-                    <div className="footerRightDownloadButton">
-                      <img src={GooglePlay} alt="Google Play Button" />
-                    </div>
-                  </Link>
-                </div>
-                <div className="footerRightSocialMedia">
-                  <Link to="#">
-                    <img src={Facebook} alt="Facebook Icon" />
-                  </Link>
-                  <Link to="#">
-                    <img src={Twitter} alt="Twitter Icon" />
-                  </Link>
-                  <Link to="#">
-                    <img src={YouTube} alt="YouTube Icon" />
-                  </Link>
-                  <Link to="#">
-                    <img src={Instagram} alt="Instagram Icon" />
-                  </Link>
-                  <Link to="#">
-                    <img src={Tiktok} alt="Tiktok Icon" />
-                  </Link>
-                  <Link to="#">
-                    <img src={Pinterest} alt="Pinterest Icon" />
-                  </Link>
-                </div>
-              </div>
-              <div className="footerRightButtons">
-                <Button variant="outline-primary" href="#">
-                  Залишити відгук
-                </Button>
-                <Button variant="outline-primary" href="#">
-                  Поскаржитись
-                </Button>
-              </div>
+          <Col className="footerRight">
+            <div>
+              <span className="footerRightTitle">Допоможи нам покращити наш сайт</span>
             </div>
-            <div className="footerRightCopyright">
-              <p>Copyright ©</p>
-              <p>
-                Limited is authorised and regulated by the Financial Conduct Authority. Our FCA firm
-                reference number is 735711.
-              </p>
-              <p>
-                4th Floor
-                <br />1 Tony Wilson Place
-                <br />
-                Manchester
-                <br />
-                M15 4FN
-                <br />
-                United Kingdom
-                <br />
-                Registered number: 03909628
-              </p>
+            <Button className="footerRightButton" variant="outline-primary" href="#">
+              Залишити відгук
+            </Button>
+            <div className="footerRightImages">
+              <div className="footerRightSocialMedia">
+                <Link to="#">
+                  <img src={Facebook} alt="Facebook Icon" />
+                </Link>
+                <Link to="#">
+                  <img src={Twitter} alt="Twitter Icon" />
+                </Link>
+                <Link to="#">
+                  <img src={YouTube} alt="YouTube Icon" />
+                </Link>
+                <Link to="#">
+                  <img src={Instagram} alt="Instagram Icon" />
+                </Link>
+                <Link to="#">
+                  <img src={Tiktok} alt="Tiktok Icon" />
+                </Link>
+                <Link to="#">
+                  <img src={Pinterest} alt="Pinterest Icon" />
+                </Link>
+              </div>
+              <div className="footerRightDownload">
+                <Link to="#">
+                  <div className="footerRightDownloadButton">
+                    <img src={AppStore} alt="App Store Button" />
+                  </div>
+                </Link>
+                <Link to="#">
+                  <div className="footerRightDownloadButton">
+                    <img src={GooglePlay} alt="Google Play Button" />
+                  </div>
+                </Link>
+              </div>
             </div>
           </Col>
         </Row>
