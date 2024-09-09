@@ -88,5 +88,37 @@ namespace Infrastructure.Repositories
 
             return activeCarIds;
         }
+
+        public async Task<List<Guid>> GetTopCarsId(int count)
+        {
+            if (_context.UserSubscribes == null)
+            {
+                return null;
+            }
+
+            var currentDateTime = DateTime.UtcNow;
+
+            var activeUserSubscribes = await _context.UserSubscribes
+                .Where(us => us.SubEndTime > currentDateTime)
+                .ToListAsync();
+
+            var activeCarIds = activeUserSubscribes
+                .SelectMany(us => us.CarsId)
+                .ToList();
+
+            if (activeCarIds == null || !activeCarIds.Any())
+            {
+                return null;
+            }
+
+            var randomActiveCarIds = activeCarIds
+                .OrderBy(_ => Guid.NewGuid())
+                .Take(count)
+                .ToList();
+
+            return randomActiveCarIds;
+
+
+        }
     }
 }

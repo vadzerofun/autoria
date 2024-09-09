@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Services;
 using Application.Model;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Application.Services
 {
@@ -80,14 +81,14 @@ namespace Application.Services
             var cars = await _carRepository.GetCarsByMark(mark);
             return cars;
         }
-        public async Task<List<Cars>> GetCarByFilter(CarFilter filter)
+        public async Task<List<Cars>> GetCarByFilter(CarFilter filter, int page, int pageSize)
         {
-            var cars = await _carRepository.GetCarsByFilter(filter.Type, filter.Mark, filter.Model, filter.Region, filter.MinYear, filter.MaxYear, filter.MinPrice, filter.MaxPrice);
+            var cars = await _carRepository.GetCarsByFilter(filter.Type, filter.Mark, filter.Model, filter.Region, filter.MinYear, filter.MaxYear, filter.MinPrice, filter.MaxPrice, page, pageSize);
             return cars;
         }
-        public async Task<List<Cars>> GetCars()
+        public async Task<List<Cars>> GetCars(int page, int pageSize)
         {
-            List<Cars> cars = await _carRepository.GetCars();
+            List<Cars> cars = await _carRepository.GetCars(page, pageSize);
             return cars;
         }
         public async Task<List<Cars>> GetCarsForYou()
@@ -170,16 +171,48 @@ namespace Application.Services
             }
         }
 
-        public async Task<Result<List<Cars>>> GetLikedCarsByUserId(Guid UserId)
+        public async Task<Result<List<Cars>>> GetLikedCarsByUserId(Guid UserId, int Page, int PageSize)
         {
             try
             {
-                var cars = await _carRepository.GetLikedCarsByUserId(UserId);
+                var cars = await _carRepository.GetLikedCarsByUserId(UserId, Page, PageSize);
                 return Result<List<Cars>>.Success(cars);
             }
             catch (Exception ex)
             {
                 return Result<List<Cars>>.Failure(ex.Message);
+            }
+        }
+
+        public async Task<Result<List<Cars>>> GetTopCars(int count)
+        {
+            try
+            {
+                var CarsId = (await _userSubscribeService.GetTopCarsId(count)).Value;
+                if (CarsId == null) return Result<List<Cars>>.Failure("top List is empty");
+                List<Cars> cars = new List<Cars>();
+                foreach (var CarId in CarsId)
+                {
+                    cars.Add(await GetCarById(CarId));
+                }
+                return Result<List<Cars>>.Success(cars);
+            }
+            catch (Exception ex)
+            {
+                return Result<List<Cars>>.Failure(ex.Message);
+            }
+        }
+
+        public async Task<Result> ViewPhone(Guid Carid)
+        {
+            try
+            {
+                await _carRepository.ViewPhone(Carid);
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure(ex.Message);
             }
         }
     }

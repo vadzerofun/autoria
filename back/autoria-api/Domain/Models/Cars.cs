@@ -36,6 +36,7 @@ namespace Core.Models
         public DateTime CreatedTime { get; set; } // дата створення оголошення
         public string Region {  get; set; } // Регіон Продажу Авто
         public int VisitedCount { get; set; } // кількість переглядів
+        public int SellerPhoneViews { get; set; } //кількість переглядів номера
         public CarState State { get; set; } // Стан Авто (нове, в ДТП ...)
         public string Body {  get; set; } // тип кузову
         public string? City { get; set; } //місто

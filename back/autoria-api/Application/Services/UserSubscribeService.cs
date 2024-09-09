@@ -49,8 +49,9 @@ namespace Application.Services
                 user.Balance -= Subscribe.Price;
 
                 if (Subscribe.Subscribe_Level != Subscribe_Level.Level3)
+                {
                     userSubscribe.CarsId = new List<Guid>() { userSubscribe.CarsId[0] };
-
+                }
                 userSubscribe.SubEndTime = DateTime.Now.Add(Subscribe.subTime);
 
                 await _userRepository.EditUser(user.Id, user);
@@ -69,6 +70,19 @@ namespace Application.Services
             try
             {
                 var cars = await _userSubscribeRepository.GetTopCarsId();
+                return Result<List<Guid>>.Success(cars);
+            }
+            catch (Exception ex)
+            {
+                return Result<List<Guid>>.Failure(ex.Message);
+            }
+        }
+
+        public async Task<Result<List<Guid>>> GetTopCarsId(int count)
+        {
+            try
+            {
+                var cars = await _userSubscribeRepository.GetTopCarsId(count);
                 return Result<List<Guid>>.Success(cars);
             }
             catch (Exception ex)
