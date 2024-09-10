@@ -6,8 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Class;
 
 namespace Infrastructure.Repositories
 {
@@ -115,31 +117,39 @@ namespace Infrastructure.Repositories
             return cars;
         }
 
-        public async Task<List<Cars>> GetCarsByFilter(CarType type, string mark, string model, string region, int minYear, int maxYear, int minPrice, int maxPrice, int page, int pageSize)
+        public async Task<List<Cars>> GetCarsByFilter(CarType? type, string? mark, string? model, string? region, int? minYear, int? maxYear, int? minPrice, int? maxPrice, Transmission_type? gearBox, Engine_type? engineType, Occasion? occasion, double? minEngineCapacity, double? maxEngineCapacity, CarState? carState, int page, int pageSize)
         {
             if (_context.Cars == null)
             {
-                return null;
+                return new List<Cars>();
             }
 
-            var query = _context.Cars
-                .Where(car => car.Type == type
-                              && car.Make == mark
-                              && car.Model == model
-                              && car.Region == region
-                              && car.Year > minYear && car.Year < maxYear
-                              && car.Price > minPrice && car.Price < maxPrice)
-                .AsQueryable();
+            var query = _context.Cars.AsQueryable();
+
+            query = query.FilterIf(type.HasValue, car => car.Type == type.Value)
+                         .FilterIf(!string.IsNullOrEmpty(mark), car => car.Make == mark)
+                         .FilterIf(!string.IsNullOrEmpty(model), car => car.Model == model)
+                         .FilterIf(!string.IsNullOrEmpty(region), car => car.Region == region)
+                         .FilterIf(minYear.HasValue, car => car.Year >= minYear)
+                         .FilterIf(maxYear.HasValue, car => car.Year <= maxYear)
+                         .FilterIf(minPrice.HasValue, car => car.Price >= minPrice)
+                         .FilterIf(maxPrice.HasValue, car => car.Price <= maxPrice)
+                         .FilterIf(gearBox.HasValue, car => car.Transmission_type == gearBox)
+                         .FilterIf(engineType.HasValue, car => car.Engine_type == engineType)
+                         .FilterIf(occasion.HasValue, car => car.Occasion == occasion)
+                         .FilterIf(minEngineCapacity.HasValue, car => car.Engine_capacity >= minEngineCapacity)
+                         .FilterIf(maxEngineCapacity.HasValue, car => car.Engine_capacity <= maxEngineCapacity)
+                         .FilterIf(carState.HasValue, car => car.State == carState);
 
             if (pageSize > 0)
             {
-                query = query
-                    .Skip((page - 1) * pageSize) 
-                    .Take(pageSize);             
+                query = query.Skip((page - 1) * pageSize)
+                             .Take(pageSize);
             }
 
             return await query.ToListAsync();
         }
+
 
 
         public async Task<List<Cars>> GetCarsForYou()

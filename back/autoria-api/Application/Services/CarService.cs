@@ -83,9 +83,28 @@ namespace Application.Services
         }
         public async Task<List<Cars>> GetCarByFilter(CarFilter filter, int page, int pageSize)
         {
-            var cars = await _carRepository.GetCarsByFilter(filter.Type, filter.Mark, filter.Model, filter.Region, filter.MinYear, filter.MaxYear, filter.MinPrice, filter.MaxPrice, page, pageSize);
+            var cars = await _carRepository.GetCarsByFilter(
+                filter.Type,
+                filter.Mark,
+                filter.Model,
+                filter.Region,
+                filter.MinYear,
+                filter.MaxYear,
+                filter.MinPrice,
+                filter.MaxPrice,
+                filter.GearBox,
+                filter.engine_Type,
+                filter.occasion,
+                filter.minEngine_capacity,
+                filter.maxEngine_capacity,
+                filter.carState,
+                page,
+                pageSize
+            );
+
             return cars;
         }
+
         public async Task<List<Cars>> GetCars(int page, int pageSize)
         {
             List<Cars> cars = await _carRepository.GetCars(page, pageSize);
