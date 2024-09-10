@@ -8,7 +8,8 @@ export const Message = ({
   linkText,
   activeComponent,
   setActiveComponent,
-  hideMessage
+  hideMessage,
+  loadHome
 }) => {
   return (
     <div className="login">
@@ -24,6 +25,9 @@ export const Message = ({
         onClick={() => {
           setActiveComponent(activeComponent);
           hideMessage();
+          if (clearURL) {
+            window.location.pathname = '/';
+          }          
         }}>
         {linkText}
       </Button>

@@ -1,0 +1,87 @@
+.carCardBig{
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  font-weight: 700;
+  background-color: var(--bs-secondary);
+  @media screen and (max-width: 700px) {
+    border-radius: 0.75rem;
+    gap: 0.25rem;
+    padding: 0.75rem;
+  }
+}
+.carBigImage{
+  max-width: 100%;
+  height: 330px;
+  object-fit: cover;
+  border-radius: 0.9rem;
+  @media screen and (max-width: 700px) {
+    height: 180px;
+  }
+}
+
+.carCardBigMain{
+  display: flex;
+  justify-content: space-between;
+}
+
+.carCardBigLikeBtn {
+  display: flex;
+  flex: 0 1 2.375rem;
+  height: 2.375rem;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+  @media screen and (max-width: 700px) {
+    flex: 0 1 1.875rem;
+    height: 1.875rem;
+    align-self: flex-start;
+    margin-right: 0.25rem;
+    > svg {
+      width: 20px;
+      height: 17px;
+    }
+  }  
+}
+
+.carCardBigTitlePrice{
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  @media screen and (max-width: 700px) {
+    gap: 0.125rem;    
+  }
+}
+
+.carCardBigTitle,
+.carCardBigPrice {
+  @media screen and (max-width: 700px) {
+    font-size: 1rem !important;   
+  }
+}
+
+.carCardBigPrice{
+  color: var(--bs-primary);
+}
+
+.carCardBigDetails{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+  @media screen and (max-width: 700px) {
+    font-size: 0.75rem;
+    > div {
+      gap: 0.25rem;
+    }
+  }
+}

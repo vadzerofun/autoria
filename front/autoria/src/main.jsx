@@ -17,12 +17,19 @@ import { EditCabinet } from './Pages/Cabinet/EditCabinet/EditCabinet.jsx';
 import { CabinetLayout } from './Components/Layouts/CabinetLayout/CabinetLayout.jsx';
 import { AddCarDataProvider } from './Contexts/addCar.context.jsx';
 import { EditCar } from './Pages/EditCar/EditCar.jsx';
+import { Balance } from './Pages/Cabinet/Balance/Balance.jsx';
+import { Subscriptions } from './Pages/Cabinet/Subscriptions/Subscriptions.jsx';
+import { SubscribeCars } from './Pages/Cabinet/SubscribeCars/SubscribeCars.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
     errorElement: <ErrorPage />
+  },
+  {
+    path: '/:token',
+    element: <Home />
   },
   {
     path: '/login',
@@ -79,27 +86,7 @@ const router = createBrowserRouter([
         <Car />
       </div>
     )
-  },
-  {
-    path: '/add-car',
-    element: (
-      <div>
-        <AddCarDataProvider>
-          <AddCar />
-        </AddCarDataProvider>
-      </div>
-    )
-  },
-  {
-    path: '/cars/:carId/edit',
-    element: (
-      <div>
-        <AddCarDataProvider>
-          <EditCar />
-        </AddCarDataProvider>
-      </div>
-    )
-  },
+  },  
   {
     path: '/cabinet',
     element: (
@@ -109,13 +96,57 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: '/cabinet/edit',
+    path: '/cabinet/edit-profile',
     element: (
       <div>
         <EditCabinet />
       </div>
     )
-  }
+  },
+  {
+    path: '/cabinet/add-car',
+    element: (
+      <div>
+        <AddCarDataProvider>
+          <AddCar />
+        </AddCarDataProvider>
+      </div>
+    )
+  },
+  {
+    path: '/cabinet/edit-car/:carId',
+    element: (
+      <div>
+        <AddCarDataProvider>
+          <EditCar />
+        </AddCarDataProvider>
+      </div>
+    )
+  },
+  {
+    path: '/cabinet/balance',
+    element: (
+      <div>
+        <Balance />
+      </div>
+    )
+  },
+  {
+    path: '/cabinet/subscriptions',
+    element: (
+      <div>
+        <Subscriptions />
+      </div>
+    )
+  },
+  {
+    path: '/cabinet/subscribe-cars',
+    element: (
+      <div>
+        <SubscribeCars />
+      </div>
+    )
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

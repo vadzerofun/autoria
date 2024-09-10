@@ -26,11 +26,11 @@ export const ForgotPassword = ({ setActiveComponent }) => {
   const [phase, setPhase] = useState(1);
   // location
   let location = useLocation();
-  const forgotPasswordURL = `${window.location.protocol}//${window.location.host}${location.pathname}`;
-  // params
+  const forgotPasswordURL = `${window.location.protocol}//${window.location.host}${
+    location.pathname === '/' || location.pathname !== '/forgot-password' ? '' : location.pathname
+  }`;
+  // token, params
   let { token } = useParams();
-  // navigate
-  const navigate = useNavigate();
 
   // email, password
   const [email, setEmail] = useState('');
@@ -94,7 +94,8 @@ export const ForgotPassword = ({ setActiveComponent }) => {
           linkText: 'Далі',
           activeComponent: 1,
           setActiveComponent: setActiveComponent,
-          hideMessage: hideMessage
+          hideMessage: hideMessage,
+          loadHome: true,
         });
         setShowMessage(true);
       })
@@ -123,7 +124,7 @@ export const ForgotPassword = ({ setActiveComponent }) => {
               <div className="loginLogo">
                 <img src="/src/assets/logo.png" alt="logo" />
               </div>
-              <h1 className="loginTitle">Вітаємо</h1>
+              <h1 className="loginTitle">Відновлення паролю</h1>
               <Form className="loginForm">
                 <Form.Group className="mb-3" controlId="password">
                   <Form.Control

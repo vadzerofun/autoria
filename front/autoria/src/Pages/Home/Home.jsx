@@ -28,18 +28,15 @@ import { getUserIdFromToken } from '../../Services/authService';
 import { getCurrency } from '../../Services/carService';
 import { formatNumber } from '../../Services/formatService';
 import { AuthOffcanvas } from '../../Components/Auth/AuthOffcanvas/AuthOffcanvas';
+import { CarCard } from '../../Components/CarCards/CarCard/CarCard';
+import { CarCardBig } from '../../Components/CarCards/CarCardBig/CarCardBig';
 
 export const Home = () => {
   // showOffcanvas
   const [showOffcanvas, setShowOffcanvas] = useState(false);
-  console.log(showOffcanvas);
 
   const displayOffcanvas = () => {
-    setShowOffcanvas(true);  
-  };
-
-  const closeOffcanvas = () => {
-    setShowOffcanvas(false);
+    setShowOffcanvas(true);
   };
 
   // images
@@ -66,14 +63,14 @@ export const Home = () => {
             <Row className="row-gap-4">
               <Col sm={12} lg={6}>
                 <div className="searchLeft">
-                  <h4 className="searchLeftTitle">Підбери авто на літо для себе та своєї сім'ї</h4>
+                  <h4 className="searchLeftTitle fs-1">Літні знижки на доставку твого сімейного авто</h4>
                   <Form>
                     <Row className="searchDropdowns">
                       <Col className="searchDropdownsLeft" md={6}>
                         <DropdownButton
                           id="dropdown-type"
                           title={
-                            <div className="d-flex align-items-center justify-content-between">
+                            <div className="d-flex align-items-center justify-content-between text-text-darkgray">
                               <span>Легкові</span>
                               <span className="searchDropdownToggle"></span>
                             </div>
@@ -87,7 +84,7 @@ export const Home = () => {
                         <DropdownButton
                           id="dropdown-brand"
                           title={
-                            <div className="d-flex align-items-center justify-content-between">
+                            <div className="d-flex align-items-center justify-content-between text-text-darkgray">
                               <span>Марка</span>
                               <span className="searchDropdownToggle"></span>
                             </div>
@@ -101,7 +98,7 @@ export const Home = () => {
                         <DropdownButton
                           id="dropdown-model"
                           title={
-                            <div className="d-flex align-items-center justify-content-between">
+                            <div className="d-flex align-items-center justify-content-between text-text-darkgray">
                               <span>Модель</span>
                               <span className="searchDropdownToggle"></span>
                             </div>
@@ -117,7 +114,7 @@ export const Home = () => {
                         <DropdownButton
                           id="dropdown-region"
                           title={
-                            <div className="d-flex align-items-center justify-content-between">
+                            <div className="d-flex align-items-center justify-content-between text-text-darkgray">
                               <span>Регіон</span>
                               <span className="searchDropdownToggle"></span>
                             </div>
@@ -131,7 +128,7 @@ export const Home = () => {
                         <DropdownButton
                           id="dropdown-year"
                           title={
-                            <div className="d-flex align-items-center justify-content-between">
+                            <div className="d-flex align-items-center justify-content-between text-text-darkgray">
                               <span>Рік випуску</span>
                               <span className="searchDropdownToggle"></span>
                             </div>
@@ -145,7 +142,7 @@ export const Home = () => {
                         <DropdownButton
                           id="dropdown-price"
                           title={
-                            <div className="d-flex align-items-center justify-content-between">
+                            <div className="d-flex align-items-center justify-content-between text-text-darkgray">
                               <span>Ціна, $</span>
                               <span className="searchDropdownToggle"></span>
                             </div>
@@ -182,7 +179,7 @@ export const Home = () => {
             <div className="recsLeft">
               <h2 className="homeTitle fs-1">Тобі може сподобатись!</h2>
               <Link to={`/cars/${carsForYou[0].id}`} className="noFontStyle">
-                <div className="recsLeftCard">
+                {/* <div className="recsLeftCard">
                   <img
                     className="recsLeftImage"
                     src={
@@ -214,37 +211,18 @@ export const Home = () => {
                       <span>{carsForYou[0].region}</span>
                     </div>
                   </div>
-                </div>
+                </div> */}
+                <CarCardBig
+                  car={carsForYou[0]}
+                  userId={userId}
+                  displayOffcanvas={displayOffcanvas}
+                />
               </Link>
             </div>
             <div className="recsRight">
               {carsForYou.slice(1, 5).map((car, index) => (
                 <Link to={`cars/${car.id}`} className="noFontStyle" key={`rec-${index}`}>
-                  <div className="carCard">
-                    <img
-                      className="carImage"
-                      src={car.imagesPath.length ? imagesURL + car.imagesPath[0] : ImagePlaceholder}
-                      alt={`Recommended car ${index + 1}`}
-                    />
-                    <div className="carCardMain">
-                      <span className="carCardTitle fs-6">{`${car.make} ${car.model}`}</span>
-                      <span className="carCardPrice fs-6">{`${formatNumber(
-                        car.price
-                      )} ${getCurrency(car.сurrency)}`}</span>
-                    </div>
-                    <div className="carCardDetails">
-                      <div>
-                        <span>{`${car.engine_type == 0 ? 'Бензин' : 'Дизель'} ${
-                          car.engine_capacity
-                        } л`}</span>
-                        <span>{car.year} р</span>
-                      </div>
-                      <div>
-                        <span>{`${formatNumber(car.mileage)} км`}</span>
-                        <span>{car.region}</span>
-                      </div>
-                    </div>
-                  </div>
+                  <CarCard car={car} userId={userId} displayOffcanvas={displayOffcanvas} />
                 </Link>
               ))}
             </div>
@@ -263,33 +241,7 @@ export const Home = () => {
               {carsMostProfitable.map((car, index) => (
                 <SwiperSlide key={`offer-${index}`}>
                   <Link to={`cars/${car.id}`} className="noFontStyle">
-                    <div className="carCard">
-                      <img
-                        className="carImage"
-                        src={
-                          car.imagesPath.length ? imagesURL + car.imagesPath[0] : ImagePlaceholder
-                        }
-                        alt={`Offer ${index + 1}`}
-                      />
-                      <div className="carCardMain">
-                        <span className="carCardTitle fs-6">{`${car.make} ${car.model}`}</span>
-                        <span className="carCardPrice fs-6">{`${formatNumber(
-                          car.price
-                        )} ${getCurrency(car.сurrency)}`}</span>
-                      </div>
-                      <div className="carCardDetails">
-                        <div>
-                          <span>{`${car.engine_type == 0 ? 'Бензин' : 'Дизель'} ${
-                            car.engine_capacity
-                          } л`}</span>
-                          <span>{car.year} р</span>
-                        </div>
-                        <div>
-                          <span>{`${formatNumber(car.mileage)} км`}</span>
-                          <span>{car.region}</span>
-                        </div>
-                      </div>
-                    </div>
+                    <CarCard car={car} userId={userId} displayOffcanvas={displayOffcanvas} />
                   </Link>
                 </SwiperSlide>
               ))}

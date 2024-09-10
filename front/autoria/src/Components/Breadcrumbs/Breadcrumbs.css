@@ -1,0 +1,23 @@
+.breadcrumbContainer {
+  padding-top: 1.125rem;
+  padding-bottom: 1.125rem;
+  --bs-breadcrumb-divider: url("../../assets/icons/ui/breadcrumbs-divider.svg");
+}
+
+.breadcrumbContainer ol {
+  margin: 0;
+}
+.breadcrumbContainer ol li {
+  line-height: 0.7;
+}
+
+.breadcrumbContainer .breadcrumb-item a {
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1.38;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+}
+.breadcrumbContainer .breadcrumb-item a:hover {
+  color: var(--bs-primary);
+}/*# sourceMappingURL=Breadcrumbs.css.map */

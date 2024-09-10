@@ -32,7 +32,7 @@ export const Header = () => {
               <Nav.Link as={Link} to="#">
                 Нові авто
               </Nav.Link>
-              <Nav.Link as={Link} to="/add-car">
+              <Nav.Link as={Link} to="/cabinet/add-car">
                 Продати машину
               </Nav.Link>
               <Nav.Link as={Link} to="#">
@@ -54,7 +54,7 @@ export const Header = () => {
                 <UserIcon color="var(--bs-text-darkgray)" hoverColor="var(--bs-primary)" />
               </Link>
             </div>
-            <Link to="/add-car" className="navbarRightButton">
+            <Link to="/cabinet/add-car" className="navbarRightButton">
               + Продати авто
             </Link>
           </div>

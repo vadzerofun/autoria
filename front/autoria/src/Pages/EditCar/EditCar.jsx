@@ -7,8 +7,11 @@ import { useParams } from 'react-router-dom';
 import useGetCarById from '../../Hooks/useLoadCarPage';
 import { capitalizeObjectKeys } from '../../Services/formatService';
 import { EditCarForm } from '../../Components/CarForm/EditCarForm/EditCarForm';
+import { AuthOffcanvas } from '../../Components/Auth/AuthOffcanvas/AuthOffcanvas';
 
 export const EditCar = () => {
+  // showOffcanvas
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
   // imagesURL
   const imagesURL = import.meta.env.VITE_IMAGES_URL;
   // token
@@ -33,7 +36,15 @@ export const EditCar = () => {
   
   
   if (!token) {
-    return <LoginRegister />;
+    useEffect(() => {
+      setShowOffcanvas(true);
+    }, [token]);
+
+    return (
+      <Layout>
+        <AuthOffcanvas showOffcanvas={showOffcanvas} setShowOffcanvas={setShowOffcanvas} />
+      </Layout>
+    );
   }
 
   if (loading) return <div>Loading...</div>;

@@ -1,8 +1,8 @@
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { CarCard } from '../../CarCard/CarCard';
 import './DeleteCarModal.css';
+import { MyCarCard } from '../../CarCards/MyCarCard/MyCarCard';
 
 export const DeleteCarModal = (props) => {
   // console.log(props.car);
@@ -26,7 +26,7 @@ export const DeleteCarModal = (props) => {
         <h4>Попередження</h4>
         <p>Ви впевнені що хочете видалити дане оголошення?</p>
         <div style={{ width: '100%', maxWidth: '370px', alignSelf: 'center' }}>
-          <CarCard car={props.car} />
+          <MyCarCard car={props.car} />
         </div>
       </Modal.Body>
       <Modal.Footer>

@@ -41,7 +41,7 @@ export const NewsCard = ({ news, userId, displayOffcanvas }) => {
 
     likeNews(token.token).catch((err) => {
       console.log(err);
-      if (err.response.status === 401) {
+      if (err.response.status === 401) {        
         refreshAuthToken(token, setToken).then(() => {
           likeNews(token.token);
         });

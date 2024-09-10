@@ -5,10 +5,14 @@ import { Login } from '../Login/Login';
 import { Register } from '../Register/Register';
 import { ForgotPassword } from '../ForgotPassword/ForgotPassword';
 import './AuthOffcanvas.css';
+import { useParams } from 'react-router-dom';
 
 export const AuthOffcanvas = ({ showOffcanvas, setShowOffcanvas }) => {
   // showOffcanvas
   // const [show, setShow] = useState(showOffcanvas);
+
+  // token, params
+  let { token } = useParams();
 
   const handleClose = () => setShowOffcanvas(false);
 
@@ -17,9 +21,16 @@ export const AuthOffcanvas = ({ showOffcanvas, setShowOffcanvas }) => {
 
   // initialize show
   useEffect(() => {
-    setShowOffcanvas(showOffcanvas);
-    setActiveComponent(0);
-  }, [showOffcanvas]);
+    if (token) {
+      setShowOffcanvas(true);
+      setActiveComponent(3);
+    }
+    else {
+      setShowOffcanvas(showOffcanvas);
+      setActiveComponent(0);
+    }
+    
+  }, [showOffcanvas, token]);
 
   // authComponents
   const authComponents = [

@@ -3,8 +3,7 @@
 import axios from 'axios';
 
 // refreshAuthToken
-export const refreshAuthToken = (token, setToken) => {
-
+export const refreshAuthToken = (token, setToken) => { 
   return axios.post(
     import.meta.env.VITE_REACT_API_URL + 'User/refresh-token',
     {
