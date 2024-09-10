@@ -17,10 +17,10 @@ namespace Core.Interfaces
         Task EditCar(Guid id, Cars car);
         Task AddImageToCar(Guid id, List<string> ImageLink);
         Task DeleteImagefromCar(Guid id, string ImageLink);
-        Task<List<Cars>> GetCarsByMark(string mark);
+        Task<List<Cars>> GetCarsByMark(Guid mark);
         Task<List<Cars>> GetCarsByFilter(
             CarType? type,
-            string? mark,
+            Guid? mark,
             string? model,
             string? region,
             int? minYear,

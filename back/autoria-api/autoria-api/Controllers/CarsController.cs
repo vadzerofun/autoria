@@ -40,7 +40,7 @@ namespace autoria_api.Controllers
         }
         [AllowAnonymous]
         [HttpGet("GetCarByMark")]
-        public async Task<Result<List<Cars>>> GetCarByMark(string mark)
+        public async Task<Result<List<Cars>>> GetCarByMark(Guid mark)
         {
             try
             {

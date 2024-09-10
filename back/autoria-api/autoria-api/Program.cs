@@ -112,6 +112,8 @@ builder.Services.AddScoped<ISubscribeService, SubscribeService>();
 builder.Services.AddScoped<IUserSubscribeService, UserSubscribeService>();
 builder.Services.AddScoped<ISubscribeRepository, SubscribeRepository>();
 builder.Services.AddScoped<IUserSubscribeRepository, UserSubscribeRepository>();
+builder.Services.AddScoped<IMarksService, MarksService>();
+builder.Services.AddScoped<IMarkRepository, MarkRepository>();
 
 var authOptionsConfiguration = builder.Configuration.GetSection("Auth");
 builder.Services.Configure<AuthOption>(authOptionsConfiguration);

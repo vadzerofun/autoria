@@ -110,14 +110,14 @@ namespace Infrastructure.Repositories
             await EditCar(id, car);
         }
 
-        public async Task<List<Cars>> GetCarsByMark(string mark)
+        public async Task<List<Cars>> GetCarsByMark(Guid mark)
         {
             List<Cars> cars = new List<Cars>();
-            cars = _context.Cars.Where(car => car.Make == mark).ToList();
+            cars = _context.Cars.Where(car => car.MakeId == mark).ToList();
             return cars;
         }
 
-        public async Task<List<Cars>> GetCarsByFilter(CarType? type, string? mark, string? model, string? region, int? minYear, int? maxYear, int? minPrice, int? maxPrice, Transmission_type? gearBox, Engine_type? engineType, Occasion? occasion, double? minEngineCapacity, double? maxEngineCapacity, CarState? carState, int page, int pageSize)
+        public async Task<List<Cars>> GetCarsByFilter(CarType? type, Guid? mark, string? model, string? region, int? minYear, int? maxYear, int? minPrice, int? maxPrice, Transmission_type? gearBox, Engine_type? engineType, Occasion? occasion, double? minEngineCapacity, double? maxEngineCapacity, CarState? carState, int page, int pageSize)
         {
             if (_context.Cars == null)
             {
@@ -127,7 +127,7 @@ namespace Infrastructure.Repositories
             var query = _context.Cars.AsQueryable();
 
             query = query.FilterIf(type.HasValue, car => car.Type == type.Value)
-                         .FilterIf(!string.IsNullOrEmpty(mark), car => car.Make == mark)
+                         .FilterIf(mark.HasValue, car => car.MakeId == mark)
                          .FilterIf(!string.IsNullOrEmpty(model), car => car.Model == model)
                          .FilterIf(!string.IsNullOrEmpty(region), car => car.Region == region)
                          .FilterIf(minYear.HasValue, car => car.Year >= minYear)

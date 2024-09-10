@@ -9,7 +9,7 @@ namespace autoria_api.ViewModel
         public double Price { get; set; } // ціна в доларах
         public Сurrency Сurrency { get; set; } //валюта
         public double Mileage { get; set; } // Пробіг авто
-        public string Make { get; set; } // Марка
+        public Guid MakeId { get; set; } // Марка
         public string Model { get; set; } // Модель
         public CarType Type { get; set; } // Тип машини Легкові, Вантажні ...
         public int Year { get; set; } // Рік випуску
@@ -45,7 +45,7 @@ namespace autoria_api.ViewModel
                 Price = CarVM.Price,
                 Сurrency = CarVM.Сurrency,
                 Mileage = CarVM.Mileage,
-                Make = CarVM.Make,
+                MakeId = CarVM.MakeId,
                 Model = CarVM.Model,
                 Type = CarVM.Type,
                 Year = CarVM.Year,

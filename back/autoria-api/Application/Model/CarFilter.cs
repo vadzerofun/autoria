@@ -10,7 +10,7 @@ namespace Application.Model
     public class CarFilter
     {
         public CarType? Type { get; set; }
-        public string? Mark {  get; set; }
+        public Guid? Mark {  get; set; }
         public string? Model { get; set; }
         public int? MinYear { get; set; }
         public int? MaxYear { get; set; }

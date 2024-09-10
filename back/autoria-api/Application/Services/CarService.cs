@@ -76,7 +76,7 @@ namespace Application.Services
             return car;
 
         }
-        public async Task<List<Cars>> GetCarByMark(string mark)
+        public async Task<List<Cars>> GetCarByMark(Guid mark)
         {
             var cars = await _carRepository.GetCarsByMark(mark);
             return cars;

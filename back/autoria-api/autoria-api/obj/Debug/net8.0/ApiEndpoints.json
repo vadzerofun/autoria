@@ -96,8 +96,8 @@
         "IsRequired": false
       },
       {
-        "Name": "Make",
-        "Type": "System.String",
+        "Name": "MakeId",
+        "Type": "System.Guid",
         "IsRequired": false
       },
       {
@@ -289,8 +289,8 @@
         "IsRequired": false
       },
       {
-        "Name": "Make",
-        "Type": "System.String",
+        "Name": "MakeId",
+        "Type": "System.Guid",
         "IsRequired": false
       },
       {
@@ -421,7 +421,7 @@
     "Parameters": [
       {
         "Name": "mark",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": false
       }
     ],
@@ -655,6 +655,48 @@
         "Name": "CarId",
         "Type": "System.Guid",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "autoria_api.Controllers.MarksController",
+    "Method": "AddMark",
+    "RelativePath": "api/Marks/AddMark",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mark",
+        "Type": "Core.Models.Marks",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "autoria_api.Controllers.MarksController",
+    "Method": "GetMarks",
+    "RelativePath": "api/Marks/GetMarks",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "autoria_api.Controllers.MarksController",
+    "Method": "RemoveMark",
+    "RelativePath": "api/Marks/RemoveMark/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
