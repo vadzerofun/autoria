@@ -47,12 +47,6 @@
   padding: 0;
   text-decoration: none;
 }
-.newsCardLikeBtn:hover, .newsCardLikeBtn:focus, .newsCardLikeBtn:active {
-  background-color: transparent;
-  color: var(--bs-primary) !important;
-  -webkit-filter: drop-shadow(0px 0px 3px #FD9052);
-          filter: drop-shadow(0px 0px 3px #FD9052);
-}
 
 .newsCardDate {
   font-size: 0.625rem;

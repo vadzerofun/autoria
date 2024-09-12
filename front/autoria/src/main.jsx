@@ -20,6 +20,7 @@ import { EditCar } from './Pages/EditCar/EditCar.jsx';
 import { Balance } from './Pages/Cabinet/Balance/Balance.jsx';
 import { Subscriptions } from './Pages/Cabinet/Subscriptions/Subscriptions.jsx';
 import { SubscribeCars } from './Pages/Cabinet/SubscribeCars/SubscribeCars.jsx';
+import { FavoriteCars } from './Pages/Cabinet/FavoriteCars/FavoriteCars.jsx';
 
 const router = createBrowserRouter([
   {
@@ -144,6 +145,14 @@ const router = createBrowserRouter([
     element: (
       <div>
         <SubscribeCars />
+      </div>
+    )
+  },
+  {
+    path: '/cabinet/favorite-cars',
+    element: (
+      <div>
+        <FavoriteCars />
       </div>
     )
   },

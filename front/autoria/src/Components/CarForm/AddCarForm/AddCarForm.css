@@ -48,12 +48,6 @@
   border-radius: 0.75rem;
 }
 
-.addCarForm select:focus,
-.addCarForm input:focus,
-.addCarForm textarea:focus {
-  background-color: var(--bs-gray-500);
-}
-
 .addCarForm select:focus option {
   background-color: var(--bs-input-addcar-bg);
 }

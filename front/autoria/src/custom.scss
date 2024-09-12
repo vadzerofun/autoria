@@ -14,7 +14,8 @@ $custom-colors: (
   "text-gray": #888888,
   "text-darkgray": #5C5C5C,
   "darkgray": #5C5C5C,
-  "input-addcar-bg": #EBECEF 
+  "input-addcar-bg": #EBECEF,
+  "dropdown-bg-active":  #F5F5F5,
 );
 
 $spacers: (
@@ -34,6 +35,9 @@ $headings-line-height: 1.375; /* 55/40 */
 // breadcrumbs
 $breadcrumb-item-padding-x: 0.75rem;
 // $breadcrumb-divider: url("./assets/icons/ui/select-caret-up.svg");
+
+// dropdown
+$dropdown-spacer: 1rem;
 
 // container
 $container-max-widths: (  

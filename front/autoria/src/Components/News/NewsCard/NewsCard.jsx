@@ -11,6 +11,8 @@ import { HeartFilledIcon } from '../../Icons/HeartIcon/HeartFilledIcon';
 
 import useToken from '../../../Hooks/useToken';
 import { refreshAuthToken } from '../../../Services/authService';
+import { ThumbUpIcon } from '../../Icons/ThumbUpIcon/ThumbUpIcon';
+import { ThumbUpFilledIcon } from '../../Icons/ThumbUpIcon/ThumbUpFilledIcon';
 
 export const NewsCard = ({ news, userId, displayOffcanvas }) => {
   // images
@@ -41,7 +43,7 @@ export const NewsCard = ({ news, userId, displayOffcanvas }) => {
 
     likeNews(token.token).catch((err) => {
       console.log(err);
-      if (err.response.status === 401) {        
+      if (err.response.status === 401) {
         refreshAuthToken(token, setToken).then(() => {
           likeNews(token.token);
         });
@@ -78,9 +80,14 @@ export const NewsCard = ({ news, userId, displayOffcanvas }) => {
         <div className="newsCardDetails">
           <Button onClick={handleClick} className="newsCardLikeBtn" variant="link">
             {liked ? (
-              <HeartFilledIcon color="var( --bs-primary )" />
+              <ThumbUpFilledIcon color={'var(--bs-primary)'} width={17} height={17} />
             ) : (
-              <HeartIcon color="var( --bs-primary )" />
+              <ThumbUpIcon
+                color="var(--bs-darkgray)"
+                hoverColor={'var(--bs-primary)'}
+                width={17}
+                height={17}
+              />
             )}
             <span>{formatNumber(likesCount)}</span>
           </Button>
