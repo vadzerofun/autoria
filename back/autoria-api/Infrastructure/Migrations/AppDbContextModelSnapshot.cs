@@ -65,8 +65,7 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Make")
-                        .IsRequired()
+                    b.Property<Guid>("MakeId")
                         .HasColumnType("TEXT");
 
                     b.Property<double>("Mileage")
@@ -137,6 +136,21 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("Core.Models.Marks", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Marks");
                 });
 
             modelBuilder.Entity("Core.Models.News", b =>

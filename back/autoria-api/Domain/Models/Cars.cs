@@ -14,7 +14,7 @@ namespace Core.Models
         public double Price { get; set; } // ціна
         public Сurrency Сurrency { get; set; } //валюта
         public double Mileage { get; set; } // Пробіг авто
-        public string Make { get; set; } // Марка
+        public Guid MakeId { get; set; } // Марка
         public string Model { get; set; } // Модель
         public CarType Type { get; set; } // Тип машини Легкові, Вантажні ...
         public int Year { get; set; } // Рік випуску

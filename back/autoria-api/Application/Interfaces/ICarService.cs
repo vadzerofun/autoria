@@ -21,7 +21,7 @@ namespace Application.Interfaces
         public Task EditCar(Guid id, Cars car);
         public Task AddImageToCar(Guid id, List<string> ImageFiles);
         public Task DeleteImageFromCar(Guid id, string ImageName);
-        public Task<List<Cars>> GetCarByMark(string mark);
+        public Task<List<Cars>> GetCarByMark(Guid mark);
         public Task<List<Cars>> GetCarByFilter(CarFilter filter, int page, int pageSize);
         public Task<List<Cars>> GetCarsForYou();
         public Task<List<Cars>> GetMostProfitable();
