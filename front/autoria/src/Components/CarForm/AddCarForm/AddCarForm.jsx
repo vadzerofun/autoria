@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { formatNumber } from '../../../Services/formatService';
 import { refreshAuthToken } from '../../../Services/authService';
 import useToken from '../../../Hooks/useToken';
+import { CarTypeDropdown } from '../CarTypeDropdown/CarTypeDropdown';
 
 export const AddCarForm = ({ carData }) => {
   // token
@@ -43,7 +44,7 @@ export const AddCarForm = ({ carData }) => {
       ...formData,
       [name]: files ? files[0] : value
     });
-    // console.log(formData);
+    console.log(formData);
     // console.log(e.target.files);
   };
 
@@ -157,13 +158,18 @@ export const AddCarForm = ({ carData }) => {
           <h1 className="addCarFirstHeader fs-2 fw-bold">Створити оголошення</h1>
           <Form.Group controlId="addCarFormCarType" className="mb-4">
             {/* <Form.Label>Select an option</Form.Label> */}
-            <Form.Select onChange={handleChange} name="Type" value={formData.Type}>
+            {/* <Form.Select onChange={handleChange} name="Type" value={formData.Type}>
               {selectCarType.map((carType, index) => (
                 <option value={index} key={`carType-${index}`}>
-                  {carType.type}
+                  {carType.icon}<span>{carType.type}</span>
                 </option>
               ))}
-            </Form.Select>
+            </Form.Select> */}
+            <CarTypeDropdown
+              selectCarType={selectCarType}
+              formDataType={formData.Type}
+              handleChange={handleChange}
+            />
           </Form.Group>
           <h2 className="fs-2 fw-bold mb-4">Подача оголошення</h2>
           <Form.Group controlId="addCarFormCarBody" className="mb-4">

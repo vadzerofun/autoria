@@ -9,6 +9,7 @@ import { DragAndDropUpload } from '../DragAndDropUpload/DragAndDropUpload';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { formatNumber } from '../../../Services/formatService';
+import { CarTypeDropdown } from '../CarTypeDropdown/CarTypeDropdown';
 
 export const EditCarForm = ({ carData, token }) => {
   // useNavigate
@@ -144,13 +145,18 @@ export const EditCarForm = ({ carData, token }) => {
           <h1 className="addCarFirstHeader fs-2 fw-bold">Редагувати оголошення</h1>
           <Form.Group controlId="addCarFormCarType" className="mb-4">
             {/* <Form.Label>Select an option</Form.Label> */}
-            <Form.Select onChange={handleChange} name="Type" value={formData.Type}>
+            {/* <Form.Select onChange={handleChange} name="Type" value={formData.Type}>
               {selectCarType.map((carType, index) => (
                 <option value={index} key={`carType-${index}`}>
                   {carType.type}
                 </option>
               ))}
-            </Form.Select>
+            </Form.Select> */}
+            <CarTypeDropdown
+              selectCarType={selectCarType}
+              formDataType={formData.Type}
+              handleChange={handleChange}
+            />
           </Form.Group>
           <h2 className="fs-2 fw-bold mb-4">Оголошення</h2>
           <Form.Group controlId="addCarFormCarBody" className="mb-4">

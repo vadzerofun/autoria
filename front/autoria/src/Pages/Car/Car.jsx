@@ -54,10 +54,9 @@ export const Car = () => {
 
   // setOpen
   const [openDescription, setOpenDescription] = useState(false);
-  // carId
-  const { carId } = useParams();
+  
   // fetch car and user
-  const { car, user, loading, error } = useLoadCarPage(carId);
+  const { car, user, loading, error } = useLoadCarPage();
 
   // liked
   const [liked, setLiked] = useState(false);
@@ -109,7 +108,7 @@ export const Car = () => {
         }
       }
     );
-  };
+  };  
 
   return (
     <Layout>
@@ -118,10 +117,6 @@ export const Car = () => {
           <div className="carGalleryContainer">
             <div className="carGallerySwiper">
               <Swiper
-                style={{
-                  '--swiper-navigation-color': 'rgba(92, 92, 92, 0.7)',
-                  '--swiper-pagination-color': 'rgba(92, 92, 92, 0.7)'
-                }}
                 spaceBetween={10}
                 navigation={true}
                 loop={true}
@@ -221,13 +216,13 @@ export const Car = () => {
                       <span>Перевірена особа</span>
                     </div>
                     <div className="carGallerySellerIconItem">
-                      <img className="carGallerySellerIcon" src={carIcons.Chat} alt="Chat Icon" />
+                      <img className="carGallerySellerIcon" src={carIcons.UserCar} alt="Chat Icon" />
                       <span>Останній раз на сайті {formatLastVisited(user.lastVisitedDate)}</span>
                     </div>
                     <div className="carGallerySellerIconItem">
                       <img
                         className="carGallerySellerIcon"
-                        src={carIcons.Profile}
+                        src={carIcons.ChatCar}
                         alt="Profile Icon"
                       />
                       <span>З Drive Dreams від {user.createdTime.substring(0, 4)}</span>
@@ -412,7 +407,10 @@ export const Car = () => {
 
 // formatDescription
 const formatDescription = (text) => {
-  return text.split('\n\r');
+  if (text) {
+    return text.split('\n\r');
+  }
+  return [''];
 };
 
 // formatLastVisited

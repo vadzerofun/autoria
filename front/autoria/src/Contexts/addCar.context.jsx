@@ -1,4 +1,8 @@
 import React, { createContext, useContext, useState } from 'react';
+import { CarIcon } from '../Components/Icons/CarIcon/CarIcon';
+import { CommercialCarIcon } from '../Components/Icons/CommercialCarIcon/CommercialCarIcon';
+import { OtherTransportIcon } from '../Components/Icons/OtherTransportIcon/OtherTransportIcon';
+
 
 const AddCarDataContext = createContext();
 
@@ -7,6 +11,7 @@ export function AddCarDataProvider({ children }) {
     selectCarType: [
       {
         type: 'Легкові автомобілі',
+        icon: <CarIcon color="var( --bs-darkgray )" width={26} height={26} />,
         bodies: [
           'Седан',
           'Хетчбэк 4/5 дверей',
@@ -21,6 +26,7 @@ export function AddCarDataProvider({ children }) {
       },
       {
         type: 'Комерційні авто',
+        icon: <CommercialCarIcon color="var( --bs-darkgray )" width={26} height={26} />,
         bodies: [
           'Фургон пасажир',
           'Фургон вантаж-пас.',
@@ -40,6 +46,7 @@ export function AddCarDataProvider({ children }) {
       },
       {
         type: 'Мото, Авіа, Водний транспорт',
+        icon: <OtherTransportIcon color="var( --bs-darkgray )" width={26} height={26} />,
         bodies: ['Причіп', 'МОТО-транспорт', 'Авіа-транспорт', 'Водний-транспорт']
       }
     ], // типи машин, кузова

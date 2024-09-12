@@ -19,8 +19,21 @@ import { Link } from 'react-router-dom';
 import { NotificationIcon } from '../../Components/Icons/NotificationIcon/NotificationIcon';
 import { EnvelopeIcon } from '../../Components/Icons/EnvelopeIcon/EnvelopeIcon';
 import { MyCarCard } from '../../Components/CarCards/MyCarCard/MyCarCard';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+// import required modules
+import { Navigation } from 'swiper/modules';
 
 export const Cabinet = () => {
+  // showOffcanvas
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+
+  const displayOffcanvas = () => {
+    setShowOffcanvas(true);
+  };
   // modal
   const [modalShow, setModalShow] = useState(false);
   const [modalCar, setModalCar] = useState({});
@@ -60,26 +73,42 @@ export const Cabinet = () => {
           </Button>
         </div>
         <div className="favoritesContainer">
-          <div className="iconTitleContainer">
-            <div className="cabinetIconContainer">
-              <HeartIcon color="var( --bs-primary )" width={17} height={15} />
+          <div className="favoritesHeader">
+            <div className="iconTitleContainer">
+              <div className="cabinetIconContainer">
+                <HeartIcon color="var( --bs-primary )" width={17} height={15} />
+              </div>
+              <h2 className="iconTitleText">Обране</h2>
+              <span
+                className="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center lh-1 countCircleText"
+                style={{ width: '27px', height: '26px' }}>
+                {favoriteCars.length}
+              </span>
             </div>
-            <h2 className="iconTitleText">Обране</h2>
-            <span
-              className="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center lh-1 countCircleText"
-              style={{ width: '27px', height: '26px' }}>
-              {favoriteCars.length}
-            </span>
+            <div className="favoritesSeeAll">
+              <Link to="/cabinet/favorite-cars">Переглянути усе</Link>
+            </div>
           </div>
           <div className="favoritesCards">
-            {favoriteCars.map((car, index, arr) => (
-              <Link
-                to={`/cars/${car.id}`}
-                key={`favoriteCar-${index}`}
-                className={`noFontStyle ${index < arr.length - 1 && 'mb-4'}`}>
-                <FavoriteCarCard car={car} userId={userId} />
-              </Link>
-            ))}
+            <Swiper
+              slidesPerView={'auto'}
+              spaceBetween={24}
+              navigation={true}
+              modules={[Navigation]}
+              grabCursor={true}
+              className="favoritesSwiper">
+              {favoriteCars.map((car, index) => (
+                <SwiperSlide key={`favoriteCar-${index}`}>
+                  <Link to={`/cars/${car.id}`} className="noFontStyle">
+                    <FavoriteCarCard
+                      car={car}
+                      userId={userId}
+                      displayOffcanvas={displayOffcanvas}
+                    />
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
         <div className="subscriptionsContainer">
@@ -114,7 +143,17 @@ export const Cabinet = () => {
                 <Dropdown.Toggle as={CustomToggle}>
                   <MyCarCard car={car} />
                 </Dropdown.Toggle>
-                <Dropdown.Menu>
+                <Dropdown.Menu
+                  popperConfig={{
+                    modifiers: [
+                      {
+                        name: 'offset',
+                        options: {
+                          offset: [0, 16]
+                        }
+                      }
+                    ]
+                  }}>
                   <Dropdown.Item href={`/cars/${car.id}`}>Перейти</Dropdown.Item>
                   <Dropdown.Item href={`/cabinet/edit-car/${car.id}`}>Редагувати</Dropdown.Item>
                   <Dropdown.Item

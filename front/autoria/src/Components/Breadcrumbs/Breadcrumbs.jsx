@@ -11,7 +11,8 @@ const crumbNames = {
   'add-car': 'Створити оголошення',
   'edit-car': 'Редагувати оголошення',
   balance: 'Поповнити баланс',
-  'edit-profile': 'Моя анкета'
+  'edit-profile': 'Моя анкета',
+  'favorite-cars': 'Обране',
 };
 
 export const Breadcrumbs = () => {
@@ -34,20 +35,20 @@ export const Breadcrumbs = () => {
       const crumbName = crumbNames[crumb];
 
       return (
-        <>
+        <React.Fragment key={`${crumb}-${index}`}>
           {crumbName && (
-            <Breadcrumb.Item href={currentLink} key={`${crumb}-${index}`}>
+            <Breadcrumb.Item href={currentLink}>
               {crumbName}
             </Breadcrumb.Item>
           )}
-        </>
+        </React.Fragment>
       );
     });
 
   return (
     <Container>
       <Breadcrumb className="breadcrumbContainer">
-        <Breadcrumb.Item href="/" key={`home-crumb`}>
+        <Breadcrumb.Item href="/">
           {crumbNames['home']}
         </Breadcrumb.Item>
         {crumbs}

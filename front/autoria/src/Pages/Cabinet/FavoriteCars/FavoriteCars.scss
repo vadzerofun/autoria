@@ -1,0 +1,65 @@
+// global styling
+.favoriteCarsButton {
+  font-family: "Inter", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.38; /* 27.6/20 */
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  align-self: center;
+}
+
+.hideButton {
+  display: none;
+}
+
+// search section
+.favoriteCarsSearch{
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;  
+}
+
+.favoriteCarsIconTitleContainer{
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.favoriteCarsIconContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;  
+}
+
+/* ======================================================================== */
+
+// list section
+.favoriteCarsCars{
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 1168px;
+  margin-bottom: 2.5rem;
+}
+
+.favoriteCarsList{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;  
+}
+
+.favoriteCarsOffers{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-left: 0.75rem;
+}
+
+.favoriteCarsOffersList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 1.5rem;
+}

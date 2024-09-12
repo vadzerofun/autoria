@@ -1,0 +1,14 @@
+.myCarCardInfo{
+  display: flex;
+  gap: 1.5rem;
+}
+
+.myCarCardInfoItem{
+  font-size: 0.75rem;
+  display: flex;
+  gap: 0.375rem;
+  align-items: center;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.75rem;
+  background-color: rgba($color: var(--bs-darkgray-rgb), $alpha: 0.03);
+}

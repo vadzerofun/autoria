@@ -42,7 +42,7 @@ export const Header = () => {
           </Navbar.Collapse>
           <div className="navbarRight">
             <div className="navbarRightIcons">
-              <Link to="/cabinet">
+              <Link to="/cabinet/favorite-cars">
                 <HeartIcon
                   color="var(--bs-text-darkgray)"
                   hoverColor="var(--bs-primary)"

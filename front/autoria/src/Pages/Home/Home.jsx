@@ -15,6 +15,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
+import 'swiper/css/navigation';
+
+// import required modules
+import { Navigation } from 'swiper/modules';
 
 // Import images
 import SearchImage from '../../assets/images/cars/car-01.png';
@@ -178,40 +182,7 @@ export const Home = () => {
           <div className="recsContainer">
             <div className="recsLeft">
               <h2 className="homeTitle fs-1">Тобі може сподобатись!</h2>
-              <Link to={`/cars/${carsForYou[0].id}`} className="noFontStyle">
-                {/* <div className="recsLeftCard">
-                  <img
-                    className="recsLeftImage"
-                    src={
-                      carsForYou[0].imagesPath.length
-                        ? imagesURL + carsForYou[0].imagesPath[0]
-                        : ImagePlaceholder
-                    }
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = ImagePlaceholder;
-                    }}
-                    alt="Recommended car"
-                  />
-                  <div className="recsLeftCardMain">
-                    <span className="recsLeftCardTitle fs-4">{`${carsForYou[0].make} ${carsForYou[0].model}`}</span>
-                    <span className="recsLeftCardPrice fs-4">{`${formatNumber(
-                      carsForYou[0].price
-                    )} ${getCurrency(carsForYou[0].сurrency)}`}</span>
-                  </div>
-                  <div className="recsLeftCardDetails">
-                    <div>
-                      <span>{`${carsForYou[0].engine_type == 1 ? 'Бензин' : 'Дизель'} ${
-                        carsForYou[0].engine_capacity
-                      } л`}</span>
-                      <span>{carsForYou[0].year} р</span>
-                    </div>
-                    <div>
-                      <span>{`${formatNumber(carsForYou[0].mileage)} км`}</span>
-                      <span>{carsForYou[0].region}</span>
-                    </div>
-                  </div>
-                </div> */}
+              <Link to={`/cars/${carsForYou[0].id}`} className="noFontStyle">                
                 <CarCardBig
                   car={carsForYou[0]}
                   userId={userId}
@@ -233,14 +204,16 @@ export const Home = () => {
         <Container>
           <div className="offersContainer">
             <h2 className="homeTitle fs-1">Найвигідніші пропозиції</h2>
-            <Swiper
+            <Swiper              
               slidesPerView={'auto'}
               spaceBetween={24}
+              navigation={true}
+              modules={[Navigation]}
               grabCursor={true}
               className="offersSwiper">
               {carsMostProfitable.map((car, index) => (
                 <SwiperSlide key={`offer-${index}`}>
-                  <Link to={`cars/${car.id}`} className="noFontStyle">
+                  <Link to={`/cars/${car.id}`} className="noFontStyle">
                     <CarCard car={car} userId={userId} displayOffcanvas={displayOffcanvas} />
                   </Link>
                 </SwiperSlide>
@@ -256,6 +229,8 @@ export const Home = () => {
             <Swiper
               slidesPerView={'auto'}
               spaceBetween={24}
+              navigation={true}
+              modules={[Navigation]}
               grabCursor={true}
               className="brandsSwiper">
               {brandsArray.map((brand, index) => (
@@ -279,6 +254,8 @@ export const Home = () => {
             <Swiper
               slidesPerView={'auto'}
               spaceBetween={24}
+              navigation={true}
+              modules={[Navigation]}
               grabCursor={true}
               className="newsSwiper">
               {news.map((news, index) => (

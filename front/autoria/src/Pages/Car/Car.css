@@ -93,14 +93,14 @@
 .swiperCarGallery .swiper-button-prev {
   width: 2rem;
   height: 2rem;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0.75rem;
+  background: rgba(245, 245, 245, 0.8);
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 .swiperCarGallery .swiper-button-next:hover,
 .swiperCarGallery .swiper-button-prev:hover {
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(245, 245, 245, 0.6);
 }
 
 .swiperCarGallery .swiper-button-next:after,
@@ -111,13 +111,13 @@
 }
 
 .swiperCarGallery .swiper-button-next:after {
-  background: url("../../assets/icons/ui/caret-right.svg") no-repeat;
-  background-position: 60% 50%;
+  background: url("../../assets/icons/ui/swiper-right-arrow.svg") no-repeat;
+  background-position: 60% 55%;
 }
 
 .swiperCarGallery .swiper-button-prev:after {
-  background: url("../../assets/icons/ui/caret-left.svg") no-repeat;
-  background-position: 40% 50%;
+  background: url("../../assets/icons/ui/swiper-left-arrow.svg") no-repeat;
+  background-position: 40% 55%;
 }
 
 .swiperCarGallerySmall {
@@ -330,17 +330,22 @@
   display: -ms-flexbox;
   display: flex;
   gap: 0.625rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .carGallerySellerIcon {
-  width: 22px;
+  width: 26px;
 }
 
 .carGallerySellerBtn {
+  font-family: "Inter", sans-serif;
   font-size: 1.25rem;
   font-weight: 700;
-  padding: 0.75rem 0;
+  padding: 0.75rem 1.25rem;
   border-radius: 0.75rem;
+  max-width: 350px;
 }
 @media screen and (max-width: 1024px) {
   .carGallerySellerBtn {

@@ -5,6 +5,8 @@ import Checkmark from '../../assets/icons/ui/checkmark.svg';
 import Chat from '../../assets/icons/ui/chat.svg';
 import ChatWhite from '../../assets/icons/ui/chat-white.svg';
 import Profile from '../../assets/icons/user.svg';
+import UserCar from '../../assets/icons/ui/user-car.svg';
+import ChatCar from '../../assets/icons/ui/chat-car.svg';
 
 const carIcons = {
   RoadLane,
@@ -14,6 +16,8 @@ const carIcons = {
   Chat,
   ChatWhite,
   Profile,
+  UserCar,
+  ChatCar,
 };
 
 export default carIcons;
