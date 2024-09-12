@@ -10,5 +10,6 @@ namespace Application.Model
     {
         public string SecretKey { get; set; }
         public string PubKey { get; set; }
+        public string StripeSignature {  get; set; }
     }
 }

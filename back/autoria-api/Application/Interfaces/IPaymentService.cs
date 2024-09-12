@@ -11,7 +11,7 @@ namespace Application.Interfaces
 {
     public interface IPaymentService
     {
-        Task<Result<CheckoutOrderResponse>> CheckoutOrder(long price, IServiceProvider sp, Guid UserId);
+        Task<Result<CheckoutOrderResponse>> CheckoutOrder(long price, string SucsessLink, string BadLink, IServiceProvider sp, Guid UserId);
         Task<Result> WebHook(string json, HttpRequest Request);
     }
 }

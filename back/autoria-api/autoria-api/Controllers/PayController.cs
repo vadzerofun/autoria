@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Application.Model;
+using autoria_api.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
@@ -24,12 +25,12 @@ namespace autoria_api.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> CheckoutOrder([FromBody] long price, [FromServices] IServiceProvider sp)
+        public async Task<ActionResult> CheckoutOrder(PayViewModel pvm, [FromServices] IServiceProvider sp)
         {
             var UserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (UserId == null) return BadRequest("No such User");
 
-            var res = await _paymentService.CheckoutOrder(price, sp, Guid.Parse(UserId));
+            var res = await _paymentService.CheckoutOrder(pvm.price, pvm.SucsessLink, pvm.BadLink, sp, Guid.Parse(UserId));
             if (res.IsSuccess)
             {
                 return Ok(res.Value);

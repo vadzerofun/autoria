@@ -24,7 +24,7 @@ namespace Application.Services
             _PubKey = pubKey;
             _userService = userService;
         }
-        public async Task<Result<CheckoutOrderResponse>> CheckoutOrder(long price, IServiceProvider sp, Guid UserId)
+        public async Task<Result<CheckoutOrderResponse>> CheckoutOrder(long price, string SucsessLink, string BadLink, IServiceProvider sp, Guid UserId)
         {
             var server = sp.GetRequiredService<IServer>();
 
@@ -39,7 +39,7 @@ namespace Application.Services
 
             if (thisApiUrl is not null)
             {
-                var sessionId = await CheckOut(thisApiUrl, price, UserId.ToString());
+                var sessionId = await CheckOut(thisApiUrl, price, UserId.ToString(), SucsessLink, BadLink);
 
                 var checkoutOrderResponse = new CheckoutOrderResponse()
                 {
@@ -86,13 +86,13 @@ namespace Application.Services
                 return Result.Failure(e.Message);
             }
         }
-        private async Task<string> CheckOut(string thisApiUrl, long PriceUSDCents, string UserId)
+        private async Task<string> CheckOut(string thisApiUrl, long PriceUSDCents, string UserId, string SucsessLink, string BadLink)
         {
             StripeConfiguration.ApiKey = _PubKey.Value.SecretKey;
             var options = new SessionCreateOptions
             {
-                SuccessUrl = $"{thisApiUrl}/checkout/success?sessionId=" + "{CHECKOUT_SESSION_ID}",
-                CancelUrl = "https://google.com" + "failed",
+                SuccessUrl = SucsessLink,
+                CancelUrl = BadLink,
                 PaymentMethodTypes = new List<string>
                 {
                     "card"

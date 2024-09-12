@@ -951,8 +951,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "price",
-        "Type": "System.Int64",
+        "Name": "pvm",
+        "Type": "autoria_api.ViewModel.PayViewModel",
         "IsRequired": true
       }
     ],
