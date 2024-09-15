@@ -418,8 +418,7 @@
               "RelativeToolTip": "autoria-api\\ViewModel\\PayViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T16:21:19.835Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-12T16:21:19.835Z"
             },
             {
               "$type": "Document",
@@ -431,8 +430,7 @@
               "RelativeToolTip": "autoria-api\\Controllers\\MarksController.cs",
               "ViewState": "AgIAACMAAAAAAAAAAAAwwDEAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T16:40:41.084Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T16:40:41.084Z"
             },
             {
               "$type": "Document",
@@ -444,8 +442,7 @@
               "RelativeToolTip": "Domain\\Interfaces\\ICarRepository.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAA5wBMAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T16:19:48.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-17T16:19:48.792Z"
             },
             {
               "$type": "Document",
@@ -493,8 +490,7 @@
               "RelativeToolTip": "autoria-api\\Program.cs",
               "ViewState": "AgIAAIQAAAAAAAAAAAAQwJUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T17:15:51.227Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-17T17:15:51.227Z"
             },
             {
               "$type": "Document",
@@ -504,7 +500,7 @@
               "RelativeDocumentMoniker": "autoria-api\\Controllers\\PayController.cs",
               "ToolTip": "D:\\projects\\autoria\\back\\autoria-api\\autoria-api\\Controllers\\PayController.cs",
               "RelativeToolTip": "autoria-api\\Controllers\\PayController.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAgwB8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAgwBAAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-13T21:24:02.842Z",
               "EditorCaption": ""
@@ -519,8 +515,7 @@
               "RelativeToolTip": "Application\\Interfaces\\IPaymentService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-11T15:32:34.628Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-11T15:32:34.628Z"
             },
             {
               "$type": "Document",
@@ -532,8 +527,7 @@
               "RelativeToolTip": "Application\\Services\\StripeService.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAABMAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-11T15:34:34.465Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-11T15:34:34.465Z"
             },
             {
               "$type": "Document",
@@ -545,8 +539,7 @@
               "RelativeToolTip": "autoria-api\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-07-17T13:32:00.623Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-17T13:32:00.623Z"
             },
             {
               "$type": "Document",
@@ -558,8 +551,7 @@
               "RelativeToolTip": "Application\\Model\\PayOptions.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-13T21:40:12.918Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-13T21:40:12.918Z"
             },
             {
               "$type": "Document",
