@@ -15,6 +15,8 @@ export const PaymentForm = () => {
   // amount
   const [amount, setAmount] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  // get URL
+  const baseUrl = `${window.location.protocol}//${window.location.host}/`;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -28,12 +30,20 @@ export const PaymentForm = () => {
     }
 
     try {
-      const response = await axios.post(import.meta.env.VITE_REACT_API_URL + 'Pay', parsedAmount, {
-        headers: {
-          Authorization: `Bearer ${token.token}`,
-          'Content-Type': 'application/json'
+      const response = await axios.post(
+        import.meta.env.VITE_REACT_API_URL + 'Pay',
+        {
+          price: parsedAmount,
+          sucsessLink: baseUrl + 'cabinet/balance/?success=true',
+          badLink: baseUrl + 'cabinet/balance/?success=false'
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token.token}`,
+            'Content-Type': 'application/json'
+          }
         }
-      });
+      );
 
       const { sessionId } = response.data;
       if (sessionId) {
@@ -47,7 +57,7 @@ export const PaymentForm = () => {
         setErrorMessage('No sessionId returned from server.');
       }
     } catch (error) {
-      console.log(error);      
+      console.log(error);
       // setErrorMessage(`Error: ${error.response?.data || error.message}`);
     }
   };
@@ -70,12 +80,7 @@ export const PaymentForm = () => {
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="amount" className="mb-3">
           <Form.Label className="fw-medium">Сума ($):</Form.Label>
-          <Form.Control
-            type="text"
-            value={amount}
-            onChange={handleAmountChange}
-            required
-          />
+          <Form.Control type="text" value={amount} onChange={handleAmountChange} required />
         </Form.Group>
         <Button variant="primary" type="submit">
           Оплатити

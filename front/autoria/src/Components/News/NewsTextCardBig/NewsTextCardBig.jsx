@@ -2,19 +2,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/esm/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import './NewsCard.css';
-
-// Import images
-import ImagePlaceholder from '../../../assets/placeholder-image.png';
+import './NewsTextCardBig.css';
 
 import useToken from '../../../Hooks/useToken';
 import { refreshAuthToken } from '../../../Services/authService';
 import { ThumbUpIcon } from '../../Icons/ThumbUpIcon/ThumbUpIcon';
 import { ThumbUpFilledIcon } from '../../Icons/ThumbUpIcon/ThumbUpFilledIcon';
 
-export const NewsCard = ({ news, userId, displayOffcanvas }) => {
-  // images
-  const imagesURL = import.meta.env.VITE_IMAGES_URL;
+export const NewsTextCardBig = ({ news, userId, displayOffcanvas }) => {
   // useToken
   const { token, setToken } = useToken();
 
@@ -64,19 +59,10 @@ export const NewsCard = ({ news, userId, displayOffcanvas }) => {
 
   return (
     <Link to={news.link} className="noFontStyle">
-      <div className="newsCard">
-        <img
-          className="newsImage"
-          src={news.imageLink ? imagesURL + news.imageLink : ImagePlaceholder}
-          alt={`News`}
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src = ImagePlaceholder;
-          }}
-        />
-        <div className="newsCardTitle fs-6">{news.tittle}</div>
-        <div className="newsCardDetails">
-          <Button onClick={handleClick} className="newsCardLikeBtn" variant="link">
+      <div className="newsTextCardBig">        
+        <div className="newsTextCardBigTitle fs-6">{news.tittle}</div>
+        <div className="newsTextCardBigDetails">
+          <Button onClick={handleClick} className="newsTextCardBigLikeBtn" variant="link">
             {liked ? (
               <ThumbUpFilledIcon color={'var(--bs-primary)'} width={17} height={17} />
             ) : (
@@ -89,7 +75,7 @@ export const NewsCard = ({ news, userId, displayOffcanvas }) => {
             )}
             <span>{formatNumber(likesCount)}</span>
           </Button>
-          <div className="newsCardDate">{formatDate(new Date(news.writingTime))}</div>
+          <div className="newsTextCardBigDate">{formatDate(new Date(news.writingTime))}</div>
         </div>
       </div>
     </Link>

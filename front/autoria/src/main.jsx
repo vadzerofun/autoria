@@ -21,6 +21,8 @@ import { Balance } from './Pages/Cabinet/Balance/Balance.jsx';
 import { Subscriptions } from './Pages/Cabinet/Subscriptions/Subscriptions.jsx';
 import { SubscribeCars } from './Pages/Cabinet/SubscribeCars/SubscribeCars.jsx';
 import { FavoriteCars } from './Pages/Cabinet/FavoriteCars/FavoriteCars.jsx';
+import { SearchCars } from './Pages/SearchCars/SearchCars.jsx';
+import { News } from './Pages/News/News.jsx';
 
 const router = createBrowserRouter([
   {
@@ -153,6 +155,22 @@ const router = createBrowserRouter([
     element: (
       <div>
         <FavoriteCars />
+      </div>
+    )
+  },
+  {
+    path: '/search-cars',
+    element: (
+      <div>
+        <SearchCars />
+      </div>
+    )
+  },
+  {
+    path: '/news',
+    element: (
+      <div>
+        <News />
       </div>
     )
   },

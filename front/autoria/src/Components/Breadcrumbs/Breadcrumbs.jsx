@@ -13,6 +13,8 @@ const crumbNames = {
   balance: 'Поповнити баланс',
   'edit-profile': 'Моя анкета',
   'favorite-cars': 'Обране',
+  'search-cars': 'Пошук авто',
+  news: 'Новини',
 };
 
 export const Breadcrumbs = () => {

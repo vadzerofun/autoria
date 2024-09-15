@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Layout } from '../../../Components/Layouts/Layout/Layout';
 import { AuthOffcanvas } from '../../../Components/Auth/AuthOffcanvas/AuthOffcanvas';
 import useToken from '../../../Hooks/useToken';
-import { Button, Container, Spinner } from 'react-bootstrap';
+import { Button, Col, Container, Dropdown, DropdownButton, Form, Row, Spinner } from 'react-bootstrap';
 import { HeartIcon } from '../../../Components/Icons/HeartIcon/HeartIcon';
 import './FavoriteCars.css';
 import useLoadFavoriteCars from '../../../Hooks/useLoadFavoriteCars';
@@ -11,6 +11,7 @@ import { getUserIdFromToken } from '../../../Services/authService';
 import { Link } from 'react-router-dom';
 import { CarCard } from '../../../Components/CarCards/CarCard/CarCard';
 import { FavoriteCarCardBig } from '../../../Components/CarCards/FavoriteCarCardBig/FavoriteCarCardBig';
+import { SearchForm } from '../../../Components/CarForm/SearchForm/SearchForm';
 
 export const FavoriteCars = () => {
   // showSpinner
@@ -43,7 +44,7 @@ export const FavoriteCars = () => {
   const userId = getUserIdFromToken(token);
 
   // favoriteCars
-  const { favoriteCars, loading, error } = useLoadFavoriteCars(userId);
+  const { favoriteCars, marks, loading, error } = useLoadFavoriteCars(userId);
   console.log(favoriteCars);
 
   if (loading) return <div>Loading...</div>;
@@ -90,22 +91,9 @@ export const FavoriteCars = () => {
             </div>
             <h1 className="fs-2 fw-bold">Обране</h1>
           </div>
-          <div>TODO</div>
+          <SearchForm marks={marks}/>
         </section>
         <section className="favoriteCarsCars">
-          {/* {topCars && topCars.length > 0 && (
-            <div className="favoriteCarsOffers">
-              <h2 className="fs-4">Пропозиції дня</h2>
-
-              <div className="favoriteCarsOffersList">
-                {topCars.map((car, index) => (
-                  <Link to={`/cars/${car.id}`} className="noFontStyle" key={`offer-${index}`}>
-                    <CarCard car={car} userId={userId} displayOffcanvas={displayOffcanvas} />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )} */}
           {favoriteCars && favoriteCars.length > 0 && (
             <>
               <div className="favoriteCarsList">
