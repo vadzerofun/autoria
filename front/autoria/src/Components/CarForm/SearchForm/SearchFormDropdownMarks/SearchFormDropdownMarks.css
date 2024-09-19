@@ -1,0 +1,35 @@
+.searchFormDropdownToggle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.38;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: 800px;
+  background-color: var(--bs-input-addcar-bg);
+  padding: 0.563rem 0.75rem;
+  border-radius: 0.75rem;
+}
+
+.searchFormDropdownToggleContent {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--bs-text-darkgray);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.625rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.searchFormDropdownMenu .dropdown-item {
+  font-size: 1.25rem;
+}/*# sourceMappingURL=SearchFormDropdownMarks.css.map */

@@ -8,6 +8,7 @@ import { UserIcon } from '../../Icons/UserIcon/UserIcon';
 import ImagePlaceholder from '../../../assets/placeholder-image.png';
 
 import Button from 'react-bootstrap/esm/Button';
+import { formatNumber } from '../../../Services/formatService';
 
 export const CabinetSidebar = ({ user }) => {
   // console.log(user);
@@ -43,7 +44,7 @@ export const CabinetSidebar = ({ user }) => {
         <div className="cabinetSidebarUserBalance">
           <div className="cabinetSidebarBalanceInfo">
             <span className="cabinetSidebarBalanceLabel">Особистий рахунок</span>
-            <span className="cabinetSidebarBalanceSum">{user.balance} грн</span>
+            <span className="cabinetSidebarBalanceSum">{formatNumber(user.balance)} грн</span>
           </div>
           <Button className="cabinetSidebarBalanceBtn" href="/cabinet/balance">
             Поповнити

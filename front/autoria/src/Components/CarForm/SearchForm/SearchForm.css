@@ -1,0 +1,26 @@
+.searchCarForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2.5rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.searchCarFormDropdowns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.searchCarFormDropdowns .dropdown {
+  max-width: 190px;
+  width: 100%;
+}
+.searchCarFormDropdowns .dropdown button {
+  width: 190px;
+}
+
+.searchCarFormButton {
+  padding: 1.25rem 2.5rem;
+}/*# sourceMappingURL=SearchForm.css.map */

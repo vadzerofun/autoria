@@ -4,6 +4,7 @@ import axios from 'axios';
 const useLoadFavoriteCars = (userId) => {
   // const [topCars, setTopCars] = useState([]);
   const [favoriteCars, setFavoriteCars] = useState([]);
+  const [marks, setMarks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -17,15 +18,6 @@ const useLoadFavoriteCars = (userId) => {
         setLoading(true);
         setError(null);
 
-        // Fetch top cars data
-        // const topCarsResponse = await axios.get(
-        //   `${import.meta.env.VITE_REACT_API_URL}Cars/GetTopCars`,
-        //   {
-        //     params: { count: topCarsCount }
-        //   }
-        // );
-        // const topCarsData = topCarsResponse.data.value;
-
         // Fetch favorite cars data
         const favoriteCarResponse = await axios.get(
           `${import.meta.env.VITE_REACT_API_URL}Cars/GetLikedCarsByUserId`,
@@ -35,8 +27,15 @@ const useLoadFavoriteCars = (userId) => {
         );
         const favoriteCarData = favoriteCarResponse.data.value;
 
+        // Fetch favorite cars data
+        const marksResponse = await axios.get(
+          `${import.meta.env.VITE_REACT_API_URL}Marks/GetMarks`
+        );
+        const marksData = marksResponse.data;        
+
         // setTopCars(topCarsData);
         setFavoriteCars(favoriteCarData);
+        setMarks(marksData);
       } catch (error) {
         setError(error);
       } finally {
@@ -47,7 +46,7 @@ const useLoadFavoriteCars = (userId) => {
     fetchCars();
   }, [userId]);
 
-  return { favoriteCars, loading, error };
+  return { favoriteCars, marks, loading, error };
 };
 
 export default useLoadFavoriteCars;

@@ -35,7 +35,7 @@ export const Header = () => {
               <Nav.Link as={Link} to="/cabinet/add-car">
                 Продати машину
               </Nav.Link>
-              <Nav.Link as={Link} to="#">
+              <Nav.Link as={Link} to="/news">
                 Новини
               </Nav.Link>
             </Nav>
