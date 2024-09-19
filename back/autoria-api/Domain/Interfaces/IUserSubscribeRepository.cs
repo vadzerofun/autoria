@@ -15,5 +15,6 @@ namespace Core.Interfaces
         public Task DeleteUserSubscribe(Guid Id);
         public Task<List<Guid>> GetTopCarsId();
         public Task<List<Guid>> GetTopCarsId(int count);
+        public Task<IEnumerable<UserSubscribe>> GetSubscriptionsByUserIdAsync(Guid userId);
     }
 }

@@ -69,16 +69,23 @@ namespace autoria_api.Controllers
         }
         [AllowAnonymous]
         [HttpGet("GetCarsByFilter")]
-        public async Task<Result<List<Cars>>> GetCarsByFilter(CarFilter carFilter, int page = 0, int pageSize = 0)
+        public async Task<Result<CarOutputViewModel>> GetCarsByFilter(CarFilter carFilter, int page = 0, int pageSize = 0)
         {
             try
             {
                 var cars = await _carService.GetCarByFilter(carFilter, page, pageSize);
-                return Result<List<Cars>>.Success(cars);
+                var count = (await _carService.GetCars(0, 0)).Count;
+                CarOutputViewModel viewModel = new CarOutputViewModel
+                {
+                    cars = cars,
+                    count = count,
+                    PageCount = count / pageSize
+                };
+                return Result<CarOutputViewModel>.Success(viewModel);
             }
             catch (Exception ex)
             {
-                return Result<List<Cars>>.Failure(ex.Message);
+                return Result<CarOutputViewModel>.Failure(ex.Message);
             }
         }
 

@@ -120,5 +120,12 @@ namespace Infrastructure.Repositories
 
 
         }
+
+        public async Task<IEnumerable<UserSubscribe>> GetSubscriptionsByUserIdAsync(Guid userId)
+        {
+            return await _context.UserSubscribes
+                .Where(s => s.UserId == userId)
+                .ToListAsync();
+        }
     }
 }

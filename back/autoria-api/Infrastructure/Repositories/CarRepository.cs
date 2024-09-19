@@ -117,7 +117,7 @@ namespace Infrastructure.Repositories
             return cars;
         }
 
-        public async Task<List<Cars>> GetCarsByFilter(CarType? type, Guid? mark, string? model, string? region, int? minYear, int? maxYear, int? minPrice, int? maxPrice, Transmission_type? gearBox, Engine_type? engineType, Occasion? occasion, double? minEngineCapacity, double? maxEngineCapacity, CarState? carState, int page, int pageSize)
+        public async Task<List<Cars>> GetCarsByFilter(CarType? type, Guid? mark, string? model, string? region, int? minYear, int? maxYear, int? minPrice, int? maxPrice, Transmission_type? gearBox, Engine_type? engineType, Occasion? occasion, double? minEngineCapacity, double? maxEngineCapacity, CarState? carState, Сurrency currency, int page, int pageSize)
         {
             if (_context.Cars == null)
             {
@@ -139,6 +139,7 @@ namespace Infrastructure.Repositories
                          .FilterIf(occasion.HasValue, car => car.Occasion == occasion)
                          .FilterIf(minEngineCapacity.HasValue, car => car.Engine_capacity >= minEngineCapacity)
                          .FilterIf(maxEngineCapacity.HasValue, car => car.Engine_capacity <= maxEngineCapacity)
+                         .FilterIf(currency != null, car => car.Сurrency == currency)
                          .FilterIf(carState.HasValue, car => car.State == carState);
 
             if (pageSize > 0)
