@@ -330,6 +330,9 @@ export function AddCarDataProvider({ children }) {
         ]
       }
     ], // міста, регіони
+    selectCurrencies: [
+      '$', '€', '₴'
+    ] // валюти
   });
 
   return <AddCarDataContext.Provider value={addCarData}>{children}</AddCarDataContext.Provider>;

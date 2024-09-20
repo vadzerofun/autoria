@@ -6,11 +6,17 @@
 
 .searchCarFormDropdowns {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 190px);
   gap: 1.5rem;
   .dropdown {
     max-width: 190px;
     width: 100%;
+  }
+  .dropdown.show {
+    .searchCaretUpIcon {
+      transform: rotateY(-180deg);
+      transition: transform 0.15s ease-in-out;
+    }
   }
   .dropdown button {
     width: 190px;
@@ -19,5 +25,52 @@
 
 // Button
 .searchCarFormButton {
+  font-family: "Inter", sans-serif;
   padding: 1.25rem 2.5rem;
+}
+
+// Dropdown
+.searchFormDropdownToggle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.38;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;    
+  background-color: var(--bs-input-addcar-bg);
+  padding: 0.563rem 0.75rem;
+  border-radius: 0.75rem;
+  .searchCaretUpIcon {
+    transform: rotateX(180deg);
+    transition: transform 0.15s ease-in-out;
+  }  
+}
+
+.searchFormDropdownToggleContent {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--bs-text-darkgray);
+  display: flex;
+  gap: 0.625rem;
+  align-items: center;
+  max-width: 135px;  
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.searchFormDropdownMenu {
+  max-height: 250px; 
+  overflow-y: auto;
+  overflow-x: hidden;
+  .dropdown-item {
+    font-size: 1.25rem;
+  }
+}
+
+// searchFormPriceGroup
+.searchFormPriceGroup {
+  display: flex;
+  gap: 1.5rem;
 }

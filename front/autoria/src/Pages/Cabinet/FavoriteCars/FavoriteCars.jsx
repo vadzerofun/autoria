@@ -50,6 +50,11 @@ export const FavoriteCars = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
+  // set marks
+  favoriteCars.forEach((car) => {
+    car.make = marks.find((mark) => mark.id === car.makeId)?.name;
+  });
+
   const handleShowMore = () => {
     setShowSpinner(!showSpinner);
     const pageNumber = fcPageCurrent + 1;

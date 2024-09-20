@@ -35,10 +35,14 @@ import { HeartIcon } from '../../Components/Icons/HeartIcon/HeartIcon';
 import useToken from '../../Hooks/useToken';
 import { getUserIdFromToken, refreshAuthToken } from '../../Services/authService';
 import { AuthOffcanvas } from '../../Components/Auth/AuthOffcanvas/AuthOffcanvas';
+import { CarCard } from '../../Components/CarCards/CarCard/CarCard';
 
 export const Car = () => {
   // showOffcanvas
-  const [showOffcanvas, setShowOffcanvas] = useState(false);  
+  const [showOffcanvas, setShowOffcanvas] = useState(false); 
+  const displayOffcanvas = () => {
+    setShowOffcanvas(true);
+  }; 
   // useToken
   const { token, setToken } = useToken();
   // userId
@@ -56,7 +60,12 @@ export const Car = () => {
   const [openDescription, setOpenDescription] = useState(false);
   
   // fetch car and user
-  const { car, user, loading, error } = useLoadCarPage();
+  const { car, user, marks, similarCars, loading, error } = useLoadCarPage();  
+  const mark = marks.find((mark) => mark.id === car.makeId)?.name;
+  // set marks
+  similarCars.forEach((car) => {
+    car.make = marks.find((mark) => mark.id === car.makeId)?.name;
+  });
 
   // liked
   const [liked, setLiked] = useState(false);
@@ -167,7 +176,7 @@ export const Car = () => {
             <div className="carGalleryInfo">
               <div className="carGalleryCarInfo">
                 <div className="carGalleryCarTitleYear">
-                  <h1 className="carGalleryCarTitle fs-2">{`${car.make} ${car.model}`}</h1>
+                  <h1 className="carGalleryCarTitle fs-2">{`${mark} ${car.model}`}</h1>
                   <div className="carGalleryCarYear fs-5">
                     <span>{!car.owners_number ? 'Невживана' : 'Вживана'}</span>
                     <span className="carGalleryInfoPoint"></span>
@@ -371,28 +380,14 @@ export const Car = () => {
             <Swiper
               slidesPerView={'auto'}
               spaceBetween={24}
+              navigation={true}
+              modules={[Navigation]}
               grabCursor={true}
               className="similarSwiper">
-              {imgRecs.slice(5, 9).map((img, index) => (
+              {similarCars.map((car, index) => (
                 <SwiperSlide key={`offer-${index}`}>
-                  <Link to="#" className="noFontStyle">
-                    <div className="carCard">
-                      <img className="carImage" src={img} alt={`Offer ${index + 1}`} />
-                      <div className="carCardMain">
-                        <span className="carCardTitle fs-6">Porsche Cayenne Coupé 3.0 340KM</span>
-                        <span className="carCardPrice fs-6">90 000 $</span>
-                      </div>
-                      <div className="carCardDetails">
-                        <div>
-                          <span>Електро, 77.4 кВт-год</span>
-                          <span>2019 р</span>
-                        </div>
-                        <div>
-                          <span>65 000 км</span>
-                          <span>м. Київ</span>
-                        </div>
-                      </div>
-                    </div>
+                  <Link to={`/cars/${car.id}`} className="noFontStyle">
+                    <CarCard car={car} userId={userId} displayOffcanvas={displayOffcanvas} />
                   </Link>
                 </SwiperSlide>
               ))}

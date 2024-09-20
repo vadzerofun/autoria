@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout } from '../../Components/Layouts/Layout/Layout';
 import Container from 'react-bootstrap/esm/Container';
 import './Home.css';
@@ -29,11 +29,10 @@ import useLoadHome from '../../Hooks/useLoadHome';
 import useToken from '../../Hooks/useToken';
 import { NewsCard } from '../../Components/News/NewsCard/NewsCard';
 import { getUserIdFromToken } from '../../Services/authService';
-import { getCurrency } from '../../Services/carService';
-import { formatNumber } from '../../Services/formatService';
 import { AuthOffcanvas } from '../../Components/Auth/AuthOffcanvas/AuthOffcanvas';
 import { CarCard } from '../../Components/CarCards/CarCard/CarCard';
 import { CarCardBig } from '../../Components/CarCards/CarCardBig/CarCardBig';
+import { SearchForm } from '../../Components/CarForm/SearchForm/SearchForm';
 
 export const Home = () => {
   // showOffcanvas
@@ -50,13 +49,23 @@ export const Home = () => {
   const [userId, setUserId] = useState(getUserIdFromToken(token));
 
   // fetch Data
-  const { carsForYou, carsMostProfitable, news, loading, error } = useLoadHome();
+  const { carsForYou, carsTop, news, marks, loading, error } = useLoadHome();
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   console.log(carsForYou);
-  // console.log(carsMostProfitable);
+
+  // set marks
+  carsForYou.forEach((car) => {
+    car.make = marks.find((mark) => mark.id === car.makeId)?.name;   
+  });
+  carsTop.forEach((car) => {
+    car.make = marks.find((mark) => mark.id === car.makeId)?.name;
+  });  
+
+  //console.log(carsForYou);
+  // console.log(carsTop);
   // console.log(news);
 
   return (
@@ -67,8 +76,10 @@ export const Home = () => {
             <Row className="row-gap-4">
               <Col sm={12} lg={6}>
                 <div className="searchLeft">
-                  <h4 className="searchLeftTitle fs-1">Літні знижки на доставку твого сімейного авто</h4>
-                  <Form>
+                  <h4 className="searchLeftTitle fs-1">
+                    Літні знижки на доставку твого сімейного авто
+                  </h4>
+                  {/* <Form>
                     <Row className="searchDropdowns">
                       <Col className="searchDropdownsLeft" md={6}>
                         <DropdownButton
@@ -167,7 +178,10 @@ export const Home = () => {
                         </Button>
                       </Col>
                     </Row>
-                  </Form>
+                  </Form> */}
+                  <div className="homeSearchFormContainer">
+                    <SearchForm marks={marks} />
+                  </div>
                 </div>
               </Col>
               <Col sm={12} lg={6} className="d-flex justify-content-center align-items-center">
@@ -182,7 +196,7 @@ export const Home = () => {
           <div className="recsContainer">
             <div className="recsLeft">
               <h2 className="homeTitle fs-1">Тобі може сподобатись!</h2>
-              <Link to={`/cars/${carsForYou[0].id}`} className="noFontStyle">                
+              <Link to={`/cars/${carsForYou[0].id}`} className="noFontStyle">
                 <CarCardBig
                   car={carsForYou[0]}
                   userId={userId}
@@ -203,15 +217,20 @@ export const Home = () => {
       <section className="homeSection">
         <Container>
           <div className="offersContainer">
-            <h2 className="homeTitle fs-1">Найвигідніші пропозиції</h2>
-            <Swiper              
+            <div className="homeTitleSeeAll">
+              <h2 className="homeTitle fs-1">Найвигідніші пропозиції</h2>
+              <div className="homeSeeAll">
+                <Link to="/search-cars">Переглянути усе</Link>
+              </div>
+            </div>
+            <Swiper
               slidesPerView={'auto'}
               spaceBetween={24}
               navigation={true}
               modules={[Navigation]}
               grabCursor={true}
               className="offersSwiper">
-              {carsMostProfitable.map((car, index) => (
+              {carsTop.map((car, index) => (
                 <SwiperSlide key={`offer-${index}`}>
                   <Link to={`/cars/${car.id}`} className="noFontStyle">
                     <CarCard car={car} userId={userId} displayOffcanvas={displayOffcanvas} />
@@ -225,7 +244,12 @@ export const Home = () => {
       <section className="homeSection">
         <Container>
           <div className="brandsContainer">
-            <h2 className="homeTitle fs-1">Шукати по брендам</h2>
+            <div className="homeTitleSeeAll">
+              <h2 className="homeTitle fs-1">Шукати по брендам</h2>
+              <div className="homeSeeAll">
+                <Link to="/search-cars">Переглянути усе</Link>
+              </div>
+            </div>
             <Swiper
               slidesPerView={'auto'}
               spaceBetween={24}
@@ -235,9 +259,11 @@ export const Home = () => {
               className="brandsSwiper">
               {brandsArray.map((brand, index) => (
                 <SwiperSlide key={`brand-${index}`}>
-                  <Link to="#" className="noFontStyle">
+                  <Link to={`/search-cars?mark=${brand.name}`} className="noFontStyle">
                     <div className="brandCard">
-                      <img className="brandImage" src={brand.url} alt={`Brand ${index + 1}`} />
+                      <div className="brandImageContainer">
+                        <img className="brandImage" src={brand.url} alt={`Brand ${index + 1}`} />
+                      </div>
                       <p className="brandName fs-5">{brand.name}</p>
                     </div>
                   </Link>
@@ -250,7 +276,12 @@ export const Home = () => {
       <section className="homeSection">
         <Container>
           <div className="newsContainer">
-            <h2 className="homeTitle fs-1">Авто новини</h2>
+            <div className="homeTitleSeeAll">
+              <h2 className="homeTitle fs-1">Авто новини</h2>
+              <div className="homeSeeAll">
+                <Link to="/news">Переглянути усе</Link>
+              </div>
+            </div>
             <Swiper
               slidesPerView={'auto'}
               spaceBetween={24}

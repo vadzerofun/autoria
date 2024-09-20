@@ -15,7 +15,7 @@
 
 .newsTextCardBigLikeBtn{
   z-index: 100;
-  font-size: 0.625rem;
+  font-size: 1rem;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -28,11 +28,12 @@
 }
 
 .newsTextCardBigDate{
-  font-size: 0.625rem;
+  font-size: 1rem;
   font-weight: 700;
 }
 
 .newsTextCardBigTitle {
+  font-size: 1.25rem;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;

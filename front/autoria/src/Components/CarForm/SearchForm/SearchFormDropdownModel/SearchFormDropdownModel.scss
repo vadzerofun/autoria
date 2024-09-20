@@ -1,0 +1,17 @@
+.dropdownMenuModel {  
+  width: 100%;
+  max-width: 180px;
+  .form-control {
+    font-size: 1rem;
+    line-height: 1.375;
+    font-weight: 700;
+    color: var(--bs-text-darkgray);
+    border-radius: 0.75rem;
+    border: 1px solid rgba($color: var(--bs-darkgray-rgb), $alpha: 0.12);
+    padding: 0.563rem 0.75rem;
+    background-color: transparent;
+  }
+}
+.dropdownMenuModel.show {
+  transform: translate3d(0px, 61.4035px, 0px) !important;
+}

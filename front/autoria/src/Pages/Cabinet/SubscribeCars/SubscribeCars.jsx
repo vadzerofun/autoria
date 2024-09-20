@@ -27,11 +27,16 @@ export const SubscribeCars = () => {
   const userId = getUserIdFromToken(token);
 
   // cars
-  const { cars, subscriptions, loading, error } = useLoadSubscriptions(userId);
-  // console.log(subscriptions);
+  const { cars, subscriptions, marks, user, loading, error } = useLoadSubscriptions(userId);
+  console.log(user);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
+
+  // set marks
+  cars.forEach((car) => {
+    car.make = marks.find((mark) => mark.id === car.makeId)?.name;
+  });
 
   const handleSubmit = () => {
     if (!selectedCarId) {
@@ -118,12 +123,12 @@ export const SubscribeCars = () => {
                 </div>
               ))}
             </div>
-            <div className="subscriptionLevel">
+            {/* <div className="subscriptionLevel">
               <h4 className="fs-6 fw-semibold">Підписка 2</h4>
             </div>
             <div className="subscriptionLevel">
               <h4 className="fs-6 fw-semibold">Підписка 3</h4>
-            </div>
+            </div> */}
           </div>
           <Button className="subscriptionsButton" type="submit">
             Оплатити

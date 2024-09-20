@@ -2,11 +2,10 @@ import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { CaretDownIcon } from '../../../Icons/CaretDownIcon/CaretDownIcon';
 import './SearchFormDropdownMarks.css';
+import { SearchCaretUpIcon } from '../../../Icons/SearchCaretUpIcon/SearchCaretUpIcon';
 
 export const SearchFormDropdownMarks = ({ marksIds, marksNames, formDataValue, handleChange }) => {
-  const handleSelect = (selectedKey) => { 
-    console.log(selectedKey);
-       
+  const handleSelect = (selectedKey) => {        
     handleChange({ target: { name: 'mark', value: selectedKey } });
   };
 
@@ -24,15 +23,15 @@ export const SearchFormDropdownMarks = ({ marksIds, marksNames, formDataValue, h
       }}>
       <div className="searchFormDropdownToggle">
         {children}
-        <CaretDownIcon color="var( --bs-darkgray )" width={14} height={8} />
+        <SearchCaretUpIcon color="var( --bs-darkgray )" width={24} height={24} />
       </div>
     </a>
   ));
 
   return (
     <Dropdown onSelect={handleSelect}>
-      <Dropdown.Toggle as={CustomToggle} id="searchFormDropdownToggle">
-        {selectedItem ? (
+      <Dropdown.Toggle as={CustomToggle} id="searchFormDropdownToggleMark">
+        {selectedItem > -1 ? (
           <div className="searchFormDropdownToggleContent">
             {marksNames[selectedItem]}
           </div>

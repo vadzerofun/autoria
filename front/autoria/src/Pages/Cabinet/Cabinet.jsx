@@ -46,11 +46,19 @@ export const Cabinet = () => {
 
   const userId = getUserIdFromToken(token);
 
-  // cars, notifications
-  const { cars, favoriteCars, notifications, loading, error } = useLoadCabinet(userId);
+  // cars, marks
+  const { cars, favoriteCars, marks, notifications, loading, error } = useLoadCabinet(userId);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
+
+  // set marks
+  cars.forEach((car) => {
+    car.make = marks.find((mark) => mark.id === car.makeId)?.name;
+  });
+  favoriteCars.forEach((car) => {
+    car.make = marks.find((mark) => mark.id === car.makeId)?.name;
+  });
 
   return (
     <CabinetLayout>

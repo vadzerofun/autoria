@@ -10,17 +10,86 @@
 
 .searchCarFormDropdowns {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 190px);
   gap: 1.5rem;
 }
 .searchCarFormDropdowns .dropdown {
   max-width: 190px;
   width: 100%;
 }
+.searchCarFormDropdowns .dropdown.show .searchCaretUpIcon {
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+  -webkit-transition: -webkit-transform 0.15s ease-in-out;
+  transition: -webkit-transform 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+}
 .searchCarFormDropdowns .dropdown button {
   width: 190px;
 }
 
 .searchCarFormButton {
+  font-family: "Inter", sans-serif;
   padding: 1.25rem 2.5rem;
+}
+
+.searchFormDropdownToggle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.38;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: 800px;
+  background-color: var(--bs-input-addcar-bg);
+  padding: 0.563rem 0.75rem;
+  border-radius: 0.75rem;
+}
+.searchFormDropdownToggle .searchCaretUpIcon {
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+  -webkit-transition: -webkit-transform 0.15s ease-in-out;
+  transition: -webkit-transform 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+}
+
+.searchFormDropdownToggleContent {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--bs-text-darkgray);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.625rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: 135px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.searchFormDropdownMenu {
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.searchFormDropdownMenu .dropdown-item {
+  font-size: 1.25rem;
+}
+
+.searchFormPriceGroup {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1.5rem;
 }/*# sourceMappingURL=SearchForm.css.map */

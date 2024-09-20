@@ -1,0 +1,49 @@
+.searchCarsSearch {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.searchCarsSearchOffersCount {
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.38; /* 19.32/14 */
+  margin-bottom: 0.375rem;
+}
+
+/* ============================================================================= */
+
+.searchCarsMain {
+  display: flex;
+  gap: 3.75rem;
+  margin-bottom: 3.75rem;
+}
+
+.searchCarsSidebar{
+  flex: 0 0 275px;
+}
+
+.searchCarsList{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+// Sort
+
+.searchCarsListSort {
+  display: flex;
+  gap: 2rem;
+}
+
+.searchCarsListSortItem {
+  font-family: "Inter", sans-serif;
+  display: flex;
+  gap: 0.75rem;
+  span {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.375; /* 22/16 */
+  }
+}
+

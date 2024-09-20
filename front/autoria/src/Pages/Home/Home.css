@@ -4,9 +4,38 @@
   color: inherit;
 }
 
+.homeTitleSeeAll {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+}
+
 .homeTitle {
   text-align: center;
   color: var(--bs-text-darkgray);
+}
+
+.homeSeeAll {
+  position: absolute;
+  right: 0;
+  padding: 0.75rem 1.25rem;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+.homeSeeAll a {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.38; /* 16.5/12 */
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+}
+.homeSeeAll a:hover {
+  color: var(--bs-primary);
 }
 
 .homeSection {
@@ -118,6 +147,19 @@
   text-align: left;
   padding-left: 0.625rem;
   padding-right: 0.625rem;
+}
+
+.homeSearchFormContainer .searchCarForm {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.5rem;
+  grid-auto-flow: column;
+}
+.homeSearchFormContainer .searchCarFormDropdowns {
+  grid-template-columns: repeat(2, 190px);
+  row-gap: 0.75rem;
 }
 
 .searchDropdowns {
@@ -356,14 +398,26 @@
       -ms-flex-direction: column;
           flex-direction: column;
   border-radius: 0.75rem;
-  gap: 0.75rem;
-  padding: 1.5rem 0.75rem 0.75rem;
+  gap: 0.625rem;
+  padding: 0.5rem;
   background-color: var(--bs-secondary);
+}
+
+.brandImageContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .brandImage {
   max-width: 100%;
-  height: 100px;
+  height: 130px;
   -o-object-fit: contain;
      object-fit: contain;
   border-radius: 0.75rem;

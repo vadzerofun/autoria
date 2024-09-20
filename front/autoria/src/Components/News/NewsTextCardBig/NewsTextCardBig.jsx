@@ -59,18 +59,18 @@ export const NewsTextCardBig = ({ news, userId, displayOffcanvas }) => {
 
   return (
     <Link to={news.link} className="noFontStyle">
-      <div className="newsTextCardBig">        
-        <div className="newsTextCardBigTitle fs-6">{news.tittle}</div>
+      <div className="newsTextCardBig">
+        <div className="newsTextCardBigTitle">{news.tittle}</div>
         <div className="newsTextCardBigDetails">
           <Button onClick={handleClick} className="newsTextCardBigLikeBtn" variant="link">
             {liked ? (
-              <ThumbUpFilledIcon color={'var(--bs-primary)'} width={17} height={17} />
+              <ThumbUpFilledIcon color={'var(--bs-primary)'} width={25} height={25} />
             ) : (
               <ThumbUpIcon
                 color="var(--bs-darkgray)"
                 hoverColor={'var(--bs-primary)'}
-                width={17}
-                height={17}
+                width={25}
+                height={25}
               />
             )}
             <span>{formatNumber(likesCount)}</span>

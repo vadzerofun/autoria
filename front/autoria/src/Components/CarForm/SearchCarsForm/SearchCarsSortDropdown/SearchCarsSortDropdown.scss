@@ -1,0 +1,39 @@
+// Sort dropdown
+
+.searchCarsSortDropdown.show {
+  .searchCaretDownIcon {
+    transform: rotateX(180deg);
+    transition: transform 0.15s ease-in-out;
+  }  
+}
+
+
+.searchCarsSortDropdownToggle {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.375; /* 22/16 */
+
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;  
+  border-radius: 0.75rem;    
+}
+
+.searchCarsSortDropdownToggleContent {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.375;  
+  color: var(--bs-primary);
+  display: flex;
+  gap: 0.625rem;
+  align-items: center; 
+}
+
+.searchCarsSortDropdownMenu {
+  max-height: 250px; 
+  overflow-y: auto;
+  overflow-x: hidden;
+  .dropdown-item {
+    font-size: 1.25rem;
+  }
+}

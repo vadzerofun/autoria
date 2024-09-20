@@ -1,0 +1,19 @@
+.dropdownMenuModel {
+  width: 100%;
+  max-width: 180px;
+}
+.dropdownMenuModel .form-control {
+  font-size: 1rem;
+  line-height: 1.375;
+  font-weight: 700;
+  color: var(--bs-text-darkgray);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(var(--bs-darkgray-rgb), 0.12);
+  padding: 0.563rem 0.75rem;
+  background-color: transparent;
+}
+
+.dropdownMenuModel.show {
+  -webkit-transform: translate3d(0px, 61.4035px, 0px) !important;
+          transform: translate3d(0px, 61.4035px, 0px) !important;
+}/*# sourceMappingURL=SearchFormDropdownModel.css.map */
