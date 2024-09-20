@@ -23,5 +23,6 @@ namespace Application.Model
         public double? minEngine_capacity { get; set; }
         public double? maxEngine_capacity { get; set; }
         public CarState? carState { get; set; }
+        public Сurrency Сurrency { get; set; }
     }
 }

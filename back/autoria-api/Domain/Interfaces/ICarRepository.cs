@@ -33,6 +33,7 @@ namespace Core.Interfaces
             double? minEngineCapacity,
             double? maxEngineCapacity,
             CarState? carState,
+            Сurrency currency,
             int page,
             int pageSize);
         Task<List<Cars>> GetCarsForYou();

@@ -98,6 +98,7 @@ namespace Application.Services
                 filter.minEngine_capacity,
                 filter.maxEngine_capacity,
                 filter.carState,
+                filter.Сurrency,
                 page,
                 pageSize
             );

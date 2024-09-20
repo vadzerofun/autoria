@@ -3,6 +3,7 @@ using Application.Model;
 using Core.Enums;
 using Core.Interfaces;
 using Core.Models;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -114,6 +115,24 @@ namespace Application.Services
             catch (Exception ex)
             {
                 return Result<List<UserSubscribe>>.Failure(ex.Message);
+            }
+        }
+
+        public async Task<Result<IEnumerable<UserSubscribe>>> GetUserSubscribesByUserIdAsync(Guid userId)
+        {
+            try
+            {
+                var subscriptions = await _userSubscribeRepository.GetSubscriptionsByUserIdAsync(userId);
+                if (subscriptions == null || !subscriptions.Any())
+                {
+                    return Result<IEnumerable<UserSubscribe>>.Failure("Користувач не має підписок");
+                }
+
+                return Result<IEnumerable<UserSubscribe>>.Success(subscriptions);
+            }
+            catch (Exception ex)
+            {
+                return Result<IEnumerable<UserSubscribe>>.Failure($"Помилка при отриманні підписок: {ex.Message}");
             }
         }
     }

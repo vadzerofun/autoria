@@ -3,6 +3,7 @@ using Application.Model;
 using Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -78,6 +79,18 @@ namespace autoria_api.Controllers
                 return Ok(result.Value);
             }
             return BadRequest(result.ErrorMessage);
+        }
+
+        [HttpGet("GetUserSubscribesByUserId")]
+        public async Task<IActionResult> GetUserSubscribesByUserId(Guid userId)
+        {
+            var result = await _userSubscribeService.GetUserSubscribesByUserIdAsync(userId);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+
+            return Ok(result.Value);
         }
     }
 }
