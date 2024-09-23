@@ -71,8 +71,7 @@ namespace Infrastructure.Migrations
                     b.Property<double>("Mileage")
                         .HasColumnType("REAL");
 
-                    b.Property<string>("Model")
-                        .IsRequired()
+                    b.Property<Guid>("ModelId")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Number_of_seats")
@@ -151,6 +150,24 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Marks");
+                });
+
+            modelBuilder.Entity("Core.Models.Model", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("MakeId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Models");
                 });
 
             modelBuilder.Entity("Core.Models.News", b =>

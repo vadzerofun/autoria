@@ -24,11 +24,13 @@ namespace Application.Services
             _PubKey = pubKey;
             _userService = userService;
         }
-        public async Task<Result<CheckoutOrderResponse>> CheckoutOrder(long price, string SucsessLink, string BadLink, IServiceProvider sp, Guid UserId)
+        public async Task<Result<CheckoutOrderResponse>> CheckoutOrder(long price, string SucsessLink, string BadLink, double Course, IServiceProvider sp, Guid UserId)
         {
             var server = sp.GetRequiredService<IServer>();
 
             var serverAddressesFeature = server.Features.Get<IServerAddressesFeature>();
+
+            var ukrprice = price * Course;
 
             string? thisApiUrl = null;
 

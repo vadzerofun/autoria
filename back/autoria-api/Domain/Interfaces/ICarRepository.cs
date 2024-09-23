@@ -21,7 +21,7 @@ namespace Core.Interfaces
         Task<List<Cars>> GetCarsByFilter(
             CarType? type,
             Guid? mark,
-            string? model,
+            Guid? modelId,
             string? region,
             int? minYear,
             int? maxYear,
@@ -33,7 +33,7 @@ namespace Core.Interfaces
             double? minEngineCapacity,
             double? maxEngineCapacity,
             CarState? carState,
-            Сurrency currency,
+            Сurrency? currency,
             int page,
             int pageSize);
         Task<List<Cars>> GetCarsForYou();
