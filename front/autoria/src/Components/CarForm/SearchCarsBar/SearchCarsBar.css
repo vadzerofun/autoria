@@ -1,0 +1,95 @@
+.searchCarsBarFormContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2rem;
+}
+
+.searchCarsBarSearchBar {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.75rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid var(--bs-darkgray);
+  border-radius: 0.75rem;
+  padding: 0.375rem;
+}
+.searchCarsBarSearchBar .form-control {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 25%;
+          flex: 1 1 25%;
+  font-size: 1rem;
+  line-height: 1.375;
+  font-weight: 700;
+  text-align: right;
+  color: var(--bs-text-darkgray);
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+.searchCarsBarSearchBar .form-control:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.searchCarsBarBadges {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.75rem;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.searchCarsBarBadges .badge {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.375rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.5rem;
+}
+
+.searchCarsBarBadgeText {
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.38;
+}
+
+.searchCarsBarBadgeIcon {
+  cursor: pointer;
+}
+
+.searchCarsBarButton {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--bs-primary);
+  border-radius: 0.75rem;
+  color: var(--bs-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.375;
+  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+.searchCarsBarButton:hover {
+  color: white;
+  background-color: var(--bs-primary);
+}/*# sourceMappingURL=SearchCarsBar.css.map */

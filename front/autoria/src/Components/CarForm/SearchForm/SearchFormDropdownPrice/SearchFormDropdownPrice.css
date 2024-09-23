@@ -1,0 +1,28 @@
+.searchFormDropdownPrice {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 100px;
+          flex: 1 0 100px;
+}
+.searchFormDropdownPrice .searchFormDropdownToggleContent {
+  max-width: 50px;
+}
+
+.dropdownMenuPrice {
+  width: 100%;
+  max-width: 180px;
+}
+.dropdownMenuPrice .form-control {
+  font-size: 1rem;
+  line-height: 1.375;
+  font-weight: 700;
+  color: var(--bs-text-darkgray);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(var(--bs-darkgray-rgb), 0.12);
+  padding: 0.563rem 0.75rem;
+  background-color: transparent;
+}
+
+.dropdownMenuPrice.show {
+  -webkit-transform: translate3d(0px, 61.4035px, 0px) !important;
+          transform: translate3d(0px, 61.4035px, 0px) !important;
+}/*# sourceMappingURL=SearchFormDropdownPrice.css.map */

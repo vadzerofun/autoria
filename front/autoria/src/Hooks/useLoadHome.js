@@ -4,9 +4,12 @@ import axios from 'axios';
 const useLoadHome = () => {
   // cars
   const [carsForYou, setCarsForYou] = useState([]);
-  const [carsMostProfitable, setCarsMostProfitable] = useState([]);
+  const [carsTop, setCarsTop] = useState([]);
   //news
   const [news, setNews] = useState([]);
+  // marks
+  const [marks, setMarks] = useState([]);
+  // user
   const [user, setUser] = useState(null);
   // loading, error
   const [loading, setLoading] = useState(true);
@@ -14,16 +17,21 @@ const useLoadHome = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try { 
-        const [carsForYouResponse, carsMostProfitableResponse, newsResponse] = await Promise.all([
-          axios.get(import.meta.env.VITE_REACT_API_URL + 'Cars/GetCarsForYou'),
-          axios.get(import.meta.env.VITE_REACT_API_URL + 'Cars/GetMostProfitable'),
-          axios.get(import.meta.env.VITE_REACT_API_URL + 'News')
-        ]);
+      try {
+        const [carsForYouResponse, carsTopResponse, newsResponse, marksResponse] =
+          await Promise.all([
+            axios.get(import.meta.env.VITE_REACT_API_URL + 'Cars/GetCarsForYou'),
+            axios.post(import.meta.env.VITE_REACT_API_URL + 'Cars/GetTopCars'),
+            axios.get(import.meta.env.VITE_REACT_API_URL + 'News'),
+            axios.get(import.meta.env.VITE_REACT_API_URL + 'Marks/GetMarks')
+          ]);
+          console.log(carsForYouResponse);
+          
 
-        setCarsForYou(carsForYouResponse.data.value);
-        setCarsMostProfitable(carsMostProfitableResponse.data.value);
+        setCarsForYou(carsForYouResponse.data.value.filter(Boolean));
+        setCarsTop(carsTopResponse.data.value.filter(Boolean));
         setNews(newsResponse.data.value);
+        setMarks(marksResponse.data);
       } catch (err) {
         setError(err);
       } finally {
@@ -34,7 +42,7 @@ const useLoadHome = () => {
     fetchData();
   }, []);
 
-  return { carsForYou, carsMostProfitable, news, user, loading, error };
+  return { carsForYou, carsTop, news, marks, user, loading, error };
 };
 
 export default useLoadHome;

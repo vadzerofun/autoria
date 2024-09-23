@@ -27,12 +27,24 @@ import { News } from './Pages/News/News.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />,
+    element: (
+      <div>
+        <AddCarDataProvider>
+          <Home />
+        </AddCarDataProvider>
+      </div>
+    ),
     errorElement: <ErrorPage />
   },
   {
     path: '/:token',
-    element: <Home />
+    element: (
+      <div>
+        <AddCarDataProvider>
+          <Home />
+        </AddCarDataProvider>
+      </div>
+    )
   },
   {
     path: '/login',
@@ -89,7 +101,7 @@ const router = createBrowserRouter([
         <Car />
       </div>
     )
-  },  
+  },
   {
     path: '/cabinet',
     element: (
@@ -154,7 +166,9 @@ const router = createBrowserRouter([
     path: '/cabinet/favorite-cars',
     element: (
       <div>
-        <FavoriteCars />
+        <AddCarDataProvider>
+          <FavoriteCars />
+        </AddCarDataProvider>
       </div>
     )
   },
@@ -162,7 +176,9 @@ const router = createBrowserRouter([
     path: '/search-cars',
     element: (
       <div>
-        <SearchCars />
+        <AddCarDataProvider>
+          <SearchCars />
+        </AddCarDataProvider>
       </div>
     )
   },
@@ -173,7 +189,7 @@ const router = createBrowserRouter([
         <News />
       </div>
     )
-  },
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

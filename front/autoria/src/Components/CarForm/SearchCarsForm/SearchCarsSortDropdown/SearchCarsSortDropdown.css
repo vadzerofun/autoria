@@ -1,0 +1,45 @@
+.searchCarsSortDropdown.show .searchCaretDownIcon {
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+  -webkit-transition: -webkit-transform 0.15s ease-in-out;
+  transition: -webkit-transform 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+}
+
+.searchCarsSortDropdownToggle {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.375; /* 22/16 */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.75rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 0.75rem;
+}
+
+.searchCarsSortDropdownToggleContent {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.375;
+  color: var(--bs-primary);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.625rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.searchCarsSortDropdownMenu {
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.searchCarsSortDropdownMenu .dropdown-item {
+  font-size: 1.25rem;
+}/*# sourceMappingURL=SearchCarsSortDropdown.css.map */

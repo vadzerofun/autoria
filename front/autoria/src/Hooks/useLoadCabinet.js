@@ -5,6 +5,8 @@ const useLoadCabinet = (userId) => {
   const [cars, setCars] = useState([]);
   const [favoriteCars, setFavoriteCars] = useState([]);
   const [notifications, setNotifications] = useState([]);
+  // marks
+  const [marks, setMarks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -26,8 +28,15 @@ const useLoadCabinet = (userId) => {
         );
         const favoriteCarData = favoriteCarResponse.data.value;
 
+        // Fetch marks data
+        const marksResponse = await axios.get(
+          `${import.meta.env.VITE_REACT_API_URL}Marks/GetMarks`
+        );
+        const marksData = marksResponse.data;        
+
         setCars(carData);
         setFavoriteCars(favoriteCarData);
+        setMarks(marksData);
       } catch (error) {
         setError(error);
       } finally {
@@ -38,7 +47,7 @@ const useLoadCabinet = (userId) => {
     fetchCars();
   }, [userId]);
 
-  return { cars, favoriteCars, notifications, loading, error };
+  return { cars, favoriteCars, marks, notifications, loading, error };
 };
 
 export default useLoadCabinet;

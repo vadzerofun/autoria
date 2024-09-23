@@ -10,6 +10,7 @@ import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { formatNumber } from '../../../Services/formatService';
 import { CarTypeDropdown } from '../CarTypeDropdown/CarTypeDropdown';
+import useLoadAddCarFormData from '../../../Hooks/useLoadAddCarFormData';
 
 export const EditCarForm = ({ carData, token }) => {
   // useNavigate
@@ -31,6 +32,12 @@ export const EditCarForm = ({ carData, token }) => {
   // formData
   const [formData, setFormData] = useState(carData);
   console.log(formData);
+
+  // load data for form
+  const { marks, loading, error } = useLoadAddCarFormData();
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   // handleChange
   const handleChange = (e) => {
@@ -81,7 +88,7 @@ export const EditCarForm = ({ carData, token }) => {
     formDataToSend.append('id', formData.id);
     formDataToSend.append('Type', formData.Type);
     formDataToSend.append('Body', formData.Body);
-    formDataToSend.append('Make', formData.Make);
+    formDataToSend.append('MakeId', formData.MakeId);
     formDataToSend.append('Model', formData.Model);
     formDataToSend.append('Year', formData.Year);
     formDataToSend.append('Mileage', formData.Mileage);
@@ -176,7 +183,14 @@ export const EditCarForm = ({ carData, token }) => {
           <div className="addCarFormFields">
             <Form.Group controlId="addCarFormCarMake" className="mb-4">
               <Form.Label className="fs-5 fw-semibold">Марка</Form.Label>
-              <Form.Control type="text" name="Make" value={formData.Make} onChange={handleChange} />
+              <Form.Select onChange={handleChange} name="MakeId" value={formData.MakeId}>
+                <option value="">Вибрати</option>
+                {marks.map((mark, index) => (
+                  <option value={mark.id} key={`mark-${index}`}>
+                    {mark.name}
+                  </option>
+                ))}
+              </Form.Select>
             </Form.Group>
             <Form.Group controlId="addCarFormCarModel" className="mb-4">
               <Form.Label className="fs-5 fw-semibold">Модель</Form.Label>
@@ -427,7 +441,11 @@ export const EditCarForm = ({ carData, token }) => {
             <Form.Group controlId="addCarFormCarTitle" className="mb-4">
               <Form.Control
                 type="text"
-                value={formData.Make && formData.Model && `${formData.Make} ${formData.Model}`}
+                value={
+                  marks.find(mark=>mark.id === formData.MakeId) &&
+                  formData.Model &&
+                  `${marks.find(mark=>mark.id === formData.MakeId)?.name} ${formData.Model}`
+                }
                 placeholder="Титул оголошення"
                 readOnly
               />

@@ -5,6 +5,11 @@ import { useParams } from 'react-router-dom';
 const useLoadCarPage = () => {
   const [car, setCar] = useState(null);
   const [user, setUser] = useState(null);
+  // marks
+  const [marks, setMarks] = useState([]);
+  // similar cars
+  const [similarCars, setSimilarCars] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   // carId
@@ -24,10 +29,24 @@ const useLoadCarPage = () => {
         setCar(carData);        
 
         // Fetch user data using car's userId
-        if (carData.userId) {
+        if (carData && carData.userId) {
           const userResponse = await axios.get(`${import.meta.env.VITE_REACT_API_URL}User/${carData.userId}`);
           setUser(userResponse.data);
         }
+
+        // Fetch marks data
+        const marksResponse = await axios.get(
+          `${import.meta.env.VITE_REACT_API_URL}Marks/GetMarks`
+        );
+        const marksData = marksResponse.data;
+        setMarks(marksData);
+
+        // Fetch similar cars
+        const similarCarsResponse = await axios.get(
+          `${import.meta.env.VITE_REACT_API_URL}Cars/GetMostProfitable`
+        );
+        const similarCarsData = similarCarsResponse.data.value;
+        setSimilarCars(similarCarsData);
         
         if (!hasViewedCar && carId) {
           await viewCar(carId);
@@ -57,7 +76,7 @@ const useLoadCarPage = () => {
       });
   };
 
-  return { car, user, loading, error };
+  return { car, user, marks, similarCars, loading, error };
 };
 
 export default useLoadCarPage;

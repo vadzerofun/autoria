@@ -49,7 +49,7 @@ export const ContactSellerButton = ({ car, icon }) => {
       <Button className="carGallerySellerBtn" ref={contactTarget} onClick={handleButtonClick}>
         <div className="d-flex align-items-center justify-content-center gap-3">
           <img className="carGallerySellerBtnIcon" src={icon} alt="Chat Icon" />
-          <span className="fs-5">Зв’язатись з продацвем</span>
+          <span className="fs-5">Зв’язатись з продавцем</span>
         </div>
       </Button>
       <Overlay target={contactTarget.current} show={showContact} placement="bottom">

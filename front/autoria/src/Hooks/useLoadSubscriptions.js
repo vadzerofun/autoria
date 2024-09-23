@@ -4,6 +4,10 @@ import axios from 'axios';
 const useLoadSubscriptions = (userId) => {
   const [cars, setCars] = useState([]);
   const [subscriptions, setSubscriptions] = useState([]);
+  // marks
+  const [marks, setMarks] = useState([]);
+  // user
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -25,8 +29,20 @@ const useLoadSubscriptions = (userId) => {
         );
         const subscriptionsData = subscriptionsResponse.data.value;
 
+        // Fetch marks
+        const marksResponse = await axios.get(
+          `${import.meta.env.VITE_REACT_API_URL}Marks/GetMarks`
+        );
+        const marksData = marksResponse.data;
+
+        // Fetch user data
+        const userResponse = await axios.get(`${import.meta.env.VITE_REACT_API_URL}User/${userId}`);
+        const userData = userResponse.data;
+
         setCars(carData);
         setSubscriptions(subscriptionsData);
+        setMarks(marksData);
+        setUser(userData);
       } catch (error) {
         setError(error);
       } finally {
@@ -37,7 +53,7 @@ const useLoadSubscriptions = (userId) => {
     fetchData();
   }, [userId]);
 
-  return { cars, subscriptions, loading, error };
+  return { cars, subscriptions, marks, user, loading, error };
 };
 
 export default useLoadSubscriptions;
