@@ -14,7 +14,7 @@ services:
 
   frontend:
     build:
-      context: ./front
+      context: ./front/autoria
       dockerfile: Dockerfile
     ports:
       - "80:80"
