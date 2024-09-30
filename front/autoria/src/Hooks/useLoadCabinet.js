@@ -35,7 +35,7 @@ const useLoadCabinet = (userId) => {
         const marksData = marksResponse.data;        
 
         setCars(carData);
-        setFavoriteCars(favoriteCarData);
+        setFavoriteCars(favoriteCarData.filter(Boolean));
         setMarks(marksData);
       } catch (error) {
         setError(error);

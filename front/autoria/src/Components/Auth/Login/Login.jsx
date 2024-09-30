@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import useToken from '../../../Hooks/useToken';
 
@@ -9,13 +9,21 @@ import axios from 'axios';
 
 export const Login = ({setActiveComponent, closeOffcanvas}) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const reloadCurrentPage = () => {
+    navigate(location.pathname, { replace: true });
+  };
 
   // useState
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   // useToken
-  const { token, setToken } = useToken();
+  const { setToken } = useToken();
+
+  // token from params
+  let { token } = useParams();  
 
   // onClick
   const loginUser = (e) => {
@@ -31,7 +39,10 @@ export const Login = ({setActiveComponent, closeOffcanvas}) => {
         const tokenValue = response.data.value;
         setToken(tokenValue);
         closeOffcanvas();
-        location.reload();
+        if (token) {
+          reloadCurrentPage();
+        }
+        window.location.reload();        
       })
       .catch((error) => {
         console.error(error);

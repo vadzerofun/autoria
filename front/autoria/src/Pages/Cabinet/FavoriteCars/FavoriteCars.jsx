@@ -44,7 +44,7 @@ export const FavoriteCars = () => {
   const userId = getUserIdFromToken(token);
 
   // favoriteCars
-  const { favoriteCars, marks, loading, error } = useLoadFavoriteCars(userId);
+  const { carsCount, favoriteCars, marks, loading, error } = useLoadFavoriteCars(userId);
   console.log(favoriteCars);
 
   if (loading) return <div>Loading...</div>;
@@ -96,7 +96,7 @@ export const FavoriteCars = () => {
             </div>
             <h1 className="fs-2 fw-bold">Обране</h1>
           </div>
-          <SearchForm marks={marks}/>
+          <SearchForm marks={marks} carsCount={carsCount}/>
         </section>
         <section className="favoriteCarsCars">
           {favoriteCars && favoriteCars.length > 0 && (

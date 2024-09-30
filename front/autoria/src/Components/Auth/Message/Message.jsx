@@ -9,7 +9,7 @@ export const Message = ({
   activeComponent,
   setActiveComponent,
   hideMessage,
-  loadHome
+  clearURL
 }) => {
   return (
     <div className="login">
@@ -27,6 +27,9 @@ export const Message = ({
           hideMessage();
           if (clearURL) {
             window.location.pathname = '/';
+            if (window.location.search) {
+              window.location.search = '';
+            }            
           }          
         }}>
         {linkText}

@@ -5,7 +5,7 @@ import { Login } from '../Login/Login';
 import { Register } from '../Register/Register';
 import { ForgotPassword } from '../ForgotPassword/ForgotPassword';
 import './AuthOffcanvas.css';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 export const AuthOffcanvas = ({ showOffcanvas, setShowOffcanvas }) => {
   // showOffcanvas
@@ -13,6 +13,9 @@ export const AuthOffcanvas = ({ showOffcanvas, setShowOffcanvas }) => {
 
   // token, params
   let { token } = useParams();
+
+  const [searchParams] = useSearchParams();
+  let success = searchParams.get('register-success');  
 
   const handleClose = () => setShowOffcanvas(false);
 
@@ -23,14 +26,19 @@ export const AuthOffcanvas = ({ showOffcanvas, setShowOffcanvas }) => {
   useEffect(() => {
     if (token) {
       setShowOffcanvas(true);
-      setActiveComponent(3);
+      setActiveComponent(3);      
     }
     else {
       setShowOffcanvas(showOffcanvas);
       setActiveComponent(0);
     }
+
+    if (success !== undefined && success !== null) {
+      setShowOffcanvas(true);
+      setActiveComponent(2); 
+    }
     
-  }, [showOffcanvas, token]);
+  }, [showOffcanvas, token, success]);
 
   // authComponents
   const authComponents = [

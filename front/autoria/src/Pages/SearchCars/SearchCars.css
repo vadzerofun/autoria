@@ -60,4 +60,15 @@
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.375; /* 22/16 */
+}
+
+.searchCarsListCars {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.5rem;
 }/*# sourceMappingURL=SearchCars.css.map */

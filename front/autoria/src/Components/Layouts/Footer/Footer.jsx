@@ -31,7 +31,7 @@ export const Footer = () => {
                   <Link>Сервіси</Link>
                 </Col>
                 <Col>
-                  <Link>Новини</Link>
+                  <Link to="/news">Новини</Link>
                   <Link>Відгуки про авто</Link>
                   <Link>Мапа сайту</Link>
                   <Link>Банк ідей</Link>

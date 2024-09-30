@@ -1,30 +1,23 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
-RUN mkdir /app
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
-COPY *.sln ./
-COPY Application/Application.csproj ./Application/
-COPY Common/Common.csproj ./Common/
-COPY Core/Core.csproj ./Core/
-COPY Domain/Core.csproj ./Domain/
-COPY Infrastructure/Infrastructure.csproj ./Infrastructure/
-COPY autoria-api/autoria-api.csproj ./autoria-api/
-COPY . .vs/
-RUN dotnet restore
-COPY autoria-api ./autoria-api/
-COPY Application ./Application/
-COPY Common ./Common/
-COPY Core ./Core/
-COPY Domain ./Domain/
-COPY Infrastructure ./Infrastructure/
-COPY .vs /.vs/
+EXPOSE 80
+EXPOSE 443
 
-RUN dotnet publish autoria-api/autoria-api.csproj -c Release -o out
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+COPY ["autoria-api/autoria-api.csproj", "autoria-api/"]
+COPY ["Application/Application.csproj", "Application/"]
+COPY ["Domain/Core.csproj", "Domain/"]
+COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
+RUN dotnet restore "autoria-api/autoria-api.csproj"
+COPY . .
+WORKDIR "/src"
+RUN dotnet build "autoria-api/autoria-api.csproj" -c Release -o /app/build
 
+FROM build AS publish
+RUN dotnet publish "autoria-api/autoria-api.csproj" -c Release -o /app/publish
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM base AS final
 WORKDIR /app
-COPY --from=build-env /app/out .
-RUN dotnet --info
-RUN ls -la
-
-ENTRYPOINT ["dotnet", "/app/autoria-api.dll"]
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "autoria-api.dll"]
