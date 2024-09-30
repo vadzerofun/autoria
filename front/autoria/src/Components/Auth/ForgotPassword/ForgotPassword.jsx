@@ -6,6 +6,9 @@ import './ForgotPassword.css';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Message } from '../Message/Message';
 
+// Images
+import Logo from '../../../assets/logo.png';
+
 export const ForgotPassword = ({ setActiveComponent }) => {
   // hide message
   const hideMessage = () => {
@@ -162,7 +165,7 @@ export const ForgotPassword = ({ setActiveComponent }) => {
       ) : phase === 1 ? (
         <>
           <div className="loginLogo">
-            <img src="/src/assets/logo.png" alt="logo" />
+            <img src={Logo} alt="logo" />
           </div>
           <h1 className="loginTitle">Відновлення паролю</h1>
           <Form className="loginForm">

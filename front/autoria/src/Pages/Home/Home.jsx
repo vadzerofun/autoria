@@ -54,7 +54,7 @@ export const Home = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  console.log(models);
+  console.log(SearchImage);
 
   // set marks, models
   carsForYou.forEach((car) => {

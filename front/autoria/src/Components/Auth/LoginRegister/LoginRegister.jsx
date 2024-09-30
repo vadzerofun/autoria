@@ -3,11 +3,17 @@ import './LoginRegister.css';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 
+// Images
+import Logo from '../../../assets/logo-with-text.png';
+import AppleLogo from '../../../assets/icons/apple.svg';
+import GoogleLogo from '../../../assets/icons/google.svg';
+import FacebookLogo from '../../../assets/icons/facebook.svg';
+
 export const LoginRegister = ({ setActiveComponent }) => {
   return (
     <div className="login">
       <div className="loginRegisterLogo">
-        <img src="/src/assets/logo-with-text.png" alt="" />
+        <img src={Logo} alt="" />
       </div>
       <div className="loginRegisterButtons">
         <Button
@@ -36,13 +42,13 @@ export const LoginRegister = ({ setActiveComponent }) => {
       </div>
       <div className="socialMediaButtons">
         <Button variant="secondary" type="button" className="loginFormBtn loginFormBtnSecondary">
-          <img src="/src/assets/icons/apple.svg" alt="" />
+          <img src={AppleLogo} alt="" />
         </Button>
         <Button variant="secondary" type="button" className="loginFormBtn loginFormBtnSecondary">
-          <img src="/src/assets/icons/google.svg" alt="" />
+          <img src={GoogleLogo} alt="" />
         </Button>
         <Button variant="secondary" type="button" className="loginFormBtn loginFormBtnSecondary">
-          <img src="/src/assets/icons/facebook.svg" alt="" />
+          <img src={FacebookLogo} alt="" />
         </Button>
       </div>
     </div>
