@@ -10,7 +10,7 @@ import { SearchFormDropdownPrice } from './SearchFormDropdownPrice/SearchFormDro
 import { SearchFormDropdownCurrency } from './SearchFormDropdownCurrency/SearchFormDropdownCurrency';
 import { SearchFormDropdownModel } from './SearchFormDropdownModel/SearchFormDropdownModel';
 
-export const SearchForm = ({ marks }) => {
+export const SearchForm = ({ marks, carsCount }) => {
   // context
   const selectData = useAddCarData();
   const { selectRegionsAndCities, selectCarType, selectYear, selectCurrencies } = selectData;
@@ -109,10 +109,10 @@ export const SearchForm = ({ marks }) => {
         </div>
       </div>
       <div className="searchCarFormButtonContainer" md={12}>
-        <Button className="searchButton searchCarFormButton">
+        <Button className="searchButton searchCarFormButton" href="/search-cars">
           <div className="d-flex align-items-center justify-content-center">
             <span className="searchButtonIcon"></span>
-            <span>Показати 247 900 оголошень</span>
+            <span>Показати {carsCount} оголошень</span>
           </div>
         </Button>
       </div>

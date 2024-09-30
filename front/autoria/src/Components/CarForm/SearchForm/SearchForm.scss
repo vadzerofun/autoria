@@ -23,9 +23,15 @@
   }
 }
 
+.searchCarFormButtonContainer {
+  width: 100%;
+  max-width: 406px;
+}
+
 // Button
 .searchCarFormButton {
   font-family: "Inter", sans-serif;
+  width: 100%;
   padding: 1.25rem 2.5rem;
 }
 

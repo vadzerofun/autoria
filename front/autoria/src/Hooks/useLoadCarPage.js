@@ -46,7 +46,7 @@ const useLoadCarPage = () => {
           `${import.meta.env.VITE_REACT_API_URL}Cars/GetMostProfitable`
         );
         const similarCarsData = similarCarsResponse.data.value;
-        setSimilarCars(similarCarsData);
+        setSimilarCars(similarCarsData.filter(Boolean));
         
         if (!hasViewedCar && carId) {
           await viewCar(carId);

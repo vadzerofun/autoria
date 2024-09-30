@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import { Message } from '../Message/Message';
 
 import axios from 'axios';
+import { useSearchParams } from 'react-router-dom';
 
 export const Register = ({ setActiveComponent }) => {
   // hide message
@@ -32,6 +33,37 @@ export const Register = ({ setActiveComponent }) => {
   // get URL
   const baseUrl = `${window.location.protocol}//${window.location.host}/`;
 
+  // searchParams
+  const [searchParams] = useSearchParams();
+  let success = searchParams.get('register-success');
+  
+  if (success !== undefined && success !== null) {
+    if (success == true) {     
+            
+      return (
+        <Message
+          title="Вітаємо"
+          msgText="Ви успішно зареєструвались"
+          linkText="Далі"
+          clearURL={true}
+          activeComponent={0}
+          setActiveComponent={setActiveComponent}
+          hideMessage={hideMessage}
+        />
+      );
+    } else {
+      <Message
+        title="Упс"
+        msgText="Щось пішло не так"
+        linkText="Повторити"
+        clearURL={true}
+        activeComponent={2}
+        setActiveComponent={setActiveComponent}
+        hideMessage={hideMessage}
+      />;
+    }
+  }
+
   // onClick
   const createUser = (e) => {
     e.preventDefault();
@@ -47,8 +79,8 @@ export const Register = ({ setActiveComponent }) => {
         axios
           .post(import.meta.env.VITE_REACT_API_URL + 'User/SendConfirmEmail', {
             email: email,
-            successLink: baseUrl + 'confirm-email/?success=1',
-            badLink: baseUrl + 'confirm-email/?success=0'
+            successLink: baseUrl + '?register-success=1',
+            badLink: baseUrl + '?register-success=0'
           })
           .then((response) => {
             setMessage({
@@ -121,9 +153,7 @@ export const Register = ({ setActiveComponent }) => {
             </Form.Group>
             <Form.Group as={Row} className="mb-4" controlId="phone">
               <Col className="pe-1" xs="3">
-                <Form.Label className="loginFormInput loginFormPhoneLabel">
-                  +380
-                </Form.Label>
+                <Form.Label className="loginFormInput loginFormPhoneLabel">+380</Form.Label>
               </Col>
               <Col xs="9">
                 <Form.Control

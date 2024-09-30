@@ -6,6 +6,7 @@ import { Button, Form } from 'react-bootstrap';
 export const SearchCarsForm = ({
   marks,
   formData,
+  selectData,
   handleChange,
   handleFormattedNumberChange,
   handleChangeTypes,
@@ -15,8 +16,7 @@ export const SearchCarsForm = ({
   handleChangeOccasion,
   resetFormData
 }) => {
-  // context
-  const selectData = useAddCarData();
+  
   const {
     selectRegionsAndCities,
     selectCarType,

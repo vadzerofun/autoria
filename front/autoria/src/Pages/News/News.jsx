@@ -39,6 +39,8 @@ export const News = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
+  console.log(isToday(new Date(news[0].writingTime)));
+
   return (
     <Layout>
       <Container>
@@ -58,7 +60,7 @@ export const News = () => {
             <NewsTextCardBig news={news[0]} userId={userId} displayOffcanvas={displayOffcanvas} />
           </div>
           <div className="newsMainNews">
-            {news.slice(1).map((news, index) => (
+            {news.slice(1, 5).map((news, index) => (
               <NewsTextCardBig news={news} userId={userId} displayOffcanvas={displayOffcanvas} />
             ))}
           </div>
@@ -72,19 +74,22 @@ export const News = () => {
             modules={[Navigation]}
             grabCursor={true}
             className="newsSwiper">
-            {news.map((news, index) => (
-              <SwiperSlide key={`news-interesting-${index}`}>
-                <img
-                  src={news.imageLink ? imagesURL + news.imageLink : ImagePlaceholder}
-                  alt={`News`}
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = ImagePlaceholder;
-                  }}
-                />
-                <NewsTextCard news={news} userId={userId} displayOffcanvas={displayOffcanvas} />
-              </SwiperSlide>
-            ))}
+            {news
+              .slice()
+              .sort((a, b) => b.likes.length - a.likes.length)
+              .map((news, index) => (
+                <SwiperSlide key={`news-interesting-${index}`}>
+                  <img
+                    src={news.imageLink ? imagesURL + news.imageLink : ImagePlaceholder}
+                    alt={`News`}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = ImagePlaceholder;
+                    }}
+                  />
+                  <NewsTextCard news={news} userId={userId} displayOffcanvas={displayOffcanvas} />
+                </SwiperSlide>
+              ))}
           </Swiper>
         </section>
         <section className="newsInterestingTodayContainer">
@@ -96,23 +101,40 @@ export const News = () => {
             modules={[Navigation]}
             grabCursor={true}
             className="newsSwiper">
-            {news.map((news, index) => (
-              <SwiperSlide key={`news-interesting-today-${index}`}>
-                <img
-                  src={news.imageLink ? imagesURL + news.imageLink : ImagePlaceholder}
-                  alt={`News`}
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = ImagePlaceholder;
-                  }}
-                />
-                <NewsTextCardBig news={news} userId={userId} displayOffcanvas={displayOffcanvas} />
-              </SwiperSlide>
-            ))}
+            {news
+              .filter((news) => isToday(new Date(news.writingTime)))
+              .sort((a, b) => b.likes.length - a.likes.length)
+              .map((news, index) => (
+                <SwiperSlide key={`news-interesting-today-${index}`}>
+                  <img
+                    src={news.imageLink ? imagesURL + news.imageLink : ImagePlaceholder}
+                    alt={`News`}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = ImagePlaceholder;
+                    }}
+                  />
+                  <NewsTextCardBig
+                    news={news}
+                    userId={userId}
+                    displayOffcanvas={displayOffcanvas}
+                  />
+                </SwiperSlide>
+              ))}
           </Swiper>
         </section>
         <AuthOffcanvas showOffcanvas={showOffcanvas} setShowOffcanvas={setShowOffcanvas} />
       </Container>
     </Layout>
+  );
+};
+
+const isToday = (date) => {
+  const today = new Date();
+
+  return (
+    date.getDate() === today.getDate() &&
+    date.getMonth() === today.getMonth() &&
+    date.getFullYear() === today.getFullYear()
   );
 };

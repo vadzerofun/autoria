@@ -95,7 +95,7 @@ export const ForgotPassword = ({ setActiveComponent }) => {
           activeComponent: 1,
           setActiveComponent: setActiveComponent,
           hideMessage: hideMessage,
-          loadHome: true,
+          clearURL: true,
         });
         setShowMessage(true);
       })

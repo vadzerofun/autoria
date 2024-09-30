@@ -49,12 +49,12 @@ export const Home = () => {
   const [userId, setUserId] = useState(getUserIdFromToken(token));
 
   // fetch Data
-  const { carsForYou, carsTop, news, marks, loading, error } = useLoadHome();
+  const { carsCount, carsForYou, carsTop, news, marks, loading, error } = useLoadHome();
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  console.log(carsForYou);
+  console.log(carsCount);
 
   // set marks
   carsForYou.forEach((car) => {
@@ -180,7 +180,7 @@ export const Home = () => {
                     </Row>
                   </Form> */}
                   <div className="homeSearchFormContainer">
-                    <SearchForm marks={marks} />
+                    <SearchForm marks={marks} carsCount={carsCount} />
                   </div>
                 </div>
               </Col>
