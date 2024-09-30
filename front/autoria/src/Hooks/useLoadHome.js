@@ -10,6 +10,8 @@ const useLoadHome = () => {
   const [news, setNews] = useState([]);
   // marks
   const [marks, setMarks] = useState([]);
+  // models
+  const [models, setModels] = useState([]);
   // user
   const [user, setUser] = useState(null);
   // loading, error
@@ -19,18 +21,25 @@ const useLoadHome = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [cars, carsForYouResponse, carsTopResponse, newsResponse, marksResponse] =
-          await Promise.all([
-            axios.get(import.meta.env.VITE_REACT_API_URL + 'Cars', {
-              params: { PageSize: 100 }
-            }),
-            axios.get(import.meta.env.VITE_REACT_API_URL + 'Cars/GetCarsForYou'),
-            axios.get(import.meta.env.VITE_REACT_API_URL + 'Cars/GetTopCars', {
-              params: { count: 10 }
-            }),
-            axios.get(import.meta.env.VITE_REACT_API_URL + 'News'),
-            axios.get(import.meta.env.VITE_REACT_API_URL + 'Marks/GetMarks')
-          ]);
+        const [
+          cars,
+          carsForYouResponse,
+          carsTopResponse,
+          newsResponse,
+          marksResponse,
+          modelsResponse
+        ] = await Promise.all([
+          axios.get(import.meta.env.VITE_REACT_API_URL + 'Cars', {
+            params: { PageSize: 100 }
+          }),
+          axios.get(import.meta.env.VITE_REACT_API_URL + 'Cars/GetCarsForYou'),
+          axios.get(import.meta.env.VITE_REACT_API_URL + 'Cars/GetTopCars', {
+            params: { count: 10 }
+          }),
+          axios.get(import.meta.env.VITE_REACT_API_URL + 'News'),
+          axios.get(import.meta.env.VITE_REACT_API_URL + 'Marks/GetMarks'),
+          axios.get(import.meta.env.VITE_REACT_API_URL + 'Models'),
+        ]);
         console.log(carsForYouResponse);
 
         setCarsCount(cars.data.length);
@@ -38,6 +47,7 @@ const useLoadHome = () => {
         setCarsTop(carsTopResponse.data.value.filter(Boolean));
         setNews(newsResponse.data.value);
         setMarks(marksResponse.data);
+        setModels(modelsResponse.data);
       } catch (err) {
         setError(err);
       } finally {
@@ -48,7 +58,7 @@ const useLoadHome = () => {
     fetchData();
   }, []);
 
-  return { carsCount, carsForYou, carsTop, news, marks, user, loading, error };
+  return { carsCount, carsForYou, carsTop, news, marks, models, user, loading, error };
 };
 
 export default useLoadHome;

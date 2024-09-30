@@ -60,11 +60,13 @@ export const Car = () => {
   const [openDescription, setOpenDescription] = useState(false);
   
   // fetch car and user
-  const { car, user, marks, similarCars, loading, error } = useLoadCarPage();  
+  const { car, user, marks, models, similarCars, loading, error } = useLoadCarPage();  
   const mark = marks.find((mark) => mark.id === car.makeId)?.name;
+  const model = models.find((model) => model.id === car.modelId)?.name;  
   // set marks
   similarCars.forEach((car) => {
     car.make = marks.find((mark) => mark.id === car.makeId)?.name;
+    car.model =  models.find((model) => model.id === car.modelId)?.name;  
   });
 
   // liked
@@ -176,7 +178,7 @@ export const Car = () => {
             <div className="carGalleryInfo">
               <div className="carGalleryCarInfo">
                 <div className="carGalleryCarTitleYear">
-                  <h1 className="carGalleryCarTitle fs-2">{`${mark} ${car.model}`}</h1>
+                  <h1 className="carGalleryCarTitle fs-2">{`${mark} ${model}`}</h1>
                   <div className="carGalleryCarYear fs-5">
                     <span>{!car.owners_number ? 'Невживана' : 'Вживана'}</span>
                     <span className="carGalleryInfoPoint"></span>

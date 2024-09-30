@@ -7,6 +7,8 @@ const useLoadCarPage = () => {
   const [user, setUser] = useState(null);
   // marks
   const [marks, setMarks] = useState([]);
+  // models
+  const [models, setModels] = useState([]);
   // similar cars
   const [similarCars, setSimilarCars] = useState([]);
 
@@ -40,6 +42,13 @@ const useLoadCarPage = () => {
         );
         const marksData = marksResponse.data;
         setMarks(marksData);
+
+        // Fetch models data
+        const modelsResponse = await axios.get(
+          `${import.meta.env.VITE_REACT_API_URL}Models`
+        );
+        const modelsData = modelsResponse.data;
+        setModels(modelsData);
 
         // Fetch similar cars
         const similarCarsResponse = await axios.get(
@@ -76,7 +85,7 @@ const useLoadCarPage = () => {
       });
   };
 
-  return { car, user, marks, similarCars, loading, error };
+  return { car, user, marks, models, similarCars, loading, error };
 };
 
 export default useLoadCarPage;

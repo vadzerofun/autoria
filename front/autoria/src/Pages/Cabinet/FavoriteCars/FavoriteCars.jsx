@@ -44,15 +44,16 @@ export const FavoriteCars = () => {
   const userId = getUserIdFromToken(token);
 
   // favoriteCars
-  const { carsCount, favoriteCars, marks, loading, error } = useLoadFavoriteCars(userId);
-  console.log(favoriteCars);
+  const { carsCount, favoriteCars, marks, models, loading, error } = useLoadFavoriteCars(userId);
+  console.log(models);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  // set marks
+  // set marks, models
   favoriteCars.forEach((car) => {
     car.make = marks.find((mark) => mark.id === car.makeId)?.name;
+    car.model =  models.find((model) => model.id === car.modelId)?.name;  
   });
 
   const handleShowMore = () => {
