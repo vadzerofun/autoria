@@ -101,8 +101,8 @@
         "IsRequired": false
       },
       {
-        "Name": "Model",
-        "Type": "System.String",
+        "Name": "ModelId",
+        "Type": "System.Guid",
         "IsRequired": false
       },
       {
@@ -294,8 +294,8 @@
         "IsRequired": false
       },
       {
-        "Name": "Model",
-        "Type": "System.String",
+        "Name": "ModelId",
+        "Type": "System.Guid",
         "IsRequired": false
       },
       {
@@ -689,6 +689,85 @@
     "ContainingType": "autoria_api.Controllers.MarksController",
     "Method": "RemoveMark",
     "RelativePath": "api/Marks/RemoveMark/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ModelsController",
+    "Method": "GetAllModels",
+    "RelativePath": "api/Models",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ModelsController",
+    "Method": "CreateModel",
+    "RelativePath": "api/Models",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Core.Models.Model",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ModelsController",
+    "Method": "GetModelById",
+    "RelativePath": "api/Models/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ModelsController",
+    "Method": "UpdateModel",
+    "RelativePath": "api/Models/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "model",
+        "Type": "Core.Models.Model",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ModelsController",
+    "Method": "DeleteModel",
+    "RelativePath": "api/Models/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,

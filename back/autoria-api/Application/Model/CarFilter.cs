@@ -11,7 +11,7 @@ namespace Application.Model
     {
         public CarType? Type { get; set; }
         public Guid? Mark {  get; set; }
-        public string? Model { get; set; }
+        public Guid? ModelId { get; set; }
         public int? MinYear { get; set; }
         public int? MaxYear { get; set; }
         public int? MinPrice { get; set; }

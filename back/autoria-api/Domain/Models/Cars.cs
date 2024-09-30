@@ -15,7 +15,7 @@ namespace Core.Models
         public Сurrency Сurrency { get; set; } //валюта
         public double Mileage { get; set; } // Пробіг авто
         public Guid MakeId { get; set; } // Марка
-        public string Model { get; set; } // Модель
+        public Guid ModelId { get; set; } // Модель
         public CarType Type { get; set; } // Тип машини Легкові, Вантажні ...
         public int Year { get; set; } // Рік випуску
         public double? Engine_capacity { get; set; } // Об'єм двигуна

@@ -17,6 +17,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Core.Enums;
 using Stripe;
+using Core.Services;
+using Infrastructure.Services;
+using Core.Interfaces.Core.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -114,6 +117,9 @@ builder.Services.AddScoped<ISubscribeRepository, SubscribeRepository>();
 builder.Services.AddScoped<IUserSubscribeRepository, UserSubscribeRepository>();
 builder.Services.AddScoped<IMarksService, MarksService>();
 builder.Services.AddScoped<IMarkRepository, MarkRepository>();
+builder.Services.AddScoped<IModelService, ModelService>();
+builder.Services.AddScoped<IModelRepository, ModelRepository>();
+
 
 var authOptionsConfiguration = builder.Configuration.GetSection("Auth");
 builder.Services.Configure<AuthOption>(authOptionsConfiguration);

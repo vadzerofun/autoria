@@ -117,7 +117,7 @@ namespace Infrastructure.Repositories
             return cars;
         }
 
-        public async Task<List<Cars>> GetCarsByFilter(CarType? type, Guid? mark, string? model, string? region, int? minYear, int? maxYear, int? minPrice, int? maxPrice, Transmission_type? gearBox, Engine_type? engineType, Occasion? occasion, double? minEngineCapacity, double? maxEngineCapacity, CarState? carState, Сurrency currency, int page, int pageSize)
+        public async Task<List<Cars>> GetCarsByFilter(CarType? type, Guid? mark, Guid? model, string? region, int? minYear, int? maxYear, int? minPrice, int? maxPrice, Transmission_type? gearBox, Engine_type? engineType, Occasion? occasion, double? minEngineCapacity, double? maxEngineCapacity, CarState? carState, Сurrency? currency, int page, int pageSize)
         {
             if (_context.Cars == null)
             {
@@ -128,7 +128,7 @@ namespace Infrastructure.Repositories
 
             query = query.FilterIf(type.HasValue, car => car.Type == type.Value)
                          .FilterIf(mark.HasValue, car => car.MakeId == mark)
-                         .FilterIf(!string.IsNullOrEmpty(model), car => car.Model == model)
+                         .FilterIf(model.HasValue, car => car.ModelId == model)
                          .FilterIf(!string.IsNullOrEmpty(region), car => car.Region == region)
                          .FilterIf(minYear.HasValue, car => car.Year >= minYear)
                          .FilterIf(maxYear.HasValue, car => car.Year <= maxYear)
@@ -139,7 +139,7 @@ namespace Infrastructure.Repositories
                          .FilterIf(occasion.HasValue, car => car.Occasion == occasion)
                          .FilterIf(minEngineCapacity.HasValue, car => car.Engine_capacity >= minEngineCapacity)
                          .FilterIf(maxEngineCapacity.HasValue, car => car.Engine_capacity <= maxEngineCapacity)
-                         .FilterIf(currency != null, car => car.Сurrency == currency)
+                         .FilterIf(currency.HasValue, car => car.Сurrency == currency)
                          .FilterIf(carState.HasValue, car => car.State == carState);
 
             if (pageSize > 0)
@@ -231,6 +231,11 @@ namespace Infrastructure.Repositories
             car.SellerPhoneViews += 1;
             await EditCar(CarId, car);
             return;
+        }
+
+        public Task<List<Cars>> GetCarsByFilter()
+        {
+            throw new NotImplementedException();
         }
     }
 }

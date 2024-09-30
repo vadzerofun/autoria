@@ -2,6 +2,7 @@ FROM node:18 AS build
 RUN mkdir /app
 WORKDIR /app
 COPY package*.json ./
+COPY package-lock.json ./
 RUN npm install --verbose
 COPY . .
 RUN npm run build

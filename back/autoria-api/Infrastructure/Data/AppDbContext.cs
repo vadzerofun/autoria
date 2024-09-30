@@ -14,6 +14,7 @@ namespace Infrastructure.Data
         public DbSet<Subscribe> Subscribe { get; set; }
         public DbSet<UserSubscribe> UserSubscribes { get; set; }
         public DbSet<Marks> Marks { get; set; }
+        public DbSet<Model> Models { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
 
         protected override void OnModelCreating(ModelBuilder builder)

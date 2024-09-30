@@ -86,7 +86,7 @@ namespace Application.Services
             var cars = await _carRepository.GetCarsByFilter(
                 filter.Type,
                 filter.Mark,
-                filter.Model,
+                filter.ModelId,
                 filter.Region,
                 filter.MinYear,
                 filter.MaxYear,
