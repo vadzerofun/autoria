@@ -47,17 +47,19 @@ export const Cabinet = () => {
   const userId = getUserIdFromToken(token);
 
   // cars, marks
-  const { cars, favoriteCars, marks, notifications, loading, error } = useLoadCabinet(userId);
+  const { cars, favoriteCars, marks, models, notifications, loading, error } = useLoadCabinet(userId);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  // set marks
+  // set marks, models
   cars.forEach((car) => {
     car.make = marks.find((mark) => mark.id === car.makeId)?.name;
+    car.model =  models.find((model) => model.id === car.modelId)?.name;  
   });
   favoriteCars.forEach((car) => {
     car.make = marks.find((mark) => mark.id === car.makeId)?.name;
+    car.model =  models.find((model) => model.id === car.modelId)?.name;  
   });
 
   return (

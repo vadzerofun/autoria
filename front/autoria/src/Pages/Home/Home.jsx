@@ -49,19 +49,21 @@ export const Home = () => {
   const [userId, setUserId] = useState(getUserIdFromToken(token));
 
   // fetch Data
-  const { carsCount, carsForYou, carsTop, news, marks, loading, error } = useLoadHome();
+  const { carsCount, carsForYou, carsTop, news, marks, models, loading, error } = useLoadHome();
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  console.log(carsCount);
+  console.log(SearchImage);
 
-  // set marks
+  // set marks, models
   carsForYou.forEach((car) => {
-    car.make = marks.find((mark) => mark.id === car.makeId)?.name;   
+    car.make = marks.find((mark) => mark.id === car.makeId)?.name;
+    car.model =  models.find((model) => model.id === car.modelId)?.name;  
   });
   carsTop.forEach((car) => {
     car.make = marks.find((mark) => mark.id === car.makeId)?.name;
+    car.model = models.find((model) => model.id === car.modelId)?.name;  
   });  
 
   //console.log(carsForYou);

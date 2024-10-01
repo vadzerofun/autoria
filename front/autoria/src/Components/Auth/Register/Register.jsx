@@ -9,6 +9,9 @@ import { Message } from '../Message/Message';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 
+// Images
+import Logo from '../../../assets/logo.png';
+
 export const Register = ({ setActiveComponent }) => {
   // hide message
   const hideMessage = () => {
@@ -32,6 +35,8 @@ export const Register = ({ setActiveComponent }) => {
   const [password, setPassword] = useState('');
   // get URL
   const baseUrl = `${window.location.protocol}//${window.location.host}/`;
+  console.log(baseUrl);
+  
 
   // searchParams
   const [searchParams] = useSearchParams();
@@ -135,7 +140,7 @@ export const Register = ({ setActiveComponent }) => {
       ) : (
         <div className="login">
           <div className="loginLogo">
-            <img src="/src/assets/logo.png" alt="" />
+            <img src={Logo} alt="" />
           </div>
           <h1 className="loginTitle">Вітаємо</h1>
           <Form className="loginForm" encType="">

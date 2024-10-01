@@ -7,6 +7,9 @@ import useToken from '../../../Hooks/useToken';
 
 import axios from 'axios';
 
+// Images
+import Logo from '../../../assets/logo.png';
+
 export const Login = ({setActiveComponent, closeOffcanvas}) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -52,7 +55,7 @@ export const Login = ({setActiveComponent, closeOffcanvas}) => {
   return (
     <div className="login">
       <div className="loginLogo">
-        <img src="/src/assets/logo.png" alt="" />
+        <img src={Logo} alt="" />
       </div>
       <h1 className="loginTitle">Вітаємо</h1>
       <Form className="loginForm">

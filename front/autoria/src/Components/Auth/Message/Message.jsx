@@ -2,6 +2,8 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import './Message.css';
 
+import Logo from '../../../assets/logo.png';
+
 export const Message = ({
   title,
   msgText,
@@ -14,7 +16,7 @@ export const Message = ({
   return (
     <div className="login">
       <div className="loginLogo msgLogo">
-        <img src="/src/assets/logo.png" alt="" />
+        <img src={Logo} alt="" />
       </div>
       <h1 className="loginTitle">{title}</h1>
       <h2 className="msgText">{msgText}</h2>
