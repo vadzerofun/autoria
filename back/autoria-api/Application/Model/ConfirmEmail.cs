@@ -16,5 +16,7 @@ namespace Application.Model
         public string SuccessLink { get; set; }
         [Required]
         public string BadLink { get; set; }
+        [Required]
+        public string ServerLink { get; set; }
     }
 }

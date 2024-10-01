@@ -53,7 +53,7 @@ namespace Application.Services
             return Result.Success();
         }
 
-        public async Task<Result<Response>> SendConfirmEmail(string Email, string SuccessLink, string BadLink)
+        public async Task<Result<Response>> SendConfirmEmail(string Email, string SuccessLink, string BadLink, string ServerLink)
         {
             var user = await _userRepository.GetUserByEmail(Email);
             if (user == null)
@@ -61,7 +61,7 @@ namespace Application.Services
 
             string Token = await _jwtTokenService.GenerateJWT(user);
             string HashToken = _encryptionService.Encrypt(Token);
-            string contitueEmail = $"https://localhost:7224/api/User/ConfirmEmail?Token={Uri.EscapeDataString(HashToken)}&SuccessLink={Uri.EscapeDataString(SuccessLink)}&BadLink={Uri.EscapeDataString(BadLink)}";
+            string contitueEmail = $"{ServerLink}?Token={Uri.EscapeDataString(HashToken)}&SuccessLink={Uri.EscapeDataString(SuccessLink)}&BadLink={Uri.EscapeDataString(BadLink)}";
             var plainTextContent = "Press this button to confirm your email";
             var htmlContent = $@"
             <strong>Підтвердіть вашу електронну пошту.</strong>

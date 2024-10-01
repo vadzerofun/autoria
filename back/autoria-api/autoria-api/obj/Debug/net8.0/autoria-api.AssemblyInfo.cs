@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("autoria-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7ac865c5093dd119ca6eccc775818a56206765dc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3acb226e3b4fd0aacc4fa9189adcf2f63c660f67")]
 [assembly: System.Reflection.AssemblyProductAttribute("autoria-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("autoria-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

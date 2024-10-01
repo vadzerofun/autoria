@@ -155,7 +155,7 @@ namespace autoria_api.Controllers
         [HttpPost("SendConfirmEmail")]
         public async Task<IActionResult> SendConfirmEmail(ConfirmEmail confirmEmail)
         {
-            var res = await _userService.SendConfirmEmail(confirmEmail.Email, confirmEmail.SuccessLink, confirmEmail.BadLink);
+            var res = await _userService.SendConfirmEmail(confirmEmail.Email, confirmEmail.SuccessLink, confirmEmail.BadLink, confirmEmail.ServerLink);
             if (!res.IsSuccess)
                 return BadRequest(res.ErrorMessage);
             return Ok(res);

@@ -19,7 +19,7 @@ namespace Application.Interfaces
         Task<Result> DeleteUserById(Guid id);
         Task<Result> EditUser(Guid id, User user);
         Task<Result<RefreshTokenResponse>> Login(Login login);
-        Task<Result<Response>> SendConfirmEmail(string Email, string SuccessLink, string BadLink);
+        Task<Result<Response>> SendConfirmEmail(string Email, string SuccessLink, string BadLink, string ServerLink);
         Task<Result> ConfirmEmail(string hashToken);
         Task<Result<Response>> ForgotPassword(string Email, string Link);
         Task<Result> ChengeForgotPassword(string NewPassword, string Token);
