@@ -35,7 +35,9 @@ export const Register = ({ setActiveComponent }) => {
   const [password, setPassword] = useState('');
   // get URL
   const baseUrl = `${window.location.protocol}//${window.location.host}/`;
-  console.log(baseUrl);
+  // server URL
+  const serverConfirmEmailUrl = import.meta.env.VITE_REACT_API_URL + 'User/ConfirmEmail';
+  console.log(serverConfirmEmailUrl);
   
 
   // searchParams
@@ -85,7 +87,8 @@ export const Register = ({ setActiveComponent }) => {
           .post(import.meta.env.VITE_REACT_API_URL + 'User/SendConfirmEmail', {
             email: email,
             successLink: baseUrl + '?register-success=1',
-            badLink: baseUrl + '?register-success=0'
+            badLink: baseUrl + '?register-success=0',
+            serverLink: serverConfirmEmailUrl,
           })
           .then((response) => {
             setMessage({
