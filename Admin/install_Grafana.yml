@@ -28,11 +28,6 @@
     mode: '0644'
   notify: Restart Grafana
 
-- name: Restart Grafana
-  systemd:
-    name: grafana-server
-    state: restarted
-
 - name: Create Grafana datasources directory
   file:
     path: /etc/grafana/provisioning/datasources
@@ -58,3 +53,9 @@
     dest: /etc/grafana/provisioning/dashboards/system_overview.json
     mode: '0644'
   notify: Restart Grafana
+
+  handlers:
+    - name: Restart Grafana
+      systemd:
+        name: grafana-server
+        state: restarted
