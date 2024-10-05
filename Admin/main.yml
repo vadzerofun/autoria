@@ -7,5 +7,6 @@
   vars_files: diplom_vars.yml
   tasks:
     - import_tasks: install_docker.yml
+    - Import_tasks: Install_Prometheus.yml
 #   - import_tasks: run_docker_compose.yml
 #    - import_tasks: run_docker.yml
