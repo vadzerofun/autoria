@@ -26,7 +26,6 @@
     src: grafana.ini.j2
     dest: /etc/grafana/grafana.ini
     mode: '0644'
-  notify: Restart Grafana
 
 - name: Create Grafana datasources directory
   file:
@@ -39,7 +38,6 @@
     src: grafana_datasource.yml.j2
     dest: /etc/grafana/provisioning/datasources/prometheus.yml
     mode: '0644'
-  notify: Restart Grafana
 
 - name: Create Grafana dashboards directory
   file:
@@ -52,10 +50,8 @@
     src: grafana_dashboard.json.j2
     dest: /etc/grafana/provisioning/dashboards/system_overview.json
     mode: '0644'
-  notify: Restart Grafana
 
-  handlers:
-    - name: Restart Grafana
-      systemd:
-        name: grafana-server
-        state: restarted
+- name: Restart Grafana
+  systemd:
+    name: grafana-server
+    state: restarted
