@@ -21,36 +21,6 @@
     state: started
     enabled: yes
 
-- name: Copy Grafana configuration
-  template:
-    src: grafana.ini.j2
-    dest: /etc/grafana/grafana.ini
-    mode: '0644'
-
-- name: Create Grafana datasources directory
-  file:
-    path: /etc/grafana/provisioning/datasources
-    state: directory
-    mode: '0755'
-
-- name: Copy Grafana datasource configuration
-  template:
-    src: grafana_datasource.yml.j2
-    dest: /etc/grafana/provisioning/datasources/prometheus.yml
-    mode: '0644'
-
-- name: Create Grafana dashboards directory
-  file:
-    path: /etc/grafana/provisioning/dashboards
-    state: directory
-    mode: '0755'
-
-- name: Copy Grafana dashboard configuration
-  template:
-    src: grafana_dashboard.json.j2
-    dest: /etc/grafana/provisioning/dashboards/system_overview.json
-    mode: '0644'
-
 - name: Restart Grafana
   systemd:
     name: grafana-server

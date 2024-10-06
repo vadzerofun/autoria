@@ -1,13 +1,14 @@
 FROM node:18 AS build
-RUN mkdir /app
 WORKDIR /app
 COPY package*.json ./
-COPY package-lock.json ./
-RUN npm install --verbose
+RUN npm ci
 COPY . .
 RUN npm run build
-FROM nginx:latest
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/sites-available/default
+FROM node:18-alpine
+WORKDIR /app
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/package*.json ./
+RUN npm ci --only=production
+RUN npm install -g serve
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["serve", "-s", "dist", "-l", "80", "--single"]
