@@ -4,7 +4,7 @@ services:
       context: ./back/autoria-api
       dockerfile: Dockerfile
     ports:
-      - "8080:80"
+      - "8081:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ConnectionStrings__DefaultConnection=Data Source=/app/DBautoria.db
@@ -23,3 +23,58 @@ services:
     restart: unless-stopped
     depends_on:
       - api
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+#      - ./data/prometheus/data:/prometheus
+    ports:
+      - "9090:9090" # Prometheus web interface
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+#      - '-storage.local.path=/prometheus'
+    restart: unless-stopped
+    depends_on:
+      - cadvisor
+      - node-exporter
+
+  # Node Exporter (для моніторингу хосту)
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    ports:
+      - "9100:9100"
+    restart: unless-stopped
+
+  # Docker Advisor (контейнер для збору метрик Docker)
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - "8080:8080" # cAdvisor web interface
+    restart: unless-stopped
+
+   # Grafana (для візуалізації метрик)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000" # Grafana web interface
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin1234 # Заміни на сильніший пароль
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+volumes:
+  grafana-data:
