@@ -7,7 +7,4 @@
   vars_files: diplom_vars.yml
   tasks:
     - import_tasks: install_docker.yml
-#    - import_tasks: Install_Prometheus.yml
-#    - import_tasks: install_Grafana.yml
 #   - import_tasks: run_docker_compose.yml
-#    - import_tasks: run_docker.yml
