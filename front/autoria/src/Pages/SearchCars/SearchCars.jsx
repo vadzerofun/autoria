@@ -51,6 +51,13 @@ export const SearchCars = () => {
     const updateSearchParams = (data) => {
       const params = {};
 
+      if (searchParams.size) {
+        // Initialize params with existing searchParams
+        searchParams.forEach((value, key) => {
+          params[key] = value;
+        });
+      }
+
       Object.entries(data).forEach(([key, value]) => {
         if (Array.isArray(value)) {
           if (value.length > 0) {
@@ -79,7 +86,7 @@ export const SearchCars = () => {
     console.log(formData);
   }, [formData]);
 
-  const { cars, marks, loading, error } = useLoadSearchCars();
+  const { cars, marks, models, loading, error } = useLoadSearchCars();
   console.log(cars);
 
   if (loading) return <div>Loading...</div>;
@@ -88,6 +95,7 @@ export const SearchCars = () => {
   // set marks
   cars.forEach((car) => {
     car.make = marks.find((mark) => mark.id === car.makeId)?.name;
+    car.model = models.find((model) => model.id === car.modelId)?.name;
   });
 
   // handleChange
@@ -204,6 +212,28 @@ export const SearchCars = () => {
     }));
   };
 
+  // filterCarsByPublishmentTime
+  const filterCarsByPublishmentTime = (car) => {    
+    const currentDate = new Date();
+
+    const carCreatedTime = new Date(car.createdTime);
+    console.log(carCreatedTime);    
+
+    if (formData.publishmentTime == 0) {
+      return true;
+    } else if (formData.publishmentTime == 1) {
+      const oneMonthAgo = new Date();
+      oneMonthAgo.setMonth(currentDate.getMonth() - 1);
+      return carCreatedTime >= oneMonthAgo;
+    } else if (formData.publishmentTime == 2) {
+      const oneWeekAgo = new Date();
+      oneWeekAgo.setDate(currentDate.getDate() - 7);
+      return carCreatedTime >= oneWeekAgo;
+    }
+
+    return true;
+  };
+
   return (
     <Layout>
       <Container>
@@ -258,7 +288,31 @@ export const SearchCars = () => {
               </div>
             </div>
             <div className="searchCarsListCars">
-              {cars                
+              {cars
+                .filter(
+                  (car) =>
+                    formData.types.length === 0 || formData.types.includes(car.type.toString())
+                )
+                .filter((car) => formData.bodies.length === 0 || formData.bodies.includes(car.body))
+                .filter(
+                  (car) =>
+                    formData.gearBoxes.length === 0 ||
+                    formData.gearBoxes.includes(car.transmission_type.toString())
+                )
+                .filter(
+                  (car) =>
+                    formData.engine_types.length === 0 ||
+                    formData.engine_types.includes(car.engine_type.toString())
+                )
+                .filter(
+                  (car) =>
+                    formData.occasions.length === 0 ||
+                    formData.occasions.includes(car.occasion.toString())
+                )
+                .filter((car) => filterCarsByPublishmentTime(car))
+                .sort((carA, carB) =>
+                  formData.sortOption == 0 ? carA.price - carB.price : carB.price - carA.price
+                )
                 .map((car, index) => (
                   <Link to={`/cars/${car.id}`} className="noFontStyle" key={`cars-${index}`}>
                     <FavoriteCarCard
