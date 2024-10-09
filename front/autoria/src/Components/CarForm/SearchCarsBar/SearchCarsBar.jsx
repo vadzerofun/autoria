@@ -11,7 +11,7 @@ function SearchCarsBar({ formData, selectData, handleBadgeRemove, handleArrayBad
     engine_types: selectData.selectEngineType,
     occasions: selectData.selectOccasion
   };
-  console.log(transformedData['types'][0]);
+  // console.log(transformedData['types'][0]);
 
   return (
     <Form>

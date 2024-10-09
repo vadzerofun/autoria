@@ -36,7 +36,7 @@ export const EditCabinet = () => {
     userRole: '',
     FormImageFile: ''
   });
-  console.log(formData);
+  // console.log(formData);
 
   useEffect(() => {
     if (user) {

@@ -6,7 +6,9 @@ const useLoadSearchCars = () => {
   const [cars, setCars] = useState([]);
   // marks
   const [marks, setMarks] = useState([]);
-  
+  // models
+  const [models, setModels] = useState([]);
+
   // loading, error
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,16 +16,17 @@ const useLoadSearchCars = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [carsResponse, marksResponse] =
-          await Promise.all([
-            axios.get(import.meta.env.VITE_REACT_API_URL + 'Cars', {
-              params: { PageSize: 100 }
-            }),
-            axios.get(import.meta.env.VITE_REACT_API_URL + 'Marks/GetMarks')
-          ]);
+        const [carsResponse, marksResponse, modelsResponse] = await Promise.all([
+          axios.get(import.meta.env.VITE_REACT_API_URL + 'Cars', {
+            params: { PageSize: 100 }
+          }),
+          axios.get(import.meta.env.VITE_REACT_API_URL + 'Marks/GetMarks'),
+          axios.get(import.meta.env.VITE_REACT_API_URL + 'Models')
+        ]);
 
         setCars(carsResponse.data.filter(Boolean));
         setMarks(marksResponse.data);
+        setModels(modelsResponse.data);
       } catch (err) {
         setError(err);
       } finally {
@@ -34,7 +37,7 @@ const useLoadSearchCars = () => {
     fetchData();
   }, []);
 
-  return { cars, marks, loading, error };
+  return { cars, marks, models, loading, error };
 };
 
 export default useLoadSearchCars;

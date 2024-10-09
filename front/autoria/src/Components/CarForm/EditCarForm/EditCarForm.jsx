@@ -34,7 +34,7 @@ export const EditCarForm = ({ carData, token }) => {
   console.log(formData);
 
   // load data for form
-  const { marks, loading, error } = useLoadAddCarFormData();
+  const { marks, models, loading, error } = useLoadAddCarFormData();
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -89,7 +89,7 @@ export const EditCarForm = ({ carData, token }) => {
     formDataToSend.append('Type', formData.Type);
     formDataToSend.append('Body', formData.Body);
     formDataToSend.append('MakeId', formData.MakeId);
-    formDataToSend.append('Model', formData.Model);
+    formDataToSend.append('ModelId', formData.ModelId);
     formDataToSend.append('Year', formData.Year);
     formDataToSend.append('Mileage', formData.Mileage);
     formDataToSend.append('Price', formData.Price);
@@ -194,13 +194,26 @@ export const EditCarForm = ({ carData, token }) => {
             </Form.Group>
             <Form.Group controlId="addCarFormCarModel" className="mb-4">
               <Form.Label className="fs-5 fw-semibold">Модель</Form.Label>
+              <Form.Select onChange={handleChange} name="ModelId" value={formData.ModelId}>
+                <option value="">Вибрати</option>
+                {models
+                  .filter((model) => model.makeId === formData.MakeId)
+                  .map((model, index) => (
+                    <option value={model.id} key={`model-${index}`}>
+                      {model.name}
+                    </option>
+                  ))}
+              </Form.Select>
+            </Form.Group>
+            {/* <Form.Group controlId="addCarFormCarModel" className="mb-4">
+              <Form.Label className="fs-5 fw-semibold">Модель</Form.Label>
               <Form.Control
                 type="text"
                 name="Model"
                 value={formData.Model}
                 onChange={handleChange}
               />
-            </Form.Group>
+            </Form.Group> */}
           </div>
           <div className="addCarFormDivider mb-4"></div>
           <div className="addCarFormFields">
