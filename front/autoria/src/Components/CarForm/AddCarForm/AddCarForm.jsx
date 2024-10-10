@@ -157,6 +157,8 @@ export const AddCarForm = ({ carData }) => {
         Authorization: `Bearer ${token.token}`,
         'Content-Type': 'multipart/form-data'
       }
+    }).then((response)=>{
+      navigate("/cabinet");
     });
   };
 

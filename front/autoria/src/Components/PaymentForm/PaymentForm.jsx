@@ -80,7 +80,7 @@ export const PaymentForm = ({course}) => {
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="amount" className="mb-3">
-          <Form.Label className="fw-medium">Сума ($):</Form.Label>
+          <Form.Label className="fw-medium">Сума (грн):</Form.Label>
           <Form.Control type="text" value={amount} onChange={handleAmountChange} required />
         </Form.Group>
         <Button variant="primary" type="submit">

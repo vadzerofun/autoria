@@ -8,6 +8,7 @@ import useToken from '../../../Hooks/useToken';
 import { getUserIdFromToken } from '../../../Services/authService';
 import useLoadSubscriptions from '../../../Hooks/useLoadSubscriptions';
 import { Button, Form } from 'react-bootstrap';
+import { formatBalance } from '../../../Services/formatService';
 
 export const SubscribeCars = () => {
   // selectedCarId
@@ -27,7 +28,7 @@ export const SubscribeCars = () => {
   const userId = getUserIdFromToken(token);
 
   // cars
-  const { cars, subscriptions, marks, user, loading, error } = useLoadSubscriptions(userId);
+  const { cars, subscriptions, marks, models, user, loading, error } = useLoadSubscriptions(userId);
   console.log(user);
 
   if (loading) return <div>Loading...</div>;
@@ -36,6 +37,7 @@ export const SubscribeCars = () => {
   // set marks
   cars.forEach((car) => {
     car.make = marks.find((mark) => mark.id === car.makeId)?.name;
+    car.model =  models.find((model) => model.id === car.modelId)?.name; 
   });
 
   const handleSubmit = () => {
@@ -119,7 +121,7 @@ export const SubscribeCars = () => {
                       readOnly
                     />
                   </div>
-                  <div className="text-primary">{subscription.price} грн</div>
+                  <div className="text-primary">{formatBalance(subscription.price)} грн</div>
                 </div>
               ))}
             </div>

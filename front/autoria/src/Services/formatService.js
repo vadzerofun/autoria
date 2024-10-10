@@ -13,6 +13,18 @@ export const formatNumber = (number) => {
     .replace(/,/g, ' ');
 };
 
+// formatBalance
+export const formatBalance = (number) => {
+  const result = number / 100;
+  return new Intl.NumberFormat('en-US', {
+    minimumFractionDigits: 2,  
+    maximumFractionDigits: 2   
+  })
+    .format(result)
+    .replace(/,/g, ' ');  
+};
+
+
 // capitalizeObjectKeys
 export const capitalizeObjectKeys = (obj) => {
   const capitalizedObj = {};
