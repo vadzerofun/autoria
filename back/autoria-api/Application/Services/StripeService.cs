@@ -30,7 +30,7 @@ namespace Application.Services
 
             var serverAddressesFeature = server.Features.Get<IServerAddressesFeature>();
 
-            var ukrprice = price * Course;
+            long ukrprice = (long)(price * Course);
 
             string? thisApiUrl = null;
 
@@ -41,7 +41,7 @@ namespace Application.Services
 
             if (thisApiUrl is not null)
             {
-                var sessionId = await CheckOut(thisApiUrl, price, UserId.ToString(), SucsessLink, BadLink);
+                var sessionId = await CheckOut(thisApiUrl, ukrprice, UserId.ToString(), SucsessLink, BadLink);
 
                 var checkoutOrderResponse = new CheckoutOrderResponse()
                 {
