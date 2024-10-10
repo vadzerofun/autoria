@@ -38,7 +38,7 @@ export const AddCarForm = ({ carData }) => {
   // console.log(formData);
 
   // load data for form
-  const { marks, loading, error } = useLoadAddCarFormData();
+  const { marks, models, loading, error } = useLoadAddCarFormData();
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -92,7 +92,7 @@ export const AddCarForm = ({ carData }) => {
     formDataToSend.append('Type', formData.Type);
     formDataToSend.append('Body', formData.Body);
     formDataToSend.append('MakeId', formData.MakeId);
-    formDataToSend.append('Model', formData.Model);
+    formDataToSend.append('ModelId', formData.ModelId);
     formDataToSend.append('Year', formData.Year);
     formDataToSend.append('Mileage', formData.Mileage);
     formDataToSend.append('Price', formData.Price);
@@ -141,8 +141,8 @@ export const AddCarForm = ({ carData }) => {
     addCar(formDataToSend).catch((err) => {
       console.log(err);
       if (err.response.status === 401) {
-        console.log("Hello");
-        
+        console.log('Hello');
+
         refreshAuthToken(token, setToken).then(() => {
           addCar(formDataToSend);
         });
@@ -159,6 +159,8 @@ export const AddCarForm = ({ carData }) => {
       }
     });
   };
+
+  // console.log(models);
 
   return (
     <Container>
@@ -209,12 +211,16 @@ export const AddCarForm = ({ carData }) => {
             </Form.Group>
             <Form.Group controlId="addCarFormCarModel" className="mb-4">
               <Form.Label className="fs-5 fw-semibold">Модель</Form.Label>
-              <Form.Control
-                type="text"
-                name="Model"
-                value={formData.Model}
-                onChange={handleChange}
-              />
+              <Form.Select onChange={handleChange} name="ModelId" value={formData.ModelId}>
+                <option value="">Вибрати</option>
+                {models
+                  .filter((model) => model.makeId === formData.MakeId)
+                  .map((model, index) => (
+                    <option value={model.id} key={`model-${index}`}>
+                      {model.name}
+                    </option>
+                  ))}
+              </Form.Select>
             </Form.Group>
           </div>
           <div className="addCarFormDivider mb-4"></div>
@@ -394,7 +400,7 @@ export const AddCarForm = ({ carData }) => {
             <Form.Group controlId="addCarFormCarWanted" className="mb-4">
               <Form.Label className="fs-5 fw-semibold">Стан в розшуку</Form.Label>
               <Form.Select onChange={handleChange} name="Wanted" value={formData.Wanted}>
-                <option value={""}>Вибрати</option>
+                <option value={''}>Вибрати</option>
                 <option value={true}>В розшуку</option>
                 <option value={false}>Не в розшуку</option>
               </Form.Select>
@@ -458,8 +464,10 @@ export const AddCarForm = ({ carData }) => {
                 type="text"
                 value={
                   marks.find((mark) => mark.id === formData.MakeId) &&
-                  formData.Model &&
-                  `${marks.find((mark) => mark.id === formData.MakeId)?.name} ${formData.Model}`
+                  models.find((model) => model.id === formData.ModelId) &&
+                  `${marks.find((mark) => mark.id === formData.MakeId)?.name} ${
+                    models.find((model) => model.id === formData.ModelId)?.name
+                  }`
                 }
                 placeholder="Титул оголошення"
                 readOnly

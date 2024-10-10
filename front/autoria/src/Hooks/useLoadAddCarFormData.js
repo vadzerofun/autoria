@@ -4,6 +4,8 @@ import axios from 'axios';
 const useLoadAddCarFormData = () => {
   // marks
   const [marks, setMarks] = useState([]);
+  // models
+  const [models, setModels] = useState([]);
   // loading, error
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,11 +13,12 @@ const useLoadAddCarFormData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [marksResponse] =
-          await Promise.all([
-            axios.get(import.meta.env.VITE_REACT_API_URL + 'Marks/GetMarks')
-          ]);
+        const [marksResponse, modelsResponse] = await Promise.all([
+          axios.get(import.meta.env.VITE_REACT_API_URL + 'Marks/GetMarks'),
+          axios.get(import.meta.env.VITE_REACT_API_URL + 'Models')
+        ]);
         setMarks(marksResponse.data);
+        setModels(modelsResponse.data);
       } catch (err) {
         setError(err);
       } finally {
@@ -26,7 +29,7 @@ const useLoadAddCarFormData = () => {
     fetchData();
   }, []);
 
-  return { marks, loading, error };
+  return { marks, models, loading, error };
 };
 
 export default useLoadAddCarFormData;

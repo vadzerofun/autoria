@@ -102,9 +102,9 @@ export const SearchCarsForm = ({
           />
         ))}
       </div>
-      <Button className="searchCarsFormButton">
+      {/* <Button className="searchCarsFormButton">
         <div className="d-flex align-items-center justify-content-center">Застосувати</div>
-      </Button>
+      </Button> */}
       <Button
         className="searchCarsFormButtonReset"
         variant="outline-darkgray"
