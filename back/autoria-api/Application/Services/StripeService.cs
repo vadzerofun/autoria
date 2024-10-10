@@ -71,11 +71,11 @@ namespace Application.Services
                     if (session != null)
                     {
                         var userId = session.Metadata["UserId"];
-                        var course = Convert.ToInt64(session.Metadata["Course"]);
-                        var amount = session.AmountTotal * course;
+                        var course = Convert.ToDouble(session.Metadata["Course"]);
+                        long? amount = Convert.ToInt64(session.AmountTotal * course);
 
                         var user = (await _userService.GetUserById(Guid.Parse(userId))).Value;
-                        user.Balance += amount ?? 0;
+                        user.Balance += amount ?? 0L;
                         await _userService.EditUser(user.Id, user);
                     }
                 }
