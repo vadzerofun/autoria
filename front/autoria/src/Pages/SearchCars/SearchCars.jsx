@@ -14,6 +14,8 @@ import useToken from '../../Hooks/useToken';
 import { FavoriteCarCard } from '../../Components/CarCards/FavoriteCarCard/FavoriteCarCard';
 
 export const SearchCars = () => {
+  // searchBarActive
+  const [searchBarActive, setSearchBarActive]  = useState(false);
   // showOffcanvas
   const [showOffcanvas, setShowOffcanvas] = useState(false);
 
@@ -40,7 +42,8 @@ export const SearchCars = () => {
     region: '',
     currency: -1,
     sortOption: 0,
-    publishmentTime: 0
+    publishmentTime: 0,
+    searchString: '',
   });
 
   // Initialize useSearchParams
@@ -51,12 +54,12 @@ export const SearchCars = () => {
     const updateSearchParams = (data) => {
       const params = {};
 
-      if (searchParams.size) {
-        // Initialize params with existing searchParams
-        searchParams.forEach((value, key) => {
-          params[key] = value;
-        });
-      }
+      // if (searchParams.size) {
+      //   // Initialize params with existing searchParams
+      //   searchParams.forEach((value, key) => {
+      //     params[key] = value;
+      //   });
+      // }
 
       Object.entries(data).forEach(([key, value]) => {
         if (Array.isArray(value)) {
@@ -82,7 +85,7 @@ export const SearchCars = () => {
   const sortOptions = ['Від дешевих до дорогих', 'Від дорогих до дешевих'];
   const publishmentTimeOptions = ['За весь час', 'За місяць', 'За тиждень'];
 
-  useEffect(() => {
+  useEffect(() => {    
     console.log(formData);
   }, [formData]);
 
@@ -101,6 +104,10 @@ export const SearchCars = () => {
   // handleChange
   const handleChange = (e) => {
     const { name, value, files } = e.target;
+
+    if (name === "searchString") {
+      setSearchBarActive(false);
+    }
 
     setFormData({
       ...formData,
@@ -193,7 +200,8 @@ export const SearchCars = () => {
       region: '',
       currency: -1,
       sortOption: 0,
-      publishmentTime: 0
+      publishmentTime: 0,
+      searchString: '',
     });
   };
 
@@ -217,7 +225,7 @@ export const SearchCars = () => {
     const currentDate = new Date();
 
     const carCreatedTime = new Date(car.createdTime);
-    console.log(carCreatedTime);    
+    // console.log(carCreatedTime);    
 
     if (formData.publishmentTime == 0) {
       return true;
@@ -232,7 +240,27 @@ export const SearchCars = () => {
     }
 
     return true;
-  };
+  };  
+
+  // filterCarsSearchString
+  const filterCarsSearchString = (car) => {
+    if (!searchBarActive) {
+      return true;      
+    }
+
+    const carTitle = (car.make + ' ' + car.model).toUpperCase();        
+        
+    return carTitle.includes(formData.searchString.toUpperCase());
+  }
+
+  // handleSearchClick
+  const handleSearchClick = () => {
+    if (!formData.searchString) {
+      setSearchBarActive(false);
+      return;
+    }
+    setSearchBarActive(true);
+  }
 
   return (
     <Layout>
@@ -247,6 +275,8 @@ export const SearchCars = () => {
                 selectData={selectData}
                 handleBadgeRemove={handleBadgeRemove}
                 handleArrayBadgeRemove={handleArrayBadgeRemove}
+                handleChange={handleChange}
+                handleSearchClick={handleSearchClick}
               />
             </Col>
           </Row>
@@ -310,6 +340,7 @@ export const SearchCars = () => {
                     formData.occasions.includes(car.occasion.toString())
                 )
                 .filter((car) => filterCarsByPublishmentTime(car))
+                .filter((car) => filterCarsSearchString(car))
                 .sort((carA, carB) =>
                   formData.sortOption == 0 ? carA.price - carB.price : carB.price - carA.price
                 )

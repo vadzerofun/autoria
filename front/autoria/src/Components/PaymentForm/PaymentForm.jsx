@@ -9,7 +9,7 @@ const stripePromise = loadStripe(
   'pk_test_51Pmd8NP6QMwmaue2i1qaSXzN3M72yW6qLH82c0ZRnEtg3mTFfQ4Xt9krGGbz5OysnR6DusRXEV05rio6jfq8E82z00496mbkyt'
 );
 
-export const PaymentForm = () => {
+export const PaymentForm = ({course}) => {
   // token
   const { token } = useToken();
   // amount
@@ -35,7 +35,8 @@ export const PaymentForm = () => {
         {
           price: parsedAmount,
           sucsessLink: baseUrl + 'cabinet/balance/?success=true',
-          badLink: baseUrl + 'cabinet/balance/?success=false'
+          badLink: baseUrl + 'cabinet/balance/?success=false',
+          course: course,
         },
         {
           headers: {
