@@ -3,7 +3,14 @@ import { Button, Form, Badge } from 'react-bootstrap';
 import './SearchCarsBar.css';
 import { CrossIcon } from '../../Icons/CrossIcon/CrossIcon';
 
-function SearchCarsBar({ formData, selectData, handleBadgeRemove, handleArrayBadgeRemove }) {
+function SearchCarsBar({
+  formData,
+  selectData,
+  handleBadgeRemove,
+  handleArrayBadgeRemove,
+  handleChange,
+  handleSearchClick,
+}) {
   // const badges = Array(3).fill('Легкові'); // Array with 10 elements
   const transformedData = {
     types: selectData.selectCarType,
@@ -47,9 +54,15 @@ function SearchCarsBar({ formData, selectData, handleBadgeRemove, handleArrayBad
               ))
             )}
           </div>
-          <Form.Control type="text" placeholder="" />
+          <Form.Control
+            type="text"
+            placeholder=""
+            value={formData.searchString}
+            onChange={handleChange}
+            name="searchString"
+          />
         </div>
-        <Button className="searchCarsBarButton" variant="outline-primary">
+        <Button className="searchCarsBarButton" variant="outline-primary" onClick={handleSearchClick}>
           Уточнити пошук
         </Button>
       </div>

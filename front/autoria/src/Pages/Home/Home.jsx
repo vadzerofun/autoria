@@ -261,7 +261,7 @@ export const Home = () => {
               className="brandsSwiper">
               {brandsArray.map((brand, index) => (
                 <SwiperSlide key={`brand-${index}`}>
-                  <Link to={`/search-cars?mark=${brand.name}`} className="noFontStyle">
+                  <Link to={`/search-cars?searchString=${brand.name}`} className="noFontStyle">
                     <div className="brandCard">
                       <div className="brandImageContainer">
                         <img className="brandImage" src={brand.url} alt={`Brand ${index + 1}`} />
