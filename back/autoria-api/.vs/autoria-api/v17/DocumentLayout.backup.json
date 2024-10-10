@@ -450,8 +450,7 @@
               "RelativeToolTip": "Application\\Services\\UserSubscribeService.cs",
               "ViewState": "AgIAACEAAAAAAAAAAAAowEQAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T19:14:06.884Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-24T19:14:06.884Z"
             },
             {
               "$type": "Document",
@@ -523,8 +522,7 @@
               "RelativeToolTip": "Application\\Model\\PaymentRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-11T15:45:25.258Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-11T15:45:25.258Z"
             },
             {
               "$type": "Document",
@@ -536,8 +534,7 @@
               "RelativeToolTip": "autoria-api\\Controllers\\PayController.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAgwCAAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-13T21:24:02.842Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-13T21:24:02.842Z"
             },
             {
               "$type": "Document",
@@ -549,8 +546,7 @@
               "RelativeToolTip": "Application\\Interfaces\\IPaymentService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-11T15:32:34.628Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-11T15:32:34.628Z"
             },
             {
               "$type": "Document",
@@ -560,7 +556,7 @@
               "RelativeDocumentMoniker": "Application\\Services\\StripeService.cs",
               "ToolTip": "D:\\projects\\autoria\\back\\autoria-api\\Application\\Services\\StripeService.cs",
               "RelativeToolTip": "Application\\Services\\StripeService.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAowCsAAAA9AAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAowCAAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-11T15:34:34.465Z",
               "EditorCaption": ""

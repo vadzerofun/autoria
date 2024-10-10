@@ -30,7 +30,7 @@ namespace Application.Services
 
             var serverAddressesFeature = server.Features.Get<IServerAddressesFeature>();
 
-            long ukrprice = (long)(price * Course);
+            long usdprice = (long)(price / Course);
 
             string? thisApiUrl = null;
 
@@ -41,7 +41,7 @@ namespace Application.Services
 
             if (thisApiUrl is not null)
             {
-                var sessionId = await CheckOut(thisApiUrl, ukrprice, UserId.ToString(), SucsessLink, BadLink);
+                var sessionId = await CheckOut(thisApiUrl, usdprice, UserId.ToString(), SucsessLink, BadLink, Course);
 
                 var checkoutOrderResponse = new CheckoutOrderResponse()
                 {
@@ -71,7 +71,8 @@ namespace Application.Services
                     if (session != null)
                     {
                         var userId = session.Metadata["UserId"];
-                        var amount = session.AmountTotal;
+                        var course = Convert.ToInt64(session.Metadata["Course"]);
+                        var amount = session.AmountTotal * course;
 
                         var user = (await _userService.GetUserById(Guid.Parse(userId))).Value;
                         user.Balance += amount ?? 0;
@@ -88,7 +89,7 @@ namespace Application.Services
                 return Result.Failure(e.Message);
             }
         }
-        private async Task<string> CheckOut(string thisApiUrl, long PriceUSDCents, string UserId, string SucsessLink, string BadLink)
+        private async Task<string> CheckOut(string thisApiUrl, long PriceUSDCents, string UserId, string SucsessLink, string BadLink, double course )
         {
             StripeConfiguration.ApiKey = _PubKey.Value.SecretKey;
             var options = new SessionCreateOptions
@@ -120,7 +121,8 @@ namespace Application.Services
                 Mode = "payment",
                 Metadata = new Dictionary<string, string>
                     {
-                        { "UserId", UserId }
+                        {"UserId", UserId},
+                        {"Course", course.ToString()}
                     }
             };
 
