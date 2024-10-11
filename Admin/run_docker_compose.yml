@@ -1,7 +1,7 @@
 ---
 - name: Run `docker-compose up` again
   community.docker.docker_compose:
-    project_src: flask
+    project_src: /root/autoria
     build: false
   register: output
 
